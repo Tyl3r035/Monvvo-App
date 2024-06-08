@@ -1,0 +1,210 @@
+*{
+    box-sizing: border-box;
+}
+body,html{
+    font-size: 10px;
+}
+#header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    box-shadow: 0 1px 1px #eee;
+    padding: 5px;
+    z-index: 2;
+}
+.logo{
+    position: relative;
+    max-width: 100px;
+}
+.logo img{
+    width: 100%;
+}
+#main{
+    margin-top: 50px;
+    padding: 10px;
+}
+#title{
+    font-family: "Open Sans", sans-serif;
+    font-size: 3rem;
+    font-weight: 500;
+    color: #151515;
+    text-align: center;
+    margin: 80px auto 50px auto;
+}
+#mortgage-form{
+    width: 90%;
+    margin: 0 auto;
+}
+#mortgage-form label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 680;
+    color: #101010;
+    opacity: .9;
+}
+.info-icon{
+    font-size: 1.4rem;
+    color: #333;
+}
+#mortgage-form .optional-span{
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-style: italic;
+    color: #333;
+}
+#mortgage-form .right-span{
+    flex-shrink: 1;
+    text-align: right;
+    padding-right: 20px;
+}
+.info-text-fluid {
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    max-width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.input-fluid{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.9rem;
+    border: 1px solid #171717;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px auto 25px auto; 
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    
+}
+.input-fluid:focus-within {
+    border: 3px solid #171717;
+    padding: 8px 10px;
+}
+.input-fluid input{
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.8rem;
+    color: #171717;
+    border: none;
+    outline: none;
+    font-weight: 600;
+    flex-grow: 1;
+}
+.input-fluid input::placeholder{
+    color: #333;
+    opacity: .6;
+}
+.input-fluid select{
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.6rem;
+    border: none;
+    outline: none;
+    flex-shrink: 1;
+    padding: 0 10px;
+    border-left: 1px solid #171717;
+}
+/* Get Rid of Input Arrows */
+.input-fluid ::-webkit-inner-spin-button, .input-fluid input::-webkit-outer-spin-button{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.mortgage_input__submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    font-family: "Open Sans", sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    width: 50%;
+    background-color: #20894D;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding: 15px;
+    margin: 60px auto 30px auto;
+    cursor: pointer;
+    transition: background-color .4s ease;
+
+}
+.mortgage_input__submit:hover{
+    background-color: #03be62;
+}
+
+.results-section{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin: 50px auto;
+}
+.results-title{
+    font-family: "Open Sans", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.9);
+    margin: 80px auto 50px auto;
+    
+}
+/* myChart CSS */
+#myChart{
+    width: 300px !important;
+    height: 300px !important;
+    margin-bottom: 40px;
+}
+.legend-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 20px;
+}
+.legend-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;    
+    margin: 5px 0 !important;
+}
+.legend-color-box {
+    width: 20px;
+    height: 20px;
+    margin-right: 50px;
+}
+.legend-text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    color: #171717;
+    font-weight: bold;
+}
+
+/* Media Queries*/
+@media screen and (min-width: 1200px) {
+    #mortgage-form{
+        max-width: 1100px;
+    }
+}
+
+@media screen and (max-width: 300px){
+    #myChart{
+        width: 250px !important;
+        height: 250px !important;
+    }
+}

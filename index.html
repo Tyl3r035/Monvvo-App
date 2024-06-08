@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Tyler P.">
+    <title>Calculate Your Mortgage Today</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/Monvvo Favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./assets/font-awesome-pro-main/fontawesome-pro-6.5.1-web/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <header id="header">
+        <div class="logo">
+            <img src="./assets/img/Monvvo transparent.PNG" alt="Monnvo Logo">
+        </div>
+    </header>
+    <main id="main">
+        <h1 id="title">Mortgage Calculator</h1>
+        <form id="mortgage-form">
+            <label for="mortgage-price">Home Price</label>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                The home price is the total cost of purchasing the property, including the base price of the house and any additional fees or costs associated with the purchase.
+            </div>
+            <div class="input-fluid">
+                <span class="input-icon dollar-span">$</span>
+                <input type="number" name="mortgage_input__mortgage_price" id="mortgage-price" placeholder="400,000" required>
+            </div>
+            <label for="down-payment">Down Payment</label>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                The down payment is the initial amount of money you pay upfront when purchasing a home, which is typically a percentage of the total home price. This amount reduces the loan amount you need to borrow.
+            </div>
+            <div class="input-fluid">
+                <span class="input-icon dollar-span">$</span>
+                <input type="number" name="mortgage_input__down_payment" id="down-payment" placeholder="20,000" required>
+            </div>
+            <label for="mortgage-term">Loan Term</label>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                The loan term is the length of time over which you agree to repay your mortgage loan. It is typically expressed in years, such as 15 or 30 years.
+            </div>
+            <div class="input-fluid">
+                <input type="number" name="mortgage_input__loan_term" id="mortgage-term" placeholder="15" required>
+                <span class="input-icon right-span">Years</span>
+            </div>
+            <label for="interest-rate">Interest Rate</label>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                The interest rate is the percentage charged on the loan amount by the lender, which determines the cost of borrowing money for your mortgage. It is usually expressed as an annual percentage rate (APR).
+            </div>
+            <div class="input-fluid">
+                <input type="number" step="0.01" name="mortgage_input__interest_rate" id="interest-rate" placeholder="7.2" required>
+                <span class="input-icon right-span">%</span>
+            </div>
+            <br><br>
+            <label for="property-taxes">Property Taxes</label>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                Property taxes are annual/monthly taxes paid by homeowners to local government authorities, based on the assessed value of the property. The average property tax rate can be around 1.1% of the property's value.
+            </div>
+            <div class="input-fluid">
+                <span class="input-icon dollar-span">$</span>
+                <input type="number" name="mortgage_input__property_taxes" id="property-taxes" placeholder="333.33">
+                <select name="tax-frequency" id="tax-frequency">
+                    <option value="annually">Annually</option>
+                    <option value="montly">Monthly</option>
+                </select>
+            </div>
+            <label for="pmi-cost">(PMI) Private Mortgage Insurance</label>
+            <span class="optional-span">(Optional)</span>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid optional-info">
+                Private Mortgage Insurance (PMI) is a type of insurance that protects the lender if you default on your mortgage. It is typically required if your down payment is less than 20% of the home's purchase price.
+            </div>
+            <div class="input-fluid">
+                <span class="input-icon dollar-span">$</span>
+                <input type="number" name="mortgage_input__pmi" id="pmi-cost" placeholder="0">
+            </div>
+            <label for="hoa-cost">(HOA) Homeowner's Association Fees</label>
+            <span class="optional-span">(Optional)</span>
+            <span class="material-symbols-outlined optional-info">info</span>
+            <div class="info-text-fluid optional-info">
+                Homeowner's Association (HOA) fees are monthly or annual dues paid by homeowners in a residential community to cover the maintenance of common areas and shared amenities.
+            </div>
+            <div class="input-fluid">
+                <span class="input-icon dollar-span">$</span>
+                <input type="number" name="mortgage_input__hoa" id="hoa-cost" placeholder="0">
+            </div>
+            <button class="mortgage_input__submit">Calculate Mortgage</button>      
+        </form>
+        <section class="results-section">
+            <h2 class="results-title">Monthly Mortgage Breakdown</h2>
+            <canvas id="myChart"></canvas>
+            <div id="chart-legend" class="legend-container"></div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
