@@ -33,25 +33,6 @@ document.addEventListener("DOMContentLoaded", function() {
         return Math.round((monthlyPI + monthlyPropertyTaxes + pmi + hoa) * 100) / 100;
     };
 
-    const drawCenterText = (chart) => {
-        const ctx = chart.ctx;
-        ctx.save();
-        const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
-        const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-
-        // Adjust font size based on screen width
-        let fontSize = '40px';
-        if (window.innerWidth <= 450) {
-            fontSize = '25px';
-        }
-        ctx.font = `bold ${fontSize} Open Sans`;
-        ctx.fillStyle = '#000';
-        ctx.fillText('Total: $' + totalMonthlyPayment, centerX, centerY);
-        ctx.restore();
-    };
-
     const updateLegend = (chart) => {
         const legendContainer = document.getElementById('chart-legend');
         legendContainer.innerHTML = '';
@@ -66,6 +47,26 @@ document.addEventListener("DOMContentLoaded", function() {
             `;
         });
         legendContainer.innerHTML = items.join('');
+    };
+
+    const drawCenterText = (chart, text) => {
+        const ctx = chart.ctx;
+        ctx.save();
+        const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
+        const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Adjust font size based on screen width
+        let fontSize = '40px';
+        if (window.innerWidth <= 450) {
+            fontSize = '25px';
+        }
+        ctx.font = `bold ${fontSize} Open Sans`;
+        ctx.fillStyle = '#000';
+        ctx.clearRect(centerX - 75, centerY - 25, 150, 50);  // Clear previous text
+        ctx.fillText(text, centerX, centerY);
+        ctx.restore();
     };
 
     const myChart = new Chart(ctx, {
@@ -136,16 +137,16 @@ document.addEventListener("DOMContentLoaded", function() {
             animation: {
                 duration: 0,  // Disable animation
                 onComplete: function() {
-                    drawCenterText(this);
                     updateLegend(this);
                 }
             }
-        },
-        plugins: [{
-            beforeDraw: drawCenterText,
-            afterUpdate: updateLegend
-        }]
+        }
     });
+
+    const updateChartAndText = () => {
+        myChart.update();
+        drawCenterText(myChart, 'Total: $' + totalMonthlyPayment);
+    };
 
     document.querySelector('.mortgage_input__submit').addEventListener('click', function(event) {
         event.preventDefault();
@@ -174,7 +175,9 @@ document.addEventListener("DOMContentLoaded", function() {
             Math.round(pmi * 100) / 100,
             Math.round(hoa * 100) / 100
         ];
-        myChart.update();
+
+        // Update the chart and draw the center text
+        updateChartAndText();
     });
 
     // Initial draw with placeholder values
@@ -190,6 +193,7 @@ document.addEventListener("DOMContentLoaded", function() {
         placeholderValues.pmi,
         placeholderValues.hoa
     );
-    drawCenterText(myChart);
-    updateLegend(myChart);
+
+    // Initial update of the chart and drawing the center text
+    updateChartAndText();
 });
