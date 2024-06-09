@@ -1,3 +1,4 @@
+// Chart Calculations & ChartJS
 document.addEventListener("DOMContentLoaded", function() {
     const ctx = document.getElementById('myChart').getContext('2d');
     let totalMonthlyPayment = 0;
