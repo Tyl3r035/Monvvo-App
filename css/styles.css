@@ -203,9 +203,15 @@ body,html{
     }
 }
 @media screen and (max-width: 600px){
+    
     .mortgage_input__submit{
         width: 90% !important;
     }    
+}
+@media screen and (max-width: 500px) {
+    .info-text-fluid {
+        max-width: 250px;
+    }
 }
 @media screen and (max-width: 300px){
     #myChart{
