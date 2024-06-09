@@ -1,10 +1,10 @@
-*{
+* {
     box-sizing: border-box;
 }
-body,html{
+body, html {
     font-size: 10px;
 }
-#header{
+#header {
     position: fixed;
     top: 0;
     left: 0;
@@ -18,18 +18,18 @@ body,html{
     padding: 5px;
     z-index: 2;
 }
-.logo{
+.logo {
     position: relative;
 }
-.logo img{
+.logo img {
     width: 100px;
     height: 19px;
 }
-#main{
+#main {
     margin-top: 50px;
     padding: 10px;
 }
-#title{
+#title {
     font-family: "Open Sans", sans-serif;
     font-size: 3rem;
     font-weight: 500;
@@ -37,29 +37,29 @@ body,html{
     text-align: center;
     margin: 80px auto 50px auto;
 }
-#mortgage-form{
+#mortgage-form {
     width: 90%;
     margin: 0 auto;
 }
-#mortgage-form label{
+#mortgage-form label {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5rem;
     font-weight: 680;
     color: #101010;
     opacity: .9;
 }
-.info-icon{
+.info-icon {
     font-size: 1.4rem;
     color: #333;
 }
-#mortgage-form .optional-span{
+#mortgage-form .optional-span {
     font-family: "Open Sans", sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
     font-style: italic;
     color: #333;
 }
-#mortgage-form .right-span{
+#mortgage-form .right-span {
     flex-shrink: 1;
     text-align: right;
     padding-right: 20px;
@@ -76,8 +76,9 @@ body,html{
     border-radius: 5px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    position: absolute;
 }
-.input-fluid{
+.input-fluid {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -85,16 +86,15 @@ body,html{
     border: 1px solid #171717;
     border-radius: 5px;
     padding: 10px;
-    margin: 10px auto 25px auto; 
+    margin: 10px auto 25px auto;
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
-    
 }
 .input-fluid:focus-within {
     border: 3px solid #171717;
     padding: 8px 10px;
 }
-.input-fluid input{
+.input-fluid input {
     font-family: "Open Sans", sans-serif;
     font-size: 1.8rem;
     color: #171717;
@@ -103,11 +103,11 @@ body,html{
     font-weight: 600;
     flex-grow: 1;
 }
-.input-fluid input::placeholder{
+.input-fluid input::placeholder {
     color: #333;
     opacity: .6;
 }
-.input-fluid select{
+.input-fluid select {
     font-family: "Open Sans", sans-serif;
     font-size: 1.6rem;
     border: none;
@@ -116,13 +116,12 @@ body,html{
     padding: 0 10px;
     border-left: 1px solid #171717;
 }
-/* Get Rid of Input Arrows */
-.input-fluid ::-webkit-inner-spin-button, .input-fluid input::-webkit-outer-spin-button{
+.input-fluid ::-webkit-inner-spin-button, .input-fluid input::-webkit-outer-spin-button {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
 }
-.mortgage_input__submit{
+.mortgage_input__submit {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -141,13 +140,11 @@ body,html{
     margin: 60px auto 30px auto;
     cursor: pointer;
     transition: background-color .4s ease;
-
 }
-.mortgage_input__submit:hover{
+.mortgage_input__submit:hover {
     background-color: #03be62;
 }
-
-.results-section{
+.results-section {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -156,17 +153,15 @@ body,html{
     max-width: 600px;
     margin: 50px auto;
 }
-.results-title{
+.results-title {
     font-family: "Open Sans", sans-serif;
     font-size: 3rem;
     font-weight: 700;
     text-align: center;
     color: rgba(0, 0, 0, 0.9);
     margin: 80px auto 50px auto;
-    
 }
-/* myChart CSS */
-#myChart{
+#myChart {
     width: 300px !important;
     height: 300px !important;
     margin-bottom: 40px;
@@ -181,7 +176,7 @@ body,html{
 .legend-item {
     display: flex;
     flex-direction: row;
-    align-items: center;    
+    align-items: center;
     margin: 5px 0 !important;
 }
 .legend-color-box {
@@ -195,26 +190,23 @@ body,html{
     color: #171717;
     font-weight: bold;
 }
-
-/* Media Queries*/
 @media screen and (min-width: 1200px) {
-    #mortgage-form{
+    #mortgage-form {
         max-width: 1100px;
     }
 }
-@media screen and (max-width: 600px){
-    
-    .mortgage_input__submit{
+@media screen and (max-width: 600px) {
+    .mortgage_input__submit {
         width: 90% !important;
-    }    
+    }
 }
 @media screen and (max-width: 500px) {
     .info-text-fluid {
         max-width: 250px;
     }
 }
-@media screen and (max-width: 300px){
-    #myChart{
+@media screen and (max-width: 300px) {
+    #myChart {
         width: 250px !important;
         height: 250px !important;
     }

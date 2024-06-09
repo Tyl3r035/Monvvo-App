@@ -12,17 +12,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 infoText.style.display = 'block';
 
                 const iconRect = this.getBoundingClientRect();
-                const bodyRect = document.body.getBoundingClientRect();
-                const offsetX = iconRect.left - bodyRect.left;
-                const offsetY = window.scrollY + iconRect.top - infoText.offsetHeight - 5;
+                const infoTextRect = infoText.getBoundingClientRect();
+                const offsetX = iconRect.left - infoTextRect.width - 5;
+                const offsetY = window.scrollY + iconRect.top - infoTextRect.height - 5;
+
+                // Ensure the tooltip does not go outside the viewport
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                const adjustedOffsetX = offsetX < 0 ? 5 : offsetX;
+                const adjustedOffsetY = offsetY < 0 ? 5 : offsetY;
 
                 infoText.style.position = 'absolute';
-                infoText.style.left = `${offsetX}px`;
-                infoText.style.top = `${offsetY}px`;
-
-                if (infoText.classList.contains('optional-info')) {
-                    infoText.style.left = `${iconRect.left - infoText.offsetWidth - 5}px`;
-                }
+                infoText.style.left = `${Math.min(adjustedOffsetX, viewportWidth - infoTextRect.width - 5)}px`;
+                infoText.style.top = `${Math.min(adjustedOffsetY, viewportHeight - infoTextRect.height - 5)}px`;
             }
         });
     });
