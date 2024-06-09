@@ -40,7 +40,13 @@ document.addEventListener("DOMContentLoaded", function() {
         const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.font = 'bold 40px Open Sans';
+
+        // Adjust font size based on screen width
+        let fontSize = '40px';
+        if (window.innerWidth <= 450) {
+            fontSize = '25px';
+        }
+        ctx.font = `bold ${fontSize} Open Sans`;
         ctx.fillStyle = '#000';
         ctx.fillText('Total: $' + totalMonthlyPayment, centerX, centerY);
         ctx.restore();
