@@ -1,4 +1,3 @@
-// Chart Calculations & ChartJS
 document.addEventListener("DOMContentLoaded", function() {
     const ctx = document.getElementById('myChart').getContext('2d');
     let totalMonthlyPayment = 0;
@@ -34,16 +33,6 @@ document.addEventListener("DOMContentLoaded", function() {
         return Math.round((monthlyPI + monthlyPropertyTaxes + pmi + hoa) * 100) / 100;
     };
 
-    const updateChartData = (chart, monthlyPI, propertyTaxes, propertyTaxesFrequency, pmi, hoa) => {
-        chart.data.datasets[0].data = [
-            monthlyPI,
-            Math.round(getPropertyTax(propertyTaxes, propertyTaxesFrequency) * 100) / 100,
-            Math.round(pmi * 100) / 100,
-            Math.round(hoa * 100) / 100
-        ];
-        chart.update();
-    };
-
     const drawCenterText = (chart) => {
         const ctx = chart.ctx;
         ctx.save();
@@ -73,98 +62,83 @@ document.addEventListener("DOMContentLoaded", function() {
         legendContainer.innerHTML = items.join('');
     };
 
-    const createChart = () => {
-        let fontSize;
-        if (window.innerWidth <= 600) {
-            fontSize = 12;
-        } else {
-            fontSize = 40;
-        }
-
-        return new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: [
-                    'Principal and Interest', 
-                    'Property Taxes', 
-                    'Private Mortgage Insurance (PMI)', 
-                    'Homeowner\'s Association Fees (HOA)'
+    const myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Principal and Interest', 
+                'Property Taxes', 
+                'Private Mortgage Insurance (PMI)', 
+                'Homeowner\'s Association Fees (HOA)'
+            ],
+            datasets: [{
+                label: 'Mortgage Breakdown',
+                data: [
+                    calculateMonthlyPI(
+                        placeholderValues.homePrice,
+                        placeholderValues.downPayment,
+                        placeholderValues.loanTerm,
+                        placeholderValues.interestRate
+                    ),
+                    Math.round(getPropertyTax(placeholderValues.propertyTaxes, placeholderValues.propertyTaxesFrequency) * 100) / 100,
+                    Math.round(placeholderValues.pmi * 100) / 100,
+                    Math.round(placeholderValues.hoa * 100) / 100
                 ],
-                datasets: [{
-                    label: 'Mortgage Breakdown',
-                    data: [
-                        calculateMonthlyPI(
-                            placeholderValues.homePrice,
-                            placeholderValues.downPayment,
-                            placeholderValues.loanTerm,
-                            placeholderValues.interestRate
-                        ),
-                        Math.round(getPropertyTax(placeholderValues.propertyTaxes, placeholderValues.propertyTaxesFrequency) * 100) / 100,
-                        Math.round(placeholderValues.pmi * 100) / 100,
-                        Math.round(placeholderValues.hoa * 100) / 100
-                    ],
-                    backgroundColor: [
-                        'rgba(100, 149, 237, 0.9)', 
-                        'rgba(255, 223, 128, 0.9)', 
-                        'rgba(192, 192, 192, 0.9)', 
-                        'rgba(60, 179, 113, 0.9)'
-                    ],
-                    borderColor: ['#fff'],
-                    borderWidth: 10
-                }]
-            },
-            options: {
-                cutout: '70%',
-                plugins: {
-                    legend: { display: false },
-                    datalabels: {
-                        display: true,
-                        color: '#000',
-                        font: {
-                            weight: 'bold',
-                            size: fontSize,
-                            family: 'Open Sans'
-                        },
-                        formatter: (value) => `$${value}`
+                backgroundColor: [
+                    'rgba(100, 149, 237, 0.9)', 
+                    'rgba(255, 223, 128, 0.9)', 
+                    'rgba(192, 192, 192, 0.9)', 
+                    'rgba(60, 179, 113, 0.9)'
+                ],
+                borderColor: ['#fff'],
+                borderWidth: 10
+            }]
+        },
+        options: {
+            cutout: '70%',
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    display: true,
+                    color: '#000',
+                    font: {
+                        weight: 'bold',
+                        size: 40,
+                        family: 'Open Sans'
                     },
-                    tooltip: {
-                        callbacks: {
-                            label: (tooltipItem) => ` ${tooltipItem.label}: $${tooltipItem.raw}`,
-                            labelTextColor: () => '#fff'
-                        },
-                        titleFont: { size: 28, family: 'Open Sans' },
-                        bodyFont: { size: 26, family: 'Open Sans' },
-                        backgroundColor: '#333',
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
-                        displayColors: false
-                    }
+                    formatter: (value) => `$${value}`
                 },
-                elements: {
-                    arc: {
-                        borderWidth: 1,
-                        borderColor: '#fff'
-                    }
-                },
-                animation: {
-                    onComplete: function() {
-                        drawCenterText(this);
-                        updateLegend(this);
-                    }
+                tooltip: {
+                    callbacks: {
+                        label: (tooltipItem) => ` ${tooltipItem.label}: $${tooltipItem.raw}`,
+                        labelTextColor: () => '#fff'
+                    },
+                    titleFont: { size: 28, family: 'Open Sans' },
+                    bodyFont: { size: 26, family: 'Open Sans' },
+                    backgroundColor: '#333',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    displayColors: false
                 }
             },
-            plugins: [{
-                beforeDraw: drawCenterText,
-                afterUpdate: updateLegend
-            }]
-        });
-    };
-
-    let myChart = createChart();
-
-    window.addEventListener('resize', function() {
-        myChart.destroy();
-        myChart = createChart();
+            elements: {
+                arc: {
+                    borderWidth: 1,
+                    borderColor: '#fff'
+                }
+            },
+            animation: {
+                duration: 0,  // Disable animation
+                onComplete: function() {
+                    drawCenterText(this);
+                    updateLegend(this);
+                }
+            }
+        },
+        plugins: [{
+            beforeDraw: drawCenterText,
+            afterUpdate: updateLegend
+        }]
     });
 
     document.querySelector('.mortgage_input__submit').addEventListener('click', function(event) {
@@ -187,6 +161,29 @@ document.addEventListener("DOMContentLoaded", function() {
         const monthlyPI = calculateMonthlyPI(homePrice, downPayment, loanTerm, interestRate);
         totalMonthlyPayment = calculateTotalMonthlyPayment(monthlyPI, propertyTaxes, propertyTaxesFrequency, pmi, hoa);
 
-        updateChartData(myChart, monthlyPI, propertyTaxes, propertyTaxesFrequency, pmi, hoa);
+        // Update the chart data directly without re-creating the chart
+        myChart.data.datasets[0].data = [
+            monthlyPI,
+            Math.round(getPropertyTax(propertyTaxes, propertyTaxesFrequency) * 100) / 100,
+            Math.round(pmi * 100) / 100,
+            Math.round(hoa * 100) / 100
+        ];
+        myChart.update();
     });
+
+    // Initial draw with placeholder values
+    totalMonthlyPayment = calculateTotalMonthlyPayment(
+        calculateMonthlyPI(
+            placeholderValues.homePrice,
+            placeholderValues.downPayment,
+            placeholderValues.loanTerm,
+            placeholderValues.interestRate
+        ),
+        placeholderValues.propertyTaxes,
+        placeholderValues.propertyTaxesFrequency,
+        placeholderValues.pmi,
+        placeholderValues.hoa
+    );
+    drawCenterText(myChart);
+    updateLegend(myChart);
 });
