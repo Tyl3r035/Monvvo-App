@@ -124,7 +124,8 @@ body, html {
     outline: none;
     flex-shrink: 1;
     padding: 0 10px;
-    border-left: 1px solid #171717;
+    padding-left: 50px !important;
+    border-left: 1px solid rgba(23, 23, 23, 0.8);
 }
 .input-fluid ::-webkit-inner-spin-button, .input-fluid input::-webkit-outer-spin-button {
     appearance: none;
@@ -220,4 +221,38 @@ body, html {
         width: 250px !important;
         height: 250px !important;
     }
+}
+/* Custom styles for the select element */
+.select-wrapper {
+    position: relative;
+    display: flex;
+}
+
+.select-wrapper select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    padding: 10px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    background-color: #fff;
+    color: #171717;
+    cursor: pointer;
+    outline: none;
+    padding-right: 40px;
+}
+
+/* Custom arrow icon */
+.select-wrapper::after {
+    content: 'arrow_drop_down'; /* Down arrow from Material Symbols */
+    font-family: 'Material Symbols Outlined';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%); /* Rotate 90 degrees clockwise */
+    pointer-events: none;
+    font-size: 1.6rem;
+    color: #171717;
 }

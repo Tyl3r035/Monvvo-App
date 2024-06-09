@@ -6,7 +6,7 @@
     <meta name="author" content="Tyler P.">
     <meta name="description" content="Use our free Mortgage Calculator by monthly payment to estimate your mortgage payments. Easily calculate your monthly payments, explore different scenarios, and find the best loan options for home buyers and refinancers.">
     <title>Calculate Mortgage by Monthly Payment | Free Mortgage Calculator</title>
-    <link rel="icon" type="image/webp" href="./assets/img/Monnvo Favicon.webp">
+    <link rel="icon" type="image/webp" href="./assets/img/Monvvo Favicon.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -18,7 +18,7 @@
     <noscript><link rel="stylesheet" href="./css/reset.css"></noscript>
     <link rel="preload" href="./css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="./css/styles.css"></noscript>
-
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
     <header id="header">
@@ -36,7 +36,7 @@
             </div>
             <div class="input-fluid">
                 <span class="input-icon dollar-span">$</span>
-                <input type="number" name="mortgage_input__mortgage_price" id="mortgage-price" placeholder="400,000" required>
+                <input type="number" name="mortgage_input__mortgage_price" id="mortgage-price" placeholder="400000" required>
             </div>
             <label for="down-payment">Down Payment</label>
             <span class="material-symbols-outlined">info</span>
@@ -45,7 +45,7 @@
             </div>
             <div class="input-fluid">
                 <span class="input-icon dollar-span">$</span>
-                <input type="number" name="mortgage_input__down_payment" id="down-payment" placeholder="20,000" required>
+                <input type="number" name="mortgage_input__down_payment" id="down-payment" placeholder="20000" required>
             </div>
             <label for="mortgage-term">Loan Term</label>
             <span class="material-symbols-outlined">info</span>
@@ -74,10 +74,12 @@
             <div class="input-fluid">
                 <span class="input-icon dollar-span">$</span>
                 <input type="number" name="mortgage_input__property_taxes" id="property-taxes" placeholder="333.33">
-                <select name="tax-frequency" id="tax-frequency">
-                    <option value="annually">Annually</option>
-                    <option value="monthly">Monthly</option>
-                </select>
+                <div class="select-wrapper">
+                    <select name="tax-frequency" id="tax-frequency">
+                        <option value="annually">Annually</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
             </div>
             <label for="pmi-cost">(PMI) Private Mortgage Insurance</label>
             <span class="optional-span">(Optional)</span>
@@ -112,7 +114,6 @@
     <script src="./js/optimize.js" defer></script>
     <script src="./js/app.js" defer></script>
     <script src="./js/mortgage.js" defer></script>
-    <script src="./js/mortgageChart.js" defer></script>
     <script src="./js/script.js" defer></script>
 </body>
 </html>
