@@ -210,10 +210,18 @@ body, html {
     .mortgage_input__submit {
         width: 90% !important;
     }
+    .input-fluid input{
+        width: 100px;
+    }
 }
 @media screen and (max-width: 500px) {
     .info-text-fluid {
         max-width: 250px;
+    }
+    .input-fluid select{
+        font-size: 1.2rem !important;
+        padding-left: 10px !important;
+        flex-grow: 1 !important;
     }
 }
 @media screen and (max-width: 450px) {
@@ -225,7 +233,6 @@ body, html {
 /* Custom styles for the select element */
 .select-wrapper {
     position: relative;
-    display: flex;
 }
 
 .select-wrapper select {
