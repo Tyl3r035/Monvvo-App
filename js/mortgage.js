@@ -33,22 +33,6 @@ document.addEventListener("DOMContentLoaded", function() {
         return Math.round((monthlyPI + monthlyPropertyTaxes + pmi + hoa) * 100) / 100;
     };
 
-    const updateLegend = (chart) => {
-        const legendContainer = document.getElementById('chart-legend');
-        legendContainer.innerHTML = '';
-        const items = chart.data.labels.map((label, index) => {
-            const value = chart.data.datasets[0].data[index];
-            const color = chart.data.datasets[0].backgroundColor[index];
-            return `
-                <div class="legend-item">
-                    <span class="legend-color-box" style="background-color:${color};"></span>
-                    <span class="legend-text">${label}: $${value}</span>
-                </div>
-            `;
-        });
-        legendContainer.innerHTML = items.join('');
-    };
-
     const drawCenterText = (chart, text) => {
         const ctx = chart.ctx;
         ctx.save();
@@ -67,6 +51,22 @@ document.addEventListener("DOMContentLoaded", function() {
         ctx.clearRect(centerX - 75, centerY - 25, 150, 50);  // Clear previous text
         ctx.fillText(text, centerX, centerY);
         ctx.restore();
+    };
+
+    const updateLegend = (chart) => {
+        const legendContainer = document.getElementById('chart-legend');
+        legendContainer.innerHTML = '';
+        const items = chart.data.labels.map((label, index) => {
+            const value = chart.data.datasets[0].data[index];
+            const color = chart.data.datasets[0].backgroundColor[index];
+            return `
+                <div class="legend-item">
+                    <span class="legend-color-box" style="background-color:${color};"></span>
+                    <span class="legend-text">${label}: $${value}</span>
+                </div>
+            `;
+        });
+        legendContainer.innerHTML = items.join('');
     };
 
     const myChart = new Chart(ctx, {
@@ -138,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 duration: 0,  // Disable animation
                 onComplete: function() {
                     updateLegend(this);
+                    drawCenterText(this, 'Total: $' + totalMonthlyPayment);
                 }
             }
         }
