@@ -250,6 +250,24 @@ body, html {
     line-height: 2.5rem;
     padding-bottom: 20px;
 }
+#footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #03be62;
+    padding: 15px 30px;
+    margin-top: 4em !important;
+}
+.footer-logo{
+    width: 100px;
+    height: auto;
+}
+#footer p{
+    font-family: "Open Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+}
 @media screen and (min-width: 1200px) {
     #mortgage-form {
         max-width: 900px;
