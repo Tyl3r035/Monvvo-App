@@ -250,6 +250,13 @@ body, html {
     line-height: 2.5rem;
     padding-bottom: 20px;
 }
+.mortgage-external{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-top: 3em;
+    color: #000;
+}
 #footer{
     display: flex;
     justify-content: space-between;
