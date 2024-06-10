@@ -1,6 +1,0 @@
-[build]
-  command = "python generate_sitemap.py && npm run build"  # Adjust this according to your site's build command
-  publish = "public"  # Adjust this to the directory where your site is published
-
-[build.environment]
-  PYTHON_VERSION = "3.8"  # Specify the Python version
