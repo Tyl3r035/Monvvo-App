@@ -6,11 +6,3 @@
   from = "/sitemap.xml"
   to = "/.netlify/functions/generate-sitemap"
   status = 200
-[build]
-  publish = "public"
-  command = "node generate-pages-metadata.js && echo 'No build step required'"
-
-[[redirects]]
-  from = "/sitemap.xml"
-  to = "/.netlify/functions/generate-sitemap"
-  status = 200
