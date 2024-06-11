@@ -4,12 +4,17 @@ const path = require('path');
 exports.handler = async function(event, context) {
     const baseUrl = 'https://www.monvvo.com';
     const metadataPath = path.join(__dirname, '..', '..', 'public', 'pages-metadata.json');
-    
+
+    // Log the metadata path
+    console.log('Metadata Path:', metadataPath);
+
     // Read the JSON file
     let pagesMetadata;
     try {
         pagesMetadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
     } catch (error) {
+        // Log the error details
+        console.error('Error reading pages metadata:', error);
         return {
             statusCode: 500,
             body: 'Error reading pages metadata: ' + error.message
@@ -21,9 +26,9 @@ exports.handler = async function(event, context) {
     pagesMetadata.forEach(page => {
         sitemapContent += `  <url>\n`;
         sitemapContent += `    <loc>${page.loc}</loc>\n`;
-        sitemapContent += `    <lastmod>${page.lastmod}</lastmod>\n`;
-        sitemapContent += `    <changefreq>${page.changefreq}</changefreq>\n`;
-        sitemapContent += `    <priority>${page.priority}</priority>\n`;
+        sitemapContent += `    <lastmod>${page.lastmod}\n`;
+        sitemapContent += `    <changefreq>${page.changefreq}\n`;
+        sitemapContent += `    <priority>${page.priority}\n`;
         sitemapContent += `  </url>\n`;
     });
     sitemapContent += `</urlset>`;
