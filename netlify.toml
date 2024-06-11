@@ -1,8 +1,8 @@
 [build]
   publish = "public"
-  command = "node generate-sitemap.js && echo 'No build step required'"
+  command = "echo 'No build step required'"
 
 [[redirects]]
   from = "/sitemap.xml"
-  to = "/sitemap.xml"
+  to = "/.netlify/functions/generate-sitemap"
   status = 200
