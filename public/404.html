@@ -6,6 +6,7 @@
         <meta name="author" content="Tyler P.">
         <meta name="description" content="Whoops. It looks like the page you're looking for isn't found.">
         <title>404 Error. Page Not Found | Monvvo</title>
+        <link rel="icon" type="img/svg" href="./img/Monnvo-Favicon.svg">
         <link rel="preload" href="./css/reset.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="./css/reset.css"></noscript>
         <link rel="preload" href="./css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -15,10 +16,10 @@
         <body>
             <header id="header">
                 <div class="logo">
-                    <img src="../assets/img/Monvvo-Transparent.svg" alt="Monnvo Logo" loading="lazy">
+                    <img src="./img/Monvvo-Transparent.svg" alt="Monnvo Logo" loading="lazy">
                 </div>
             </header>
-            <main id="main">
+            <main id="main" class="error-main">
                 <h1 id="error-title">
                     404 Error
                 </h1>
@@ -26,7 +27,7 @@
                     Page Not Found
                 </h2>
                 <p class="error-text">Please Visit Our Main Page Here:</p>
-                <a href="./index.html">Monvvo.com</a>
+                <a class="error-link" href="./index.html">Monvvo.com</a>
             </main>
         </body>
 </html>
