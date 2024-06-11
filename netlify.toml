@@ -1,0 +1,8 @@
+[build]
+  publish = "public"
+  command = "echo 'No build step required'"  # Since there is no build step
+
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/.netlify/functions/generate-sitemap"
+  status = 200
