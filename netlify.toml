@@ -1,6 +1,6 @@
 [build]
   publish = "public"
-  command = "echo 'No build step required'"  # Since there is no build step
+  command = "echo 'No build step required'"
 
 [[redirects]]
   from = "/sitemap.xml"
