@@ -3,8 +3,8 @@ const path = require('path');
 
 exports.handler = async function(event, context) {
     try {
-        // Construct the path to the metadata file
-        const metadataPath = path.resolve(__dirname, '../../public/pages-metadata.json');
+        // Simplify the path to the metadata file
+        const metadataPath = path.join(process.cwd(), 'public', 'pages-metadata.json');
         console.log('Metadata Path:', metadataPath);
 
         // Check if the file exists before reading
