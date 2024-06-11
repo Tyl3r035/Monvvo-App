@@ -39,9 +39,8 @@ function generateSitemap() {
     });
     sitemapContent += `</urlset>`;
 
-    return sitemapContent;
+    fs.writeFileSync(path.join(directoryPath, 'sitemap.xml'), sitemapContent);
+    console.log('Sitemap generated and saved to public/sitemap.xml');
 }
 
-const sitemap = generateSitemap();
-fs.writeFileSync(path.join(directoryPath, 'sitemap.xml'), sitemap);
-console.log('Sitemap generated and saved to public/sitemap.xml');
+generateSitemap();

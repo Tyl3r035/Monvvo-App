@@ -1,3 +1,8 @@
 [build]
   publish = "public"
   command = "node generate-sitemap.js && echo 'No build step required'"
+
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
