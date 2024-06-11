@@ -3,7 +3,7 @@ const path = require('path');
 
 exports.handler = async function(event, context) {
     const baseUrl = 'https://www.monvvo.com';
-    const metadataPath = path.join(__dirname, 'pages-metadata.json');
+    const metadataPath = path.join(__dirname, '..', '..', 'public', 'pages-metadata.json');
     
     // Read the JSON file
     let pagesMetadata;
@@ -12,7 +12,7 @@ exports.handler = async function(event, context) {
     } catch (error) {
         return {
             statusCode: 500,
-            body: 'Error reading pages metadata'
+            body: 'Error reading pages metadata: ' + error.message
         };
     }
 
