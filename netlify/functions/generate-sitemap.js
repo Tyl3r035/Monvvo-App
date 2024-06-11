@@ -3,7 +3,7 @@ const path = require('path');
 
 exports.handler = async function(event, context) {
     try {
-        // Simplify the path to the metadata file
+        // Construct the path to the metadata file
         const metadataPath = path.join(process.cwd(), 'public', 'pages-metadata.json');
         console.log('Metadata Path:', metadataPath);
 
@@ -26,7 +26,7 @@ exports.handler = async function(event, context) {
             sitemapContent += `  <url>\n`;
             sitemapContent += `    <loc>${page.loc}</loc>\n`;
             sitemapContent += `    <lastmod>${page.lastmod}</lastmod>\n`;
-            sitemapContent += `    <changefreq>${page.changefreq}\n`;
+            sitemapContent += `    <changefreq>${page.changefreq}</changefreq>\n`;
             sitemapContent += `    <priority>${page.priority}\n`;
             sitemapContent += `  </url>\n`;
         });
