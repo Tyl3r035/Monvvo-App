@@ -16,28 +16,12 @@ exports.handler = async function(event, context) {
         const fileContent = fs.readFileSync(metadataPath, 'utf8');
         console.log('File Content:', fileContent);
 
-        // Parse the JSON content
-        const pagesMetadata = JSON.parse(fileContent);
-        console.log('Parsed Metadata:', pagesMetadata);
-
-        // Generate sitemap content
-        let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
-        pagesMetadata.forEach(page => {
-            sitemapContent += `  <url>\n`;
-            sitemapContent += `    <loc>${page.loc}</loc>\n`;
-            sitemapContent += `    <lastmod>${page.lastmod}</lastmod>\n`;
-            sitemapContent += `    <changefreq">${page.changefreq}\n`;
-            sitemapContent += `    <priority>${page.priority}\n`;
-            sitemapContent += `  </url>\n`;
-        });
-        sitemapContent += `</urlset>`;
-
         return {
             statusCode: 200,
             headers: {
-                'Content-Type': 'application/xml',
+                'Content-Type': 'application/json',
             },
-            body: sitemapContent,
+            body: fileContent,
         };
     } catch (error) {
         // Log the error details
