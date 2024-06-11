@@ -1,8 +1,9 @@
 [build]
   publish = "public"
-  command = "echo 'No build step required'"
+  command = "node generate-pages-metadata.js && echo 'No build step required'"
 
+# Remove the redirects for the functions
 [[redirects]]
   from = "/sitemap.xml"
-  to = "/.netlify/functions/generate-sitemap"
+  to = "/sitemap.xml"
   status = 200
