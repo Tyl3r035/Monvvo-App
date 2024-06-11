@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const baseUrl = 'https://www.monvvo.com';  // Your website URL
-const directoryPath = path.join(__dirname, '../../public');  // Adjust this to your public directory
+const baseUrl = 'https://www.monvvo.com';
+const directoryPath = path.join(__dirname, 'public');
 
 function generateSitemap() {
     let urls = [];
@@ -11,10 +11,10 @@ function generateSitemap() {
         fs.readdirSync(directory).forEach(file => {
             const fullPath = path.join(directory, file);
             if (fs.lstatSync(fullPath).isDirectory()) {
-                readDirectory(fullPath);  // Recursively read directories
+                readDirectory(fullPath);
             } else {
                 const relativePath = fullPath.replace(directoryPath, '').replace(/\\/g, '/');
-                if (relativePath.endsWith('.html')) {  // Include only HTML files
+                if (relativePath.endsWith('.html')) {
                     urls.push({
                         loc: `${baseUrl}${relativePath}`,
                         lastmod: new Date().toISOString().split('T')[0],
@@ -42,13 +42,6 @@ function generateSitemap() {
     return sitemapContent;
 }
 
-exports.handler = async function(event, context) {
-    const sitemap = generateSitemap();
-    return {
-        statusCode: 200,
-        headers: {
-            'Content-Type': 'application/xml',
-        },
-        body: sitemap,
-    };
-};
+const sitemap = generateSitemap();
+fs.writeFileSync(path.join(directoryPath, 'sitemap.xml'), sitemap);
+console.log('Sitemap generated and saved to public/sitemap.xml');
