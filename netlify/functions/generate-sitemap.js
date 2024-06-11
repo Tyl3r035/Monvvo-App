@@ -15,7 +15,12 @@ function generateSitemap() {
             } else {
                 const relativePath = fullPath.replace(directoryPath, '').replace(/\\/g, '/');
                 if (relativePath.endsWith('.html')) {  // Include only HTML files
-                    urls.push(`${baseUrl}${relativePath}`);
+                    urls.push({
+                        loc: `${baseUrl}${relativePath}`,
+                        lastmod: new Date().toISOString().split('T')[0],
+                        changefreq: 'monthly',
+                        priority: 0.8
+                    });
                 }
             }
         });
@@ -25,7 +30,12 @@ function generateSitemap() {
 
     let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
     urls.forEach(url => {
-        sitemapContent += `  <url>\n    <loc>${url}</loc>\n  </url>\n`;
+        sitemapContent += `  <url>\n`;
+        sitemapContent += `    <loc>${url.loc}</loc>\n`;
+        sitemapContent += `    <lastmod>${url.lastmod}</lastmod>\n`;
+        sitemapContent += `    <changefreq>${url.changefreq}</changefreq>\n`;
+        sitemapContent += `    <priority>${url.priority}</priority>\n`;
+        sitemapContent += `  </url>\n`;
     });
     sitemapContent += `</urlset>`;
 
