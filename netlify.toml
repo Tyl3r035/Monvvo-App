@@ -2,6 +2,9 @@
   publish = "public"
   command = "node generate-pages-metadata.js && echo 'No build step required'"
 
+[functions]
+  directory = "netlify/functions"
+
 [[redirects]]
   from = "/sitemap.xml"
   to = "/.netlify/functions/generate-sitemap"
