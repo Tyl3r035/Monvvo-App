@@ -35,10 +35,6 @@ body, html {
     width: 100px;
     height: 19px;
 }
-.knowledge-logo img{
-    width: 100px;
-    height: auto;
-}
 #main {
     margin-top: 50px;
     padding: 10px;
@@ -254,6 +250,11 @@ body, html {
     line-height: 2.5rem;
     padding-bottom: 20px;
 }
+.mortgage-internal{
+    font-size: inherit;
+    color: inherit;
+    margin: 5px auto 0 auto;
+}
 .mortgage-external{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.6rem;
@@ -351,6 +352,11 @@ body, html {
 /* Blog Post Template CSS */
 .blog-body{
     background-color: #f7f7f7;
+}
+
+.knowledge-logo img{
+    width: 100px;
+    height: auto;
 }
 .blog-wrap{
     display: flex;
