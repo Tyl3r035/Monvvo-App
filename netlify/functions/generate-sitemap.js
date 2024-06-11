@@ -2,44 +2,43 @@ const fs = require('fs');
 const path = require('path');
 
 exports.handler = async function(event, context) {
-    // Construct the path to the metadata file relative to the function's directory
-    const metadataPath = path.resolve(__dirname, '..', '..', 'public', 'pages-metadata.json');
-
-    // Log the metadata path for debugging
-    console.log('Metadata Path:', metadataPath);
-
-    // Read the JSON file
-    let pagesMetadata;
     try {
+        // Construct the path to the metadata file relative to the function's directory
+        const metadataPath = path.resolve(__dirname, '..', '..', 'public', 'pages-metadata.json');
+        console.log('Metadata Path:', metadataPath);
+
+        // Read the JSON file
         const fileContent = fs.readFileSync(metadataPath, 'utf8');
         console.log('File Content:', fileContent);
-        pagesMetadata = JSON.parse(fileContent);
+
+        const pagesMetadata = JSON.parse(fileContent);
+        console.log('Parsed Metadata:', pagesMetadata);
+
+        // Generate sitemap content
+        let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+        pagesMetadata.forEach(page => {
+            sitemapContent += `  <url>\n`;
+            sitemapContent += `    <loc>${page.loc}</loc>\n`;
+            sitemapContent += `    <lastmod>${page.lastmod}</lastmod>\n`;
+            sitemapContent += `    <changefreq>${page.changefreq}</changefreq>\n`;
+            sitemapContent += `    <priority>${page.priority}\n`;
+            sitemapContent += `  </url>\n`;
+        });
+        sitemapContent += `</urlset>`;
+
+        return {
+            statusCode: 200,
+            headers: {
+                'Content-Type': 'application/xml',
+            },
+            body: sitemapContent,
+        };
     } catch (error) {
         // Log the error details
-        console.error('Error reading pages metadata:', error);
+        console.error('Error:', error.message);
         return {
             statusCode: 500,
             body: 'Error reading pages metadata: ' + error.message
         };
     }
-
-    // Generate sitemap content
-    let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
-    pagesMetadata.forEach(page => {
-        sitemapContent += `  <url>\n`;
-        sitemapContent += `    <loc>${page.loc}</loc>\n`;
-        sitemapContent += `    <lastmod>${page.lastmod}</lastmod>\n`;
-        sitemapContent += `    <changefreq>${page.changefreq}</changefreq>\n`;
-        sitemapContent += `    <priority>${page.priority}\n`;
-        sitemapContent += `  </url>\n`;
-    });
-    sitemapContent += `</urlset>`;
-
-    return {
-        statusCode: 200,
-        headers: {
-            'Content-Type': 'application/xml',
-        },
-        body: sitemapContent,
-    };
 };
