@@ -7,10 +7,16 @@ exports.handler = async function(event, context) {
         const metadataPath = path.resolve(__dirname, '..', '..', 'public', 'pages-metadata.json');
         console.log('Metadata Path:', metadataPath);
 
+        // Check if the file exists before reading
+        if (!fs.existsSync(metadataPath)) {
+            throw new Error(`File does not exist at path: ${metadataPath}`);
+        }
+
         // Read the JSON file
         const fileContent = fs.readFileSync(metadataPath, 'utf8');
         console.log('File Content:', fileContent);
 
+        // Parse the JSON content
         const pagesMetadata = JSON.parse(fileContent);
         console.log('Parsed Metadata:', pagesMetadata);
 
@@ -21,7 +27,7 @@ exports.handler = async function(event, context) {
             sitemapContent += `    <loc>${page.loc}</loc>\n`;
             sitemapContent += `    <lastmod>${page.lastmod}</lastmod>\n`;
             sitemapContent += `    <changefreq>${page.changefreq}</changefreq>\n`;
-            sitemapContent += `    <priority>${page.priority}\n`;
+            sitemapContent += `    <priority>${page.priority}</priority>\n`;
             sitemapContent += `  </url>\n`;
         });
         sitemapContent += `</urlset>`;
