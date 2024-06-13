@@ -9,11 +9,11 @@
     gtag('js', new Date());
     gtag('config', 'G-3773H5L03T');
     </script>
-    
+
     <!-- Google Adsense Head Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5106760016649931"
     crossorigin="anonymous"></script>
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Tyler P.">
@@ -23,19 +23,39 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+    <!-- Preload Custom Font from CDN -->
+    <link rel="preload" href="https://cdn.example.com/fonts/open-sans.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+    <!-- Inline Critical CSS -->
+    <style>
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFUK0Zdc1UAw.ttf') format('truetype');
+        }
     
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"></noscript>
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8OXOhpOqc.ttf') format('truetype');
+        }
     
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"></noscript>
+        h1 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 3rem;
+            font-weight: 500;
+            color: #151515;
+            text-align: center;
+            margin: 80px auto 50px auto;
+        }
     
-    <link rel="preload" href="./css/reset.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./css/reset.css"></noscript>
-    
-    <link rel="preload" href="./css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./css/styles.css"></noscript>
-    <link rel="stylesheet" href="./css/styles.css">
+        /* Other critical CSS */
+    </style>
 </head>
 <body>
     <header id="header">
