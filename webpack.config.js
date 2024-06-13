@@ -3,8 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
+    mode: 'production', // Set mode to production for optimizations
     entry: './public/js/index.js',
     output: {
         filename: '[name].[contenthash].js',
@@ -46,6 +49,22 @@ module.exports = {
             ]
         })
     ],
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({
+                terserOptions: {
+                    compress: {
+                        drop_console: true,
+                    },
+                },
+            }),
+            new CssMinimizerPlugin(),
+        ],
+        splitChunks: {
+            chunks: 'all',
+        },
+    },
     devServer: {
         static: {
             directory: path.join(__dirname, 'dist')
@@ -58,6 +77,5 @@ module.exports = {
     },
     stats: {
         children: true
-    },
-    mode: 'development'
+    }
 };
