@@ -1,4 +1,3 @@
-
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -42,8 +41,8 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 { from: 'public/img', to: 'img' },
-                { from: 'public/css', to: 'css' },  // Copy CSS files
-                { from: 'public/Knowledge-Center', to: 'Knowledge-Center' } // Copy Knowledge-Center folder
+                { from: 'public/css', to: 'css' },
+                { from: 'public/Knowledge-Center', to: 'Knowledge-Center' }
             ]
         })
     ],
