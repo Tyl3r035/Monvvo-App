@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3773H5L03T"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-3773H5L03T');
     </script>
+    
     <!-- Google Adsense Head Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5106760016649931"
     crossorigin="anonymous"></script>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Tyler P.">
@@ -22,12 +23,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"></noscript>
+    
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"></noscript>
+    
     <link rel="preload" href="./css/reset.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="./css/reset.css"></noscript>
+    
     <link rel="preload" href="./css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="./css/styles.css"></noscript>
     <link rel="stylesheet" href="./css/styles.css">
@@ -40,7 +45,9 @@
     </header>
     <main id="main">
         <h1 id="title">Mortgage Calculator</h1>
+        <!-- Form content here -->
         <form id="mortgage-form">
+            <!-- Form fields here -->
             <label for="mortgage-price">Home Price</label>
             <span class="material-symbols-outlined">info</span>
             <div class="info-text-fluid">
@@ -120,9 +127,10 @@
             <canvas id="myChart"></canvas>
             <div id="chart-legend" class="legend-container"></div>
         </section>
-        <!-- Enter Google Ads Here -->
+         <!-- Additional sections here -->
          <div class="border-bottom"></div>
          <section class="how-section detail-section">
+            <!-- How-to content here -->
             <h2 class="section-title">How to Use Monvvo Mortgage Calculator</h2>
             <ol class="how-fluid">
                 <li class="how-link"><b class="bold-text">Input the home’s price.</b><br>Enter the total purchase price of the home you plan to buy or the current market value of your home if you are looking to refinance.</li>
@@ -139,6 +147,7 @@
          </section>
          <div class="border-bottom"></div>
          <section class="terms-section detail-section">
+            <!-- Terms content here -->
             <h2 class="section-title"> Mortgage Terms</h2>
             <h4 class="terms-heading">Home Price</h4>
             <p class="terms-content">The home price is the total cost of purchasing the property, including the base price of the house and any additional fees or costs associated with the purchase.</p>
@@ -161,11 +170,12 @@
         <img src="./img/Monvvo-Transparent.svg" alt="Monvvo Footer Logo" class="footer-logo">
         <p>&copy; 2024, Monvvo.com</p>
     </footer>
+
+    <!-- External Scripts (CDNs) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels" defer></script>
-    <script src="./js/optimize.js" defer></script>
-    <script src="./js/app.js" defer></script>
-    <script src="./js/mortgage.js" defer></script>
-    <script src="./js/script.js" defer></script>
+
+    <!-- Local Scripts (bundled by Webpack) -->
+    <script src="./dist/main.[contenthash].js" defer></script>
 </body>
 </html>

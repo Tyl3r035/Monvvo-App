@@ -11,6 +11,10 @@ module.exports = {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
   },
+  externals: {
+    'chart.js': 'Chart',
+    'chartjs-plugin-datalabels': 'ChartDataLabels',
+  },
   module: {
     rules: [
       {
