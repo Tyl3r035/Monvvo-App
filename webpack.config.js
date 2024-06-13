@@ -11,7 +11,7 @@ module.exports = (env, argv) => {
         output: {
             filename: isProduction ? 'main.[contenthash].js' : 'main.js',
             path: path.resolve(__dirname, 'dist'),
-            clean: true,
+            publicPath: '/',
         },
         module: {
             rules: [
@@ -41,11 +41,12 @@ module.exports = (env, argv) => {
         ],
         devServer: {
             static: {
-                directory: path.join(__dirname, 'dist'),
+                directory: path.join(__dirname, 'public'),
+                publicPath: '/',
             },
             compress: true,
             port: 9000,
         },
-        devtool: isProduction ? 'source-map' : 'inline-source-map',
+        devtool: isProduction ? 'source-map' : 'eval-source-map',
     };
 };
