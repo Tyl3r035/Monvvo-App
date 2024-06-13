@@ -1,5 +1,6 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
@@ -10,10 +11,6 @@ module.exports = {
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
-  },
-  externals: {
-    'chart.js': 'Chart',
-    'chartjs-plugin-datalabels': 'ChartDataLabels',
   },
   module: {
     rules: [
@@ -27,6 +24,8 @@ module.exports = {
     ],
   },
   optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
     splitChunks: {
       chunks: 'all',
     },
@@ -37,7 +36,7 @@ module.exports = {
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       reportFilename: 'bundle-report.html',
-      openAnalyzer: true,
+      openAnalyzer: false,
     }),
   ],
 };

@@ -1,5 +1,10 @@
-// public/js/utils.js
-export function add(a, b) {
+// Your existing utility functions
+export function multiply(a, b) {
+    return a * b;
+  }
+  
+  // Add new utility functions as needed
+  export function add(a, b) {
     return a + b;
   }
   
