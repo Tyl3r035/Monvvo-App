@@ -199,6 +199,7 @@ body, html {
     margin: 0 auto 1em auto;
 }
 .mortgage-title{
+    text-align: center !important;
     margin: 2em 0 1.5em 0;
 }
 #myChart {
