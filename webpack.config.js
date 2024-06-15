@@ -7,7 +7,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
-    mode: 'production', // Set mode to production for optimizations
+    mode: 'production',
     entry: './public/js/index.js',
     output: {
         filename: '[name].[contenthash].js',
@@ -38,6 +38,10 @@ module.exports = {
             template: './public/index.html',
             filename: 'index.html'
         }),
+        new HtmlWebpackPlugin({
+            template: './public/404.html',
+            filename: '404.html'
+        }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css'
         }),
@@ -46,7 +50,7 @@ module.exports = {
                 { from: 'public/img', to: 'img' },
                 { from: 'public/css', to: 'css' },
                 { from: 'public/Knowledge-Center', to: 'Knowledge-Center' },
-                { from: 'public/js/service-worker.js', to: 'service-worker.js' } // Add this line
+                { from: 'public/js/service-worker.js', to: 'service-worker.js' }
             ]
         })
     ],
@@ -73,8 +77,16 @@ module.exports = {
         compress: true,
         port: 9000,
         open: true,
-        historyApiFallback: true,
-        watchFiles: ['public/**/*']
+        historyApiFallback: {
+            rewrites: [
+                { from: /^\/$/, to: '/index.html' },
+                { from: /./, to: '/404.html' }
+            ]
+        },
+        watchFiles: ['public/**/*'],
+        client: {
+            logging: 'info',
+        }
     },
     stats: {
         children: true

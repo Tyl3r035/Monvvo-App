@@ -8,8 +8,13 @@ const PORT = process.env.PORT || 9000;
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Send all requests to index.html
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+// Handle 404
+app.use((req, res, next) => {
+    res.status(404).sendFile(path.join(__dirname, 'dist', '404.html'));
 });
 
 app.listen(PORT, () => {
