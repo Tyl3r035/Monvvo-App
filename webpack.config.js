@@ -8,7 +8,10 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    entry: './public/js/index.js',  // Ensure this entry point is correct
+    entry: {
+        main: './public/js/index.js',
+        ads: './public/js/ads.js'  // Add ads.js to the entry points
+    },
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -37,7 +40,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public/index.html'),
             filename: 'index.html',
-            inject: 'body'
+            inject: 'body',
+            chunks: ['main', 'ads']  // Include ads chunk
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public/404.html'),
