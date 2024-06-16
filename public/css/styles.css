@@ -185,6 +185,13 @@ body, html {
     margin: 3rem auto;
     padding-bottom: 1.5rem;
 }
+.results-section a{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3rem;
+    text-align: center;
+    color: #171717;
+    margin-bottom: 4em;;
+}
 .detail-section{
     width: 100%;
     padding: 0 4em;
@@ -197,6 +204,9 @@ body, html {
     text-align: left;
     color: #000;
     margin: 0 auto 1em auto;
+}
+.results-section .section-title{
+    margin-bottom: 15px !important
 }
 .mortgage-title{
     text-align: center !important;
@@ -346,6 +356,44 @@ body, html {
     outline: none;
     padding-right: 40px;
 }
+
+/* Footer CSS */
+#footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+
+    background-color: #1C2939;
+    padding: 75px 20px;
+}
+.footer-col{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.footer-heading{
+    font-family: "Open Sans", sans-serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+.footer-link{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    color: #fdfdfd;
+    margin-bottom: 10px;
+    text-decoration: none;
+    text-indent: 10px;
+}
+.footer-col img{
+    width: 100px;
+    height: 40px;
+}
+
 
 /* Custom arrow icon */
 .select-wrapper::after {
@@ -507,4 +555,25 @@ body, html {
     text-decoration: underline;
     color: #151515;
     padding: 15px 0;
+}
+
+/* Disclaimer Styles */
+.disclaimer-main{
+    margin: 0 30px;
+}
+.disclaimer-heading{
+    font-family: "Open Sans", sans-serif;
+    font-size: 2rem;
+    color: #000;
+    margin-bottom: 2rem;
+}
+.disclaimer-text{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    color: #000;
+    margin-bottom: 3rem;
+}
+.disclaimer-text a{
+    color: #03be62;
 }

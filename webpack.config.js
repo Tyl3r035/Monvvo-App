@@ -8,7 +8,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    entry: './public/js/index.js',
+    entry: './public/js/index.js',  // Ensure this entry point is correct
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -35,12 +35,24 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: './public/index.html',
-            filename: 'index.html'
+            template: path.resolve(__dirname, 'public/index.html'),
+            filename: 'index.html',
+            inject: 'body'
         }),
         new HtmlWebpackPlugin({
-            template: './public/404.html',
-            filename: '404.html'
+            template: path.resolve(__dirname, 'public/404.html'),
+            filename: '404.html',
+            inject: 'body'
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'public/privacy-policy.html'),
+            filename: 'privacy-policy.html',
+            inject: 'body'
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'public/monvvo-disclaimer.html'),
+            filename: 'monvvo-disclaimer.html',
+            inject: 'body'
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css'
