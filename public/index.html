@@ -34,6 +34,10 @@
         </div>
     </header>
     <main id="main">
+        <div id="fcConsentRevocation">
+            <button on="googleFC.prompt(consent=googleFC, expireCache=true)">Privacy and cookie settings</button>
+        </div>
+        <a href=”javascript:googlefc.callbackQueue.push(googlefc.showRevocationMessage)”>Privacy and cookie settings</a>
         <h1 id="title">Mortgage Calculator</h1>
         <form id="mortgage-form">
             <label for="mortgage-price">Home Price</label>
