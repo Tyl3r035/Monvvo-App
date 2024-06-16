@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './public/js/index.js',
@@ -29,6 +30,27 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './public/index.html',
             filename: 'index.html',
+        }),
+        new HtmlWebpackPlugin({
+            template: './public/privacy-policy.html',
+            filename: 'privacy-policy.html',
+        }),
+        new HtmlWebpackPlugin({
+            template: './public/monvvo-disclaimer.html',
+            filename: 'monvvo-disclaimer.html',
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'public/sitemap.xml', to: 'sitemap.xml' },
+                { from: 'public/ads.txt', to: 'ads.txt' },  // Include ads.txt
+                {
+                    from: 'public/Knowledge-Center',
+                    to: 'Knowledge-Center',
+                    globOptions: {
+                        ignore: ['**/privacy-policy.html', '**/monvvo-disclaimer.html'],
+                    },
+                },
+            ],
         }),
     ],
 };

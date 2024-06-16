@@ -22,6 +22,11 @@ app.get('/monvvo-disclaimer', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'monvvo-disclaimer.html'));
 });
 
+// Serve the sitemap.xml
+app.get('/sitemap.xml', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'sitemap.xml'));
+});
+
 // Handle 404
 app.use((req, res, next) => {
     res.status(404).sendFile(path.join(__dirname, 'dist', '404.html'));
