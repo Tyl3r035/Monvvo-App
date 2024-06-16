@@ -65,7 +65,9 @@ module.exports = {
             patterns: [
                 { from: 'public/img', to: 'img' },
                 { from: 'public/css', to: 'css' },
-                { from: 'public/Knowledge-Center', to: 'Knowledge-Center' },
+                { from: 'public/Knowledge-Center', to: 'Knowledge-Center', globOptions: {
+                    ignore: ['**/privacy-policy.html', '**/monvvo-disclaimer.html']
+                }},
                 { from: 'public/js/service-worker.js', to: 'service-worker.js' }
             ]
         })
