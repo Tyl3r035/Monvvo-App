@@ -308,13 +308,13 @@ body, html {
     }
 }
 @media screen and (max-width: 768px) {
-    .mortgage-btn{
+    .form-btn{
         width: auto;
         padding: 15px 20px;
     }
 }
 @media screen and (max-width: 600px) {
-    .mortgage-btn {
+    .form-btn {
         font-size: 1.6rem;
         width: 90% !important;
     }

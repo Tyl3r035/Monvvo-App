@@ -1,39 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
     const infoIcons = document.querySelectorAll('.material-symbols-outlined');
 
-    infoIcons.forEach(icon => {
-        icon.addEventListener('click', function(event) {
-            event.stopPropagation();
-            const infoText = this.nextElementSibling;
-            if (infoText.style.display === 'block') {
-                infoText.style.display = 'none';
-            } else {
-                document.querySelectorAll('.info-text-fluid').forEach(text => text.style.display = 'none');
-                infoText.style.display = 'block';
+    if (infoIcons.length > 0) {
+        infoIcons.forEach(icon => {
+            icon.addEventListener('click', function(event) {
+                event.stopPropagation();
+                const infoText = this.nextElementSibling;
+                if (infoText.style.display === 'block') {
+                    infoText.style.display = 'none';
+                } else {
+                    document.querySelectorAll('.info-text-fluid').forEach(text => text.style.display = 'none');
+                    infoText.style.display = 'block';
 
-                const iconRect = this.getBoundingClientRect();
+                    const iconRect = this.getBoundingClientRect();
 
-                let offsetX = iconRect.left - infoText.offsetWidth - 5;
-                let offsetY = window.scrollY + iconRect.bottom + 5;
+                    let offsetX = iconRect.left - infoText.offsetWidth - 5;
+                    let offsetY = window.scrollY + iconRect.bottom + 5;
 
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
+                    const viewportWidth = window.innerWidth;
+                    const viewportHeight = window.innerHeight;
 
-                if (offsetX < 0) {
-                    offsetX = iconRect.right + 5;
-                } else if (offsetX + infoText.offsetWidth > viewportWidth) {
-                    offsetX = viewportWidth - infoText.offsetWidth - 5;
+                    if (offsetX < 0) {
+                        offsetX = iconRect.right + 5;
+                    } else if (offsetX + infoText.offsetWidth > viewportWidth) {
+                        offsetX = viewportWidth - infoText.offsetWidth - 5;
+                    }
+
+                    if (offsetY + infoText.offsetHeight > window.scrollY + viewportHeight) {
+                        offsetY = window.scrollY + iconRect.top - infoText.offsetHeight - 5;
+                    }
+
+                    infoText.style.left = `${offsetX}px`;
+                    infoText.style.top = `${offsetY}px`;
                 }
-
-                if (offsetY + infoText.offsetHeight > window.scrollY + viewportHeight) {
-                    offsetY = window.scrollY + iconRect.top - infoText.offsetHeight - 5;
-                }
-
-                infoText.style.left = `${offsetX}px`;
-                infoText.style.top = `${offsetY}px`;
-            }
+            });
         });
-    });
+    }
 
     document.addEventListener('click', function() {
         document.querySelectorAll('.info-text-fluid').forEach(text => text.style.display = 'none');
@@ -45,82 +47,84 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    const ctx = document.getElementById('myChart').getContext('2d');
-    let totalMonthlyPayment = 0;
+    const chartElement = document.getElementById('myChart');
+    if (chartElement) {
+        const ctx = chartElement.getContext('2d');
+        let totalMonthlyPayment = 0;
 
-    const placeholderValues = {
-        homePrice: 400000,
-        downPayment: 20000,
-        loanTerm: 15,
-        interestRate: 7.2,
-        propertyTaxes: 333.33,
-        propertyTaxesFrequency: 'monthly',
-        pmi: 0,
-        hoa: 0
-    };
+        const placeholderValues = {
+            homePrice: 400000,
+            downPayment: 20000,
+            loanTerm: 15,
+            interestRate: 7.2,
+            propertyTaxes: 333.33,
+            propertyTaxesFrequency: 'monthly',
+            pmi: 0,
+            hoa: 0
+        };
 
-    const calculateMonthlyPI = (homePrice, downPayment, loanTerm, interestRate) => {
-        const principal = homePrice - downPayment;
-        const monthlyInterestRate = (interestRate / 100) / 12;
-        const numberOfPayments = loanTerm * 12;
-        const monthlyPI = principal * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) / (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
-        return Math.round(monthlyPI * 100) / 100;
-    };
+        const calculateMonthlyPI = (homePrice, downPayment, loanTerm, interestRate) => {
+            const principal = homePrice - downPayment;
+            const monthlyInterestRate = (interestRate / 100) / 12;
+            const numberOfPayments = loanTerm * 12;
+            const monthlyPI = principal * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) / (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+            return Math.round(monthlyPI * 100) / 100;
+        };
 
-    const getPropertyTax = (propertyTaxes, frequency) => {
-        if (frequency === 'annually') {
-            return propertyTaxes / 12;
-        }
-        return propertyTaxes;
-    };
+        const getPropertyTax = (propertyTaxes, frequency) => {
+            if (frequency === 'annually') {
+                return propertyTaxes / 12;
+            }
+            return propertyTaxes;
+        };
 
-    const calculateTotalMonthlyPayment = (monthlyPI, propertyTaxes, propertyTaxesFrequency, pmi, hoa) => {
-        const monthlyPropertyTaxes = getPropertyTax(propertyTaxes, propertyTaxesFrequency);
-        return Math.round((monthlyPI + monthlyPropertyTaxes + pmi + hoa) * 100) / 100;
-    };
+        const calculateTotalMonthlyPayment = (monthlyPI, propertyTaxes, propertyTaxesFrequency, pmi, hoa) => {
+            const monthlyPropertyTaxes = getPropertyTax(propertyTaxes, propertyTaxesFrequency);
+            return Math.round((monthlyPI + monthlyPropertyTaxes + pmi + hoa) * 100) / 100;
+        };
 
-    const drawCenterText = (chart) => {
-        const ctx = chart.ctx;
-        ctx.save();
-        const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
-        const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
+        const drawCenterText = (chart) => {
+            const ctx = chart.ctx;
+            ctx.save();
+            const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
+            const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
 
-        let fontSize = '40px';
-        if (window.innerWidth <= 450) {
-            fontSize = '25px';
-        }
-        ctx.font = `bold ${fontSize} Open Sans`;
-        ctx.fillStyle = '#000';
-        ctx.clearRect(centerX - 75, centerY - 25, 150, 50);
-        ctx.fillText('Total: $' + totalMonthlyPayment, centerX, centerY);
-        ctx.restore();
-    };
+            let fontSize = '40px';
+            if (window.innerWidth <= 450) {
+                fontSize = '25px';
+            }
+            ctx.font = `bold ${fontSize} Open Sans`;
+            ctx.fillStyle = '#000';
+            ctx.clearRect(centerX - 75, centerY - 25, 150, 50);
+            ctx.fillText('Total: $' + totalMonthlyPayment, centerX, centerY);
+            ctx.restore();
+        };
 
-    const updateLegend = (chart) => {
-        const legendContainer = document.getElementById('chart-legend');
-        legendContainer.innerHTML = '';
-        const items = chart.data.labels.map((label, index) => {
-            const value = chart.data.datasets[0].data[index];
-            const color = chart.data.datasets[0].backgroundColor[index];
-            return `
-                <div class="legend-item">
-                    <span class="legend-color-box" style="background-color:${color};"></span>
-                    <span class="legend-text">${label}: $${value}</span>
-                </div>
-            `;
-        });
-        legendContainer.innerHTML = items.join('');
-    };
+        const updateLegend = (chart) => {
+            const legendContainer = document.getElementById('chart-legend');
+            legendContainer.innerHTML = '';
+            const items = chart.data.labels.map((label, index) => {
+                const value = chart.data.datasets[0].data[index];
+                const color = chart.data.datasets[0].backgroundColor[index];
+                return `
+                    <div class="legend-item">
+                        <span class="legend-color-box" style="background-color:${color};"></span>
+                        <span class="legend-text">${label}: $${value}</span>
+                    </div>
+                `;
+            });
+            legendContainer.innerHTML = items.join('');
+        };
 
-    const centerTextPlugin = {
-        id: 'centerTextPlugin',
-        afterDraw: (chart) => {
-            drawCenterText(chart);
-            updateLegend(chart);
-        }
-    };
+        const centerTextPlugin = {
+            id: 'centerTextPlugin',
+            afterDraw: (chart) => {
+                drawCenterText(chart);
+                updateLegend(chart);
+            }
+        };
 
     const myChart = new Chart(ctx, {
         type: 'doughnut',
@@ -198,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
         myChart.update();
     };
 
-    document.querySelector('.mortgage_input__submit').addEventListener('click', function(event) {
+    document.querySelector('.mortgage-btn').addEventListener('click', function(event) {
         event.preventDefault();
 
         const homePrice = parseFloat(document.getElementById('mortgage-price').value);
@@ -242,4 +246,4 @@ document.addEventListener('DOMContentLoaded', function() {
     );
 
     updateChartAndText();
-});
+}});

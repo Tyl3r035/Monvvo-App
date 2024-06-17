@@ -49,23 +49,23 @@
             <h1 id="title">Mortgage Payoff Calculator</h1>
             <form id="mortgage-form">
                 <!-- Remaining Value -->
-                <label for="remaining-value">Remaining Value</label>
+                <label for="payoff-value">Remaining Value</label>
                 <span class="material-symbols-outlined">info</span>
                 <div class="info-text-fluid">
                     Put Content Here For Remaining Value Definition - Mortgage Payoff Calculator
                 </div>
                 <div class="input-fluid payoff-fluid">
                     <span class="input-icon dollar-span">$</span>
-                    <input type="number" name="payoff_input__remaining_value" id="remaining-value" placeholder="250000" required>
+                    <input type="number" name="payoff_input__remaining_value" id="payoff-value" placeholder="250000" required>
                 </div>
                 <!-- Interest Rate -->
-                <label for="interest-rate">Interest Rate</label>
+                <label for="payoff-interest">Interest Rate</label>
                 <span class="material-symbols-outlined">info</span>
                 <div class="info-text-fluid">
                     The interest rate is the percentage charged on the loan amount by the lender, which determines the cost of borrowing money for your mortgage. It is usually expressed as an annual percentage rate (APR).
                 </div>
                 <div class="input-fluid payoff-fluid">
-                    <input type="number" step="0.01" name="payoff_input__interest_rate" id="interest-rate" placeholder="7.2" required>
+                    <input type="number" step="0.01" name="payoff_input__interest_rate" id="payoff-interest" placeholder="7.2" required>
                     <span class="input-icon right-span">%</span>
                 </div>
                 <!-- Current Payment -->
@@ -105,14 +105,14 @@
                     </div>
                 </div>
                 <!-- Loan Start Date -->
-                <label for="pmi-cost">Loan Start Date</label>
+                <label for="payoff-start">Loan Start Date</label>
                 <span class="optional-span">(Optional)</span>
                 <span class="material-symbols-outlined">info</span>
                 <div class="info-text-fluid optional-info">
                     Put Content Here For Current Loan Start Date Definition - Mortgage Payoff Calculator
                 </div>
                 <div class="input-fluid payoff-fluid">
-                    <input type="number" name="payoff_input__pmi" id="pmi-cost" placeholder="0">
+                    <input type="date" name="payoff_input__pmi" id="payoff-start">
                 </div>
                 <button class="form-btn mortgage_payoff__submit">Calculate Mortgage Payoff</button>
             </form>

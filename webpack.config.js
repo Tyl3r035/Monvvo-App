@@ -64,9 +64,11 @@ module.exports = {
                 { from: 'public/Knowledge-Center', to: 'Knowledge-Center' },
                 { from: 'public/Mortgage', to: 'Mortgage' },
                 { from: 'public/js/service-worker.js', to: 'service-worker.js' },
-                // Add these lines to copy _headers and _redirects
+                // Copy _headers and _redirects to dist
                 { from: '_headers', to: '_headers', toType: 'file' },
-                { from: '_redirects', to: '_redirects', toType: 'file' }
+                { from: '_redirects', to: '_redirects', toType: 'file' },
+                // Copy sitemap.xml to dist
+                { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' }
             ]
         })
     ],
