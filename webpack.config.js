@@ -71,14 +71,14 @@ module.exports = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: 'public/img', to: 'img' },
-                { from: 'public/css', to: 'css' },
-                { from: 'public/Knowledge-Center', to: 'Knowledge-Center', globOptions: {
+                { from: path.resolve(__dirname, 'public/img'), to: 'img' },
+                { from: path.resolve(__dirname, 'public/css'), to: 'css' },
+                { from: path.resolve(__dirname, 'public/Knowledge-Center'), to: 'Knowledge-Center', globOptions: {
                     ignore: ['**/privacy-policy.html', '**/monvvo-disclaimer.html']
                 }},
-                { from: 'public/js/service-worker.js', to: 'service-worker.js' },
-                { from: 'public/sitemap.xml', to: 'sitemap.xml' },
-                { from: 'public/ads.txt', to: 'ads.txt' }
+                { from: path.resolve(__dirname, 'public/js/service-worker.js'), to: 'service-worker.js' },
+                { from: path.resolve(__dirname, 'public/sitemap.xml'), to: 'sitemap.xml' },
+                { from: path.resolve(__dirname, 'public/ads.txt'), to: 'ads.txt' }
             ]
         })
     ],
