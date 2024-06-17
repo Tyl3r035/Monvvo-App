@@ -1,0 +1,8 @@
+# Ensure sitemap.xml is accessible
+/sitemap.xml  /sitemap.xml  200
+
+# Redirect all other paths to index.html for SPA
+/*    /index.html   200
+
+# Handle 404 errors
+/*    /404.html     404

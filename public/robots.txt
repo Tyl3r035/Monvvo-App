@@ -1,0 +1,25 @@
+User-agent: *
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /public/
+Disallow: /_headers
+Disallow: /_redirects
+Disallow: /deno.lock
+Disallow: /netlify.toml
+Disallow: /server.js
+Disallow: /webpack.common.js
+Disallow: /webpack.config.js
+
+# Allow specific assets that are necessary for the site
+Allow: /dist/js/
+Allow: /dist/css/
+Allow: /dist/img/
+Allow: /dist/index.html
+Allow: /Knowledge-Center/
+Allow: /404.html
+
+# Sitemap
+Sitemap: https://www.monvvo.com/sitemap.xml
+
+# Reduce server load
+Crawl-delay: 10
