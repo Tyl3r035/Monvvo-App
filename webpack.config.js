@@ -33,6 +33,13 @@ module.exports = {
                         presets: ['@babel/preset-env']
                     }
                 }
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf|svg|png|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'img/[hash][ext][query]',
+                },
             }
         ]
     },
@@ -69,7 +76,9 @@ module.exports = {
                 { from: 'public/Knowledge-Center', to: 'Knowledge-Center', globOptions: {
                     ignore: ['**/privacy-policy.html', '**/monvvo-disclaimer.html']
                 }},
-                { from: 'public/js/service-worker.js', to: 'service-worker.js' }
+                { from: 'public/js/service-worker.js', to: 'service-worker.js' },
+                { from: 'public/sitemap.xml', to: 'sitemap.xml' },
+                { from: 'public/ads.txt', to: 'ads.txt' }
             ]
         })
     ],
