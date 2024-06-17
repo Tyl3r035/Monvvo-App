@@ -9,24 +9,22 @@ const PORT = process.env.PORT || 9000;
 // Serve static files from the dist directory
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Serve the index.html for the root path
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
-
-// Serve the privacy-policy.html
+// Serve specific files
 app.get('/privacy-policy', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'privacy-policy.html'));
 });
 
-// Serve the monvvo-disclaimer.html
 app.get('/monvvo-disclaimer', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'monvvo-disclaimer.html'));
 });
 
-// Serve the sitemap.xml
 app.get('/sitemap.xml', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'sitemap.xml'));
+});
+
+// Serve index.html for the root path
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 // Handle 404

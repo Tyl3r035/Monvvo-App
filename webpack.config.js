@@ -1,3 +1,4 @@
+// webpack.config.js
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -10,7 +11,7 @@ module.exports = {
     mode: 'production',
     entry: {
         main: './public/js/index.js',
-        ads: './public/js/ads.js'  // Add ads.js to the entry points
+        ads: './public/js/ads.js'
     },
     output: {
         filename: '[name].[contenthash].js',
@@ -41,7 +42,7 @@ module.exports = {
             template: path.resolve(__dirname, 'public/index.html'),
             filename: 'index.html',
             inject: 'body',
-            chunks: ['main', 'ads']  // Include ads chunk
+            chunks: ['main', 'ads']
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public/404.html'),
@@ -98,6 +99,7 @@ module.exports = {
         historyApiFallback: {
             rewrites: [
                 { from: /^\/$/, to: '/index.html' },
+                { from: /404/, to: '/404.html' },
                 { from: /./, to: '/404.html' }
             ]
         },
