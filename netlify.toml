@@ -14,7 +14,7 @@
 
 # Custom 404 redirect for non-existing links
 [[redirects]]
-  from = "/404.html"
+  from = "/*"
   to = "/404.html"
   status = 404
   force = true
