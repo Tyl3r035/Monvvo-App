@@ -48,7 +48,7 @@ module.exports = {
             template: path.resolve(__dirname, 'public/index.html'),
             filename: 'index.html',
             inject: 'body',
-            chunks: ['main', 'ads']
+            chunks: ['main']
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public/404.html'),
@@ -72,10 +72,7 @@ module.exports = {
             patterns: [
                 { from: path.resolve(__dirname, 'public/img'), to: 'img' },
                 { from: path.resolve(__dirname, 'public/css'), to: 'css' },
-                { from: path.resolve(__dirname, 'public/Knowledge-Center'), to: 'Knowledge-Center', globOptions: {
-                    ignore: ['**/privacy-policy.html', '**/monvvo-disclaimer.html']
-                }},
-                { from: path.resolve(__dirname, 'public/js/service-worker.js'), to: 'service-worker.js' },
+                { from: path.resolve(__dirname, 'public/Knowledge-Center'), to: 'Knowledge-Center' },
                 { from: path.resolve(__dirname, 'public/sitemap.xml'), to: 'sitemap.xml' },
                 { from: path.resolve(__dirname, 'public/ads.txt'), to: 'ads.txt' }
             ]

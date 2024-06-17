@@ -45,16 +45,11 @@ module.exports = {
         }),
         new CopyWebpackPlugin({
             patterns: [
+                { from: 'public/img', to: 'img' },
+                { from: 'public/css', to: 'css' },
+                { from: 'public/Knowledge-Center', to: 'Knowledge-Center' },
                 { from: 'public/sitemap.xml', to: 'sitemap.xml' },
                 { from: 'public/ads.txt', to: 'ads.txt' },
-                {
-                    from: 'public/Knowledge-Center',
-                    to: 'Knowledge-Center',
-                    globOptions: {
-                        ignore: ['**/privacy-policy.html', '**/monvvo-disclaimer.html'],
-                    },
-                },
-                { from: 'public/css', to: 'css' }, // Ensure CSS files are copied
             ],
         }),
     ],
