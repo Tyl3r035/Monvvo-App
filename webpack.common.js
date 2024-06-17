@@ -39,6 +39,10 @@ module.exports = {
             template: './public/monvvo-disclaimer.html',
             filename: 'monvvo-disclaimer.html',
         }),
+        new HtmlWebpackPlugin({
+            template: './public/404.html',
+            filename: '404.html',
+        }),
         new CopyWebpackPlugin({
             patterns: [
                 { from: 'public/sitemap.xml', to: 'sitemap.xml' },
@@ -50,6 +54,7 @@ module.exports = {
                         ignore: ['**/privacy-policy.html', '**/monvvo-disclaimer.html'],
                     },
                 },
+                { from: 'public/css', to: 'css' }, // Ensure CSS files are copied
             ],
         }),
     ],
