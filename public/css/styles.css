@@ -53,6 +53,7 @@ body, html {
     font-family: "Open Sans", sans-serif;
     font-size: 3rem;
     font-weight: 500;
+    line-height: 4rem;
     color: #151515;
     text-align: center;
     margin: 80px auto 50px auto;
@@ -114,7 +115,7 @@ body, html {
     font-size: 1.6rem !important;
 }
 .input-fluid:focus-within {
-    border: 3px solid #171717;
+    border: 2px solid #171717;
     padding: 8px 10px;
 }
 .input-fluid input {
@@ -145,7 +146,7 @@ body, html {
     -webkit-appearance: none;
     -moz-appearance: none;
 }
-.mortgage_input__submit {
+.form-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -165,7 +166,7 @@ body, html {
     cursor: pointer;
     transition: background-color .4s ease;
 }
-.mortgage_input__submit:hover {
+.form-btn:hover {
     background-color: #03be62;
 }
 .border-bottom{
@@ -200,7 +201,7 @@ body, html {
     font-family: "Open Sans", sans-serif;
     font-size: 3rem;
     font-weight: 700;
-    line-height: 3.5rem;
+    line-height: 4rem;
     text-align: left;
     color: #000;
     margin: 0 auto 1em auto;
@@ -306,8 +307,15 @@ body, html {
         max-width: 900px;
     }
 }
+@media screen and (max-width: 768px) {
+    .mortgage-btn{
+        width: auto;
+        padding: 15px 20px;
+    }
+}
 @media screen and (max-width: 600px) {
-    .mortgage_input__submit {
+    .mortgage-btn {
+        font-size: 1.6rem;
         width: 90% !important;
     }
     .input-fluid input{
@@ -356,7 +364,6 @@ body, html {
     outline: none;
     padding-right: 40px;
 }
-
 /* Footer CSS */
 #footer{
     display: flex;
@@ -378,6 +385,7 @@ body, html {
 .footer-heading{
     font-family: "Open Sans", sans-serif;
     font-size: 2rem;
+    font-weight: 600;
     margin-bottom: 20px;
     color: #fff;
 }
