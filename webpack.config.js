@@ -8,10 +8,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    entry: {
-        main: './public/js/index.js',
-        ads: './public/js/ads.js'
-    },
+    entry: './public/js/index.js',  // Ensure this entry point is correct
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -32,13 +29,6 @@ module.exports = {
                         presets: ['@babel/preset-env']
                     }
                 }
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf|svg|png|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
-                generator: {
-                    filename: 'img/[hash][ext][query]',
-                },
             }
         ]
     },
@@ -47,8 +37,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public/index.html'),
             filename: 'index.html',
-            inject: 'body',
-            chunks: ['main']
+            inject: 'body'
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public/404.html'),
@@ -70,11 +59,10 @@ module.exports = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: path.resolve(__dirname, 'public/img'), to: 'img' },
-                { from: path.resolve(__dirname, 'public/css'), to: 'css' },
-                { from: path.resolve(__dirname, 'public/Knowledge-Center'), to: 'Knowledge-Center' },
-                { from: path.resolve(__dirname, 'public/sitemap.xml'), to: 'sitemap.xml' },
-                { from: path.resolve(__dirname, 'public/ads.txt'), to: 'ads.txt' }
+                { from: 'public/img', to: 'img' },
+                { from: 'public/css', to: 'css' },
+                { from: 'public/Knowledge-Center', to: 'Knowledge-Center' },
+                { from: 'public/js/service-worker.js', to: 'service-worker.js' }
             ]
         })
     ],
@@ -104,7 +92,6 @@ module.exports = {
         historyApiFallback: {
             rewrites: [
                 { from: /^\/$/, to: '/index.html' },
-                { from: /404/, to: '/404.html' },
                 { from: /./, to: '/404.html' }
             ]
         },
