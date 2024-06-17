@@ -42,7 +42,7 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 { from: 'public/sitemap.xml', to: 'sitemap.xml' },
-                { from: 'public/ads.txt', to: 'ads.txt' },  // Include ads.txt
+                { from: 'public/ads.txt', to: 'ads.txt' },
                 {
                     from: 'public/Knowledge-Center',
                     to: 'Knowledge-Center',
