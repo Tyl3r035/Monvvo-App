@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-// Handle 404
+// Handle 404 by serving the 404.html page
 app.use((req, res, next) => {
     res.status(404).sendFile(path.join(__dirname, 'dist', '404.html'));
 });
