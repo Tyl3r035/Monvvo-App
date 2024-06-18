@@ -63,12 +63,15 @@ module.exports = {
                 { from: 'public/css', to: 'css' },
                 { from: 'public/Knowledge-Center', to: 'Knowledge-Center' },
                 { from: 'public/Mortgage', to: 'Mortgage' },
+                { from: 'public/Loan', to: 'Loan' },
                 { from: 'public/js/service-worker.js', to: 'service-worker.js' },
                 // Copy _headers and _redirects to dist
                 { from: '_headers', to: '_headers', toType: 'file' },
                 { from: '_redirects', to: '_redirects', toType: 'file' },
                 // Copy sitemap.xml to dist
-                { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' }
+                { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' },
+                // Copy ads.txt to dist
+                { from: 'ads.txt', to: 'ads.txt', toType: 'file' }
             ]
         })
     ],
@@ -97,7 +100,6 @@ module.exports = {
         open: true,
         historyApiFallback: {
             rewrites: [
-                { from: /^\/$/, to: '/index.html' },
                 { from: /./, to: '/404.html' }
             ]
         },
