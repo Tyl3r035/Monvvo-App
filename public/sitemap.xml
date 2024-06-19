@@ -1,42 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://monvvo.com/</loc>
-  <lastmod>2024-06-17T01:39:53+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://monvvo.com/monvvo-disclaimer</loc>
-  <lastmod>2024-06-17T01:39:53+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://monvvo.com/knowledge-center/how-to-calculate-mortgage-blog</loc>
-  <lastmod>2024-06-17T01:39:53+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://monvvo.com/privacy-policy</loc>
-  <lastmod>2024-06-17T01:39:53+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://monvvo.com/knowledge-center/privacy-policy.html</loc>
-  <lastmod>2024-06-17T01:39:53+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://monvvo.com/knowledge-center/monvvo-disclaimer.html</loc>
-  <lastmod>2024-06-17T01:39:53+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.monvvo.com/</loc>
+    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://www.monvvo.com/monvvo-disclaimer</loc>
+    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.monvvo.com/knowledge-center/how-to-calculate-mortgage-blog</loc>
+    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.monvvo.com/privacy-policy</loc>
+    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.monvvo.com/knowledge-center/privacy-policy.html</loc>
+    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
+  <url>
+    <loc>https://www.monvvo.com/knowledge-center/monvvo-disclaimer.html</loc>
+    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
+  <!-- Add Mortgage folder URLs -->
+  <url>
+    <loc>https://www.monvvo.com/mortgage/</loc>
+    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.monvvo.com/mortgage/filename1.html</loc>
+    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
+  <url>
+    <loc>https://www.monvvo.com/mortgage/filename2.html</loc>
+    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
+  <!-- Add Loan folder URLs -->
+  <url>
+    <loc>https://www.monvvo.com/loan/</loc>
+    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.monvvo.com/loan/filename1.html</loc>
+    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
+  <url>
+    <loc>https://www.monvvo.com/loan/filename2.html</loc>
+    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
 </urlset>

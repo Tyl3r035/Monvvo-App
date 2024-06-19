@@ -6,6 +6,39 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
+const pages = [
+    {
+        filename: 'index.html',
+        template: path.resolve(__dirname, 'public/index.html'),
+        canonical: 'https://monvvo.com/'
+    },
+    {
+        filename: 'privacy-policy.html',
+        template: path.resolve(__dirname, 'public/privacy-policy.html'),
+        canonical: 'https://monvvo.com/privacy-policy'
+    },
+    {
+        filename: 'monvvo-disclaimer.html',
+        template: path.resolve(__dirname, 'public/monvvo-disclaimer.html'),
+        canonical: 'https://monvvo.com/monvvo-disclaimer'
+    },
+    {
+        filename: 'Knowledge-Center/how-to-calculate-mortgage-blog.html',
+        template: path.resolve(__dirname, 'public/Knowledge-Center/how-to-calculate-mortgage-blog.html'),
+        canonical: 'https://monvvo.com/knowledge-center/how-to-calculate-mortgage-blog'
+    },
+    {
+        filename: 'Mortgage/index.html',
+        template: path.resolve(__dirname, 'public/Mortgage/index.html'),
+        canonical: 'https://monvvo.com/mortgage'
+    },
+    {
+        filename: 'Loan/index.html',
+        template: path.resolve(__dirname, 'public/Loan/index.html'),
+        canonical: 'https://monvvo.com/loan'
+    }
+];
+
 module.exports = {
     mode: 'production',
     entry: './public/js/index.js',
@@ -34,26 +67,13 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public/index.html'),
-            filename: 'index.html',
-            inject: 'body'
-        }),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public/404.html'),
-            filename: '404.html',
-            inject: 'body'
-        }),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public/privacy-policy.html'),
-            filename: 'privacy-policy.html',
-            inject: 'body'
-        }),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public/monvvo-disclaimer.html'),
-            filename: 'monvvo-disclaimer.html',
-            inject: 'body'
-        }),
+        ...pages.map(page => new HtmlWebpackPlugin({
+            filename: page.filename,
+            template: page.template,
+            inject: 'body',
+            minify: true,
+            canonical: page.canonical
+        })),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css'
         }),
