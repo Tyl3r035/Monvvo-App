@@ -4,12 +4,11 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3773H5L03T"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-3773H5L03T');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3773H5L03T');
     </script>
-
     <!-- Google Adsense Head Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5106760016649931"
     crossorigin="anonymous"></script>
@@ -21,17 +20,35 @@
     <title>Calculate Mortgage by Monthly Payment | Free Mortgage Calculator</title>
     <link rel="canonical" href="<%= htmlWebpackPlugin.options.canonical %>" />
     <link rel="icon" type="image/svg+xml" href="../img/Monvvo-Favicon.svg">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Google Fonts with defer -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" defer>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin defer>
+           <!-- Google Font Code -->
+           <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var fontLinks = [
+                    "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap",
+                    "https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+                ];
+                
+                fontLinks.forEach(function(linkHref) {
+                    var link = document.createElement("link");
+                    link.href = linkHref;
+                    link.rel = "stylesheet";
+                    link.defer = true;
+                    document.head.appendChild(link);
+                });
+            });
+        </script>
     <!-- JS Delivr -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
     <!-- CSS Stylesheets -->
     <link rel="preload" href="../css/reset.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="../css/reset.css"></noscript>
     <link rel="preload" href="../css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="../css/styles.css"></noscript>
+
 </head>
 <body>
     <header id="header">
@@ -168,8 +185,8 @@
             <img src="../img/Monvvo-White.png" alt="Monvvo Logo">
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-    <script src="./js/main.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script defer src="./js/main.js"></script>
 </body>
 </html>

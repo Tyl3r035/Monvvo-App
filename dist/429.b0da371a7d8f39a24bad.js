@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmonvvo_app=self.webpackChunkmonvvo_app||[]).push([[429],{429:(a,c,e)=>{e.r(c),e.d(c,{default:()=>p});const p=e.p+"images/chevron.a55dcc5ec01bca7fd032f067b6a40a3f.svg"}}]);

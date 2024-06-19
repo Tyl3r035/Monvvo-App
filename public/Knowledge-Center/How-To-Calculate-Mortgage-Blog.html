@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3773H5L03T"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-3773H5L03T');
+    <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-3773H5L03T"></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3773H5L03T');
     </script>
     <!-- Google Adsense Head Code -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5106760016649931" crossorigin="anonymous"></script>
+    <script async defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5106760016649931" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Tyler P.">
@@ -19,11 +19,27 @@
     <link rel="canonical" href="<%= htmlWebpackPlugin.options.canonical %>" />
     <link rel="icon" type="image/svg+xml" href="../img/Monvvo-Favicon.svg">
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+           <!-- Google Font Code -->
+           <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var fontLinks = [
+                    "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap",
+                    "https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+                ];
+                
+                fontLinks.forEach(function(linkHref) {
+                    var link = document.createElement("link");
+                    link.href = linkHref;
+                    link.rel = "stylesheet";
+                    link.defer = true;
+                    document.head.appendChild(link);
+                });
+            });
+        </script>
     <!-- JS Delivr -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <!-- CSS Stylesheets -->
     <link rel="preload" href="../css/reset.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="../css/reset.css"></noscript>

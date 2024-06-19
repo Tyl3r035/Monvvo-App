@@ -57,6 +57,11 @@ const pages = [
         filename: 'Loan/Personal-Loan-Calculator.html',
         template: path.resolve(__dirname, 'public/Loan/Personal-Loan-Calculator.html'),
         canonical: 'https://monvvo.com/loan/personal-loan-calculator'
+    },
+    {
+        filename: 'Loan/Student-Loan-Calculator.html',
+        template: path.resolve(__dirname, 'public/Loan/Student-Loan-Calculator.html'),
+        canonical: 'https://monvvo.com/loan/student-loan-calculator'
     }
 ];
 
@@ -73,6 +78,18 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader']
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[hash].[ext]',
+                            outputPath: 'images/',
+                        },
+                    },
+                ],
             },
             {
                 test: /\.js$/,
@@ -109,7 +126,9 @@ module.exports = {
                 // Copy sitemap.xml to dist
                 { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' },
                 // Copy ads.txt to dist
-                { from: 'ads.txt', to: 'ads.txt', toType: 'file' }
+                { from: 'ads.txt', to: 'ads.txt', toType: 'file' },
+                // Copy robots.txt to dist
+                { from: 'robots.txt', to: 'robots.txt', toType: 'file'}
             ]
         })
     ],
