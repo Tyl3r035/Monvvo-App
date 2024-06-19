@@ -24,18 +24,38 @@ const pages = [
     },
     {
         filename: 'Knowledge-Center/how-to-calculate-mortgage-blog.html',
-        template: path.resolve(__dirname, 'public/Knowledge-Center/how-to-calculate-mortgage-blog.html'),
+        template: path.resolve(__dirname, 'public/Knowledge-Center/How-To-Calculate-Mortgage-Blog.html'),
         canonical: 'https://monvvo.com/knowledge-center/how-to-calculate-mortgage-blog'
     },
     {
-        filename: 'Mortgage/index.html',
-        template: path.resolve(__dirname, 'public/Mortgage/index.html'),
-        canonical: 'https://monvvo.com/mortgage'
+        filename: 'Knowledge-Center/Mortgage-Calculator-Make-Informed-Home-Loan-Decisions.html',
+        template: path.resolve(__dirname, 'public/Knowledge-Center/Mortgage-Calculator-Make-Informed-Home-Loan-Decisions.html'),
+        canonical: 'https://monvvo.com/knowledge-center/mortgage-calculator-make-informed-home-loan-decisions'
     },
     {
-        filename: 'Loan/index.html',
-        template: path.resolve(__dirname, 'public/Loan/index.html'),
-        canonical: 'https://monvvo.com/loan'
+        filename: 'Mortgage/Down-Payment-Calculator.html',
+        template: path.resolve(__dirname, 'public/Mortgage/Down-Payment-Calculator.html'),
+        canonical: 'https://monvvo.com/mortgage/down-payment-calculator'
+    },
+    {
+        filename: 'Mortgage/Home-Equity-Calculator.html',
+        template: path.resolve(__dirname, 'public/Mortgage/Home-Equity-Calculator.html'),
+        canonical: 'https://monvvo.com/mortgage/home-equity-calculator'
+    },
+    {
+        filename: 'Mortgage/Mortgage-Payoff-Calculator.html',
+        template: path.resolve(__dirname, 'public/Mortgage/Mortgage-Payoff-Calculator.html'),
+        canonical: 'https://monvvo.com/mortgage/mortgage-payoff-calculator'
+    },
+    {
+        filename: 'Loan/Auto-Loan-Calculator.html',
+        template: path.resolve(__dirname, 'public/Loan/Auto-Loan-Calculator.html'),
+        canonical: 'https://monvvo.com/loan/auto-loan-calculator'
+    },
+    {
+        filename: 'Loan/Personal-Loan-Calculator.html',
+        template: path.resolve(__dirname, 'public/Loan/Personal-Loan-Calculator.html'),
+        canonical: 'https://monvvo.com/loan/personal-loan-calculator'
     }
 ];
 
@@ -81,9 +101,6 @@ module.exports = {
             patterns: [
                 { from: 'public/img', to: 'img' },
                 { from: 'public/css', to: 'css' },
-                { from: 'public/Knowledge-Center', to: 'Knowledge-Center' },
-                { from: 'public/Mortgage', to: 'Mortgage' },
-                { from: 'public/Loan', to: 'Loan' },
                 { from: 'public/js/service-worker.js', to: 'service-worker.js' },
                 // Copy _headers and _redirects to dist
                 { from: '_headers', to: '_headers', toType: 'file' },
