@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Tyler P.">
+    <meta name="description" content="Estimate the future value of your investments with Monvvo's Investment Growth Calculator. Plan for your financial growth with ease and accuracy.">
+    <title>
+        Monvvo Investment Growth Calculator - Plan Your Financial Growth
+    </title>
+    <link rel="canonical" href="<%= htmlWebpackPlugin.options.canonical %>" />
+    <link rel="icon" type="image/svg" href="../img/Monnvo-Favicon.svg">
+    <!-- Preconnects for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts will be added dynamically -->
+            <!-- Google Font Code -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var fontLinks = [
+                "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap",
+                "https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+            ];
+            
+            fontLinks.forEach(function(linkHref) {
+                var link = document.createElement("link");
+                link.href = linkHref;
+                link.rel = "stylesheet";
+                link.defer = true;
+                document.head.appendChild(link);
+            });
+        });
+    </script>
+    <!-- JS Delivr -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <!-- CSS Stylesheets -->
+    <link rel="preload" href="../css/reset.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../css/reset.css"></noscript>
+    <link rel="preload" href="../css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../css/styles.css"></noscript>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3773H5L03T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-3773H5L03T');
+    </script>
+    <!-- Google Adsense Head Code -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5106760016649931"
+        crossorigin="anonymous"></script>
+</head>  
+<body>
+    <header id="header">
+        <div class="logo">
+            <img src="../img/Monvvo-Transparent.svg" alt="Monvvo Logo" loading="lazy">
+        </div>
+    </header>
+    <main id="main">
+        <h1 id="title">
+            Investment Growth Calculator
+        </h1>
+        <form id="mortgage-form">
+            <!-- Initial Investment Amount -->
+            <label for="investment-initial">
+                Initial Investment Amount
+            </label>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                Initial investment amount is the starting sum of money you plan to invest. This is a key input for the investment growth calculator to determine how your investment will grow over time.
+            </div>
+            <div class="input-fluid payoff-fluid">
+                <span class="input-icon dollar-span">$</span>
+                <input type="number" name="investment_input__initial_investment" id="investment-initial" placeholder="20000" required>
+            </div>
+            <!-- Annual Contribution -->
+            <label for="investment-contribution">
+                Annual Contribution
+            </label>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                Annual contribution is the amount of money you plan to add to your investment each year. This helps the investment growth calculator estimate how your regular contributions will impact your overall investment growth.
+            </div>
+            <div class="input-fluid">
+                <span class="input-icon dollar-span">$</span>
+                <input type="number" name="retirement_input__annual_contribution" id="investment-contribution" placeholder="15000">
+            </div>
+            <!-- Annual Interest Rate -->
+            <label for="investment-interest">
+                Annual Interest Rate
+            </label>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                Inflation rate is the rate at which you expect the cost of living to increase each year. Including this helps the retirement savings calculator adjust your savings projections to account for rising expenses.
+            </div>
+            <div class="input-fluid payoff-fluid">
+                <input type="number" step="0.01" name="investment_input__interest_rate" id="investment-interest" placeholder="8.0">
+                <span class="input-icon right-span">%</span>
+            </div>
+            <!-- Investment Duration -->
+            <label for="investment-duration">
+                Investment Duration
+            </label>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                Investment duration is the length of time you plan to hold the investment. This is critical for the investment growth calculator to determine how your investment grows over the specified period.
+            </div>
+            <div class="input-fluid payoff-fluid">
+                <input type="number" name="investment_input__investment_duration" id="investment-duration" placeholder="30">
+                <span class="input-icon right-span">Years</span>
+            </div>
+            <br><br>
+            <!-- Contribution Frequency -->
+            <label for="investment-contribution-frequency">
+                Contribution Frequency
+            </label>
+            <span class="optional-span">(Optional)</span>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                Contribution frequency is how often you plan to contribute to your investment, such as monthly, quarterly, or annually. Including this helps the investment growth calculator provide a more accurate growth projection.
+            </div>
+            <div class="input-fluid payoff-fluid">
+                <input type="number" name="investment_input__contribution_frequency" id="investment-contribution-frequency" placeholder="1">
+                <div class="select-wrapper">
+                    <select name="investment-contribution-select" id="investment-contribution-select">
+                        <option value="weekly" aria-label="weekly">Weekly</option>
+                        <option value="bi-weekly" aria-label="bi-weekly">Bi-Weekly</option>
+                        <option value="monthly" aria-label="monthly">Monthly</option>
+                        <option value="bi-monthly" aria-label="bi-monthly">Bi-Monthly</option>
+                        <option value="quarterly" aria-label="quarterly">Quarterly</option>
+                        <option value="semi-annually" aria-label="semi-annually">Semi-Annually</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Compound Frequency -->
+            <label for="investment-compound-frequency">
+                Compound Frequency
+            </label>
+            <span class="optional-span">(Optional)</span>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                Compound frequency is how often your investment’s interest is calculated and added to the principal amount. Options include daily, monthly, quarterly, or annually. This impacts the overall growth estimated by the investment growth calculator.
+            </div>
+            <div class="input-fluid payoff-fluid">
+                <input type="number" name="investment_input__compound_frequency" id="investment-compound-frequency" placeholder="1">
+                <div class="select-wrapper">
+                    <select name="investment-compound-select" id="investment-compound-select">
+                        <option value="annually" aria-label="annually">Annually</option>
+                        <option value="weekly" aria-label="weekly">Weekly</option>
+                        <option value="bi-weekly" aria-label="bi-weekly">Bi-Weekly</option>
+                        <option value="monthly" aria-label="monthly">Monthly</option>
+                        <option value="bi-monthly" aria-label="bi-monthly">Bi-Monthly</option>
+                        <option value="quarterly" aria-label="quarterly">Quarterly</option>
+                        <option value="semi-annually" aria-label="semi-annually">Semi-Annually</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Inflation Rate -->
+            <label for="investment-inflation">
+                Inflation Rate
+            </label>
+            <span class="optional-span">(Optional)</span>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                Inflation rate is the rate at which you expect the cost of living to increase each year. Including this helps the investment growth calculator adjust your growth projections for rising expenses.
+            </div>
+            <div class="input-fluid payoff-fluid">
+                <input step="0.01" type="number" name="investment_input__inflation_rate" id="investment-inflation" placeholder="3.0">
+                <span class="input-icon right-span">%</span>
+            </div>
+            <!-- Tax Rate -->
+            <label for="investment-tax">
+                Tax Rate
+            </label>
+            <span class="optional-span">(Optional)</span>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                Tax rate is the percentage of your investment returns that you expect to pay in taxes. This input helps the investment growth calculator estimate your net returns.
+            </div>
+            <div class="input-fluid payoff-fluid">
+                <input step="0.01" type="number" name="investment_input__tax_rate" id="investment-tax" placeholder="10.0">
+                <span class="input-icon right-span">%</span>
+            </div>
+            <!-- Withdrawal Amounts -->
+            <label for="investment-withdrawal">
+                Withdrawal Amounts
+            </label>
+            <span class="optional-span">(Optional)</span>
+            <span class="material-symbols-outlined">info</span>
+            <div class="info-text-fluid">
+                Withdrawal amounts are any planned withdrawals from your investment over time. Including these helps the investment growth calculator adjust the growth projections accordingly.
+            </div>
+            <div class="input-fluid">
+                <span class="input-icon dollar-span">$</span>
+                <input type="number" name="investment_input__annual_contribution" id="investment-withdrawal" placeholder="3000">
+                <span class="input-icon right-span">/ Year</span>
+ 
+            </div>
+            <button class="form-btn investment_growth__submit">Calculate Retirement Savings</button>
+        </form>
+        <div class="border-bottom"></div>
+        <section class="how-section detail-section">
+            <h2 class="section-title">
+                How to Use Monvvo Investment Growth Calculator
+            </h2>
+            <ol class="how-fluid">
+                <li class="how-link">
+                    <b class="bold-text">
+                        Enter the Initial Investment Amount.
+                    </b><br>
+                     Provide the starting sum of money you plan to invest. This is crucial for the investment growth calculator to determine your investment’s starting point.
+                </li>
+                <li class="how-link">
+                    <b class="bold-text">
+                        Input Your Annual Contribution.
+                    </b><br>
+                     Specify the amount of money you will add to your investment each year. This helps the investment growth calculator estimate the impact of regular contributions.
+                </li>
+                <li class="how-link">
+                    <b class="bold-text">
+                        Provide the Annual Interest Rate.
+                    </b><br>
+                     Enter the percentage at which your investment will grow each year. This is key for the investment growth calculator to project future growth.
+                </li>
+                <li class="how-link">
+                    <b class="bold-text">
+                        Enter the Investment Duration.
+                    </b><br>
+                     Indicate the length of time you plan to hold the investment. This helps the investment growth calculator determine the growth over the specified period.
+                </li>
+                <li class="how-link">
+                    <b class="bold-text">
+                        Select Contribution Frequency.
+                    </b><br>
+                     Indicate how often you plan to make contributions, such as monthly or annually. This refines the investment growth calculator’s projections.
+                </li>
+                <li class="how-link">
+                    <b class="bold-text">
+                        Specify Compound Frequency.
+                    </b><br>
+                     Choose how often your investment’s interest will be compounded. This impacts the overall growth estimate provided by the investment growth calculator.
+                </li>
+                <li class="how-link">
+                    <b class="bold-text">
+                        Include Inflation Rate.
+                    </b><br>
+                     Enter the expected annual increase in the cost of living. This helps the investment growth calculator adjust for inflation.
+                </li>
+                <li class="how-link">
+                    <b class="bold-text">
+                        Account for Inflation Rate.
+                    </b><br>
+                     Provide the expected rate of inflation. This helps the retirement savings calculator adjust your savings projections for rising costs.
+                </li>
+                <li class="how-link">
+                    <b class="bold-text">
+                        Input Tax Rate.
+                    </b><br>
+                     Specify the percentage of your returns that will go to taxes. This helps the investment growth calculator estimate your net returns.
+                </li>
+                <li class="how-link">
+                    <b class="bold-text">
+                        Add Withdrawal Amounts.
+                    </b><br>
+                     If you plan to make withdrawals from your investment, include these amounts. This helps the investment growth calculator adjust your growth projections accordingly.
+                </li>
+                <li class="how-link">
+                    <b class="bold-text">
+                        Calculate Your Investment Growth.
+                    </b><br>
+                     Once you have entered all the necessary details, click the “Calculate Investment Growth” button to see your projected Investment Growth. This calculation helps you plan your financial future effectively.
+                </li>
+            </ol>
+        </section>
+        <div class="border-bottom"></div>
+        <section class="terms-section detail-section">
+            <h2 class="section-title">
+                Investment Growth Calculator Terms
+            </h2>
+            <h3 class="terms-heading">
+                Initial Investment Amount
+            </h3>
+            <p class="terms-content">
+                The age you are today. This is a key input for the retirement savings calculator to determine your savings timeline.
+            </p>
+            <h3 class="terms-heading">
+                Annual Contribution
+            </h3>
+            <p class="terms-content">
+                The amount you plan to add to your investment each year. This is essential for the investment growth calculator to estimate your total investment growth.
+            </p>
+            <h3 class="terms-heading">
+                Annual Interest Rate
+            </h3>
+            <p class="terms-content">
+                The percentage at which your investment will grow each year. This rate is crucial for the investment growth calculator to project future value.
+            </p>
+            <h3 class="terms-heading">
+                Investment Duration
+            </h3>
+            <p class="terms-content">
+                The length of time you plan to hold the investment. This is critical for determining how your investment grows over time.
+            </p>
+            <h3 class="terms-heading">
+                Contribution Frequency
+            </h3>
+            <p class="terms-content">
+                How often your investment’s interest is calculated and added to the principal. This affects the overall growth estimated by the investment growth calculator.
+            </p>
+            <h3 class="terms-heading">
+                Compound Frequency
+            </h3>
+            <p class="terms-content">
+                How often your investment’s interest is calculated and added to the principal. This affects the overall growth estimated by the investment growth calculator.
+            </p>
+            <h3 class="terms-heading">
+                Inflation Rate
+            </h3>
+            <p class="terms-content">
+                The annual increase in the cost of living. This helps the investment growth calculator adjust for inflation.
+            </p>
+            <h3 class="terms-heading">
+                Tax Rate
+            </h3>
+            <p class="terms-content">
+                The percentage of your investment returns paid in taxes. This helps the investment growth calculator estimate net returns
+            </p>
+        </section>
+    </main>
+    <footer id="footer">
+        <div class="footer-col">
+            <h4 class="footer-heading">Quick Links</h4>
+            <a class="footer-link" href="privacy-policy.html" target="_blank">Privacy Policy</a>
+            <a class="footer-link" href="monvvo-disclaimer.html" target="_blank">Monvvo Disclaimer</a>
+        </div>
+        <div class="footer-col">
+            <img src="../img/Monvvo-White.png" alt="Monvvo Logo">
+        </div>
+    </footer>
+    <!-- Chart.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>    
+</body>
+</html>

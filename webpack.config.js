@@ -62,6 +62,21 @@ const pages = [
         filename: 'Loan/Student-Loan-Calculator.html',
         template: path.resolve(__dirname, 'public/Loan/Student-Loan-Calculator.html'),
         canonical: 'https://monvvo.com/loan/student-loan-calculator'
+    },
+    {
+        filename: 'Investment/Retirement-Savings-Calculator.html',
+        template: path.resolve(__dirname, 'public/Investment/Retirement-Savings-Calculator.html'),
+        canonical: 'https://monvvo.com/investment/retirement-savings-calculator'
+    },
+    {
+        filename: 'Investment/Investment-Growth-Calculator.html',
+        template: path.resolve(__dirname, 'public/Investment/Investment-Growth-Calculator.html'),
+        canonical: 'https://monvvo.com/investment/investment-growth-calculator'
+    },
+    {
+        filename: 'Investment/Compound-Interest-Calculator.html',
+        template: path.resolve(__dirname, 'public/Investment/Compound-Interest-Calculator.html'),
+        canonical: 'https://monvvo.com/investment/compound-interest-calculator'
     }
 ];
 

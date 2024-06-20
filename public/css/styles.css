@@ -58,11 +58,11 @@ body, html {
     text-align: center;
     margin: 80px auto 50px auto;
 }
-#mortgage-form {
+form {
     width: 90%;
     margin: 0 auto;
 }
-#mortgage-form label {
+form label {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5rem;
     font-weight: 680;
@@ -72,14 +72,14 @@ body, html {
 .info-icon {
     color: #333;
 }
-#mortgage-form .optional-span {
+form .optional-span {
     font-family: "Open Sans", sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
     font-style: italic;
     color: #333;
 }
-#mortgage-form .right-span {
+form .right-span {
     font-size: 1.6rem;
     flex-shrink: 1;
     text-align: right;
@@ -303,7 +303,7 @@ body, html {
     color: #000;
 }
 @media screen and (min-width: 1200px) {
-    #mortgage-form {
+    form {
         max-width: 900px;
     }
 }
