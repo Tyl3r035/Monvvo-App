@@ -20,51 +20,51 @@ const pages = [
         filename: 'monvvo-disclaimer.html',
     },
     {
-        template: './public/Knowledge-Center/how-to-calculate-mortgage-blog.html',
+        template: './public/knowledge-center/how-to-calculate-mortgage-blog.html',
         filename: 'knowledge-center/how-to-calculate-mortgage-blog.html',
     },
     {
-        template: './public/Knowledge-Center/mortgage-calculator-make-informed-home-loan-decisions.html',
+        template: './public/knowledge-center/mortgage-calculator-make-informed-home-loan-decisions.html',
         filename: 'knowledge-center/mortgage-calculator-make-informed-home-loan-decisions.html',
     },
     {
-        template: './public/Mortgage/down-payment-calculator.html',
+        template: './public/mortgage/down-payment-calculator.html',
         filename: 'mortgage/down-payment-calculator.html',
     },
     {
-        template: './public/Mortgage/home-equity-calculator.html',
+        template: './public/mortgage/home-equity-calculator.html',
         filename: 'mortgage/home-equity-calculator.html',
     },
     {
-        template: './public/Mortgage/mortgage-payoff-calculator.html',
+        template: './public/mortgage/mortgage-payoff-calculator.html',
         filename: 'mortgage/mortgage-payoff-calculator.html',
     },
     {
-        template: './public/Loan/auto-loan-calculator.html',
+        template: './public/loan/auto-loan-calculator.html',
         filename: 'loan/auto-loan-calculator.html',
     },
     {
-        template: './public/Loan/loan-amortization-calculator.html',
+        template: './public/loan/loan-amortization-calculator.html',
         filename: 'loan/loan-amortization-calculator.html',
     },
     {
-        template: './public/Loan/personal-loan-calculator.html',
+        template: './public/loan/personal-loan-calculator.html',
         filename: 'loan/personal-loan-calculator.html',
     },
     {
-        template: './public/Loan/student-loan-calculator.html',
+        template: './public/loan/student-loan-calculator.html',
         filename: 'loan/student-loan-calculator.html',
     },
     {
-        template: './public/Investment/retirement-savings-calculator.html',
+        template: './public/investment/retirement-savings-calculator.html',
         filename: 'investment/retirement-savings-calculator.html',
     },
     {
-        template: './public/Investment/investment-growth-calculator.html',
+        template: './public/investment/investment-growth-calculator.html',
         filename: 'investment/investment-growth-calculator.html',
     },
     {
-        template: './public/Investment/compound-interest-calculator.html',
+        template: './public/investment/compound-interest-calculator.html',
         filename: 'investment/compound-interest-calculator.html',
     }
 ];
