@@ -139,7 +139,7 @@ module.exports = {
                 { from: '_headers', to: '_headers', toType: 'file' },
                 { from: '_redirects', to: '_redirects', toType: 'file' },
                 // Copy sitemap.xml to dist
-                { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' },
+                { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' }, // Ensure this line is correct
                 // Copy ads.txt to dist
                 { from: 'ads.txt', to: 'ads.txt', toType: 'file' },
                 // Copy robots.txt to dist

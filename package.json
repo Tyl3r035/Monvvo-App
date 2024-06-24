@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "prebuild": "node server.js",
     "build": "webpack",
+    "postbuild": "node generate-sitemap.js",
     "serve": "webpack serve"
   },
   "author": "Tyler P.",
