@@ -135,14 +135,14 @@ module.exports = (env, argv) => {
             }),
             new CopyWebpackPlugin({
                 patterns: [
-                    { from: 'public/img', to: 'img' },
-                    { from: 'public/css', to: 'css' },
-                    { from: 'public/js/service-worker.js', to: 'service-worker.js' },
-                    { from: '_headers', to: '_headers', toType: 'file' },
-                    { from: '_redirects', to: '_redirects', toType: 'file' },
-                    { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' },
-                    { from: 'ads.txt', to: 'ads.txt', toType: 'file' },
-                    { from: 'robots.txt', to: 'robots.txt', toType: 'file' },
+                    { from: path.resolve(__dirname, 'public/img'), to: 'img' },
+                    { from: path.resolve(__dirname, 'public/css'), to: 'css' },
+                    { from: path.resolve(__dirname, 'public/js/service-worker.js'), to: 'service-worker.js' },
+                    { from: path.resolve(__dirname, 'public/sitemap.xml'), to: 'sitemap.xml', toType: 'file' },
+                    { from: path.resolve(__dirname, '_headers'), to: '_headers', toType: 'file' },
+                    { from: path.resolve(__dirname, '_redirects'), to: '_redirects', toType: 'file' },
+                    { from: path.resolve(__dirname, 'ads.txt'), to: 'ads.txt', toType: 'file' },
+                    { from: path.resolve(__dirname, 'robots.txt'), to: 'robots.txt', toType: 'file' },
                 ],
             }),
         ],
@@ -169,11 +169,7 @@ module.exports = (env, argv) => {
             compress: true,
             port: 9000,
             open: true,
-            historyApiFallback: {
-                rewrites: [
-                    { from: /./, to: '/404.html' }
-                ],
-            },
+            historyApiFallback: true,
             watchFiles: ['public/**/*'],
             client: {
                 logging: 'info',
