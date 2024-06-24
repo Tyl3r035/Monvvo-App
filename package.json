@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "webpack --mode production",
+    "clean": "rimraf dist",
+    "build": "npm run clean && webpack --mode production",
     "postbuild": "node generate-sitemap.js",
-    "serve": "webpack serve --mode development"
+    "serve": "webpack serve --mode development",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write ."
   },
   "author": "Tyler P.",
   "license": "ISC",
@@ -26,7 +29,10 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.92.0",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^4.11.1",
+    "eslint": "^8.23.0",
+    "prettier": "^2.8.0",
+    "rimraf": "^3.0.2"
   },
   "dependencies": {
     "express": "^4.17.1"
