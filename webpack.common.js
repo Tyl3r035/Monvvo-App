@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const pages = [
     {
@@ -97,5 +98,14 @@ module.exports = {
             template: page.template,
             filename: page.filename,
         })),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: path.resolve(__dirname, '_headers'), to: '_headers', toType: 'file' },
+                { from: path.resolve(__dirname, '_redirects'), to: '_redirects', toType: 'file' },
+                { from: path.resolve(__dirname, 'ads.txt'), to: 'ads.txt', toType: 'file' },
+                { from: path.resolve(__dirname, 'robots.txt'), to: 'robots.txt', toType: 'file' },
+                { from: path.resolve(__dirname, 'public/sitemap.xml'), to: 'sitemap.xml', toType: 'file' },
+            ],
+        }),
     ],
 };
