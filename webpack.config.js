@@ -181,6 +181,7 @@ module.exports = (env, argv) => {
         },
         stats: {
             children: true,
+            errorDetails: true,
         },
     };
 };
