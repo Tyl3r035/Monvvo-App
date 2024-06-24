@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "prebuild": "node server.js",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "postbuild": "node generate-sitemap.js",
-    "serve": "webpack serve"
+    "serve": "webpack serve --mode development"
   },
   "author": "Tyler P.",
   "license": "ISC",

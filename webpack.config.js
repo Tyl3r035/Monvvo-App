@@ -6,181 +6,181 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-// Add new files and folder here
 const pages = [
     {
         filename: 'index.html',
         template: path.resolve(__dirname, 'public/index.html'),
-        canonical: 'https://monvvo.com/'
+        canonical: 'https://www.monvvo.com/'
     },
     {
         filename: 'privacy-policy.html',
         template: path.resolve(__dirname, 'public/privacy-policy.html'),
-        canonical: 'https://monvvo.com/privacy-policy'
+        canonical: 'https://www.monvvo.com/privacy-policy'
     },
     {
         filename: 'monvvo-disclaimer.html',
         template: path.resolve(__dirname, 'public/monvvo-disclaimer.html'),
-        canonical: 'https://monvvo.com/monvvo-disclaimer'
+        canonical: 'https://www.monvvo.com/monvvo-disclaimer'
     },
     {
-        filename: 'Knowledge-Center/how-to-calculate-mortgage-blog.html',
-        template: path.resolve(__dirname, 'public/Knowledge-Center/How-To-Calculate-Mortgage-Blog.html'),
-        canonical: 'https://monvvo.com/knowledge-center/how-to-calculate-mortgage-blog'
+        filename: 'knowledge-center/how-to-calculate-mortgage-blog.html',
+        template: path.resolve(__dirname, 'public/knowledge-center/how-to-calculate-mortgage-blog.html'),
+        canonical: 'https://www.monvvo.com/knowledge-center/how-to-calculate-mortgage-blog'
     },
     {
-        filename: 'Knowledge-Center/Mortgage-Calculator-Make-Informed-Home-Loan-Decisions.html',
-        template: path.resolve(__dirname, 'public/Knowledge-Center/Mortgage-Calculator-Make-Informed-Home-Loan-Decisions.html'),
-        canonical: 'https://monvvo.com/knowledge-center/mortgage-calculator-make-informed-home-loan-decisions'
+        filename: 'knowledge-center/mortgage-calculator-make-informed-home-loan-decisions.html',
+        template: path.resolve(__dirname, 'public/knowledge-center/mortgage-calculator-make-informed-home-loan-decisions.html'),
+        canonical: 'https://www.monvvo.com/knowledge-center/mortgage-calculator-make-informed-home-loan-decisions'
     },
     {
-        filename: 'Mortgage/Down-Payment-Calculator.html',
-        template: path.resolve(__dirname, 'public/Mortgage/Down-Payment-Calculator.html'),
-        canonical: 'https://monvvo.com/mortgage/down-payment-calculator'
+        filename: 'mortgage/down-payment-calculator.html',
+        template: path.resolve(__dirname, 'public/mortgage/down-payment-calculator.html'),
+        canonical: 'https://www.monvvo.com/mortgage/down-payment-calculator'
     },
     {
-        filename: 'Mortgage/Home-Equity-Calculator.html',
-        template: path.resolve(__dirname, 'public/Mortgage/Home-Equity-Calculator.html'),
-        canonical: 'https://monvvo.com/mortgage/home-equity-calculator'
+        filename: 'mortgage/home-equity-calculator.html',
+        template: path.resolve(__dirname, 'public/mortgage/home-equity-calculator.html'),
+        canonical: 'https://www.monvvo.com/mortgage/home-equity-calculator'
     },
     {
-        filename: 'Mortgage/Mortgage-Payoff-Calculator.html',
-        template: path.resolve(__dirname, 'public/Mortgage/Mortgage-Payoff-Calculator.html'),
-        canonical: 'https://monvvo.com/mortgage/mortgage-payoff-calculator'
+        filename: 'mortgage/mortgage-payoff-calculator.html',
+        template: path.resolve(__dirname, 'public/mortgage/mortgage-payoff-calculator.html'),
+        canonical: 'https://www.monvvo.com/mortgage/mortgage-payoff-calculator'
     },
     {
-        filename: 'Loan/Auto-Loan-Calculator.html',
-        template: path.resolve(__dirname, 'public/Loan/Auto-Loan-Calculator.html'),
-        canonical: 'https://monvvo.com/loan/auto-loan-calculator'
+        filename: 'loan/auto-loan-calculator.html',
+        template: path.resolve(__dirname, 'public/loan/auto-loan-calculator.html'),
+        canonical: 'https://www.monvvo.com/loan/auto-loan-calculator'
     },
     {
-        filename: 'Loan/Personal-Loan-Calculator.html',
-        template: path.resolve(__dirname, 'public/Loan/Personal-Loan-Calculator.html'),
-        canonical: 'https://monvvo.com/loan/personal-loan-calculator'
+        filename: 'loan/personal-loan-calculator.html',
+        template: path.resolve(__dirname, 'public/loan/personal-loan-calculator.html'),
+        canonical: 'https://www.monvvo.com/loan/personal-loan-calculator'
     },
     {
-        filename: 'Loan/Student-Loan-Calculator.html',
-        template: path.resolve(__dirname, 'public/Loan/Student-Loan-Calculator.html'),
-        canonical: 'https://monvvo.com/loan/student-loan-calculator'
+        filename: 'loan/student-loan-calculator.html',
+        template: path.resolve(__dirname, 'public/loan/student-loan-calculator.html'),
+        canonical: 'https://www.monvvo.com/loan/student-loan-calculator'
     },
     {
-        filename: 'Investment/Retirement-Savings-Calculator.html',
-        template: path.resolve(__dirname, 'public/Investment/Retirement-Savings-Calculator.html'),
-        canonical: 'https://monvvo.com/investment/retirement-savings-calculator'
+        filename: 'investment/retirement-savings-calculator.html',
+        template: path.resolve(__dirname, 'public/investment/retirement-savings-calculator.html'),
+        canonical: 'https://www.monvvo.com/investment/retirement-savings-calculator'
     },
     {
-        filename: 'Investment/Investment-Growth-Calculator.html',
-        template: path.resolve(__dirname, 'public/Investment/Investment-Growth-Calculator.html'),
-        canonical: 'https://monvvo.com/investment/investment-growth-calculator'
+        filename: 'investment/investment-growth-calculator.html',
+        template: path.resolve(__dirname, 'public/investment/investment-growth-calculator.html'),
+        canonical: 'https://www.monvvo.com/investment/investment-growth-calculator'
     },
     {
-        filename: 'Investment/Compound-Interest-Calculator.html',
-        template: path.resolve(__dirname, 'public/Investment/Compound-Interest-Calculator.html'),
-        canonical: 'https://monvvo.com/investment/compound-interest-calculator'
+        filename: 'investment/compound-interest-calculator.html',
+        template: path.resolve(__dirname, 'public/investment/compound-interest-calculator.html'),
+        canonical: 'https://www.monvvo.com/investment/compound-interest-calculator'
     }
 ];
 
-module.exports = {
-    mode: 'production',
-    entry: './public/js/index.js',
-    output: {
-        filename: '[name].[contenthash].js',
-        path: path.resolve(__dirname, 'dist'),
-        publicPath: '/'
-    },
-    module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
-            },
-            {
-                test: /\.(png|jpe?g|gif|svg)$/i,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[hash].[ext]',
-                            outputPath: 'images/',
+module.exports = (env, argv) => {
+    const isProduction = argv.mode === 'production';
+
+    return {
+        mode: isProduction ? 'production' : 'development',
+        entry: './public/js/index.js',
+        output: {
+            filename: '[name].[contenthash].js',
+            path: path.resolve(__dirname, 'dist'),
+            publicPath: '/',
+            clean: true,
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.css$/,
+                    use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader']
+                },
+                {
+                    test: /\.(png|jpe?g|gif|svg)$/i,
+                    use: [
+                        {
+                            loader: 'file-loader',
+                            options: {
+                                name: '[name].[hash].[ext]',
+                                outputPath: 'images/',
+                            },
                         },
-                    },
-                ],
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
+                    ],
+                },
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env']
+                        }
                     }
                 }
-            }
-        ]
-    },
-    plugins: [
-        new CleanWebpackPlugin(),
-        ...pages.map(page => new HtmlWebpackPlugin({
-            filename: page.filename,
-            template: page.template,
-            inject: 'body',
-            minify: true,
-            canonical: page.canonical
-        })),
-        new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].css'
-        }),
-        new CopyWebpackPlugin({
-            patterns: [
-                { from: 'public/img', to: 'img' },
-                { from: 'public/css', to: 'css' },
-                { from: 'public/js/service-worker.js', to: 'service-worker.js' },
-                // Copy _headers and _redirects to dist
-                { from: '_headers', to: '_headers', toType: 'file' },
-                { from: '_redirects', to: '_redirects', toType: 'file' },
-                // Copy sitemap.xml to dist
-                { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' }, // Ensure this line is correct
-                // Copy ads.txt to dist
-                { from: 'ads.txt', to: 'ads.txt', toType: 'file' },
-                // Copy robots.txt to dist
-                { from: 'robots.txt', to: 'robots.txt', toType: 'file'}
             ]
-        })
-    ],
-    optimization: {
-        minimize: true,
-        minimizer: [
-            new TerserPlugin({
-                terserOptions: {
-                    compress: {
-                        drop_console: true,
-                    },
-                },
+        },
+        plugins: [
+            new CleanWebpackPlugin(),
+            ...pages.map(page => new HtmlWebpackPlugin({
+                filename: page.filename,
+                template: page.template,
+                inject: 'body',
+                minify: isProduction,
+                canonical: page.canonical
+            })),
+            new MiniCssExtractPlugin({
+                filename: '[name].[contenthash].css'
             }),
-            new CssMinimizerPlugin(),
+            new CopyWebpackPlugin({
+                patterns: [
+                    { from: 'public/img', to: 'img' },
+                    { from: 'public/css', to: 'css' },
+                    { from: 'public/js/service-worker.js', to: 'service-worker.js' },
+                    { from: '_headers', to: '_headers', toType: 'file' },
+                    { from: '_redirects', to: '_redirects', toType: 'file' },
+                    { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' },
+                    { from: 'ads.txt', to: 'ads.txt', toType: 'file' },
+                    { from: 'robots.txt', to: 'robots.txt', toType: 'file' },
+                ],
+            }),
         ],
-        splitChunks: {
-            chunks: 'all',
+        optimization: {
+            minimize: isProduction,
+            minimizer: [
+                new TerserPlugin({
+                    terserOptions: {
+                        compress: {
+                            drop_console: true,
+                        },
+                    },
+                }),
+                new CssMinimizerPlugin(),
+            ],
+            splitChunks: {
+                chunks: 'all',
+            },
         },
-    },
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'dist')
+        devServer: {
+            static: {
+                directory: path.join(__dirname, 'dist'),
+            },
+            compress: true,
+            port: 9000,
+            open: true,
+            historyApiFallback: {
+                rewrites: [
+                    { from: /./, to: '/404.html' }
+                ],
+            },
+            watchFiles: ['public/**/*'],
+            client: {
+                logging: 'info',
+            },
         },
-        compress: true,
-        port: 9000,
-        open: true,
-        historyApiFallback: {
-            rewrites: [
-                { from: /./, to: '/404.html' }
-            ]
+        stats: {
+            children: true,
         },
-        watchFiles: ['public/**/*'],
-        client: {
-            logging: 'info',
-        }
-    },
-    stats: {
-        children: true
-    }
+    };
 };
