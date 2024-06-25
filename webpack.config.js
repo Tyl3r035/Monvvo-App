@@ -24,58 +24,58 @@ const pages = [
         canonical: 'https://monvvo.com/monvvo-disclaimer'
     },
     {
-        filename: 'Knowledge-Center/how-to-calculate-mortgage-blog.html',
-        template: path.resolve(__dirname, 'public/Knowledge-Center/How-To-Calculate-Mortgage-Blog.html'),
+        filename: 'knowledge-center/how-to-calculate-mortgage-blog.html',
+        template: path.resolve(__dirname, 'public/knowledge-center/how-to-calculate-mortgage-blog.html'),
         canonical: 'https://monvvo.com/knowledge-center/how-to-calculate-mortgage-blog'
     },
     {
-        filename: 'Knowledge-Center/Mortgage-Calculator-Make-Informed-Home-Loan-Decisions.html',
-        template: path.resolve(__dirname, 'public/Knowledge-Center/Mortgage-Calculator-Make-Informed-Home-Loan-Decisions.html'),
+        filename: 'knowledge-center/mortgage-calculator-make-informed-home-loan-decisions.html',
+        template: path.resolve(__dirname, 'public/knowledge-center/mortgage-calculator-make-informed-home-loan-decisions.html'),
         canonical: 'https://monvvo.com/knowledge-center/mortgage-calculator-make-informed-home-loan-decisions'
     },
     {
-        filename: 'Mortgage/Down-Payment-Calculator.html',
-        template: path.resolve(__dirname, 'public/Mortgage/Down-Payment-Calculator.html'),
+        filename: 'mortgage/down-payment-calculator.html',
+        template: path.resolve(__dirname, 'public/mortgage/down-payment-calculator.html'),
         canonical: 'https://monvvo.com/mortgage/down-payment-calculator'
     },
     {
-        filename: 'Mortgage/Home-Equity-Calculator.html',
-        template: path.resolve(__dirname, 'public/Mortgage/Home-Equity-Calculator.html'),
+        filename: 'mortgage/home-equity-calculator.html',
+        template: path.resolve(__dirname, 'public/mortgage/home-equity-calculator.html'),
         canonical: 'https://monvvo.com/mortgage/home-equity-calculator'
     },
     {
-        filename: 'Mortgage/Mortgage-Payoff-Calculator.html',
-        template: path.resolve(__dirname, 'public/Mortgage/Mortgage-Payoff-Calculator.html'),
+        filename: 'mortgage/mortgage-payoff-calculator.html',
+        template: path.resolve(__dirname, 'public/mortgage/mortgage-payoff-calculator.html'),
         canonical: 'https://monvvo.com/mortgage/mortgage-payoff-calculator'
     },
     {
-        filename: 'Loan/Auto-Loan-Calculator.html',
+        filename: 'loan/auto-loan-calculator.html',
         template: path.resolve(__dirname, 'public/Loan/Auto-Loan-Calculator.html'),
         canonical: 'https://monvvo.com/loan/auto-loan-calculator'
     },
     {
-        filename: 'Loan/Personal-Loan-Calculator.html',
-        template: path.resolve(__dirname, 'public/Loan/Personal-Loan-Calculator.html'),
+        filename: 'loan/personal-loan-calculator.html',
+        template: path.resolve(__dirname, 'public/loan/personal-loan-calculator.html'),
         canonical: 'https://monvvo.com/loan/personal-loan-calculator'
     },
     {
-        filename: 'Loan/Student-Loan-Calculator.html',
-        template: path.resolve(__dirname, 'public/Loan/Student-Loan-Calculator.html'),
+        filename: 'loan/student-loan-calculator.html',
+        template: path.resolve(__dirname, 'public/loan/student-loan-calculator.html'),
         canonical: 'https://monvvo.com/loan/student-loan-calculator'
     },
     {
-        filename: 'Investment/Retirement-Savings-Calculator.html',
-        template: path.resolve(__dirname, 'public/Investment/Retirement-Savings-Calculator.html'),
+        filename: 'investment/retirement-savings-calculator.html',
+        template: path.resolve(__dirname, 'public/investment/retirement-savings-calculator.html'),
         canonical: 'https://monvvo.com/investment/retirement-savings-calculator'
     },
     {
-        filename: 'Investment/Investment-Growth-Calculator.html',
-        template: path.resolve(__dirname, 'public/Investment/Investment-Growth-Calculator.html'),
+        filename: 'investment/investment-growth-calculator.html',
+        template: path.resolve(__dirname, 'public/investment/investment-growth-calculator.html'),
         canonical: 'https://monvvo.com/investment/investment-growth-calculator'
     },
     {
-        filename: 'Investment/Compound-Interest-Calculator.html',
-        template: path.resolve(__dirname, 'public/Investment/Compound-Interest-Calculator.html'),
+        filename: 'investment/compound-interest-calculator.html',
+        template: path.resolve(__dirname, 'public/investment/compound-interest-calculator.html'),
         canonical: 'https://monvvo.com/investment/compound-interest-calculator'
     }
 ];
