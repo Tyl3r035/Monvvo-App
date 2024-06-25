@@ -1,11 +1,10 @@
-# Redirect HTTP to HTTPS for non-www
-http://monvvo.com/* https://monvvo.com/:splat 301
-
-# Redirect HTTP to HTTPS for www
+# Redirect all HTTP traffic to HTTPS and www
+http://monvvo.com/* https://www.monvvo.com/:splat 301
 http://www.monvvo.com/* https://www.monvvo.com/:splat 301
-
-# Redirect non-www HTTPS to www HTTPS
 https://monvvo.com/* https://www.monvvo.com/:splat 301
+
+# Ensure .html and non-.html URLs are handled
+https://www.monvvo.com/* https://www.monvvo.com/:splat.html 301
 
 # Handle 404 errors
 /* /404.html 404
