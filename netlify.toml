@@ -13,6 +13,24 @@
     Content-Type = "text/css"
 
 [[redirects]]
+  from = "http://monvvo.com/*"
+  to = "https://monvvo.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.monvvo.com/*"
+  to = "https://www.monvvo.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://monvvo.com/*"
+  to = "https://www.monvvo.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/404.html"
   status = 404
