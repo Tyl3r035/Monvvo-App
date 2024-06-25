@@ -12,24 +12,21 @@
   [headers.values]
     Content-Type = "text/css"
 
+# Redirect all HTTP traffic to HTTPS
 [[redirects]]
-  from = "http://monvvo.com/*"
-  to = "https://monvvo.com/:splat"
+  from = "http://*"
+  to = "https://:splat"
   status = 301
   force = true
 
-[[redirects]]
-  from = "http://www.monvvo.com/*"
-  to = "https://www.monvvo.com/:splat"
-  status = 301
-  force = true
-
+# Redirect non-www HTTPS traffic to www HTTPS
 [[redirects]]
   from = "https://monvvo.com/*"
   to = "https://www.monvvo.com/:splat"
   status = 301
   force = true
 
+# Handle 404 errors
 [[redirects]]
   from = "/*"
   to = "/404.html"
