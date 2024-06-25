@@ -1,65 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.monvvo.com/</loc>
-    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
-    <priority>1.00</priority>
-  </url>
-  <url>
-    <loc>https://www.monvvo.com/monvvo-disclaimer</loc>
-    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.monvvo.com/knowledge-center/how-to-calculate-mortgage-blog</loc>
-    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.monvvo.com/privacy-policy</loc>
-    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.monvvo.com/knowledge-center/privacy-policy.html</loc>
-    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://www.monvvo.com/knowledge-center/monvvo-disclaimer.html</loc>
-    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
-    <priority>0.64</priority>
-  </url>
-  <!-- Add Mortgage folder URLs -->
-  <url>
-    <loc>https://www.monvvo.com/mortgage/</loc>
-    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.monvvo.com/mortgage/filename1.html</loc>
-    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://www.monvvo.com/mortgage/filename2.html</loc>
-    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
-    <priority>0.64</priority>
-  </url>
-  <!-- Add Loan folder URLs -->
-  <url>
-    <loc>https://www.monvvo.com/loan/</loc>
-    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.monvvo.com/loan/filename1.html</loc>
-    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://www.monvvo.com/loan/filename2.html</loc>
-    <lastmod>2024-06-19T00:13:26+00:00</lastmod>
-    <priority>0.64</priority>
-  </url>
+
+    <!-- Main Pages -->
+    <url>
+        <loc>https://www.monvvo.com/</loc>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://www.monvvo.com/monvo-disclaimer</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.monvvo.com/privacy-policy</loc>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- Investment Pages -->
+    <url>
+        <loc>https://www.monvvo.com/investment/compound-interest-calculator</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.monvvo.com/investment/investment-growth-calculator</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.monvvo.com/investment/retirement-savings-calculator</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Knowledge Center Pages -->
+    <url>
+        <loc>https://www.monvvo.com/knowledge-center/how-to-calculate-mortgage-blog</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.monvvo.com/knowledge-center/mortgage-calculator-make-informed-home-loan-decisions</loc>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Loan Pages -->
+    <url>
+        <loc>https://www.monvvo.com/loan/auto-loan-calculator</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.monvvo.com/loan/loan-amortization-calculator</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.monvvo.com/loan/personal-loan-calculator</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.monvvo.com/loan/student-loan-calculator</loc>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Mortgage Pages -->
+    <url>
+        <loc>https://www.monvvo.com/mortgage/down-payment-calculator</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.monvvo.com/mortgage/home-equity-calculator</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.monvvo.com/mortgage/mortgage-payoff-calculator</loc>
+        <priority>0.7</priority>
+    </url>
+
 </urlset>
