@@ -20,7 +20,7 @@ Allow: /404.html
 
 # Allow crawling of only the canonical https://www.monvvo.com/
 User-agent: *
-Allow: https://www.monvvo.com/
+Allow: /
 
 # Sitemap
 Sitemap: https://www.monvvo.com/sitemap.xml
