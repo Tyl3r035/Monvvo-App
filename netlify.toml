@@ -31,13 +31,6 @@
   status = 301
   force = true
 
-# Ensure .html and non-.html URLs are handled
-[[redirects]]
-  from = "https://www.monvvo.com/*"
-  to = "https://www.monvvo.com/:splat.html"
-  status = 301
-  force = true
-
 [[redirects]]
   from = "/*"
   to = "/404.html"

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmonvvo_app=self.webpackChunkmonvvo_app||[]).push([[951],{951:(e,a,p)=>{p.r(a),p.d(a,{default:()=>s});const s=p.p+"images/Monvvo-Square.f2096dcb6dd1102b3b087e76ea8c438b.svg"}}]);
