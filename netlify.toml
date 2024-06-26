@@ -31,6 +31,12 @@
   status = 301
   force = true
 
+# Explicit redirect to ensure status 200 for www.monvvo.com/*
+[[redirects]]
+  from = "https://www.monvvo.com/*"
+  to = "/:splat"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/404.html"
