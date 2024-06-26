@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "webpack",
-    "serve": "webpack serve"
+    "build": "webpack --mode production",
+    "serve": "webpack serve --mode development",
+    "watch": "webpack --watch --mode development"
   },
   "author": "Tyler P.",
   "license": "ISC",

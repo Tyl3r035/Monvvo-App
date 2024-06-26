@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmonvvo_app=self.webpackChunkmonvvo_app||[]).push([[403],{403:(e,a,o)=>{o.r(a),o.d(a,{default:()=>f});const f=o.p+"images/Monvvo-Footer.ed4845f7e5b3036bd3bf6cafa8f4a8df.svg"}}]);
