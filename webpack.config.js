@@ -54,6 +54,11 @@ const pages = [
         canonical: 'https://www.monvvo.com/loan/auto-loan-calculator'
     },
     {
+        filename: 'Loan/Loan-Amortization-Calculator.html',
+        template: path.resolve(__dirname, 'public/Loan/Loan-Amortization-Calculator.html'),
+        canonical: 'https://www.monvvo.com/loan/loan-amortization-calculator'
+    },
+    {
         filename: 'Loan/Personal-Loan-Calculator.html',
         template: path.resolve(__dirname, 'public/Loan/Personal-Loan-Calculator.html'),
         canonical: 'https://www.monvvo.com/loan/personal-loan-calculator'
