@@ -11,7 +11,7 @@ const pages = [
     {
         filename: 'index.html',
         template: path.resolve(__dirname, 'public/index.html'),
-        canonical: 'https://www.monvvo.com/'
+        canonical: 'https://www.monvvo.com'
     },
     {
         filename: 'privacy-policy.html',
