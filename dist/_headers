@@ -16,3 +16,10 @@
 
 /npm/chartjs-plugin-datalabels
   Cache-Control: public, max-age=604800    # 7 days for Chart.js plugin datalabels
+
+# Caching Google Fonts CSS and font files
+https://fonts.googleapis.com/*
+  Cache-Control: public, max-age=604800    # 7 days for Google Fonts CSS
+
+https://fonts.gstatic.com/*
+  Cache-Control: public, max-age=31536000  # 1 year for Google Fonts files
