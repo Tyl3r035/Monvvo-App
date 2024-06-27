@@ -156,7 +156,7 @@ form .right-span {
     font-size: 2rem;
     font-weight: 600;
     width: 50%;
-    background-color: #20894D;
+    background-color: #176337;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -167,7 +167,7 @@ form .right-span {
     transition: background-color .4s ease;
 }
 .form-btn:hover {
-    background-color: #03be62;
+    background-color: #0F4326;
 }
 .border-bottom{
     width: 100%;
