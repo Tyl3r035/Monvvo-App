@@ -93,10 +93,11 @@ const pages = [
         canonical: 'https://www.monvvo.com/investment/compound-interest-calculator'
     }
 ];
+
 module.exports = {
     mode: 'production',
     entry: {
-        main: './public/js/main.js',
+        main: './public/js/index.js',
         'mortgage-calculator': './public/js/mortgage-calculator.js',
         utils: './public/js/utils.js'
     },
@@ -141,7 +142,6 @@ module.exports = {
             filename: page.filename,
             template: page.template,
             inject: 'body',
-            chunks: page.chunks,
             minify: true,
             canonical: page.canonical
         })),
