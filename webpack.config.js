@@ -33,12 +33,6 @@ const pages = [
         canonical: 'https://www.monvvo.com/knowledge-center/how-to-calculate-mortgage-blog'
     },
     {
-        filename: 'Knowledge-Center/Mortgage-Calculator-Make-Informed-Home-Loan-Decisions.html',
-        template: path.resolve(__dirname, 'public/Knowledge-Center/Mortgage-Calculator-Make-Informed-Home-Loan-Decisions.html'),
-        // chunks: ['main', 'utils'],
-        canonical: 'https://www.monvvo.com/knowledge-center/mortgage-calculator-make-informed-home-loan-decisions'
-    },
-    {
         filename: 'Mortgage/Down-Payment-Calculator.html',
         template: path.resolve(__dirname, 'public/Mortgage/Down-Payment-Calculator.html'),
         // chunks: ['main', 'utils'],
