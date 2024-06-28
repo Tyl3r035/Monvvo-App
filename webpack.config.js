@@ -11,7 +11,7 @@ const pages = [
     {
         filename: 'index.html',
         template: path.resolve(__dirname, 'public/index.html'),
-        // chunks: ['main', 'utils'],
+        chunks: ['main', 'mortgage-calculator', 'utils'],
         canonical: 'https://www.monvvo.com'
     },
     {
