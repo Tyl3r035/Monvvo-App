@@ -93,10 +93,13 @@ const pages = [
         canonical: 'https://www.monvvo.com/investment/compound-interest-calculator'
     }
 ];
-
 module.exports = {
     mode: 'production',
-    entry: './public/js/index.js',
+    entry: {
+        main: './public/js/main.js',
+        'mortgage-calculator': './public/js/mortgage-calculator.js',
+        utils: './public/js/utils.js'
+    },
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -138,6 +141,7 @@ module.exports = {
             filename: page.filename,
             template: page.template,
             inject: 'body',
+            chunks: page.chunks,
             minify: true,
             canonical: page.canonical
         })),
@@ -149,14 +153,10 @@ module.exports = {
                 { from: 'public/img', to: 'img' },
                 { from: 'public/css', to: 'css' },
                 { from: 'public/js/service-worker.js', to: 'service-worker.js' },
-                // Copy _headers and _redirects to dist
                 { from: '_headers', to: '_headers', toType: 'file' },
                 { from: '_redirects', to: '_redirects', toType: 'file' },
-                // Copy sitemap.xml to dist
                 { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' },
-                // Copy ads.txt to dist
                 { from: 'ads.txt', to: 'ads.txt', toType: 'file' },
-                // Copy robots.txt to dist
                 { from: 'robots.txt', to: 'robots.txt', toType: 'file'}
             ]
         })
