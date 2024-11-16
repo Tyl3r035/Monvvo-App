@@ -42,53 +42,5 @@ module.exports = {
             template: './public/monvvo-disclaimer.html',
             filename: 'monvvo-disclaimer.html',
         }),
-        new HtmlWebpackPlugin({
-            template: './public/investment/compound-interest-calculator.html',
-            filename: 'investment/compound-interest-calculator.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './public/investment/investment-growth-calculator.html',
-            filename: 'investment/investment-growth-calculator.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './public/investment/retirement-savings-calculator.html',
-            filename: 'investment/retirement-savings-calculator.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './public/knowledge-center/how-to-calculate-mortgage-blog.html',
-            filename: 'knowledge-center/how-to-calculate-mortgage-blog.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './public/knowledge-center/mortgage-calculator-make-informed-home-loan-decisions.html',
-            filename: 'knowledge-center/mortgage-calculator-make-informed-home-loan-decisions.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './public/loan/auto-loan-calculator.html',
-            filename: 'loan/auto-loan-calculator.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './public/loan/loan-amortization-calculator.html',
-            filename: 'loan/loan-amortization-calculator.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './public/loan/personal-loan-calculator.html',
-            filename: 'loan/personal-loan-calculator.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './public/loan/student-loan-calculator.html',
-            filename: 'loan/student-loan-calculator.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './public/mortgage/down-payment-calculator.html',
-            filename: 'mortgage/down-payment-calculator.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './public/mortgage/home-equity-calculator.html',
-            filename: 'mortgage/home-equity-calculator.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: './public/mortgage/Mortgage-Payoff-Calculator.html',
-            filename: 'mortgage/Mortgage-Payoff-Calculator.html',
-        }),
     ],
 };

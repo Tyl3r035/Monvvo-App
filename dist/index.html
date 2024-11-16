@@ -1,14 +1,21 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="author" content="Tyler P."><meta name="description" content="Use our free Mortgage Calculator by monthly payment to estimate your mortgage payments. Easily calculate your monthly payments, explore different scenarios, and find the best loan options for home buyers and refinancers."><title>Calculate Mortgage by Monthly Payment | Free Mortgage Calculator</title><link rel="canonical" href="https://www.monvvo.com"/><link rel="icon" type="image/svg" href="img/Monnvo-Favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><script async src="https://www.googletagmanager.com/gtag/js?id=G-3773H5L03T"></script><script>window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-3773H5L03T');</script><script>document.addEventListener("DOMContentLoaded", function() {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Tyler P.">
+    <meta name="description" content="Use our free Mortgage Calculator by monthly payment to estimate your mortgage payments. Easily calculate your monthly payments, explore different scenarios, and find the best loan options for home buyers and refinancers.">
+    <title>Calculate Mortgage by Monthly Payment | Free Mortgage Calculator</title>
+    <link rel="canonical" href="https://www.monvvo.com" />
+    <link rel="icon" type="image/svg" href="./img/logos/Monnvo-Favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
             var fontLinks = [
                 "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap",
                 "https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
             ];
-            
             fontLinks.forEach(function(linkHref) {
                 var link = document.createElement("link");
                 link.href = linkHref;
@@ -16,4 +23,318 @@
                 link.defer = true;
                 document.head.appendChild(link);
             });
-        });</script><link href="/main.c65faaa048fba11f39c9.css" rel="stylesheet"></head><body><header id="header"><div class="logo"><img src="img/Monvvo-Transparent.svg" alt="Monvvo Logo" loading="lazy"></div></header><main id="main"><h1 id="title">Mortgage Calculator</h1><form id="mortgage-form"><label for="mortgage-price">Home Price</label> <span class="material-symbols-outlined">info</span><div class="info-text-fluid">The home price is the total cost of purchasing the property, including the base price of the house and any additional fees or costs associated with the purchase.</div><div class="input-fluid"><span class="input-icon dollar-span">$</span> <input type="number" name="mortgage_input__mortgage_price" id="mortgage-price" placeholder="400000" required></div><label for="down-payment">Down Payment</label> <span class="material-symbols-outlined">info</span><div class="info-text-fluid">The down payment is the initial amount of money you pay upfront when purchasing a home, which is typically a percentage of the total home price. This amount reduces the loan amount you need to borrow.</div><div class="input-fluid"><span class="input-icon dollar-span">$</span> <input type="number" name="mortgage_input__down_payment" id="down-payment" placeholder="20000" required></div><label for="mortgage-term">Loan Term</label> <span class="material-symbols-outlined">info</span><div class="info-text-fluid">The loan term is the length of time over which you agree to repay your mortgage loan. It is typically expressed in years, such as 15 or 30 years.</div><div class="input-fluid"><input type="number" name="mortgage_input__loan_term" id="mortgage-term" placeholder="15" required> <span class="input-icon right-span">Years</span></div><label for="interest-rate">Interest Rate</label> <span class="material-symbols-outlined">info</span><div class="info-text-fluid">The interest rate is the percentage charged on the loan amount by the lender, which determines the cost of borrowing money for your mortgage. It is usually expressed as an annual percentage rate (APR).</div><div class="input-fluid"><input type="number" step="0.01" name="mortgage_input__interest_rate" id="interest-rate" placeholder="7.2" required> <span class="input-icon right-span">%</span></div><br><br><label for="property-taxes">Property Taxes</label> <span class="material-symbols-outlined">info</span><div class="info-text-fluid">Property taxes are annual/monthly taxes paid by homeowners to local government authorities, based on the assessed value of the property. The average property tax rate can be around 1.1% of the property's value.</div><div class="input-fluid"><span class="input-icon dollar-span">$</span> <input type="number" name="mortgage_input__property_taxes" id="property-taxes" placeholder="333.33"><div class="select-wrapper"><select name="tax-frequency" id="tax-frequency" aria-label="tax-frequency"><option value="annually" aria-label="Annually">Annually</option><option value="monthly" aria-label="Monthly">Monthly</option></select></div></div><label for="pmi-cost">PMI Expense</label> <span class="optional-span">(Optional)</span> <span class="material-symbols-outlined">info</span><div class="info-text-fluid optional-info">Private Mortgage Insurance (PMI) is a type of insurance that protects the lender if you default on your mortgage. It is typically required if your down payment is less than 20% of the home's purchase price.</div><div class="input-fluid"><span class="input-icon dollar-span">$</span> <input type="number" name="mortgage_input__pmi" id="pmi-cost" placeholder="0"></div><label for="hoa-cost">HOA Fees</label> <span class="optional-span">(Optional)</span> <span class="material-symbols-outlined optional-info">info</span><div class="info-text-fluid optional-info">Homeowner's Association (HOA) fees are monthly or annual dues paid by homeowners in a residential community to cover the maintenance of common areas and shared amenities.</div><div class="input-fluid"><span class="input-icon dollar-span">$</span> <input type="number" name="mortgage_input__hoa" id="hoa-cost" placeholder="0"></div><button class="form-btn mortgage-btn">Calculate Mortgage</button></form><section class="results-section"><h2 class="section-title mortgage-title">Monthly Mortgage Breakdown</h2><a href="./monvvo-disclaimer.html" target="_blank">Please Read Monvvo Disclosure</a><canvas id="myChart"></canvas><div id="chart-legend" class="legend-container"></div></section><div class="border-bottom"></div><section class="how-section detail-section"><h2 class="section-title">How to Use Monvvo Mortgage Calculator</h2><ol class="how-fluid"><li class="how-link"><b class="bold-text">Input the home’s price.</b><br>Enter the total purchase price of the home you plan to buy or the current market value of your home if you are looking to refinance.</li><li class="how-link"><b class="bold-text">Specify your down payment.</b><br>Enter the amount you intend to pay upfront for the home purchase.</li><li class="how-link"><b class="bold-text">Select the loan duration.</b><br>Choose the term length for your mortgage, commonly 30 years, but you may also consider 20, 15, or even 10 years, depending on your financial strategy.</li><li class="how-link"><b class="bold-text">Provide the interest rate.</b><br>Enter the interest rate you anticipate securing or the rate you are currently paying. The calculator might default to an average rate, but you can customize this to reflect your actual rate.</li><li class="how-link"><b class="bold-text">Enter property taxes.</b><br>Include the annual property tax amount to get a more accurate estimate of your monthly payment. This can usually be found on the property’s listing or by contacting your local tax assessor’s office.</li><li class="how-link"><b class="bold-text">Include PMI.</b><br>If your down payment is less than 20%, you may be required to have private mortgage insurance (PMI). Enter the cost of PMI, which is typically calculated as a percentage of the loan amount.</li><li class="how-link"><b class="bold-text">Add HOA fees.</b><br>If the property is part of a homeowners association, enter the monthly HOA fees. These fees cover the maintenance and amenities provided by the association.</li><li class="how-link"><b class="bold-text">Calculate your Monthly Mortgage Payment.</b><br>Once all the necessary details are filled in, click on the button to calculate your monthly mortgage payment. This will give you an estimate based on the information provided. <a class="mortgage-internal" target="_blank" href="./Knowledge-Center/How-To-Calculate-Mortgage-Blog.html">Click Here to Learn More About Mortgage Calculations.</a></li></ol></section><div class="border-bottom"></div><section class="terms-section detail-section"><h2 class="section-title">Mortgage Terms</h2><h3 class="terms-heading">Home Price</h3><p class="terms-content">The home price is the total cost of purchasing the property, including the base price of the house and any additional fees or costs associated with the purchase.</p><h3 class="terms-heading">Down Payment</h3><p class="terms-content">The down payment is the initial amount of money you pay upfront when purchasing a home, which is typically a percentage of the total home price. This amount reduces the loan amount you need to borrow.</p><h3 class="terms-heading">Loan Term</h3><p class="terms-content">The loan term is the length of time over which you agree to repay your mortgage loan. It is typically expressed in years, such as 15 or 30 years.</p><h3 class="terms-heading">Interest Rate</h3><p class="terms-content">The interest rate is the percentage charged on the loan amount by the lender, which determines the cost of borrowing money for your mortgage. It is usually expressed as an annual percentage rate (APR).</p><h3 class="terms-heading">Property Taxes</h3><p class="terms-content">Property taxes are annual/monthly taxes paid by homeowners to local government authorities, based on the assessed value of the property. The average property tax rate can be around 1.1% of the property's value.</p><h3 class="terms-heading">PMI Expense</h3><p class="terms-content">Private Mortgage Insurance (PMI) is a type of insurance that protects the lender if you default on your mortgage. It is typically required if your down payment is less than 20% of the home's purchase price.</p><h3 class="terms-heading">HOA Fees</h3><p class="terms-content">Homeowner's Association (HOA) fees are monthly or annual dues paid by homeowners in a residential community to cover the maintenance of common areas and shared amenities.</p></section></main><footer id="footer"><div class="footer-col"><h4 class="footer-heading">Quick Links</h4><a class="footer-link" href="https://www.monvvo.com/privacy-policy" target="_blank">Privacy Policy</a> <a class="footer-link" href="https://www.monvvo.com/monvvo-disclaimer" target="_blank">Monvvo Disclaimer</a></div><div class="footer-col"><img src="./img/Monvvo-Footer.svg" alt="Monvvo Logo" loading="lazy"></div></footer><script defer="defer" src="https://cdn.jsdelivr.net/npm/chart.js"></script><script defer="defer" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script><script defer="defer" src="/main.34f5bf97dd089210a9b0.js"></script><script defer="defer" src="/mortgage-calculator.7ef434f9e265df7715d1.js"></script><script defer="defer" src="/utils.87b666bbcdd6b247a5de.js"></script></body></html>
+        });
+    </script>
+<link href="/main.58738a4b681345ad40b4.css" rel="stylesheet"></head>
+<body>
+  <header id="header">
+    <div class="logo">
+      <img src="./img/logos/shape_101.svg" alt="Monvvo Icon" class="logo-1" loading="lazy">
+      <img src="./img/logos/Monvvo-Primary.svg" alt="Monvvo" class="logo-2" loading="lazy">
+    </div>
+  </header>
+  <main id="main">
+    <section class="calculation-section">
+      <h1 id="title">Mortgage Calculator</h1>
+      <div class="calculator-wrap">
+        <div class="calculator-inputs">
+          <div class="input-box">
+            <label for="home-price">Home Price</label>
+            <div class="input-fluid">
+              <div class="input-content">
+                <img src="./img/icons/dollar.svg" alt="$" class="input-icon" loading="lazy">
+                <div class="input-separator"></div>
+                <input type="number" class="number-input" id="home-price" name="mortgage_input__home_price" placeholder="500000">
+              </div>
+            </div>
+          </div>
+          <div class="input-box">
+            <label for="down-payment-amount">Down Payment</label>
+            <div class="multiple-inputs">
+              <div class="input-left">
+                <div class="input-content">
+                  <img src="./img/icons/dollar.svg" alt="$" class="input-icon" loading="lazy">
+                  <div class="input-separator"></div>
+                  <input type="number" class="number-input" id="down-payment-amount" name="mortgage_input__dp_amount" placeholder="25000">
+                </div>
+              </div>
+              <div class="input-right">
+                <div class="input-content">
+                  <input type="number" step=".01" class="number-input percentage-input" id="down-payment-percentage" name="mortgage_input__dp_percentage" placeholder="5">
+                  <div class="input-separator"></div>
+                  <img src="./img/icons/percentage.svg" alt="%" class="input-icon" loading="lazy">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-box">
+            <div class="input-top">
+              <label for="loan-term">Loan Term</label>
+              <img src="./img/icons/info-icon.svg" 
+     alt="info-icon" 
+     class="info-icon" 
+     data-tooltip="Enter the length of time (in years) over which you plan to repay the mortgage loan." 
+     loading="lazy">
+
+            </div>
+            <div class="input-bottom">
+              <div class="input-inner">
+                <select id="loan-term" name="mortgage_input__loan_term" aria-label="term-dropdown">
+                  <option value="25" class="calculation-option">25</option>
+                  <option value="30" class="calculation-option">30</option>
+                  <option value="15" class="calculation-option">15</option>
+                  <option value="10" class="calculation-option">10</option>
+                </select>
+                <img src="./img/icons/down-arrow.svg" alt="down-arrrow" class="input-dropdown" loading="lazy">
+              </div>
+            </div>
+          </div>
+          <div class="input-box">
+            <div class="input-top">
+              <label for="interest-rate">Interest Rate</label>
+              <img src="./img/icons/info-icon.svg" 
+     alt="info-icon" 
+     class="info-icon" 
+     data-tooltip="Enter the annual interest rate on the mortgage loan as a percentage." 
+     loading="lazy">
+
+            </div>
+            <div class="input-bottom">
+              <div class="input-bottom-inner">
+                <input type="number" step="0.01" id="interest-rate" name="mortgage_input__interest_rate" placeholder="7.04">
+                <div class="input-bottom-right">
+                  <div class="input-separator"></div>
+                  <img src="./img/icons/percentage.svg" alt="%" class="input-icon" loading="lazy">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-box">
+            <div class="input-top">
+              <label for="payment-frequency">Payment Frequency</label>
+              <img src="./img/icons/info-icon.svg" 
+     alt="info-icon" 
+     class="info-icon" 
+     data-tooltip="Enter how often you plan to make mortgage payments, such as monthly, bi-weekly, or weekly." 
+     loading="lazy">
+
+            </div>
+            <div class="input-bottom">
+              <div class="input-inner">
+                <select id="payment-frequency" aria-label="payment-dropdown" name="mortgage_input__payment_frequency">
+                  <option value="monthly" class="calculation-option">Monthly</option>
+                  <option value="biweekly" class="calculation-option">Bi-Weekly</option>
+                  <option value="weekly" class="calculation-option">Weekly</option>
+                  <option value="accelerated-biweekly" class="calculation-option">Accelerated Bi-Weekly Payments</option>
+                  <option value="accelerated-weekly" class="calculation-option">Accelerated Weekly Payments</option>
+                </select>
+                <img src="./img/icons/down-arrow.svg" alt="down-arrrow" class="input-dropdown" loading="lazy">
+              </div>
+            </div>
+          </div>
+          <div class="advanced-box">
+            <div id="advanced-text-fluid">
+              <p>Advanced Options</p>
+              <img src="./img/icons/down-arrow.svg" alt="down-arrrow" class="input-dropdown" id="advanced-arrow" loading="lazy">
+            </div>
+            <p class="additional-subtext">(Add additional monthly expenses)</p>
+          </div>
+          <div id="additional-inputs">
+            <div class="input-box">
+              <label for="property-tax">Property Tax</label>
+              <div class="input-fluid">
+                <div class="input-content">
+                  <img src="./img/icons/dollar.svg" alt="$" class="input-icon" loading="lazy">
+                  <div class="input-separator"></div>
+                  <input type="number" class="number-input" id="property-tax" name="mortgage_input__property_tax" placeholder="250">
+                </div>
+              </div>
+            </div>
+            <div class="input-box">
+              <div class="input-top">
+                <label for="pmi-expense">PMI Expense</label>
+                <img src="./img/icons/info-icon.svg" 
+     alt="info-icon" 
+     class="info-icon" 
+     data-tooltip="Enter the monthly cost of Private Mortgage Insurance (PMI), if required, typically for down payments less than 20%." 
+     loading="lazy">
+
+              </div>
+              <div class="input-fluid">
+                <div class="input-content">
+                  <img src="./img/icons/dollar.svg" alt="$" class="input-icon" loading="lazy">
+                  <div class="input-separator"></div>
+                  <input type="number" class="number-input" id="pmi-expense" name="mortgage_input__pmi_expense" placeholder="200">
+                </div>
+              </div>
+            </div>
+            <div class="input-box">
+              <div class="input-top">
+                <label for="hoa-expense">Homeowners Association (HOA) Fees</label>
+                <img src="./img/icons/info-icon.svg" 
+     alt="info-icon" 
+     class="info-icon" 
+     data-tooltip="Enter the monthly Homeowners Association (HOA) fees if applicable to the property." 
+     loading="lazy">
+
+              </div>
+              <div class="input-fluid">
+                <div class="input-content">
+                  <img src="./img/icons/dollar.svg" alt="$" class="input-icon" loading="lazy">
+                  <div class="input-separator"></div>
+                  <input type="number" class="number-input" id="hoa-expense" name="mortgage_input__hoa_expense" placeholder="0">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="calculations-container">
+          <div class="results-container">
+            <div class="results-top">
+              <div class="results-tab tab-active" id="tab-payment-breakdown">
+                <p class="tab-text">Payment Breakdown</p>
+              </div>
+              <div class="results-tab" id="tab-amortization-schedule">
+                <p class="tab-text">Amortization Schedule</p>
+              </div>
+            </div>
+            <div class="results-content">
+              <div id="payment-breakdown-content">
+                <div class="results-answer">
+                  <div class="answer-text">
+                    <h5 class="answer-title">Monthly Payment:</h5>
+                    <p class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate)</p>
+                  </div>
+                  <div class="monthly-answer">
+                    <h2 class="monthly-payment"><span class="dollar">$</span>6,747.72</h2>
+                    <p class="supporting-answer">/ Month</p>
+                  </div>
+                </div>
+                <div class="result-fluid">
+                  <canvas id="mortgageChart"></canvas>
+                  <div id="chartLabels" class="chart-labels"></div>
+                </div>
+              </div>
+              <div id="amortization-schedule-content" style="display: none;">
+                <h5 class="answer-title">Amortization for Mortgage Loan</h5>
+                <canvas id="amortizationChart"></canvas>
+                <div id="amortizationLabels" class="chart-labels"></div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-container">
+            <div class="btn-left">
+              <button id="update-btn" class="btn-submit calculation-btn" name="mortgage_input__mortgage_submit">Update</button>
+              <button id="reset-btn" class="btn-reset calculation-btn" name="mortgage_input__mortgage_reset">Reset</button>
+            </div>
+            <div class="btn-right">
+              <div class="btn-icon-fluid">
+                <img class="btn-icon" src="./img/icons/printer-icon.svg">
+                <p class="printer-text">Export Results</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="how-section">
+      <div class="how-inner">
+        <h3 class="how-title">How to use Monvvo mortgage calculator</h3>
+        <ol class="how-list">
+          <li class="how-text">Enter the total purchase price of the home or its current market value if you're refinancing.</li>
+          <li class="how-text">Specify your down payment amount and choose the mortgage term length, typically 30, 20, 15, or 10 years.</li>
+          <li class="how-text">Provide the anticipated or current interest rate, adjusting if necessary to reflect your actual rate.</li>
+          <li class="how-text">Include the annual property tax amount for a more accurate monthly payment estimate.</li>
+          <li class="how-text">If applicable, enter the cost of private mortgage insurance (PMI) for down payments less than 20%.</li>
+          <li class="how-text">Finally, click the calculate button to get an estimate of your monthly mortgage payment.</li>
+        </ol>
+      </div>
+    </section>
+    <section class="terms-section">
+      <h3 class="terms-title">Mortgage Terms</h3>
+      <div class="terms-content">
+        <div class="terms-item">
+          <div class="item-inner">
+            <h4 class="item-title">Home Price</h4>
+            <p class="item-text">The home price is the total cost of purchasing the property, including the base price of the house and any additional fees or costs associated with the purchase.</p>
+          </div>
+          <img src="./img/icons/item-corner.svg" class="item-corner">
+        </div>
+        <div class="terms-item">
+          <div class="item-inner">
+            <h4 class="item-title">Down Payment</h4>
+            <p class="item-text">The down payment is the initial amount of money you pay upfront when purchasing a home, which is typically a percentage of the total home price. This amount reduces the loan amount you need to borrow.</p>
+          </div>
+          <img src="./img/icons/item-corner.svg" class="item-corner">
+        </div>
+        <div class="terms-item">
+          <div class="item-inner">
+            <h4 class="item-title">Loan Term</h4>
+            <p class="item-text">The loan term is the length of time over which you agree to repay your mortgage loan. It is typically expressed in years, such as 15 or 30 years.</p>
+          </div>
+          <img src="./img/icons/item-corner.svg" class="item-corner">
+        </div>
+        <div class="terms-item">
+          <div class="item-inner">
+            <h4 class="item-title">Interest Rate</h4>
+            <p class="item-text">The interest rate is the percentage charged on the loan amount by the lender, which determines the cost of borrowing money for your mortgage.</p>
+          </div>
+          <img src="./img/icons/item-corner.svg" class="item-corner">
+        </div>
+        <div class="terms-item">
+          <div class="item-inner">
+            <h4 class="item-title">Property Taxes</h4>
+            <p class="item-text">Property taxes are annual/monthly taxes paid by homeowners to local government authorities, based on the assessed value of the property.</p>
+          </div>
+          <img src="./img/icons/item-corner.svg" class="item-corner">
+        </div>
+        <div class="terms-item">
+          <div class="item-inner">
+            <h4 class="item-title">PMI Expense</h4>
+            <p class="item-text">Private Mortgage Insurance (PMI) is a type of insurance that protects the lender if you default on your mortgage. It is typically required if your down payment is less than 20%.</p>
+          </div>
+          <img src="./img/icons/item-corner.svg" class="item-corner">
+        </div>
+        <div class="terms-item">
+          <div class="item-inner">
+            <h4 class="item-title">HOA Fees</h4>
+            <p class="item-text">Homeowner's Association (HOA) fees are monthly or annual dues paid by homeowners in a residential community to cover the maintenance of common areas.</p>
+          </div>
+          <img src="./img/icons/item-corner.svg" class="item-corner">
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="footer-left"></div>
+      <div class="footer-right">
+        <div class="footer-col">
+          <h5 class="footer-title">Calculators</h5>
+          <a class="footer-link" href="#">Banking</a>
+          <a class="footer-link" href="#">Mortgage</a>
+          <a class="footer-link" href="#">Loan</a>
+          <a class="footer-link" href="#">Investing</a>
+          <a class="footer-link" href="#">Personal Finance</a>
+          <a class="footer-link" href="#">Taxes</a>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-title">Resources</h5>
+          <a class="footer-link" href="#">Articles</a>
+          <a class="footer-link" href="#">Videos</a>
+          <a class="footer-link" href="#">Podcasts</a>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-title">About Us</h5>
+          <a class="footer-link" href="#">Our Story</a>
+          <a class="footer-link" href="#">Articles</a>
+          <a class="footer-link" href="#">Partners</a>
+          <a class="footer-link" href="#">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="footer-bottom"></div>
+  </footer>
+<script defer src="/90.5c8226adc2fff10d1a0d.js"></script><script defer src="/main.f58062b52eeb4fe43bdf.js"></script><script defer src="/mortgage-calculator.6637d84293bae3ca197d.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script></body>
+</html>
