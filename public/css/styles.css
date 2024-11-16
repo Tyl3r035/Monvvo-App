@@ -898,6 +898,9 @@ canvas {
   }
 }
 @media screen and (max-width: 500px){
+  #main{
+    margin-top: 100px;
+  }
   canvas{
     width: 95%;
     height: 150px;
@@ -906,11 +909,21 @@ canvas {
     font-size: 12px;
   }
   .calculation-btn{
-    padding: 10px 24px;
-    font-size: 14px;
+    padding: 8px 16px;
+    font-size: 12px;
   }
   .printer-text{
-    font-size: 14px;
+    font-size: 12px;
+  }
+  .btn-container{
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+  .btn-left{
+    align-self: flex-start;
+  }
+  .btn-right{
+    align-self: flex-end;
   }
   .how-text{
     font-size: 16px;
