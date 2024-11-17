@@ -919,22 +919,23 @@ canvas {
   .label-name, .label-value{
     font-size: 12px;
   }
+  .btn-left{
+    gap: 10px;
+  }
+  .btn-right{
+    padding-left: 10px;
+    padding-right: 10px;
+  };
   .calculation-btn{
     padding: 8px 16px;
     font-size: 12px;
   }
+  .btn-icon{
+    width: 15px;
+    height: 15px;
+  }
   .printer-text{
-    font-size: 12px;
-  }
-  .btn-container{
-    flex-direction: column-reverse;
-    justify-content: center;
-  }
-  .btn-left{
-    align-self: flex-start;
-  }
-  .btn-right{
-    align-self: flex-end;
+    font-size: 12px !important;
   }
   .how-text{
     font-size: 16px;
