@@ -391,32 +391,19 @@ document.addEventListener("DOMContentLoaded", function () {
             return padding.left + (index / months) * (width - padding.left - padding.right);
         }
 
-        let currentBreakpoint = null; // Track the current breakpoint
-
-        function determineBreakpoint(width) {
-            if (width < 500) return 'small';
-            if (width < 768) return 'medium';
-            return 'large';
-        }
-        
         function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData) {
             const ctx = amortizationChartCanvas.getContext('2d');
             const dpr = window.devicePixelRatio || 1;
         
-            // Adjust height and font size dynamically based on the breakpoint
-            const screenWidth = window.innerWidth;
-            const breakpoint = determineBreakpoint(screenWidth);
-        
-            let height, labelFont;
-            if (breakpoint === 'small') {
-                height = 200;
-                labelFont = '10px Open Sans';
-            } else if (breakpoint === 'medium') {
-                height = 250;
-                labelFont = '12px Open Sans';
+            // Adjust height dynamically based on screen width
+            let height;
+            let labelFont;
+            if (window.innerWidth < 500) {
+                height = 200; // Set a smaller height for smaller screens
+                labelFont = '10px Open Sans'; // Smaller font size for smaller screens
             } else {
-                height = 300;
-                labelFont = '14px Open Sans';
+                height = 300; // Default height
+                labelFont = '14px Open Sans'; // Default font size
             }
         
             amortizationChartCanvas.style.width = '100%';
@@ -443,7 +430,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
             const gridColor = '#d0d0d0';
             const labelColor = '#505050';
-        
+            
             ctx.font = labelFont;
             ctx.textAlign = 'right';
         
@@ -454,21 +441,13 @@ document.addEventListener("DOMContentLoaded", function () {
             function getX(index) {
                 return padding.left + (index / months) * (width - padding.left - padding.right);
             }
+        
         }
         
         // Attach the resize event listener
         window.addEventListener('resize', () => {
-            const newBreakpoint = determineBreakpoint(window.innerWidth);
-            if (newBreakpoint !== currentBreakpoint) {
-                currentBreakpoint = newBreakpoint;
-                drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
-            }
+            drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
         });
-        
-        // Initial draw
-        currentBreakpoint = determineBreakpoint(window.innerWidth);
-        drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
-        
         
         
         // Draw horizontal grid lines only, avoiding the line at the bottom (y-axis line)
