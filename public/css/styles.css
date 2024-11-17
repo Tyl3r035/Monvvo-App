@@ -927,8 +927,8 @@ canvas {
     padding-right: 10px;
   };
   .calculation-btn{
-    padding: 8px 16px;
-    font-size: 12px;
+    padding: 8px 16px !important;
+    font-size: 12px !important;
   }
   .btn-icon{
     width: 15px;
