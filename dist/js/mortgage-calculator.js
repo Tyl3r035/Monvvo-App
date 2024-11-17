@@ -346,13 +346,10 @@ document.addEventListener("DOMContentLoaded", function () {
     
         // Adjust height dynamically based on screen width
         let height;
-        let labelFont;
         if (window.innerWidth < 500) {
             height = 200; // Set a smaller height for smaller screens
-            labelFont = '10px Open Sans'; // Smaller font size for smaller screens
         } else {
             height = 300; // Default height
-            labelFont = '14px Open Sans'; // Default font size
         }
     
         amortizationChartCanvas.style.width = '100%';
@@ -379,7 +376,15 @@ document.addEventListener("DOMContentLoaded", function () {
     
         const gridColor = '#d0d0d0';
         const labelColor = '#505050';
-        
+        const labelFont = '14px Open Sans';
+        const currentYear = new Date().getFullYear();
+
+        if (window.innerWidth < 500) {
+            labelfont = '10px'; // Set a smaller font for smaller screens
+        } else {
+            height = '14px'; // Default height
+        }
+    
         ctx.font = labelFont;
         ctx.textAlign = 'right';
     
@@ -390,65 +395,9 @@ document.addEventListener("DOMContentLoaded", function () {
         function getX(index) {
             return padding.left + (index / months) * (width - padding.left - padding.right);
         }
-
-        function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData) {
-            const ctx = amortizationChartCanvas.getContext('2d');
-            const dpr = window.devicePixelRatio || 1;
-        
-            // Adjust height dynamically based on screen width
-            let height;
-            let labelFont;
-            if (window.innerWidth < 500) {
-                height = 200; // Set a smaller height for smaller screens
-                labelFont = '10px Open Sans'; // Smaller font size for smaller screens
-            } else {
-                height = 300; // Default height
-                labelFont = '14px Open Sans'; // Default font size
-            }
-        
-            amortizationChartCanvas.style.width = '100%';
-            amortizationChartCanvas.style.height = `${height}px`;
-        
-            const width = amortizationChartCanvas.offsetWidth;
-            amortizationChartCanvas.width = width * dpr;
-            amortizationChartCanvas.height = height * dpr;
-        
-            if (dpr > 1) {
-                ctx.scale(dpr, dpr);
-            }
-        
-            ctx.clearRect(0, 0, width * dpr, height * dpr);
-        
-            const months = balanceData.length;
-            const maxBalance = Math.max(...balanceData);
-            const maxCumulative = Math.max(...cumulativeInterestData, ...cumulativePrincipalData);
-        
-            const yAxisMax = Math.max(maxBalance, maxCumulative);
-        
-            const intervalMonths = 5 * 12;
-            const padding = { top: 30, right: 20, bottom: 30, left: 70 };
-        
-            const gridColor = '#d0d0d0';
-            const labelColor = '#505050';
-            
-            ctx.font = labelFont;
-            ctx.textAlign = 'right';
-        
-            function getY(value) {
-                return height - padding.bottom - (value / yAxisMax) * (height - padding.top - padding.bottom);
-            }
-        
-            function getX(index) {
-                return padding.left + (index / months) * (width - padding.left - padding.right);
-            }
-        
-        }
-        
-        // Attach the resize event listener
         window.addEventListener('resize', () => {
             drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
         });
-        
         
         // Draw horizontal grid lines only, avoiding the line at the bottom (y-axis line)
         ctx.strokeStyle = gridColor;

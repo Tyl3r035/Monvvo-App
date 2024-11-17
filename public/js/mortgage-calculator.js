@@ -378,6 +378,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const labelColor = '#505050';
         const labelFont = '14px Open Sans';
         const currentYear = new Date().getFullYear();
+
+        if (window.innerWidth < 500) {
+            labelfont = '10px'; // Set a smaller font for smaller screens
+        } else {
+            height = '14px'; // Default height
+        }
     
         ctx.font = labelFont;
         ctx.textAlign = 'right';
