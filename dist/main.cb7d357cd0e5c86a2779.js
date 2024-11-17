@@ -167,41 +167,13 @@ var map = {
 		991,
 		991
 	],
-	"./logos/Monnvo-Favicon.svg": [
-		733,
-		733
+	"./logos/monvvo-favicon.png": [
+		514,
+		514
 	],
-	"./logos/Monvvo-Footer.svg": [
-		238,
-		238
-	],
-	"./logos/Monvvo-Knowledge-Center.png": [
-		210,
-		210
-	],
-	"./logos/Monvvo-Long.svg": [
-		969,
-		969
-	],
-	"./logos/Monvvo-Primary.svg": [
-		947,
-		947
-	],
-	"./logos/Monvvo-Square.svg": [
-		826,
-		826
-	],
-	"./logos/Monvvo-Transparent.svg": [
-		843,
-		843
-	],
-	"./logos/chevron.svg": [
-		296,
-		296
-	],
-	"./logos/shape_101.svg": [
-		379,
-		379
+	"./logos/monvvo-transparent.svg": [
+		67,
+		67
 	]
 };
 function webpackAsyncContext(req) {
@@ -328,7 +300,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + "." + {"210":"ea2cc6ca029100226374","238":"f44f707320f24236e168","296":"ff7cb5afaaa6020c12bb","379":"f4228c6cd9fff5599c00","397":"a00ef0584e38f2f62d04","730":"d52372ea07440c23aaf2","733":"350e32d255bd67d13f4a","749":"1aba59bddb5546607d01","805":"c37b3df6f853072cb61e","826":"aaffdef413351b603809","843":"07a3c0091957bf0191c2","867":"dec7116d57c02c91d93c","947":"4e83b65747aaa684c9a0","969":"134e6e3f750e5b6051f8","991":"db73b6f117f1c4d61943"}[chunkId] + ".js";
+/******/ 			return "" + chunkId + "." + {"67":"bb744e9880cc2135f277","397":"a00ef0584e38f2f62d04","514":"c986534017d53a958abe","730":"d52372ea07440c23aaf2","749":"1aba59bddb5546607d01","805":"c37b3df6f853072cb61e","867":"dec7116d57c02c91d93c","991":"db73b6f117f1c4d61943"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -337,7 +309,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference all chunks
 /******/ 		__webpack_require__.miniCssF = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + "main" + "." + "af4ff2c0b35db9213bf8" + ".css";
+/******/ 			return "" + "main" + "." + "51a3e8c8be170efe2957" + ".css";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -508,4 +480,4 @@ module.exports = webpackAsyncContext;
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=main.051339c949952e990d78.js.map
+//# sourceMappingURL=main.cb7d357cd0e5c86a2779.js.map

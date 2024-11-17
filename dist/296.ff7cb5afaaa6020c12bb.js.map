@@ -1,1 +1,0 @@
-{"version":3,"file":"296.ff7cb5afaaa6020c12bb.js","mappings":";;;;;;;;;;AAAA,iEAAe,qBAAuB,wDAAwD","sources":["webpack://monvvo-app/./public/img/logos/chevron.svg"],"sourcesContent":["export default __webpack_public_path__ + \"images/chevron.a55dcc5ec01bca7fd032f067b6a40a3f.svg\";"],"names":[],"sourceRoot":""}

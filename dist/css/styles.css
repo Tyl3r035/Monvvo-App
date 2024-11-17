@@ -38,14 +38,9 @@ body,html{
   align-items: center;
   gap: 5.984px;
 }
-.logo .logo-1{
-  width: 14.532px;
-  height: 14.532px;
-  transform: rotate(90deg);
-}
-.logo .logo-2{
-  width: 85.484px;
-  height: 15.157px;  
+.logo .monvvo-.logo{
+  width: 106px;
+  height: 16px;
 }
 #nav{
   display: flex;

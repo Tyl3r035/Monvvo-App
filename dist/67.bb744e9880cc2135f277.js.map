@@ -1,0 +1,1 @@
+{"version":3,"file":"67.bb744e9880cc2135f277.js","mappings":";;;;;;;;;;AAAA,iEAAe,qBAAuB,mEAAmE","sources":["webpack://monvvo-app/./public/img/logos/monvvo-transparent.svg"],"sourcesContent":["export default __webpack_public_path__ + \"images/monvvo-transparent.f5e65af9e7a83b39bf847fbf6fd75d13.svg\";"],"names":[],"sourceRoot":""}
