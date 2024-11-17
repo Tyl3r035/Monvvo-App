@@ -217,6 +217,14 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
   width: 40px;
   text-align: right;
 }
+.percent-icon{
+  width: 10px;
+  height: 11px;
+}
+.dollar-icon{
+  width: 9px;
+  height: 14px;
+}
 
 /* Info Icon Input Specific CSS */
 .input-top{
@@ -849,7 +857,7 @@ canvas {
 .footer-link{
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  color: #6C6C70;
+  color: #fff;
   margin-bottom: 8px;
   text-decoration: none;
   cursor: pointer;
