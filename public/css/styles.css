@@ -903,6 +903,9 @@ canvas {
   #main{
     margin-top: 100px;
   }
+  .results-content{
+    padding: 0 !important;
+  }
   #amortizationChartContainer {
       padding: 0; /* This creates visual padding around the chart */
   }
