@@ -953,6 +953,15 @@ canvas {
   #main{
     margin-top: 100px;
   }
+  #amortizationChartContainer {
+      padding: 0; /* This creates visual padding around the chart */
+  }
+  
+  #amortizationChart {
+    margin-right: 10px; /* Right margin to avoid overflow */
+    margin-bottom: 10px; /* Bottom margin to avoid overflow */
+  }
+
   canvas{
     width: 95%;
     height: 150px;
@@ -960,26 +969,27 @@ canvas {
   .label-name, .label-value{
     font-size: 12px;
   }
-  .calculation-btn{
-    padding: 8px 16px;
-    font-size: 12px;
-  }
-  .printer-text{
-    font-size: 12px;
-  }
-  .btn-container{
-    flex-direction: column-reverse;
-    justify-content: center;
-  }
   .btn-left{
-    align-self: flex-start;
+    gap: 10px;
   }
   .btn-right{
-    align-self: flex-end;
+    padding-left: 10px;
+    padding-right: 10px;
+  };
+  .calculation-btn{
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+  }
+  .btn-icon{
+    width: 15px;
+    height: 15px;
+  }
+  .printer-text{
+    font-size: 12px !important;
   }
   .how-text{
     font-size: 16px;
   }
 }
 
-/*# sourceMappingURL=main.33757262880ba9927b44.css.map*/
+/*# sourceMappingURL=main.b038993c4eb4226b1ed9.css.map*/

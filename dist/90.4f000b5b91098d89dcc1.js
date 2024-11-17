@@ -320,10 +320,20 @@ document.addEventListener("DOMContentLoaded", function () {
   function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData) {
     var ctx = amortizationChartCanvas.getContext('2d');
     var dpr = window.devicePixelRatio || 1;
+
+    // Adjust height dynamically based on screen width
+    var height;
+    var labelFont;
+    if (window.innerWidth < 500) {
+      height = 200; // Set a smaller height for smaller screens
+      labelFont = '10px Open Sans'; // Smaller font size for smaller screens
+    } else {
+      height = 300; // Default height
+      labelFont = '14px Open Sans'; // Default font size
+    }
     amortizationChartCanvas.style.width = '100%';
-    amortizationChartCanvas.style.height = '300px';
+    amortizationChartCanvas.style.height = "".concat(height, "px");
     var width = amortizationChartCanvas.offsetWidth;
-    var height = 300;
     amortizationChartCanvas.width = width * dpr;
     amortizationChartCanvas.height = height * dpr;
     if (dpr > 1) {
@@ -343,8 +353,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     var gridColor = '#d0d0d0';
     var labelColor = '#505050';
-    var labelFont = '14px Open Sans';
-    var currentYear = new Date().getFullYear();
     ctx.font = labelFont;
     ctx.textAlign = 'right';
     function getY(value) {
@@ -353,6 +361,75 @@ document.addEventListener("DOMContentLoaded", function () {
     function getX(index) {
       return padding.left + index / months * (width - padding.left - padding.right);
     }
+    var currentBreakpoint = null; // Track the current breakpoint
+
+    function determineBreakpoint(width) {
+      if (width < 500) return 'small';
+      if (width < 768) return 'medium';
+      return 'large';
+    }
+    function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData) {
+      var ctx = amortizationChartCanvas.getContext('2d');
+      var dpr = window.devicePixelRatio || 1;
+
+      // Adjust height and font size dynamically based on the breakpoint
+      var screenWidth = window.innerWidth;
+      var breakpoint = determineBreakpoint(screenWidth);
+      var height, labelFont;
+      if (breakpoint === 'small') {
+        height = 200;
+        labelFont = '10px Open Sans';
+      } else if (breakpoint === 'medium') {
+        height = 250;
+        labelFont = '12px Open Sans';
+      } else {
+        height = 300;
+        labelFont = '14px Open Sans';
+      }
+      amortizationChartCanvas.style.width = '100%';
+      amortizationChartCanvas.style.height = "".concat(height, "px");
+      var width = amortizationChartCanvas.offsetWidth;
+      amortizationChartCanvas.width = width * dpr;
+      amortizationChartCanvas.height = height * dpr;
+      if (dpr > 1) {
+        ctx.scale(dpr, dpr);
+      }
+      ctx.clearRect(0, 0, width * dpr, height * dpr);
+      var months = balanceData.length;
+      var maxBalance = Math.max.apply(Math, _toConsumableArray(balanceData));
+      var maxCumulative = Math.max.apply(Math, _toConsumableArray(cumulativeInterestData).concat(_toConsumableArray(cumulativePrincipalData)));
+      var yAxisMax = Math.max(maxBalance, maxCumulative);
+      var intervalMonths = 5 * 12;
+      var padding = {
+        top: 30,
+        right: 20,
+        bottom: 30,
+        left: 70
+      };
+      var gridColor = '#d0d0d0';
+      var labelColor = '#505050';
+      ctx.font = labelFont;
+      ctx.textAlign = 'right';
+      function getY(value) {
+        return height - padding.bottom - value / yAxisMax * (height - padding.top - padding.bottom);
+      }
+      function getX(index) {
+        return padding.left + index / months * (width - padding.left - padding.right);
+      }
+    }
+
+    // Attach the resize event listener
+    window.addEventListener('resize', function () {
+      var newBreakpoint = determineBreakpoint(window.innerWidth);
+      if (newBreakpoint !== currentBreakpoint) {
+        currentBreakpoint = newBreakpoint;
+        drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
+      }
+    });
+
+    // Initial draw
+    currentBreakpoint = determineBreakpoint(window.innerWidth);
+    drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
 
     // Draw horizontal grid lines only, avoiding the line at the bottom (y-axis line)
     ctx.strokeStyle = gridColor;
@@ -501,4 +578,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=90.5c8226adc2fff10d1a0d.js.map
+//# sourceMappingURL=90.4f000b5b91098d89dcc1.js.map
