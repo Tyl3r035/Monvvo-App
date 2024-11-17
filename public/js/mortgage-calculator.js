@@ -345,12 +345,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const dpr = window.devicePixelRatio || 1;
     
         // Adjust height dynamically based on screen width
-        let height;
-        if (window.innerWidth < 500) {
-            height = 200; // Set a smaller height for smaller screens
-        } else {
-            height = 300; // Default height
-        }
+        const isSmallScreen = window.innerWidth < 500;
+        const height = isSmallScreen ? 200 : 300;
+        const labelFont = isSmallScreen ? '10px Open Sans' : '14px Open Sans'; // Dynamically adjust font size
     
         amortizationChartCanvas.style.width = '100%';
         amortizationChartCanvas.style.height = `${height}px`;
@@ -376,15 +373,8 @@ document.addEventListener("DOMContentLoaded", function () {
     
         const gridColor = '#d0d0d0';
         const labelColor = '#505050';
-        const labelFont = '14px Open Sans';
-        const currentYear = new Date().getFullYear();
-
-        if (window.innerWidth < 500) {
-            labelfont = '10px'; // Set a smaller font for smaller screens
-        } else {
-            height = '14px'; // Default height
-        }
     
+        // Apply dynamic label font
         ctx.font = labelFont;
         ctx.textAlign = 'right';
     
@@ -395,14 +385,11 @@ document.addEventListener("DOMContentLoaded", function () {
         function getX(index) {
             return padding.left + (index / months) * (width - padding.left - padding.right);
         }
-        window.addEventListener('resize', () => {
-            drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
-        });
-        
+    
         // Draw horizontal grid lines only, avoiding the line at the bottom (y-axis line)
         ctx.strokeStyle = gridColor;
         ctx.lineWidth = 1;
-        
+    
         const yLabelInterval = 100000;
         for (let yValue = yLabelInterval; yValue < yAxisMax; yValue += yLabelInterval) {
             const y = getY(yValue);
@@ -410,10 +397,17 @@ document.addEventListener("DOMContentLoaded", function () {
             ctx.moveTo(padding.left, y);
             ctx.lineTo(width - padding.right, y);
             ctx.stroke();
-            
+    
             ctx.fillStyle = labelColor;
             ctx.fillText(`$${(yValue / 1000).toFixed(0)}K`, padding.left - 10, y + 4);
         }
+    
+        // Add resize event listener to redraw chart
+        window.addEventListener('resize', () => {
+            drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
+        });
+    }
+    
         
         // Draw vertical grid lines only, avoiding the line on the left (x-axis line)
         ctx.textAlign = 'center';
