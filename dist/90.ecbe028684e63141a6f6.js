@@ -352,11 +352,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var labelColor = '#505050';
     var labelFont = '14px Open Sans';
     var currentYear = new Date().getFullYear();
-    if (window.innerWidth < 500) {
-      labelfont = '10px'; // Set a smaller font for smaller screens
-    } else {
-      height = '14px'; // Default height
-    }
     ctx.font = labelFont;
     ctx.textAlign = 'right';
     function getY(value) {
@@ -516,4 +511,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=90.0a655924972eff2ac940.js.map
+//# sourceMappingURL=90.ecbe028684e63141a6f6.js.map
