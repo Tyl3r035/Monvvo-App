@@ -406,7 +406,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.addEventListener('resize', () => {
             drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
         });
-    }
+    
     
         
         // Draw vertical grid lines only, avoiding the line on the left (x-axis line)
