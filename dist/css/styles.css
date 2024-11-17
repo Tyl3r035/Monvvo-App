@@ -379,7 +379,6 @@ select {
 .results-container{
   display: flex;
   height: 600px;
-  padding-bottom: 40px;
   flex-direction: column;
   align-items: center;
   gap: 40px;
@@ -575,6 +574,7 @@ canvas {
 }
 
 #amortizationChart {
+  margin-top: 0 !important;
   margin-right: 10px; /* Right margin to avoid overflow */
   margin-bottom: 10px; /* Bottom margin to avoid overflow */
   box-sizing: border-box;
@@ -903,6 +903,9 @@ canvas {
   #main{
     margin-top: 100px;
   }
+  .results-content{
+    padding: 0 !important;
+  }
   #amortizationChartContainer {
       padding: 0; /* This creates visual padding around the chart */
   }
@@ -917,7 +920,7 @@ canvas {
     height: 150px;
   }
   .label-name, .label-value{
-    font-size: 12px;
+    font-size: 14px;
   }
   .btn-left{
     gap: 10px;
@@ -939,5 +942,10 @@ canvas {
   }
   .how-text{
     font-size: 16px;
+  }
+}
+@media screen and (max-width: 380px){
+  .label-name, .label-value{
+    font-size: 12px;
   }
 }
