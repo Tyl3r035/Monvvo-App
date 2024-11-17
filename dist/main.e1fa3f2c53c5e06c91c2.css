@@ -780,7 +780,7 @@ canvas {
   line-height: 30px;
   color: #E4E4E4;
   align-self: stretch;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 /* Terms Section CSS */
@@ -944,7 +944,15 @@ canvas {
   }
   
 }
+@media screen and (max-width: 768px){
+  .results-container{
+    border: none
+  }
+}
 @media screen and (max-width: 700px){
+  .tab-text{
+    font-size: 14px;
+  }
   .terms-content{
     grid-template-columns: repeat(1, 1fr);
   }
@@ -952,6 +960,15 @@ canvas {
 @media screen and (max-width: 500px){
   #main{
     margin-top: 100px;
+  }
+  #title{
+    font-family: 'Open Sans', sans-serif;
+  }
+  .calculation-section{
+    gap: 30px;
+  }
+  .tab-text{
+    font-size: 12px;
   }
   .results-content{
     padding: 0 !important;
@@ -977,11 +994,15 @@ canvas {
   }
   .btn-right{
     padding-left: 10px;
-    padding-right: 10px;
-  };
+    padding-right: 0 !important;
+  }
+  .btn-icon-fluid{
+    padding-right: 0 !important;
+  }
   .calculation-btn{
-    padding: 8px 16px !important;
+    padding: 4px 16px !important;
     font-size: 12px !important;
+    border-radius: 3px;
   }
   .btn-icon{
     width: 15px;
@@ -992,6 +1013,7 @@ canvas {
   }
   .how-text{
     font-size: 16px;
+    line-height: 20px;
   }
 }
 @media screen and (max-width: 380px){
@@ -1000,4 +1022,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.21520783143b31d0f9aa.css.map*/
+/*# sourceMappingURL=main.e1fa3f2c53c5e06c91c2.css.map*/
