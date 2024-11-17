@@ -267,6 +267,14 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
   width: 40px;
   text-align: right;
 }
+.percent-icon{
+  width: 10px;
+  height: 11px;
+}
+.dollar-icon{
+  width: 9px;
+  height: 14px;
+}
 
 /* Info Icon Input Specific CSS */
 .input-top{
@@ -611,7 +619,6 @@ canvas {
   height: auto !important;
   background-color: transparent;
   margin: 30px auto 0 auto;
-  overflow: visible;
 }
 
 #amortizationChartContainer {
@@ -899,7 +906,7 @@ canvas {
 .footer-link{
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  color: #6C6C70;
+  color: #fff;
   margin-bottom: 8px;
   text-decoration: none;
   cursor: pointer;
@@ -948,6 +955,9 @@ canvas {
   }
 }
 @media screen and (max-width: 500px){
+  #main{
+    margin-top: 100px;
+  }
   canvas{
     width: 95%;
     height: 150px;
@@ -956,15 +966,25 @@ canvas {
     font-size: 12px;
   }
   .calculation-btn{
-    padding: 10px 24px;
-    font-size: 14px;
+    padding: 8px 16px;
+    font-size: 12px;
   }
   .printer-text{
-    font-size: 14px;
+    font-size: 12px;
+  }
+  .btn-container{
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+  .btn-left{
+    align-self: flex-start;
+  }
+  .btn-right{
+    align-self: flex-end;
   }
   .how-text{
     font-size: 16px;
   }
 }
 
-/*# sourceMappingURL=main.58738a4b681345ad40b4.css.map*/
+/*# sourceMappingURL=main.af4ff2c0b35db9213bf8.css.map*/

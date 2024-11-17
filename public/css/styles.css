@@ -569,7 +569,6 @@ canvas {
   height: auto !important;
   background-color: transparent;
   margin: 30px auto 0 auto;
-  overflow: visible;
 }
 
 #amortizationChartContainer {
