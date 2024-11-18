@@ -101,9 +101,21 @@ body,html{
   height: auto;
   flex-direction: column;
   align-items: flex-start;
-  gap: 40px;
-  margin-bottom: 40px;
 }
+.main-inputs{
+  display: grid;
+  grid-template-areas: 
+  "home-price home-price"
+  "down-payment down-payment"
+  "loan-term loan-term"
+  "interest-rate interest-rate"
+  "payment-frequency payment-frequency";
+}
+.home-price-box{grid-area: home-price;}
+.down-payment-box{grid-area: down-payment;}
+.loan-term-box{grid-area: loan-term;}
+.interest-rate-box{grid-area: interest-rate;}
+.payment-frequency-box{grid-area: payment-frequency;}
 
 /* No Info Icon Generalized Input CSS */
 .input-box{
@@ -111,6 +123,8 @@ body,html{
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
+  margin-right: 40px;
+  margin-bottom: 40px;
 }
 .input-box label{
   font-family: "Roboto", sans-serif;
@@ -884,6 +898,18 @@ canvas {
     margin: 0 auto;
     padding-bottom: 70px;
   }
+  .main-inputs {
+    display: grid;
+    width: 100%;
+    justify-items: stretch;
+    align-items: center;
+  }
+  .input-box{
+    margin-right: 0;
+  }
+  #additional-inputs{
+    width: 100%;
+  }
 }
 @media screen and (max-width: 900px){
   .terms-content{
@@ -898,9 +924,35 @@ canvas {
   .results-container{
     border: none
   }
+  .calculator-inputs{
+    width: 100%;
+  }
+  .main-inputs{
+    width: 95% !important;
+    margin: 0 auto !important;
+    grid-template-areas:
+    "down-payment down-payment"
+    "home-price interest-rate"
+    "loan-term payment-frequency" !important;
+    justify-items: center;
+    align-items: center;
+  }
+  .input-box{
+    flex-shrink: 1;
+    max-width: 35vw;
+  }
+  .down-payment-box{
+    width: 100%;
+  }
+  .input-box input, .input-bottom input{
+    width: 100%;
+  }
+  .input-box label, .input-top label{
+    font-size: 14px;
+  }
 }
 @media screen and (max-width: 700px){
-  .tab-text{
+  .tab-text, .tab-active{
     font-size: 14px;
   }
   .terms-content{
@@ -917,7 +969,7 @@ canvas {
   .calculation-section{
     gap: 30px;
   }
-  .tab-text{
+  .tab-text, .tab-active{
     font-size: 12px;
   }
   .results-content{
