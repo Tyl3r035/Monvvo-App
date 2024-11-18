@@ -992,7 +992,19 @@ canvas {
     max-width: 35vw;
   }
   .down-payment-box{
-    width: 100%;
+   max-width: 100%;
+  }
+  .home-price-box{
+    width: 35vw;
+  }
+  .interest-rate-box{
+    width: 35vw;
+  }
+  .loan-term-box{
+    width: 35vw;
+  }
+  .payment-frequency-box, .payment-frequency-box .input-bottom{
+    width: 35vw;
   }
   .input-box input, .input-bottom input{
     width: 100%;
@@ -1074,4 +1086,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.d00a03c240fd88f75dc1.css.map*/
+/*# sourceMappingURL=main.3b2b4e61c9ceeb85a128.css.map*/
