@@ -57,6 +57,7 @@ body,html{
   width: 100%;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 /* Additional styles for color circles */
@@ -1019,16 +1020,16 @@ canvas {
    max-width: 100%;
   }
   .home-price-box{
-    width: 35%;
+    width: 35vw;
   }
   .interest-rate-box{
-    width: 35%;
+    width: 35vw;
   }
   .loan-term-box{
-    width: 35%;
+    width: 35vw;
   } 
   .payment-frequency-box, .payment-frequency-box .input-bottom{
-    width: 35%;
+    width: 35vw;
   }
 
   .input-box input, .input-bottom input{
@@ -1128,4 +1129,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.2294967545b81fe5b4cb.css.map*/
+/*# sourceMappingURL=main.3f69de08d2b341740591.css.map*/
