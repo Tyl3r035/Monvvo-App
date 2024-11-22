@@ -1,6 +1,5 @@
 *{
   box-sizing: border-box;
-  outline: 1px solid red; /* Highlights all elements for debugging */
 }
 
 
@@ -957,33 +956,13 @@ canvas {
     width: 100%;
   }
   .main-inputs{
-    width: 100% !important;
-    margin: 0 auto !important;
+
     grid-template-areas:
     "down-payment down-payment"
     "home-price interest-rate"
     "loan-term payment-frequency" !important;
-    justify-items: center;
-    align-items: center;
-  }
-  .input-box{
-    max-width: 100%;
-  }
 
-  .down-payment-box{
-   max-width: 100%;
-  }
-  .home-price-box{
-    width: 40vw;
-  }
-  .interest-rate-box{
-    width: 40vw;
-  }
-  .loan-term-box{
-    width: 40vw;
-  } 
-  .payment-frequency-box, .payment-frequency-box .input-bottom{
-    width: 40vw;
+    gap: 0 30px;
   }
 
   .input-inner select{
@@ -1073,6 +1052,21 @@ canvas {
   }
   .printer-text{
     font-size: 12px !important;
+  }
+  .input-box input, .input-box select{
+    font-size: 14px;
+  }
+  .percent-icon{
+    width: 8px;
+    height: 9px;
+  }
+  .dollar-icon{
+    width: 8px;
+    height: 11px;
+  }
+  .input-dropdown{
+    width: 8px;
+    height: 4px;
   }
   .how-text{
     font-size: 16px;
