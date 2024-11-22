@@ -1,6 +1,8 @@
 *{
   box-sizing: border-box;
+  outline: 1px solid red; /* Highlights all elements for debugging */
 }
+
 
 body,html{
   background-color: #F6F4F2;

@@ -50,7 +50,9 @@
   }
 *{
   box-sizing: border-box;
+  outline: 1px solid red; /* Highlights all elements for debugging */
 }
+
 
 body,html{
   background-color: #F6F4F2;
@@ -1131,4 +1133,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.34f343cd2f8fd458fd9a.css.map*/
+/*# sourceMappingURL=main.9d5d0487076e11db43b6.css.map*/
