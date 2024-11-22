@@ -1002,7 +1002,7 @@ canvas {
     width: 100%;
   }
   .main-inputs{
-    width: 95% !important;
+    width: 100% !important;
     margin: 0 auto !important;
     grid-template-areas:
     "down-payment down-payment"
@@ -1011,9 +1011,11 @@ canvas {
     justify-items: center;
     align-items: center;
   }
-  /* .input-box{
-    max-width: 35%;
+  .input-box{
+    max-width: 100%;
   }
+
+  /*
   .down-payment-box{
    max-width: 100%;
   }
@@ -1025,10 +1027,12 @@ canvas {
   }
   .loan-term-box{
     width: 35%;
-  } */
+  } 
   .payment-frequency-box, .payment-frequency-box .input-bottom{
     width: 35%;
   }
+
+  */
   .input-box input, .input-bottom input{
     width: 100%;
   }
@@ -1126,4 +1130,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.f50715842880ae3fa5d5.css.map*/
+/*# sourceMappingURL=main.72ef82e8d64bf71f9694.css.map*/
