@@ -69,6 +69,7 @@ body,html{
   justify-content: flex-start;
   align-items: center;
   margin: 155px auto 0 auto;
+  width: 100%;
 }
 .calculation-section{
   display: flex;
@@ -970,16 +971,16 @@ canvas {
    max-width: 100%;
   }
   .home-price-box{
-    width: 35vw;
+    width: 40vw;
   }
   .interest-rate-box{
-    width: 35vw;
+    width: 40vw;
   }
   .loan-term-box{
-    width: 35vw;
+    width: 40vw;
   } 
   .payment-frequency-box, .payment-frequency-box .input-bottom{
-    width: 35vw;
+    width: 40vw;
   }
 
   .input-box input, .input-bottom input{
@@ -987,6 +988,7 @@ canvas {
   }
   .input-box label, .input-top label{
     font-size: 14px;
+    height: 22px;
   }
 }
 @media screen and (max-width: 700px){
