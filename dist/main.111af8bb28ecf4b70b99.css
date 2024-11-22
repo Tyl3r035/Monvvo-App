@@ -313,6 +313,7 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
   border-bottom: 1px solid #232525;
 }
 .input-inner{
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1035,6 +1036,11 @@ canvas {
     width: 40vw;
   }
 
+  .input-inner select{
+    flex-shrink: 1;
+    width: 100%;
+  }
+
   .input-box input, .input-bottom input{
     width: 100%;
   }
@@ -1133,4 +1139,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.9d5d0487076e11db43b6.css.map*/
+/*# sourceMappingURL=main.111af8bb28ecf4b70b99.css.map*/

@@ -263,6 +263,7 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
   border-bottom: 1px solid #232525;
 }
 .input-inner{
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -983,6 +984,11 @@ canvas {
   } 
   .payment-frequency-box, .payment-frequency-box .input-bottom{
     width: 40vw;
+  }
+
+  .input-inner select{
+    flex-shrink: 1;
+    width: 100%;
   }
 
   .input-box input, .input-bottom input{
