@@ -54,7 +54,7 @@
 
 body,html{
   background-color: #F6F4F2;
-  width: 100vw;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
@@ -1011,7 +1011,7 @@ canvas {
     justify-items: center;
     align-items: center;
   }
-  .input-box{
+  /* .input-box{
     max-width: 35%;
   }
   .down-payment-box{
@@ -1025,7 +1025,7 @@ canvas {
   }
   .loan-term-box{
     width: 35%;
-  }
+  } */
   .payment-frequency-box, .payment-frequency-box .input-bottom{
     width: 35%;
   }
@@ -1116,7 +1116,7 @@ canvas {
     line-height: 20px;
   }
   .terms-item{
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
   }
 }
@@ -1126,4 +1126,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.89a2992dd2a9c95757a7.css.map*/
+/*# sourceMappingURL=main.f50715842880ae3fa5d5.css.map*/
