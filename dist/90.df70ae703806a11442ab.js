@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
     hoaExpense: 0
   };
   var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
@@ -100,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
           monthlyPMI = _lastAmortizationData.monthlyPMI,
           monthlyHOA = _lastAmortizationData.monthlyHOA;
         updateHorizontalStackedBarChart(monthlyPrincipalAndInterest, monthlyPropertyTax, monthlyPMI, monthlyHOA);
+        updateLabels(monthlyPrincipalAndInterest, monthlyPropertyTax, monthlyPMI, monthlyHOA);
       }
     } else if (tabName === "amortization") {
       paymentBreakdownContent.style.display = "none";
@@ -156,11 +159,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var totalMonthlyPayment = monthlyPrincipalAndInterest + monthlyPropertyTax + monthlyPMI + monthlyHOA;
     updateHorizontalStackedBarChart(monthlyPrincipalAndInterest, monthlyPropertyTax, monthlyPMI, monthlyHOA);
     updateLabels(monthlyPrincipalAndInterest, monthlyPropertyTax, monthlyPMI, monthlyHOA);
-    var monthlyPaymentElement = document.querySelector('.monthly-payment');
-    monthlyPaymentElement.innerText = "$".concat(formatter.format(totalMonthlyPayment));
-    monthlyPaymentElement.style.fontFamily = 'Open Sans';
-    monthlyPaymentElement.style.fontWeight = '500';
-    monthlyPaymentElement.style.color = '#000';
+    var monthlyPaymentElement = document.getElementById('monthly-payment-value');
+    monthlyPaymentElement.innerText = "".concat(formatter.format(totalMonthlyPayment), " / Month");
     var amortizationData = calculateAmortizationSchedule(principal, monthlyInterestRate, monthlyPrincipalAndInterest, numberOfPayments);
     drawAmortizationChart(amortizationData.balanceData, amortizationData.cumulativeInterestData, amortizationData.cumulativePrincipalData);
     updateAmortizationLabels(amortizationData.totalInterestPaid, amortizationData.totalPrincipalPaid, amortizationData.totalAmountPaid);
@@ -220,24 +220,49 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   function updateHorizontalStackedBarChart(principalAndInterest, propertyTax, pmi, hoa) {
     var ctx = canvas.getContext('2d');
-    var parentWidth = canvas.parentElement.offsetWidth;
-    canvas.width = parentWidth;
-    canvas.height = 100;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var dpr = window.devicePixelRatio || 1;
+
+    // Adjust height dynamically based on screen width
+    var height;
+    if (window.innerWidth < 500) {
+      height = 80; // Set a smaller height for smaller screens
+    } else {
+      height = 100; // Default height
+    }
+    canvas.style.width = '100%';
+    canvas.style.height = "".concat(height, "px");
+    var width = canvas.offsetWidth;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    if (dpr > 1) {
+      ctx.scale(dpr, dpr);
+    }
+    ctx.clearRect(0, 0, width, height);
     var data = [principalAndInterest, propertyTax, pmi, hoa];
     var colors = ['#175134', '#3EB721', '#91BBA6', '#B3D4C2'];
-    var chartHeight = 70;
-    var chartWidth = canvas.width;
+    var chartHeight = height * 0.7;
+    var chartWidth = width;
     var total = data.reduce(function (a, b) {
       return a + b;
     }, 0);
     var maxTotal = Math.max(total, 1);
     var xOffset = 0;
-    var yOffset = canvas.height / 2;
+    var yOffset = height / 2;
     var borderRadius = 5;
     var gap = 2;
     ctx.save();
-    drawRoundedRect(ctx, xOffset, yOffset - chartHeight / 2, chartWidth, chartHeight, borderRadius);
+    ctx.beginPath();
+    ctx.moveTo(xOffset + borderRadius, yOffset - chartHeight / 2);
+    ctx.lineTo(xOffset + chartWidth - borderRadius, yOffset - chartHeight / 2);
+    ctx.quadraticCurveTo(xOffset + chartWidth, yOffset - chartHeight / 2, xOffset + chartWidth, yOffset - chartHeight / 2 + borderRadius);
+    ctx.lineTo(xOffset + chartWidth, yOffset + chartHeight / 2 - borderRadius);
+    ctx.quadraticCurveTo(xOffset + chartWidth, yOffset + chartHeight / 2, xOffset + chartWidth - borderRadius, yOffset + chartHeight / 2);
+    ctx.lineTo(xOffset + borderRadius, yOffset + chartHeight / 2);
+    ctx.quadraticCurveTo(xOffset, yOffset + chartHeight / 2, xOffset, yOffset + chartHeight / 2 - borderRadius);
+    ctx.lineTo(xOffset, yOffset - chartHeight / 2 + borderRadius);
+    ctx.quadraticCurveTo(xOffset, yOffset - chartHeight / 2, xOffset + borderRadius, yOffset - chartHeight / 2);
+    ctx.closePath();
+    ctx.clip();
     var cumulativeWidth = 0;
     data.forEach(function (value, index) {
       var barWidth = value / maxTotal * chartWidth - gap;
@@ -281,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
       labelText.textContent = item.label;
       var labelValue = document.createElement('span');
       labelValue.classList.add('label-value');
-      labelValue.textContent = "".concat(formatter.format(item.value));
+      labelValue.textContent = formatter.format(item.value);
       labelElement.appendChild(colorCircle);
       labelElement.appendChild(labelText);
       labelElement.appendChild(labelValue);
@@ -336,7 +361,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (dpr > 1) {
       ctx.scale(dpr, dpr);
     }
-    ctx.clearRect(0, 0, width * dpr, height * dpr);
+    ctx.clearRect(0, 0, width, height);
     var months = balanceData.length;
     var maxBalance = Math.max.apply(Math, _toConsumableArray(balanceData));
     var maxCumulative = Math.max.apply(Math, _toConsumableArray(cumulativeInterestData).concat(_toConsumableArray(cumulativePrincipalData)));
@@ -360,9 +385,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function getX(index) {
       return padding.left + index / months * (width - padding.left - padding.right);
     }
-    window.addEventListener('resize', function () {
-      drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
-    });
 
     // Draw horizontal grid lines only, avoiding the line at the bottom (y-axis line)
     ctx.strokeStyle = gridColor;
@@ -438,9 +460,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }; // Match this with your chart's padding
 
     // Ensure x is within the horizontal bounds of the chart
-    if (x >= padding.left && x <= amortizationChartCanvas.width - padding.right) {
-      var chartWidth = amortizationChartCanvas.width - padding.left - padding.right;
-      var chartHeight = amortizationChartCanvas.height - padding.top - padding.bottom;
+    if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
+      var chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
+      var chartHeight = amortizationChartCanvas.offsetHeight - padding.top - padding.bottom;
       var index = Math.round((x - padding.left) / chartWidth * (lastAmortizationData.balanceData.length - 1));
       if (index >= 0 && index < lastAmortizationData.balanceData.length) {
         // Clear the canvas and redraw the chart
@@ -511,4 +533,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=90.ecbe028684e63141a6f6.js.map
+//# sourceMappingURL=90.df70ae703806a11442ab.js.map

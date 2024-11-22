@@ -181,20 +181,15 @@
             </div>
             <div class="results-content">
               <div id="payment-breakdown-content">
-                <div class="results-answer">
-                  <div class="answer-text">
-                    <h2 class="answer-title">Monthly Payment:</h2>
-                    <p class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate)</p>
-                  </div>
-                  <div class="monthly-answer">
-                    <h3 class="monthly-payment"><span class="dollar">$</span>6,747.72</h3>
-                    <p class="supporting-answer">/ Month</p>
-                  </div>
-                </div>
-                <div class="result-fluid">
-                  <canvas id="mortgageChart"></canvas>
-                  <div id="chartLabels" class="chart-labels"></div>
-                </div>
+                <h2 class="answer-title">Monthly Payment:</h2>
+                <p class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate)</p>
+
+                <div id="monthly-payment-value" class="monthly-payment">
+                  $0.00 <span class="monthly-subtext">   / Month</span>
+              </div>
+              
+                <canvas id="mortgageChart"></canvas>
+                <div id="chartLabels" class="chart-labels"></div>
               </div>
               <div id="amortization-schedule-content" style="display: none;">
                 <h2 class="answer-title">Amortization for Mortgage Loan</h2>
