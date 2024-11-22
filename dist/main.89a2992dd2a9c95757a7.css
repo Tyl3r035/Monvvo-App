@@ -54,6 +54,9 @@
 
 body,html{
   background-color: #F6F4F2;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
 }
 
 /* Additional styles for color circles */
@@ -971,7 +974,7 @@ canvas {
     width: 100%;
   }
   .results-container {
-    width: 90%; /* Allow it to fit within the container */
+    width: 100%; /* Allow it to fit within the container */
     height: auto; /* Make height dynamic */
     aspect-ratio: 16 / 9; /* Maintain a responsive aspect ratio */
     margin: 0 auto; /* Center horizontally */
@@ -1009,23 +1012,22 @@ canvas {
     align-items: center;
   }
   .input-box{
-    flex-shrink: 1;
-    max-width: 35vw;
+    max-width: 35%;
   }
   .down-payment-box{
    max-width: 100%;
   }
   .home-price-box{
-    width: 35vw;
+    width: 35%;
   }
   .interest-rate-box{
-    width: 35vw;
+    width: 35%;
   }
   .loan-term-box{
-    width: 35vw;
+    width: 35%;
   }
   .payment-frequency-box, .payment-frequency-box .input-bottom{
-    width: 35vw;
+    width: 35%;
   }
   .input-box input, .input-bottom input{
     width: 100%;
@@ -1113,6 +1115,10 @@ canvas {
     font-size: 16px;
     line-height: 20px;
   }
+  .terms-item{
+    width: 90%;
+    margin: 0 auto;
+  }
 }
 @media screen and (max-width: 380px){
   .label-name, .label-value{
@@ -1120,4 +1126,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.9454254c6421ccb678c4.css.map*/
+/*# sourceMappingURL=main.89a2992dd2a9c95757a7.css.map*/
