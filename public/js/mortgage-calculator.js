@@ -586,7 +586,7 @@ window.addEventListener(
         // Call your chart logic here
         calculateAndDisplayResults();
         syncResultsContainerSize();
-    }, 300) // Adjust the delay as needed
+    }, 500) // Adjust the delay as needed
 );
 
 

@@ -544,7 +544,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Call your chart logic here
     calculateAndDisplayResults();
     syncResultsContainerSize();
-  }, 300) // Adjust the delay as needed
+  }, 500) // Adjust the delay as needed
   );
   calculateAndDisplayResults();
   console.log("End of script reached");
@@ -569,4 +569,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=90.c8bf1ea774cbc55681e8.js.map
+//# sourceMappingURL=90.02b68db936a515a99e57.js.map
