@@ -474,7 +474,7 @@ select {
 }
 .results-tab{
   display: flex;
-  padding: 8px 24px;
+  /* padding: 8px 24px; */
   justify-content: center;
   align-items: center;
   flex: 1 0 0;
@@ -535,7 +535,7 @@ select {
   line-height: normal;
   color: #175134;
   display: flex;
-  width: 80%;
+  /* width: 80%; */
   flex-direction: column;
   justify-content: center;
   align-self: stretch;
@@ -1080,6 +1080,9 @@ canvas {
   }
 }
 @media screen and (max-width: 600px){
+  .calculations-container{
+    margin-top: -90px;
+  }
   .info-tooltips{
     padding: 5px 10px;
     width: 200px
@@ -1282,4 +1285,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.ab6a16bbc53298758f8e.css.map*/
+/*# sourceMappingURL=main.0313e8a125c1fbb6e973.css.map*/

@@ -138,6 +138,52 @@ document.addEventListener("DOMContentLoaded", function () {
     tabPaymentBreakdown.addEventListener("click", () => showTab("payment"));
     tabAmortizationSchedule.addEventListener("click", () => showTab("amortization"));
 
+
+
+
+// Cache DOM elements for better performance
+const resultsContainer = document.querySelector('.results-container');
+
+let resizeTimeout;
+let previousWidth = 0;
+let previousHeight = 0;
+
+window.addEventListener('resize', () => {
+    // Lightweight updates during resize
+    syncResultsContainerSize();
+
+    // Clear the timeout for delayed updates
+    clearTimeout(resizeTimeout);
+
+    // Perform heavy updates (like chart redraws) after resizing ends
+    resizeTimeout = setTimeout(() => {
+        const { width, height } = amortizationChartCanvas.getBoundingClientRect();
+
+        // Avoid redundant redraws
+        if (width === previousWidth && height === previousHeight) {
+            return;
+        }
+
+        previousWidth = width;
+        previousHeight = height;
+
+        console.log('Redrawing charts...');
+        calculateAndDisplayResults();
+    }, 300); // Delay as needed
+});
+
+function syncResultsContainerSize() {
+    if (amortizationChartCanvas && resultsContainer) {
+        const { width, height } = amortizationChartCanvas.getBoundingClientRect();
+        resultsContainer.style.height = `${height}px`;
+        resultsContainer.style.width = `${width}px`;
+    }
+}
+
+
+
+
+
     function calculateAndDisplayResults() {
         console.log("Calculating and displaying results");
 
@@ -557,37 +603,6 @@ document.addEventListener("DOMContentLoaded", function () {
             amortizationLabelsContainer.appendChild(labelElement);
         });
     }
-
-// Custom throttle function
-function throttle(func, limit) {
-    let lastFunc;
-    let lastRan;
-    return function (...args) {
-        const context = this;
-        if (!lastRan) {
-            func.apply(context, args); // Run immediately on first call
-            lastRan = Date.now();
-        } else {
-            clearTimeout(lastFunc); // Clear any pending execution
-            lastFunc = setTimeout(() => {
-                if (Date.now() - lastRan >= limit) {
-                    func.apply(context, args);
-                    lastRan = Date.now();
-                }
-            }, limit - (Date.now() - lastRan));
-        }
-    };
-}
-
-// Add throttled event listener for window resize
-window.addEventListener(
-    'resize',
-    throttle(() => {
-        // Call your chart logic here
-        calculateAndDisplayResults();
-        syncResultsContainerSize();
-    }, 500) // Adjust the delay as needed
-);
 
 
     calculateAndDisplayResults();

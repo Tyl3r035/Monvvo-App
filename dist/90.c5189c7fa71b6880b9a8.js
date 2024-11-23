@@ -138,6 +138,44 @@ document.addEventListener("DOMContentLoaded", function () {
   tabAmortizationSchedule.addEventListener("click", function () {
     return showTab("amortization");
   });
+
+  // Cache DOM elements for better performance
+  var resultsContainer = document.querySelector('.results-container');
+  var resizeTimeout;
+  var previousWidth = 0;
+  var previousHeight = 0;
+  window.addEventListener('resize', function () {
+    // Lightweight updates during resize
+    syncResultsContainerSize();
+
+    // Clear the timeout for delayed updates
+    clearTimeout(resizeTimeout);
+
+    // Perform heavy updates (like chart redraws) after resizing ends
+    resizeTimeout = setTimeout(function () {
+      var _amortizationChartCan = amortizationChartCanvas.getBoundingClientRect(),
+        width = _amortizationChartCan.width,
+        height = _amortizationChartCan.height;
+
+      // Avoid redundant redraws
+      if (width === previousWidth && height === previousHeight) {
+        return;
+      }
+      previousWidth = width;
+      previousHeight = height;
+      console.log('Redrawing charts...');
+      calculateAndDisplayResults();
+    }, 300); // Delay as needed
+  });
+  function syncResultsContainerSize() {
+    if (amortizationChartCanvas && resultsContainer) {
+      var _amortizationChartCan2 = amortizationChartCanvas.getBoundingClientRect(),
+        width = _amortizationChartCan2.width,
+        height = _amortizationChartCan2.height;
+      resultsContainer.style.height = "".concat(height, "px");
+      resultsContainer.style.width = "".concat(width, "px");
+    }
+  }
   function calculateAndDisplayResults() {
     console.log("Calculating and displaying results");
     var homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
@@ -514,38 +552,6 @@ document.addEventListener("DOMContentLoaded", function () {
       amortizationLabelsContainer.appendChild(labelElement);
     });
   }
-
-  // Custom throttle function
-  function throttle(func, limit) {
-    var lastFunc;
-    var lastRan;
-    return function () {
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-      var context = this;
-      if (!lastRan) {
-        func.apply(context, args); // Run immediately on first call
-        lastRan = Date.now();
-      } else {
-        clearTimeout(lastFunc); // Clear any pending execution
-        lastFunc = setTimeout(function () {
-          if (Date.now() - lastRan >= limit) {
-            func.apply(context, args);
-            lastRan = Date.now();
-          }
-        }, limit - (Date.now() - lastRan));
-      }
-    };
-  }
-
-  // Add throttled event listener for window resize
-  window.addEventListener('resize', throttle(function () {
-    // Call your chart logic here
-    calculateAndDisplayResults();
-    syncResultsContainerSize();
-  }, 500) // Adjust the delay as needed
-  );
   calculateAndDisplayResults();
   console.log("End of script reached");
   function syncResultsContainerSize() {
@@ -569,4 +575,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=90.02b68db936a515a99e57.js.map
+//# sourceMappingURL=90.c5189c7fa71b6880b9a8.js.map
