@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -46,7 +45,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: /\.css$/i,
                 use: [MiniCssExtractPlugin.loader, 'css-loader']
             },
             {
@@ -62,7 +61,7 @@ module.exports = {
                 ],
             },
             {
-                test: /\.js$/,
+                test: /\.js$/i,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
@@ -109,7 +108,6 @@ module.exports = {
                     },
                 },
             }),
-            new CssMinimizerPlugin(),
         ],
         splitChunks: {
             chunks: 'all',

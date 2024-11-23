@@ -44,8 +44,8 @@ body,html{
   gap: 5.984px;
 }
 .logo .monvvo-logo{
-  width: 106px;
-  height: 16px;
+  width: 127.2px;
+  height: 19.2px;
 }
 #nav{
   display: flex;
@@ -245,7 +245,7 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
 .input-top{
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   align-self: stretch;
 }
 .info-icon{
@@ -377,6 +377,7 @@ select {
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
+  margin-top: 25px;
   margin-bottom: 40px;
 }
 
@@ -594,7 +595,6 @@ canvas {
 }
 
 #amortizationChart {
-  margin-top: 0 !important;
   margin-right: 10px; /* Right margin to avoid overflow */
   margin-bottom: 10px; /* Bottom margin to avoid overflow */
   box-sizing: border-box;
@@ -887,20 +887,29 @@ canvas {
 
 
 /* Media Queries */
-@media  screen and (max-width: 1950) {
+@media  screen and (max-width: 1950px) {
   .terms-item{
     width: 400px;
     height: 350px;
   }  
 }
+@media screen and (max-width: 1600px){
+  .terms-item{
+    width: 360px;
+    height: 326px;
+  }
+}
 @media screen and (max-width: 1300px) {
   #header{
     padding: 14px 25px;
   }
-  .terms-content{
-    grid-template-columns: repeat(2, 1fr);
+  .terms-item{
+    transform: scale(0.95);
+    gap: 0;
   }
 }
+
+
 @media screen and (max-width: 1150px) {
   .calculator-wrap{
     display: flex;
@@ -923,8 +932,13 @@ canvas {
   }
   .input-box{
     margin-right: 0;
+    margin-bottom: 25px;
   }
   #additional-inputs{
+    width: 100%;
+
+  }
+  .calculations-container{
     width: 100%;
   }
   .results-container {
@@ -933,20 +947,28 @@ canvas {
     aspect-ratio: 16 / 9; /* Maintain a responsive aspect ratio */
     margin: 0 auto; /* Center horizontally */
   }
+  .results-content{
+    width: 100%;
+  }
 
   canvas {
-    width: 100%; /* Ensure the canvas resizes with the container */
+    max-width: 100%; /* Ensure the canvas resizes with the container */
     height: auto; /* Maintain responsiveness */
+  }
+  .terms-content{
+    grid-template-columns: repeat(2, auto);
   }
 }
 @media screen and (max-width: 900px){
   .terms-content{
     gap: 0;
   }
-  .terms-item{
-    transform: scale(0.8);
-  }
   
+}
+@media screen and (max-width: 850px){
+  .terms-section{
+    width: initial;
+  }
 }
 @media screen and (max-width: 768px){
   .results-container{
@@ -975,25 +997,46 @@ canvas {
   }
   .input-box label, .input-top label{
     font-size: 14px;
-    height: 22px;
+  }
+  .terms-content{
+    gap: 30px;
+  }
+  .terms-item{
+    width: 300px;
+    height: 280px;
+  }
+  .item-title{
+    font-size: 22px;
+  }
+  .item-text{
+    font-size: 14px;
   }
 }
 @media screen and (max-width: 700px){
   .tab-text, .tab-active .tab-text{
-    font-size: 14px !important;
-  }
-  .terms-content{
-    grid-template-columns: repeat(1, 1fr);
+    font-size: 14px;
   }
   .results-container {
     width: 100%; /* Full width on smaller screens */
     height: auto;
-    padding: 0 20px; /* Add padding for aesthetics */
   }
 
   canvas {
     width: 100%;
     height: 200px; /* Adjust height for smaller screens */
+  }
+  .terms-content{
+    gap: 0;
+  }
+}
+@media screen and (max-width: 600px){
+  .info-tooltips{
+    padding: 5px 10px;
+    width: 200px
+  }
+  .terms-item{
+    width: 250px;
+    height: 300px;
   }
 }
 @media screen and (max-width: 500px){
@@ -1001,17 +1044,24 @@ canvas {
     margin-top: 100px;
   }
   #title{
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 32px;
   }
   .calculation-section{
     gap: 30px;
   }
-  .tab-text, .tab-active{
+
+  .tab-text, .tab-active .tab-text{
     font-size: 12px;
+    padding: 8px 0;
   }
   .results-content{
-    padding: 0 !important;
+    padding: 0 20px;
   }
+  .monthly-payment{
+    font-size: 24px;
+  }
+
   #amortizationChartContainer {
       padding: 0; /* This creates visual padding around the chart */
   }
@@ -1064,6 +1114,12 @@ canvas {
     width: 8px;
     height: 11px;
   }
+  .input-box label, .input-top label{
+  }
+  .info-icon{
+    width: 14px;
+    height: 14px;
+  }
   .input-dropdown{
     width: 8px;
     height: 4px;
@@ -1072,13 +1128,106 @@ canvas {
     font-size: 16px;
     line-height: 20px;
   }
+  .terms-section{
+    gap: 0;
+    margin: 50px auto;
+  }
+  .terms-content{
+    margin-top: 25px;
+  }
   .terms-item{
-    width: 95%;
-    margin: 0 auto;
+    width: 200px;
+    height: 250px;
+    padding: 20px 10px;
+  }
+  .item-text{
+    font-size: 12px;
+  }
+  .item-corner{
+    width: 45px;
+    height: 45px;
   }
 }
-@media screen and (max-width: 380px){
+@media screen and (max-width: 460px){
+  .info-tooltips{
+    font-size: 12px;
+    width: 150px;
+  }  
+}
+@media screen and (max-width: 430px){
+  #title{
+    font-size: 24px;
+  }
+}
+@media screen and (max-width: 400px){
+  .terms-item{
+    width: 180px;
+    height: 230px;
+  }
+}
+@media screen and (max-width: 390px){
+  .results-tab{
+    padding: 8px 0;
+  }
+  .main-inputs{
+    grid-template-areas:
+    "home-price interest-rate"
+    "loan-term payment-frequency"
+    "down-payment down-payment" !important;
+  }
   .label-name, .label-value{
     font-size: 12px;
+  }
+  .input-box label, .input-top label{
+    font-size: 12px;
+  }
+  .how-title{
+    font-size: 24px;
+  }
+  .how-text{
+    font-size: 14px;
+  }
+  .terms-title{
+    font-size: 24px;
+    padding-left: 5px;
+  }
+}
+@media screen and (max-width: 360px){
+  .answer-title{
+    font-size: 16px;
+  }
+  .answer-disclaimer{
+    font-size: 12px;
+  }
+  .info-tooltips{
+    width: 120px;
+  }
+  .terms-title{
+    padding-left: 10px;
+  }
+  .terms-content{
+    grid-template-columns: repeat(1, auto);
+    justify-items: center;
+  }
+  .terms-item{
+    width: 95%;
+    height: auto;
+    padding: 30px 15px;
+  }
+  .item-corner{
+    width: 30px;
+    height: 30px;
+  }
+}
+@media screen and (max-width: 320px){
+  .main-inputs{
+    gap: 0 15px;
+  }
+  .calculation-btn{
+    padding: 4px 12px;
+  }
+  .btn-icon-fluid .btn-icon{
+    width: 16px;
+    height: 16px;
   }
 }

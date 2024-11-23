@@ -1,5 +1,15 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded event fired");
+
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+    
 
     // Disable Google Analytics on localhost
     if (window.location.hostname === "localhost") {
@@ -34,8 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     const formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     });
@@ -113,7 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
             if (lastAmortizationData) {
                 const { monthlyPrincipalAndInterest, monthlyPropertyTax, monthlyPMI, monthlyHOA } = lastAmortizationData;
                 updateHorizontalStackedBarChart(monthlyPrincipalAndInterest, monthlyPropertyTax, monthlyPMI, monthlyHOA);
-                updateLabels(monthlyPrincipalAndInterest, monthlyPropertyTax, monthlyPMI, monthlyHOA);
             }
         } else if (tabName === "amortization") {
             paymentBreakdownContent.style.display = "none";
@@ -172,9 +179,11 @@ document.addEventListener("DOMContentLoaded", function () {
         updateHorizontalStackedBarChart(monthlyPrincipalAndInterest, monthlyPropertyTax, monthlyPMI, monthlyHOA);
         updateLabels(monthlyPrincipalAndInterest, monthlyPropertyTax, monthlyPMI, monthlyHOA);
 
-        const monthlyPaymentElement = document.getElementById('monthly-payment-value');
-        monthlyPaymentElement.innerText = `${formatter.format(totalMonthlyPayment)} / Month`;
-        
+        const monthlyPaymentElement = document.querySelector('.monthly-payment');
+        monthlyPaymentElement.innerText = `$${formatter.format(totalMonthlyPayment)}`;
+        monthlyPaymentElement.style.fontFamily = 'Open Sans';
+        monthlyPaymentElement.style.fontWeight = '500';
+        monthlyPaymentElement.style.color = '#000';
 
         const amortizationData = calculateAmortizationSchedule(principal, monthlyInterestRate, monthlyPrincipalAndInterest, numberOfPayments);
         drawAmortizationChart(amortizationData.balanceData, amortizationData.cumulativeInterestData, amortizationData.cumulativePrincipalData);
@@ -240,55 +249,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateHorizontalStackedBarChart(principalAndInterest, propertyTax, pmi, hoa) {
         const ctx = canvas.getContext('2d');
-        const dpr = window.devicePixelRatio || 1;
+        const parentWidth = canvas.parentElement.offsetWidth;
 
-        // Adjust height dynamically based on screen width
-        let height;
-        if (window.innerWidth < 500) {
-            height = 80; // Set a smaller height for smaller screens
-        } else {
-            height = 100; // Default height
-        }
+        canvas.width = parentWidth;
+        canvas.height = 100;
 
-        canvas.style.width = '100%';
-        canvas.style.height = `${height}px`;
-
-        const width = canvas.offsetWidth;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-
-        if (dpr > 1) {
-            ctx.scale(dpr, dpr);
-        }
-
-        ctx.clearRect(0, 0, width, height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         const data = [principalAndInterest, propertyTax, pmi, hoa];
         const colors = ['#175134', '#3EB721', '#91BBA6', '#B3D4C2'];
 
-        const chartHeight = height * 0.7;
-        const chartWidth = width;
+        const chartHeight = 70;
+        const chartWidth = canvas.width;
         const total = data.reduce((a, b) => a + b, 0);
         const maxTotal = Math.max(total, 1);
 
         const xOffset = 0;
-        const yOffset = height / 2;
+        const yOffset = canvas.height / 2;
         const borderRadius = 5;
         const gap = 2;
 
         ctx.save();
-        ctx.beginPath();
-        ctx.moveTo(xOffset + borderRadius, yOffset - chartHeight / 2);
-        ctx.lineTo(xOffset + chartWidth - borderRadius, yOffset - chartHeight / 2);
-        ctx.quadraticCurveTo(xOffset + chartWidth, yOffset - chartHeight / 2, xOffset + chartWidth, yOffset - chartHeight / 2 + borderRadius);
-        ctx.lineTo(xOffset + chartWidth, yOffset + chartHeight / 2 - borderRadius);
-        ctx.quadraticCurveTo(xOffset + chartWidth, yOffset + chartHeight / 2, xOffset + chartWidth - borderRadius, yOffset + chartHeight / 2);
-        ctx.lineTo(xOffset + borderRadius, yOffset + chartHeight / 2);
-        ctx.quadraticCurveTo(xOffset, yOffset + chartHeight / 2, xOffset, yOffset + chartHeight / 2 - borderRadius);
-        ctx.lineTo(xOffset, yOffset - chartHeight / 2 + borderRadius);
-        ctx.quadraticCurveTo(xOffset, yOffset - chartHeight / 2, xOffset + borderRadius, yOffset - chartHeight / 2);
-        ctx.closePath();
-        ctx.clip();
+        drawRoundedRect(ctx, xOffset, yOffset - chartHeight / 2, chartWidth, chartHeight, borderRadius);
 
         let cumulativeWidth = 0;
 
@@ -329,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const labelValue = document.createElement('span');
             labelValue.classList.add('label-value');
-            labelValue.textContent = formatter.format(item.value);
+            labelValue.textContent = `${formatter.format(item.value)}`;
 
             labelElement.appendChild(colorCircle);
             labelElement.appendChild(labelText);
@@ -391,7 +373,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ctx.scale(dpr, dpr);
         }
     
-        ctx.clearRect(0, 0, width, height);
+        ctx.clearRect(0, 0, width * dpr, height * dpr);
     
         const months = balanceData.length;
         const maxBalance = Math.max(...balanceData);
@@ -418,6 +400,9 @@ document.addEventListener("DOMContentLoaded", function () {
         function getX(index) {
             return padding.left + (index / months) * (width - padding.left - padding.right);
         }
+        window.addEventListener('resize', () => {
+            drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
+        });
         
         // Draw horizontal grid lines only, avoiding the line at the bottom (y-axis line)
         ctx.strokeStyle = gridColor;
@@ -485,7 +470,6 @@ document.addEventListener("DOMContentLoaded", function () {
         ctx.lineWidth = 1;
         ctx.strokeRect(padding.left - 3, padding.top - 3, width - padding.left - padding.right + 6, height - padding.top - padding.bottom + 6);
     }
-
     amortizationChartCanvas.addEventListener('mousemove', (event) => {
         const ctx = amortizationChartCanvas.getContext('2d');
         const rect = amortizationChartCanvas.getBoundingClientRect();
@@ -494,9 +478,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const padding = { top: 30, right: 20, bottom: 30, left: 70 }; // Match this with your chart's padding
     
         // Ensure x is within the horizontal bounds of the chart
-        if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
-            const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
-            const chartHeight = amortizationChartCanvas.offsetHeight - padding.top - padding.bottom;
+        if (x >= padding.left && x <= amortizationChartCanvas.width - padding.right) {
+            const chartWidth = amortizationChartCanvas.width - padding.left - padding.right;
+            const chartHeight = amortizationChartCanvas.height - padding.top - padding.bottom;
     
             const index = Math.round(
                 ((x - padding.left) / chartWidth) *
@@ -529,6 +513,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
     
+    
+    
+
     amortizationChartCanvas.addEventListener('mouseout', () => {
         // Clear the canvas and redraw the chart without the vertical line
         drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData);
@@ -571,11 +558,59 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    window.addEventListener('resize', () => {
+// Custom throttle function
+function throttle(func, limit) {
+    let lastFunc;
+    let lastRan;
+    return function (...args) {
+        const context = this;
+        if (!lastRan) {
+            func.apply(context, args); // Run immediately on first call
+            lastRan = Date.now();
+        } else {
+            clearTimeout(lastFunc); // Clear any pending execution
+            lastFunc = setTimeout(() => {
+                if (Date.now() - lastRan >= limit) {
+                    func.apply(context, args);
+                    lastRan = Date.now();
+                }
+            }, limit - (Date.now() - lastRan));
+        }
+    };
+}
+
+// Add throttled event listener for window resize
+window.addEventListener(
+    'resize',
+    throttle(() => {
+        // Call your chart logic here
         calculateAndDisplayResults();
-    });
+        syncResultsContainerSize();
+    }, 300) // Adjust the delay as needed
+);
+
 
     calculateAndDisplayResults();
     console.log("End of script reached");
+    function syncResultsContainerSize() {
+        const amortizationChartCanvas = document.getElementById('amortizationChart');
+        const resultsContainer = document.querySelector('.results-container');
+    
+        if (amortizationChartCanvas && resultsContainer) {
+            // Sync the results container dimensions with the chart
+            const chartStyles = window.getComputedStyle(amortizationChartCanvas);
+            resultsContainer.style.height = chartStyles.height;
+            resultsContainer.style.width = chartStyles.width;
+        }
+    }
+    
+   
+    
+    // Ensure initial alignment
+    document.addEventListener('DOMContentLoaded', () => {
+        calculateAndDisplayResults(); // If not already auto-triggered
+        syncResultsContainerSize();
+    });
+    
 
 });
