@@ -2,13 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded event fired");
 
-    function debounce(func, wait) {
-        let timeout;
-        return function(...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), wait);
-        };
-    }
+  
     
 
     // Disable Google Analytics on localhost
@@ -137,50 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     tabPaymentBreakdown.addEventListener("click", () => showTab("payment"));
     tabAmortizationSchedule.addEventListener("click", () => showTab("amortization"));
-
-
-
-
-// Cache DOM elements for better performance
-const resultsContainer = document.querySelector('.results-container');
-
-let resizeTimeout;
-let previousWidth = 0;
-let previousHeight = 0;
-
-window.addEventListener('resize', () => {
-    // Lightweight updates during resize
-    syncResultsContainerSize();
-
-    // Clear the timeout for delayed updates
-    clearTimeout(resizeTimeout);
-
-    // Perform heavy updates (like chart redraws) after resizing ends
-    resizeTimeout = setTimeout(() => {
-        const { width, height } = amortizationChartCanvas.getBoundingClientRect();
-
-        // Avoid redundant redraws
-        if (width === previousWidth && height === previousHeight) {
-            return;
-        }
-
-        previousWidth = width;
-        previousHeight = height;
-
-        console.log('Redrawing charts...');
-        calculateAndDisplayResults();
-    }, 300); // Delay as needed
-});
-
-function syncResultsContainerSize() {
-    if (amortizationChartCanvas && resultsContainer) {
-        const { width, height } = amortizationChartCanvas.getBoundingClientRect();
-        resultsContainer.style.height = `${height}px`;
-        resultsContainer.style.width = `${width}px`;
-    }
-}
-
-
 
 
 
@@ -446,9 +396,6 @@ function syncResultsContainerSize() {
         function getX(index) {
             return padding.left + (index / months) * (width - padding.left - padding.right);
         }
-        window.addEventListener('resize', () => {
-            drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
-        });
         
         // Draw horizontal grid lines only, avoiding the line at the bottom (y-axis line)
         ctx.strokeStyle = gridColor;
@@ -606,26 +553,6 @@ function syncResultsContainerSize() {
 
 
     calculateAndDisplayResults();
-    console.log("End of script reached");
-    function syncResultsContainerSize() {
-        const amortizationChartCanvas = document.getElementById('amortizationChart');
-        const resultsContainer = document.querySelector('.results-container');
-    
-        if (amortizationChartCanvas && resultsContainer) {
-            // Sync the results container dimensions with the chart
-            const chartStyles = window.getComputedStyle(amortizationChartCanvas);
-            resultsContainer.style.height = chartStyles.height;
-            resultsContainer.style.width = chartStyles.width;
-        }
-    }
-    
-   
-    
-    // Ensure initial alignment
-    document.addEventListener('DOMContentLoaded', () => {
-        calculateAndDisplayResults(); // If not already auto-triggered
-        syncResultsContainerSize();
-    });
-    
+    console.log("End of script reached");    
 
 });

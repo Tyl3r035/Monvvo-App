@@ -452,6 +452,7 @@ select {
   margin: 0 auto;
 }
 .results-container{
+  position: relative;
   display: flex;
   height: 600px;
   flex-direction: column;
@@ -498,6 +499,7 @@ select {
   flex-direction: column;
   align-items: flex-start;
   margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .label-item {
@@ -1285,4 +1287,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.0313e8a125c1fbb6e973.css.map*/
+/*# sourceMappingURL=main.5390dfc6ffa2216cafab.css.map*/

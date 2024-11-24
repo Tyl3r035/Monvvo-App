@@ -402,6 +402,7 @@ select {
   margin: 0 auto;
 }
 .results-container{
+  position: relative;
   display: flex;
   height: 600px;
   flex-direction: column;
@@ -448,6 +449,7 @@ select {
   flex-direction: column;
   align-items: flex-start;
   margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .label-item {
