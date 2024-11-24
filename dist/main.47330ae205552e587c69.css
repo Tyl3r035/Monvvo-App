@@ -148,15 +148,14 @@ body,html{
   height: auto;
   margin: 0;
   padding: 0;
-  gap: 80px;
 }
 .calculator-inputs{
   position: relative;
   display: flex;
-  /* width: 392px; */
   height: auto;
   flex-direction: column;
   align-items: flex-start;
+  flex-shrink: 1;
 }
 .main-inputs{
   display: grid;
@@ -166,6 +165,7 @@ body,html{
   "loan-term loan-term"
   "interest-rate interest-rate"
   "payment-frequency payment-frequency";
+  width: 100%
 }
 .home-price-box{grid-area: home-price;}
 .down-payment-box{grid-area: down-payment;}
@@ -179,7 +179,6 @@ body,html{
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
-  margin-right: 40px;
   margin-bottom: 40px;
 }
 .input-box label{
@@ -423,7 +422,7 @@ select {
 /* Default to hidden */
 #additional-inputs {
   display: none;
-  width: 392px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
@@ -443,7 +442,7 @@ select {
 /* Results CSS */
 .calculations-container{
   display: flex;
-  flex-grow: 1;
+  flex-grow: 6;
   flex-direction: column;
   justify-self: center;
   align-items: flex-end;
@@ -557,7 +556,7 @@ select {
 
 .answer-title{
   font-family: "Roboto", sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -579,32 +578,27 @@ select {
   align-items: flex-end;
   gap: 16px;
 }
-.monthly-payment{
-  font-family: "Roboto", sans-serif;
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+#monthly-payment-value {
+  display: flex;
+  align-items: baseline;
+  font-family: 'Open Sans', sans-serif;
   color: #232525;
-  text-align: left;
-  padding-top: 25px;
+  margin-top: 20px
 }
-.monthly-subtext{
-  font-size: 24px;
-  margin: 0;
-  padding: 0;
+
+.payment-amount {
+  font-size: 32px; /* Larger font size for the amount */
+  font-weight: 500; /* Boldish text */
+  color: #171717; /* Black text */
 }
-.supporting-answer{
-  width: 67px;
-  height: 25px;
-  font-family: "Roboto", sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 140%;
-  color: #232525;
-  text-align: center;
+
+.payment-frequency {
+  font-size: 16px; /* Smaller font size for the frequency */
+  font-weight: 400; /* Regular weight */
+  margin-left: 15px; /* Space between amount and frequency */
+  color: #171717; 
 }
+
 .result-fluid{
   position: relative;
   width: 100%;
@@ -951,6 +945,12 @@ canvas {
     height: 326px;
   }
 }
+@media screen and (max-width: 1500px){
+  .calculator-wrap{
+    gap: 40px;
+  }
+  
+}
 @media screen and (max-width: 1300px) {
   #header{
     padding: 14px 25px;
@@ -968,19 +968,10 @@ canvas {
     flex-direction: column-reverse;
     justify-content: center;
   }
-  .calculator-wrap{
-    gap: 0;
-  }
   .calculator-inputs{
     width: 90%;
     margin: 0 auto;
     padding-bottom: 70px;
-  }
-  .main-inputs {
-    display: grid;
-    width: 100%;
-    justify-items: stretch;
-    align-items: center;
   }
   .input-box{
     margin-right: 0;
@@ -1287,4 +1278,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.5390dfc6ffa2216cafab.css.map*/
+/*# sourceMappingURL=main.47330ae205552e587c69.css.map*/
