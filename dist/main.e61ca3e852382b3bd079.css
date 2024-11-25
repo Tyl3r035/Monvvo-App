@@ -54,8 +54,11 @@
 
 
 body,html{
+  display: flex;
+  flex-direction: column;
   background-color: #F6F4F2;
   width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
@@ -115,6 +118,7 @@ body,html{
 /* Main CSS */
 #main{
   position: relative;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -883,10 +887,9 @@ canvas {
 
 #footer{
   background-color: #1C2939;
-  /* position: fixed;
-  bottom: 0;
-  left: 0; */
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 .footer-top{
   display: flex;
@@ -1294,4 +1297,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.804d291e9e0bb851a971.css.map*/
+/*# sourceMappingURL=main.e61ca3e852382b3bd079.css.map*/
