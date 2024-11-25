@@ -8,9 +8,15 @@
     <title>Calculate Mortgage by Monthly Payment | Free Mortgage Calculator</title>
     <link rel="canonical" href="https://www.monvvo.com" />
     <link rel="icon" type="image/svg" href="./img/logos/monvvo-favicon.svg">
+    <!-- Google Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap">
+
+    <!-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             var fontLinks = [
                 "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap",
@@ -24,7 +30,7 @@
                 document.head.appendChild(link);
             });
         });
-    </script>
+    </script> -->
 <link href="/main.3bb60151d3ed28e736bf.css" rel="stylesheet"></head>
 <body>
   <header id="header">
@@ -182,15 +188,15 @@
             <div class="results-content">
               <div id="payment-breakdown-content">
                 <h2 class="answer-title">Monthly Payment:</h2>
-                <p class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate)</p>
+                <p fetchpriority="high" class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate)</p>
                 <div id="monthly-payment-value"></div>
               
-                <canvas id="mortgageChart"></canvas>
+                <canvas id="mortgageChart" loading="lazy"></canvas>
                 <div id="chartLabels" class="chart-labels"></div>
               </div>
               <div id="amortization-schedule-content" style="display: none;">
                 <h2 class="answer-title">Amortization for Mortgage Loan</h2>
-                <canvas id="amortizationChart"></canvas>
+                <canvas id="amortizationChart" loading="lazy"></canvas>
                 <div id="amortizationHoverDate" class="hover-date"></div>
                 <div id="amortizationLabels" class="chart-labels"></div>
               </div>
