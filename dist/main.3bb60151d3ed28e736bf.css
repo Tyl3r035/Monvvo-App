@@ -457,7 +457,7 @@ select {
 .results-container{
   position: relative;
   display: flex;
-  height: 600px;
+  min-height: 600px;
   flex-direction: column;
   align-items: center;
   gap: 20px;
@@ -519,13 +519,14 @@ select {
   display: flex;
   width: 100%;
   max-width: 700px;
-  padding: 0px 40px;
+  padding: 0 40px 30px 40px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   gap: 40px;
   align-self: stretch;
   margin: 20px auto 0 auto;
+  
 }
 
 .answer-title{
@@ -649,6 +650,19 @@ canvas {
 #amortizationLabels .label-value {
   font-weight: 500;
   white-space: nowrap;
+}
+
+
+/* Hover Date */
+.hover-date {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 550;
+  color: #232525;
+  text-align: left;
+  height: 10px;
+  margin-top: 20px;
+  margin-left: 30px;
 }
 
 
@@ -1288,4 +1302,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.286f8a5641e110726614.css.map*/
+/*# sourceMappingURL=main.3bb60151d3ed28e736bf.css.map*/

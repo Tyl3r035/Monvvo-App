@@ -2,7 +2,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded event fired");
 
-  
     
 
     // Disable Google Analytics on localhost
@@ -39,6 +38,20 @@ document.addEventListener("DOMContentLoaded", function () {
         pmiExpense: 200,
         hoaExpense: 0
     };
+
+
+    homePriceInput.placeholder = defaultValues.homePrice;
+    downPaymentAmountInput.placeholder = defaultValues.downPaymentAmount;
+    downPaymentPercentageInput.placeholder = defaultValues.downPaymentPercentage;
+    loanTermInput.value = defaultValues.loanTerm; // Keep loan term as value since it is a dropdown
+    interestRateInput.placeholder = defaultValues.interestRate;
+    propertyTaxInput.placeholder = defaultValues.propertyTax;
+    pmiExpenseInput.placeholder = defaultValues.pmiExpense;
+    hoaExpenseInput.placeholder = defaultValues.hoaExpense;
+
+    // Set payment frequency to default
+    paymentFrequencyInput.value = "monthly";
+
 
     const formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2,
@@ -110,137 +123,203 @@ document.addEventListener("DOMContentLoaded", function () {
     const amortizationScheduleContent = document.getElementById("amortization-schedule-content");
 
 
-    function showTab(tabName) {
-        if (tabName === "payment") {
-            paymentBreakdownContent.style.display = "block";
-            amortizationScheduleContent.style.display = "none";
-            tabPaymentBreakdown.classList.add("tab-active");
-            tabAmortizationSchedule.classList.remove("tab-active");
+//     function showTab(tabName) {
+//         if (tabName === "payment") {
+//             paymentBreakdownContent.style.display = "block";
+//             amortizationScheduleContent.style.display = "none";
+//             tabPaymentBreakdown.classList.add("tab-active");
+//             tabAmortizationSchedule.classList.remove("tab-active");
     
-            if (lastAmortizationData) {
-                const {
-                    periodicPrincipalAndInterest,
-                    periodicPropertyTax,
-                    periodicPMI,
-                    periodicHOA
-                } = lastAmortizationData;
+//             if (lastAmortizationData) {
+//                 const {
+//                     periodicPrincipalAndInterest,
+//                     periodicPropertyTax,
+//                     periodicPMI,
+//                     periodicHOA
+//                 } = lastAmortizationData;
+
+
+//                 const adjustedPrincipalAndInterest = periodicPrincipalAndInterest * paymentFactor;
+//                 const adjustedPropertyTax = periodicPropertyTax * paymentFactor;
+//                 const adjustedPMI = periodicPMI * paymentFactor;
+//                 const adjustedHOA = periodicHOA * paymentFactor;
+
+// updateHorizontalStackedBarChart(
+//     adjustedPrincipalAndInterest,
+//     adjustedPropertyTax,
+//     adjustedPMI,
+//     adjustedHOA
+// );
+
+//             }
+//         } else if (tabName === "amortization") {
+//             paymentBreakdownContent.style.display = "none";
+//             amortizationScheduleContent.style.display = "block";
+//             tabPaymentBreakdown.classList.remove("tab-active");
+//             tabAmortizationSchedule.classList.add("tab-active");
     
-                // Re-render the stacked bar chart
-                updateHorizontalStackedBarChart(
-                    periodicPrincipalAndInterest,
-                    periodicPropertyTax,
-                    periodicPMI,
-                    periodicHOA
-                );
-            }
-        } else if (tabName === "amortization") {
-            paymentBreakdownContent.style.display = "none";
-            amortizationScheduleContent.style.display = "block";
-            tabPaymentBreakdown.classList.remove("tab-active");
-            tabAmortizationSchedule.classList.add("tab-active");
+//             if (lastAmortizationData) {
+//                 const {
+//                     balanceData,
+//                     cumulativeInterestData,
+//                     cumulativePrincipalData,
+//                     totalInterestPaid,
+//                     totalPrincipalPaid,
+//                     totalAmountPaid
+//                 } = lastAmortizationData;
     
-            if (lastAmortizationData) {
-                const {
-                    balanceData,
-                    cumulativeInterestData,
-                    cumulativePrincipalData,
-                    totalInterestPaid,
-                    totalPrincipalPaid,
-                    totalAmountPaid
-                } = lastAmortizationData;
+//                 drawAmortizationChart(
+//                     balanceData,
+//                     cumulativeInterestData,
+//                     cumulativePrincipalData
+//                 );
+//                 updateAmortizationLabels(
+//                     totalInterestPaid,
+//                     totalPrincipalPaid,
+//                     totalAmountPaid
+//                 );
+//             }
+//         }
+//     }
     
-                drawAmortizationChart(
-                    balanceData,
-                    cumulativeInterestData,
-                    cumulativePrincipalData
-                );
-                updateAmortizationLabels(
-                    totalInterestPaid,
-                    totalPrincipalPaid,
-                    totalAmountPaid
-                );
-            }
+function showTab(tabName) {
+    if (tabName === "payment") {
+        paymentBreakdownContent.style.display = "block";
+        amortizationScheduleContent.style.display = "none";
+        tabPaymentBreakdown.classList.add("tab-active");
+        tabAmortizationSchedule.classList.remove("tab-active");
+
+        if (lastAmortizationData) {
+            const {
+                periodicPrincipalAndInterest,
+                periodicPropertyTax,
+                periodicPMI,
+                periodicHOA,
+            } = lastAmortizationData;
+
+            // Redraw the stacked bar chart
+            updateHorizontalStackedBarChart(
+                periodicPrincipalAndInterest,
+                periodicPropertyTax,
+                periodicPMI,
+                periodicHOA
+            );
+        }
+    } else if (tabName === "amortization") {
+        paymentBreakdownContent.style.display = "none";
+        amortizationScheduleContent.style.display = "block";
+        tabPaymentBreakdown.classList.remove("tab-active");
+        tabAmortizationSchedule.classList.add("tab-active");
+
+        if (lastAmortizationData) {
+            const {
+                balanceData,
+                cumulativeInterestData,
+                cumulativePrincipalData,
+                totalInterestPaid,
+                totalPrincipalPaid,
+                totalAmountPaid,
+            } = lastAmortizationData;
+
+            drawAmortizationChart(
+                balanceData,
+                cumulativeInterestData,
+                cumulativePrincipalData
+            );
+            updateAmortizationLabels(
+                totalInterestPaid,
+                totalPrincipalPaid,
+                totalAmountPaid
+            );
         }
     }
-    
+}
 
     tabPaymentBreakdown.addEventListener("click", () => showTab("payment"));
     tabAmortizationSchedule.addEventListener("click", () => showTab("amortization"));
-
-
+    
 
 
 function calculateAndDisplayResults() {
     console.log("Calculating and displaying results");
 
+    // Retrieve inputs with fallback to default values
     const homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
-    const downPaymentAmount = parseFloat(downPaymentAmountInput.value);
-    const downPaymentPercentage = parseFloat(downPaymentPercentageInput.value);
-
-    let downPayment;
-    if (!isNaN(downPaymentPercentage) && downPaymentPercentage > 0) {
-        downPayment = Math.ceil((downPaymentPercentage / 100) * homePrice);
-        downPaymentAmountInput.value = downPayment;
-    } else if (!isNaN(downPaymentAmount)) {
-        downPayment = downPaymentAmount;
-        const percentageValue = (downPaymentAmount / homePrice) * 100;
-        downPaymentPercentageInput.value = Number.isInteger(percentageValue)
-            ? percentageValue
-            : percentageValue.toFixed(2);
-    } else {
-        downPayment = defaultValues.downPaymentAmount;
-    }
-
-    const principal = homePrice - downPayment;
+    const downPaymentAmount = parseFloat(downPaymentAmountInput.value) || defaultValues.downPaymentAmount;
     const loanTerm = parseInt(loanTermInput.value) || defaultValues.loanTerm;
     const interestRate = parseFloat(interestRateInput.value) || defaultValues.interestRate;
     const propertyTax = parseFloat(propertyTaxInput.value) || defaultValues.propertyTax;
     const pmiExpense = parseFloat(pmiExpenseInput.value) || defaultValues.pmiExpense;
     const hoaExpense = parseFloat(hoaExpenseInput.value) || defaultValues.hoaExpense;
 
+    // Calculations for principal, interest rate, and number of payments
+    const principal = homePrice - downPaymentAmount;
     const monthlyInterestRate = (interestRate / 100) / 12;
     const numberOfPayments = loanTerm * 12;
 
-    const periodicPrincipalAndInterest = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments) / (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+    // Calculate monthly principal and interest payment
+    const periodicPrincipalAndInterest = principal * monthlyInterestRate *
+        Math.pow(1 + monthlyInterestRate, numberOfPayments) /
+        (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
 
+    // Keep additional inputs as monthly values
     const periodicPropertyTax = propertyTax;
     const periodicPMI = pmiExpense;
     const periodicHOA = hoaExpense;
 
-    // Adjust payment for selected frequency
+    // Adjustments for payment frequency
     const selectedFrequency = paymentFrequencyInput.value;
     let paymentFactor = 1; // Default to monthly
-
     if (selectedFrequency === 'biweekly') {
-        paymentFactor = 12 / 26; // Bi-weekly payments
+        paymentFactor = 12 / 26;
     } else if (selectedFrequency === 'weekly') {
-        paymentFactor = 12 / 52; // Weekly payments
+        paymentFactor = 12 / 52;
     } else if (selectedFrequency === 'accelerated-biweekly') {
-        paymentFactor = 1 / 26; // 13 monthly payments per year
+        paymentFactor = 1 / 26;
     } else if (selectedFrequency === 'accelerated-weekly') {
-        paymentFactor = 1 / 52; // 13 monthly payments per year
+        paymentFactor = 1 / 52;
     }
 
-    const totalPeriodicPayment = (periodicPrincipalAndInterest + periodicPropertyTax + periodicPMI + periodicHOA) * paymentFactor;
+    // Adjust only principal and interest for frequency
+    const adjustedPrincipalAndInterest = periodicPrincipalAndInterest * paymentFactor;
 
-    // Update the payment display
-    updateLabels(periodicPrincipalAndInterest, periodicPropertyTax, periodicPMI, periodicHOA);
+    // Keep additional inputs unadjusted
+    const adjustedPropertyTax = periodicPropertyTax; // Unchanged
+    const adjustedPMI = periodicPMI; // Unchanged
+    const adjustedHOA = periodicHOA; // Unchanged
 
-    // Update the stacked bar chart
+    // Update Payment Breakdown
+    updateLabels(adjustedPrincipalAndInterest, adjustedPropertyTax, adjustedPMI, adjustedHOA);
     updateHorizontalStackedBarChart(
-        periodicPrincipalAndInterest,
-        periodicPropertyTax,
-        periodicPMI,
-        periodicHOA
+        adjustedPrincipalAndInterest,
+        adjustedPropertyTax,
+        adjustedPMI,
+        adjustedHOA
     );
 
-    // Calculate Amortization Data
-    const amortizationData = calculateAmortizationSchedule(principal, monthlyInterestRate, periodicPrincipalAndInterest, numberOfPayments);
+    // Calculate Amortization Data (independent of payment frequency)
+    const amortizationData = calculateAmortizationSchedule(
+        principal,
+        monthlyInterestRate,
+        periodicPrincipalAndInterest,
+        numberOfPayments
+    );
 
-    drawAmortizationChart(amortizationData.balanceData, amortizationData.cumulativeInterestData, amortizationData.cumulativePrincipalData);
+    // Render Amortization Chart
+    drawAmortizationChart(
+        amortizationData.balanceData,
+        amortizationData.cumulativeInterestData,
+        amortizationData.cumulativePrincipalData
+    );
 
-    updateAmortizationLabels(amortizationData.totalInterestPaid, amortizationData.totalPrincipalPaid, amortizationData.totalAmountPaid);
+    // Update Amortization Chart Labels
+    updateAmortizationLabels(
+        amortizationData.totalInterestPaid,
+        amortizationData.totalPrincipalPaid,
+        amortizationData.totalAmountPaid
+    );
 
+    // Store amortization data for hover events
     lastAmortizationData = {
         balanceData: amortizationData.balanceData,
         cumulativeInterestData: amortizationData.cumulativeInterestData,
@@ -253,42 +332,54 @@ function calculateAndDisplayResults() {
         periodicPMI,
         periodicHOA,
     };
+
+    console.log({
+        principal,
+        monthlyInterestRate,
+        numberOfPayments,
+        periodicPrincipalAndInterest,
+        totalPayment: adjustedPrincipalAndInterest + adjustedPropertyTax + adjustedPMI + adjustedHOA
+    });
 }
 
 
 
 
-
-
-
-    function updateHoverValues(balance, interest, principal) {
-        const labelValues = amortizationLabelsContainer.querySelectorAll('.label-value');
-        if (labelValues.length === 3) {
-            labelValues[0].textContent = formatter.format(interest);
-            labelValues[1].textContent = formatter.format(principal);
-            labelValues[2].textContent = formatter.format(balance);
-        }
+function updateHoverValues(balance, interest, principal) {
+    const labelValues = amortizationLabelsContainer.querySelectorAll('.label-value');
+    if (labelValues.length === 3) {
+        labelValues[0].textContent = formatter.format(interest);   // Update interest label
+        labelValues[1].textContent = formatter.format(principal); // Update principal label
+        labelValues[2].textContent = formatter.format(balance);   // Update balance label
     }
+}
 
-    function revertValuesToTotals() {
-        const { totalInterestPaid, totalPrincipalPaid, totalAmountPaid } = lastAmortizationData;
-        updateHoverValues(totalAmountPaid, totalInterestPaid, totalPrincipalPaid);
-    }
 
+
+
+    
     function resetInputs() {
         console.log("Resetting inputs to default values");
-
-        homePriceInput.value = defaultValues.homePrice;
-        downPaymentAmountInput.value = defaultValues.downPaymentAmount;
-        downPaymentPercentageInput.value = defaultValues.downPaymentPercentage;
-        loanTermInput.value = defaultValues.loanTerm;
-        interestRateInput.value = defaultValues.interestRate;
-        propertyTaxInput.value = defaultValues.propertyTax;
-        pmiExpenseInput.value = defaultValues.pmiExpense;
-        hoaExpenseInput.value = defaultValues.hoaExpense;
-
+    
+        // Clear inputs without populating default values
+        homePriceInput.value = "";
+        downPaymentAmountInput.value = "";
+        downPaymentPercentageInput.value = "";
+        loanTermInput.value = "25";
+        interestRateInput.value = "";
+        propertyTaxInput.value = "";
+        pmiExpenseInput.value = "";
+        hoaExpenseInput.value = "";
+    
+        // Reset payment frequency to monthly
+        paymentFrequencyInput.value = "monthly";
+    
+        // Recalculate using default values (inputs remain blank)
         calculateAndDisplayResults();
     }
+    
+
+
 
     function drawRoundedRect(ctx, x, y, width, height, radius) {
         ctx.beginPath();
@@ -447,43 +538,10 @@ function calculateAndDisplayResults() {
     }
     
 
-
-
-    // function updateLabels(principalAndInterest, propertyTax, pmi, hoa) {
-    //     const periodicPaymentElement = document.getElementById('monthly-payment-value');
-    
-    //     // Get the selected frequency from the dropdown
-    //     const selectedFrequency = paymentFrequencyInput.value;
-    
-    //     // Determine the frequency label for display
-    //     let frequencyLabel = "Month";
-    //     if (selectedFrequency === "biweekly") {
-    //         frequencyLabel = "Bi-Week";
-    //     } else if (selectedFrequency === "weekly") {
-    //         frequencyLabel = "Week";
-    //     } else if (selectedFrequency === "accelerated-biweekly") {
-    //         frequencyLabel = "Accelerated Bi-Week";
-    //     } else if (selectedFrequency === "accelerated-weekly") {
-    //         frequencyLabel = "Accelerated Week";
-    //     }
-    
-    //     // Calculate total periodic payment
-    //     const totalPeriodicPayment = principalAndInterest + propertyTax + pmi + hoa;
-    
-    //     // Update the payment element with payment amount and frequency
-    //     periodicPaymentElement.innerHTML = `
-    //         <span class="payment-amount">$${formatter.format(totalPeriodicPayment)}</span>
-    //         <span class="payment-frequency">/ ${frequencyLabel}</span>
-    //     `;
-    // }
-    
     function updateLabels(principalAndInterest, propertyTax, pmi, hoa) {
         const periodicPaymentElement = document.getElementById('monthly-payment-value');
-    
-        // Get the selected frequency from the dropdown
         const selectedFrequency = paymentFrequencyInput.value;
     
-        // Determine the frequency label for display
         let frequencyLabel = "Month";
         if (selectedFrequency === "biweekly") {
             frequencyLabel = "Bi-Week";
@@ -498,13 +556,13 @@ function calculateAndDisplayResults() {
         // Calculate total periodic payment
         const totalPeriodicPayment = principalAndInterest + propertyTax + pmi + hoa;
     
-        // Update the payment element with styled HTML
+        // Update the payment element
         periodicPaymentElement.innerHTML = `
             <span class="payment-amount">$${formatter.format(totalPeriodicPayment)}</span>
             <span class="payment-frequency"> / ${frequencyLabel}</span>
         `;
+        
     }
-    
     
     
     
@@ -673,22 +731,34 @@ function calculateAndDisplayResults() {
     }
 
     
+    
     amortizationChartCanvas.addEventListener('mousemove', (event) => {
         const rect = amortizationChartCanvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
     
         const padding = { top: 30, right: 20, bottom: 30, left: 70 };
     
-        // Ensure x is within the horizontal bounds of the chart
         if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
             const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
     
             const index = Math.round(
-                ((x - padding.left) / chartWidth) *
-                (lastAmortizationData.balanceData.length - 1)
+                ((x - padding.left) / chartWidth) * (lastAmortizationData.balanceData.length - 1)
             );
     
             if (index >= 0 && index < lastAmortizationData.balanceData.length) {
+                // Update hover labels
+                updateHoverValues(
+                    lastAmortizationData.balanceData[index],
+                    lastAmortizationData.cumulativeInterestData[index],
+                    lastAmortizationData.cumulativePrincipalData[index]
+                );
+    
+                // Update hover date
+                const startDate = new Date(); // Assume the loan starts from today
+                const hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
+                displayHoverDate(hoverDate);
+    
+                // Redraw chart with hover effects
                 drawAmortizationChart(
                     lastAmortizationData.balanceData,
                     lastAmortizationData.cumulativeInterestData,
@@ -699,8 +769,24 @@ function calculateAndDisplayResults() {
         }
     });
     
+    // Function to display the hover date
+    function displayHoverDate(date) {
+        const hoverDateContainer = document.getElementById('amortizationHoverDate');
+        const month = date.toLocaleString('default', { month: 'long' }); // Full month name
+        const year = date.getFullYear();
+        hoverDateContainer.textContent = `${month} ${year}`;
+    }
+    
+
+
+   
     amortizationChartCanvas.addEventListener('mouseout', () => {
-        // Clear the canvas and redraw the chart without hover effects
+        revertValuesToTotals();
+    
+        // Clear the hover date
+        const hoverDateContainer = document.getElementById('amortizationHoverDate');
+        hoverDateContainer.textContent = '';
+    
         drawAmortizationChart(
             lastAmortizationData.balanceData,
             lastAmortizationData.cumulativeInterestData,
@@ -710,16 +796,11 @@ function calculateAndDisplayResults() {
     
 
 
-    amortizationChartCanvas.addEventListener('mouseout', () => {
-        // Clear the canvas and redraw the chart without hover effects
-        drawAmortizationChart(
-            lastAmortizationData.balanceData,
-            lastAmortizationData.cumulativeInterestData,
-            lastAmortizationData.cumulativePrincipalData
-        );
-    });
+    function revertValuesToTotals() {
+        const { totalInterestPaid, totalPrincipalPaid, totalAmountPaid } = lastAmortizationData;
+        updateHoverValues(totalAmountPaid, totalInterestPaid, totalPrincipalPaid);
+    }
     
-
     function updateAmortizationLabels(totalInterestPaid, totalPrincipalPaid, totalAmountPaid) {
         const labels = [
             { label: 'Total Interest Paid', value: totalInterestPaid, color: '#3EB721' },
