@@ -485,7 +485,7 @@ select {
   color: #232525;
   text-align: center;
   font-family: "Roboto", sans-serif;
-  font-size: 18px;
+  font-size: 22px;
   font-style: normal;
   font-weight: 400;
   line-height: 140%;
@@ -530,7 +530,7 @@ select {
 .tab-active .tab-text{
   text-align: center;
   font-family: "Roboto", sans-serif;
-  font-size: 18px;
+  font-size: 22px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -883,7 +883,10 @@ canvas {
 
 #footer{
   background-color: #1C2939;
-  padding: 80px 50px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 .footer-top{
   display: flex;
@@ -925,6 +928,18 @@ canvas {
 .footer-link:hover{
   transition: .4s ease-in-out;
   opacity: 0.9;
+}
+
+.footer-bottom{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  margin: 0;
 }
 
 
@@ -979,6 +994,7 @@ canvas {
   }
   #additional-inputs{
     width: 100%;
+    gap: 0;
 
   }
   .calculations-container{
@@ -992,6 +1008,9 @@ canvas {
   }
   .results-content{
     width: 100%;
+  }
+  .btn-container{
+    margin-bottom: 50px;
   }
 
   canvas {
@@ -1057,7 +1076,7 @@ canvas {
 }
 @media screen and (max-width: 700px){
   .tab-text, .tab-active .tab-text{
-    font-size: 14px;
+    font-size: 18px;
   }
   .results-container {
     width: 100%; /* Full width on smaller screens */
@@ -1073,9 +1092,9 @@ canvas {
   }
 }
 @media screen and (max-width: 600px){
-  .calculations-container{
+  /* .calculations-container{
     margin-top: -90px;
-  }
+  } */
   .info-tooltips{
     padding: 5px 10px;
     width: 200px
@@ -1098,7 +1117,7 @@ canvas {
   }
 
   .tab-text, .tab-active .tab-text{
-    font-size: 12px;
+    font-size: 14px;
     padding: 8px 0;
   }
   .results-content{
@@ -1127,6 +1146,9 @@ canvas {
   .label-name, .label-value{
     font-size: 14px;
   }
+  .btn-container{
+    margin-bottom: 0;
+  }
   .btn-left{
     gap: 10px;
   }
@@ -1138,38 +1160,35 @@ canvas {
     padding-right: 0 !important;
   }
   .calculation-btn{
-    padding: 4px 16px !important;
-    font-size: 12px !important;
+    /* padding: 4px 16px !important; */
+    font-size: 15px !important;
     border-radius: 3px;
   }
-  .btn-icon{
-    width: 15px;
-    height: 15px;
-  }
   .printer-text{
-    font-size: 12px !important;
+    font-size: 15px !important;
   }
   .input-box input, .input-box select{
-    font-size: 14px;
+    font-size: 16px;
   }
-  .percent-icon{
+  /* .percent-icon{
     width: 8px;
     height: 9px;
   }
   .dollar-icon{
     width: 8px;
     height: 11px;
-  }
-  .input-box label, .input-top label{
-  }
+  } */
   .info-icon{
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
   }
-  .input-dropdown{
+  #advanced-text-fluid p{
+    font-size: 16px;
+  }
+  /* .input-dropdown{
     width: 8px;
     height: 4px;
-  }
+  } */
   .how-text{
     font-size: 16px;
     line-height: 20px;
@@ -1179,15 +1198,13 @@ canvas {
     margin: 50px auto;
   }
   .terms-content{
+    grid-template-columns: repeat(1, auto);
     margin-top: 25px;
   }
   .terms-item{
-    width: 200px;
-    height: 250px;
-    padding: 20px 10px;
-  }
-  .item-text{
-    font-size: 12px;
+    width: 100%;
+    height: auto;
+    padding: 20px 10px 50px 10px;
   }
   .item-corner{
     width: 45px;
@@ -1196,7 +1213,7 @@ canvas {
 }
 @media screen and (max-width: 460px){
   .info-tooltips{
-    font-size: 12px;
+    font-size: 14px;
     width: 150px;
   }  
 }
@@ -1205,12 +1222,7 @@ canvas {
     font-size: 24px;
   }
 }
-@media screen and (max-width: 400px){
-  .terms-item{
-    width: 180px;
-    height: 230px;
-  }
-}
+
 @media screen and (max-width: 390px){
   .results-tab{
     padding: 8px 0;
@@ -1225,7 +1237,11 @@ canvas {
     font-size: 12px;
   }
   .input-box label, .input-top label{
-    font-size: 12px;
+    font-size: 14px;
+  }
+  .calculation-btn{
+    font-size: 14px !important;
+    padding: 6px 16px;
   }
   .how-title{
     font-size: 24px;
@@ -1251,14 +1267,19 @@ canvas {
   .terms-title{
     padding-left: 10px;
   }
+  .btn-container{
+    font-size: 14px !important;
+  }
+  .printer-text{
+    font-size: 14px !important;
+  }
+  .btn-icon-fluid .btn-icon{
+    width: 15px;
+    height: 15px;
+  }
   .terms-content{
     grid-template-columns: repeat(1, auto);
     justify-items: center;
-  }
-  .terms-item{
-    width: 95%;
-    height: auto;
-    padding: 30px 15px;
   }
   .item-corner{
     width: 30px;
@@ -1272,10 +1293,6 @@ canvas {
   .calculation-btn{
     padding: 4px 12px;
   }
-  .btn-icon-fluid .btn-icon{
-    width: 16px;
-    height: 16px;
-  }
 }
 
-/*# sourceMappingURL=main.47330ae205552e587c69.css.map*/
+/*# sourceMappingURL=main.8dc788d422c057efaa5b.css.map*/
