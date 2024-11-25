@@ -883,7 +883,7 @@ canvas {
 
 #footer{
   background-color: #1C2939;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -1197,6 +1197,9 @@ canvas {
     gap: 0;
     margin: 50px auto;
   }
+  .terms-title{
+    padding-left: 15px;
+  }
   .terms-content{
     grid-template-columns: repeat(1, auto);
     margin-top: 25px;
@@ -1251,7 +1254,6 @@ canvas {
   }
   .terms-title{
     font-size: 24px;
-    padding-left: 5px;
   }
 }
 @media screen and (max-width: 360px){
@@ -1263,9 +1265,6 @@ canvas {
   }
   .info-tooltips{
     width: 120px;
-  }
-  .terms-title{
-    padding-left: 10px;
   }
   .btn-container{
     font-size: 14px !important;
@@ -1295,4 +1294,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.8dc788d422c057efaa5b.css.map*/
+/*# sourceMappingURL=main.697e21e4a510ef9c0881.css.map*/
