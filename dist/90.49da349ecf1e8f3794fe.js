@@ -619,6 +619,46 @@ document.addEventListener("DOMContentLoaded", function () {
     ctx.lineWidth = 1;
     ctx.strokeRect(padding.left - 3, padding.top - 3, width - padding.left - padding.right + 6, height - padding.top - padding.bottom + 6);
   }
+
+  // amortizationChartCanvas.addEventListener('mousemove', (event) => {
+  //     const rect = amortizationChartCanvas.getBoundingClientRect();
+  //     const x = event.clientX - rect.left;
+
+  //     const padding = { top: 30, right: 20, bottom: 30, left: 70 };
+
+  //     if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
+  //         const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
+
+  //         const index = Math.round(
+  //             ((x - padding.left) / chartWidth) * (lastAmortizationData.balanceData.length - 1)
+  //         );
+
+  //         if (index >= 0 && index < lastAmortizationData.balanceData.length) {
+  //             // Update hover labels
+  //             updateHoverValues(
+  //                 lastAmortizationData.balanceData[index],
+  //                 lastAmortizationData.cumulativeInterestData[index],
+  //                 lastAmortizationData.cumulativePrincipalData[index]
+  //             );
+
+  //             // Update hover date
+  //             const startDate = new Date(); // Assume the loan starts from today
+  //             const hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
+  //             displayHoverDate(hoverDate);
+
+  //             // Redraw chart with hover effects
+  //             drawAmortizationChart(
+  //                 lastAmortizationData.balanceData,
+  //                 lastAmortizationData.cumulativeInterestData,
+  //                 lastAmortizationData.cumulativePrincipalData,
+  //                 index // Pass hover index for hover effects
+  //             );
+  //         }
+  //     }
+  // });
+
+  // Function to display the hover date
+
   amortizationChartCanvas.addEventListener('mousemove', function (event) {
     var rect = amortizationChartCanvas.getBoundingClientRect();
     var x = event.clientX - rect.left;
@@ -632,22 +672,41 @@ document.addEventListener("DOMContentLoaded", function () {
       var chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
       var index = Math.round((x - padding.left) / chartWidth * (lastAmortizationData.balanceData.length - 1));
       if (index >= 0 && index < lastAmortizationData.balanceData.length) {
-        // Update hover labels
         updateHoverValues(lastAmortizationData.balanceData[index], lastAmortizationData.cumulativeInterestData[index], lastAmortizationData.cumulativePrincipalData[index]);
-
-        // Update hover date
-        var startDate = new Date(); // Assume the loan starts from today
+        var startDate = new Date();
         var hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
         displayHoverDate(hoverDate);
-
-        // Redraw chart with hover effects
-        drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData, index // Pass hover index for hover effects
-        );
+        drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData, index);
       }
     }
   });
 
-  // Function to display the hover date
+  // Add support for touchmove
+  amortizationChartCanvas.addEventListener('touchmove', handleTouchEvent);
+  amortizationChartCanvas.addEventListener('touchstart', handleTouchEvent);
+  function handleTouchEvent(event) {
+    var rect = amortizationChartCanvas.getBoundingClientRect();
+    var touch = event.touches[0] || event.changedTouches[0];
+    var x = touch.clientX - rect.left;
+    var padding = {
+      top: 30,
+      right: 20,
+      bottom: 30,
+      left: 70
+    };
+    if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
+      var chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
+      var index = Math.round((x - padding.left) / chartWidth * (lastAmortizationData.balanceData.length - 1));
+      if (index >= 0 && index < lastAmortizationData.balanceData.length) {
+        updateHoverValues(lastAmortizationData.balanceData[index], lastAmortizationData.cumulativeInterestData[index], lastAmortizationData.cumulativePrincipalData[index]);
+        var startDate = new Date();
+        var hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
+        displayHoverDate(hoverDate);
+        drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData, index);
+      }
+    }
+    event.preventDefault(); // Prevent default scrolling
+  }
   function displayHoverDate(date) {
     var hoverDateContainer = document.getElementById('amortizationHoverDate');
     var month = date.toLocaleString('default', {
@@ -713,4 +772,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=90.d9e566d95251421d7019.js.map
+//# sourceMappingURL=90.49da349ecf1e8f3794fe.js.map
