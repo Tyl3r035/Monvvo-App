@@ -390,7 +390,7 @@ function calculateAndDisplayResults() {
     
             const labelValue = document.createElement('span');
             labelValue.classList.add('label-value');
-            labelValue.textContent = `$${formatter.format(value)}`;
+            labelValue.textContent = `${formatter.format(value)}`;
     
             labelItem.appendChild(colorCircle);
             labelItem.appendChild(labelName);
@@ -720,43 +720,39 @@ function calculateAndDisplayResults() {
     });
     
 
-
     function updateAmortizationLabels(totalInterestPaid, totalPrincipalPaid, totalAmountPaid) {
         const labels = [
             { label: 'Total Interest Paid', value: totalInterestPaid, color: '#3EB721' },
             { label: 'Total Principal Paid', value: totalPrincipalPaid, color: '#91BBA6' },
             { label: 'Balance (Total Paid)', value: totalAmountPaid, color: '#175134' }
         ];
-    
+        
         amortizationLabelsContainer.innerHTML = ''; // Clear previous labels
-    
+        
         labels.forEach(item => {
             const labelElement = document.createElement('div');
-            labelElement.classList.add('label-item');
-            labelElement.style.fontFamily = "'Open Sans', sans-serif";
-            labelElement.style.fontWeight = '550';
-            labelElement.style.color = "#101010";
+            labelElement.classList.add('label-item'); // Use CSS class instead of inline styles
             
             const colorCircle = document.createElement('span');
             colorCircle.classList.add('color-circle');
             colorCircle.style.backgroundColor = item.color;
-    
+            
             const labelText = document.createElement('span');
-            labelText.classList.add('label-name');
+            labelText.classList.add('label-name'); // Apply consistent class
             labelText.textContent = item.label;
-    
+            
             const labelValue = document.createElement('span');
-            labelValue.classList.add('label-value');
+            labelValue.classList.add('label-value'); // Apply consistent class
             labelValue.textContent = formatter.format(item.value).replace('$', '');
-    
+            
             labelElement.appendChild(colorCircle);
             labelElement.appendChild(labelText);
             labelElement.appendChild(labelValue);
-    
+            
             amortizationLabelsContainer.appendChild(labelElement);
         });
     }
-
+    
 
     calculateAndDisplayResults();
    

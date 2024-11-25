@@ -314,7 +314,7 @@ document.addEventListener("DOMContentLoaded", function () {
       labelName.textContent = labels[index];
       var labelValue = document.createElement('span');
       labelValue.classList.add('label-value');
-      labelValue.textContent = "$".concat(formatter.format(value));
+      labelValue.textContent = "".concat(formatter.format(value));
       labelItem.appendChild(colorCircle);
       labelItem.appendChild(labelName);
       labelItem.appendChild(labelValue);
@@ -615,18 +615,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     labels.forEach(function (item) {
       var labelElement = document.createElement('div');
-      labelElement.classList.add('label-item');
-      labelElement.style.fontFamily = "'Open Sans', sans-serif";
-      labelElement.style.fontWeight = '550';
-      labelElement.style.color = "#101010";
+      labelElement.classList.add('label-item'); // Use CSS class instead of inline styles
+
       var colorCircle = document.createElement('span');
       colorCircle.classList.add('color-circle');
       colorCircle.style.backgroundColor = item.color;
       var labelText = document.createElement('span');
-      labelText.classList.add('label-name');
+      labelText.classList.add('label-name'); // Apply consistent class
       labelText.textContent = item.label;
       var labelValue = document.createElement('span');
-      labelValue.classList.add('label-value');
+      labelValue.classList.add('label-value'); // Apply consistent class
       labelValue.textContent = formatter.format(item.value).replace('$', '');
       labelElement.appendChild(colorCircle);
       labelElement.appendChild(labelText);
@@ -641,4 +639,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=90.0c3249f857b717242916.js.map
+//# sourceMappingURL=90.514e86063e3ba90944d1.js.map

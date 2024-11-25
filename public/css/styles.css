@@ -446,39 +446,9 @@ select {
   cursor: pointer;
 }
 
-/* Styles for the chart labels */
-.chart-labels {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 20px;
-  padding-bottom: 20px;
-}
-
-.label-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  color: #232525;
-  margin-bottom: 20px;
-  width: 100%; /* Ensures full-width layout */
-}
-
-
-.label-name {
-  flex-grow: 1; /* Takes up available space */
-  margin-left: 8px;
-}
-
-.label-value {
-  font-weight: 500;
-  white-space: nowrap; /* Prevents wrapping of value */
-}
-
-
 .tab-active{
+  border-bottom: 0.5px solid #175134;
+  font-weight: bold;
   border-bottom: 0.5px solid #175134;
 }
 .tab-active .tab-text{
@@ -559,11 +529,6 @@ select {
   max-width: 100%;
 }
 
-.tab-active {
-  border-bottom: 0.5px solid #175134;
-  font-weight: bold;
-}
-
 #payment-breakdown-content,
 #amortization-schedule-content {
   display: none; /* Default hidden */
@@ -600,19 +565,43 @@ canvas {
   box-sizing: border-box;
 }
 
-
+/* Shared styles for all chart labels */
 .chart-labels {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   margin: 25px 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  color: #232525;
 }
 
-.label-item {
+/* Specific styles for label items */
+#chartLabels .label-item,
+#amortizationLabels .label-item {
   display: flex;
   align-items: center;
-  margin-bottom: 25px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-weight: 400; /* Default weight */
 }
+
+/* Ensure consistency in label names */
+#chartLabels .label-name,
+#amortizationLabels .label-name {
+  flex-grow: 1;
+  margin-left: 8px;
+  font-weight: 500; /* Apply the same font-weight */
+}
+
+/* Consistent style for label values */
+#chartLabels .label-value,
+#amortizationLabels .label-value {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+
 
 .color-circle {
   width: 12px;
@@ -683,14 +672,15 @@ canvas {
   align-self: stretch;
 }
 .btn-icon-fluid{
-  display: flex;
+  display: hidden;
   padding: 10px;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .btn-icon-fluid .btn-icon{
+  display: none !important;
   width: 18px;
   height: 18px;
   flex-shrink: 0;
@@ -698,6 +688,7 @@ canvas {
   stroke: #232525;
 }
 .btn-icon-fluid .printer-text{
+  display: none !important;
   color: #232525;
   text-align: center;
   font-family: "Roboto", sans-serif;
