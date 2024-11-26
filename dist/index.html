@@ -10,6 +10,8 @@
     <link rel="icon" type="image/svg" href="./img/logos/monvvo-favicon.svg">
     <!-- Google Fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +33,7 @@
             });
         });
     </script> -->
-<link href="/main.b5baf5a9907b23619d8f.css" rel="stylesheet"></head>
+<link href="/main.4a78c18529a5bf7a5b02.css" rel="stylesheet"></head>
 <body>
   <header id="header">
     <div class="logo">
@@ -188,7 +190,7 @@
             <div class="results-content">
               <div id="payment-breakdown-content">
                 <h2 class="answer-title">Monthly Payment:</h2>
-                <p fetchpriority="high" class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="./disclaimer.html" target="_blank" style="color: initial;">See Disclaimer.</a>)</p>
+                <p fetchpriority="high" class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="./disclaimer.html" target="_blank" style="color: initial;">See Disclaimer</a>.)</p>
                 <div id="monthly-payment-value"></div>
               
                 <canvas id="mortgageChart" loading="lazy"></canvas>
@@ -196,10 +198,30 @@
               </div>
               <div id="amortization-schedule-content" style="display: none;">
                 <h2 class="answer-title">Amortization for Mortgage Loan</h2>
-                <p fetchpriority="high" class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="./disclaimer.html" target="_blank" style="color: initial;">See Disclaimer.</a>)</p>
+                <p fetchpriority="high" class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="./disclaimer.html" target="_blank" style="color: initial;">See Disclaimer</a>.)</p>
                 <canvas id="amortizationChart" loading="lazy"></canvas>
                 <div id="amortizationHoverDate" class="hover-date"></div>
                 <div id="amortizationLabels" class="chart-labels"></div>
+                <h2 class="answer-title">Amortization Schedule Breakdown</h2>
+                <div class="expand-box">
+                  <p class="expand-text">Expand</p>
+                  <img class="expand-icon" src="./img/icons/down-arrow.svg" alt="expand icon">
+                </div>
+                <div id="amortization-schedule" style="display:none;">
+                  <table class="amortization-table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Principal</th>
+                        <th>Interest</th>
+                        <th>Remaining Balance</th>
+                      </tr>
+                    </thead>
+                    <tbody id="amortization-table-body">
+                      <!-- Rows will be populated dynamically -->
+                    </tbody>
+                  </table>
+                </div>                
               </div>
             </div>
           </div>
@@ -288,9 +310,9 @@
   </main>
   <footer id="footer">
     <div class="footer-top">
-      <!-- <div class="footer-left"></div>
+ <div class="footer-left"></div>
       <div class="footer-right">
-        <div class="footer-col">
+        <!-- <div class="footer-col">
           <h5 class="footer-title">Calculators</h5>
           <a class="footer-link" href="#">Banking</a>
           <a class="footer-link" href="#">Mortgage</a>
@@ -304,20 +326,19 @@
           <a class="footer-link" href="#">Articles</a>
           <a class="footer-link" href="#">Videos</a>
           <a class="footer-link" href="#">Podcasts</a>
-        </div>
+        </div> -->
         <div class="footer-col">
           <h5 class="footer-title">About Us</h5>
-          <a class="footer-link" href="#">Our Story</a>
-          <a class="footer-link" href="#">Articles</a>
-          <a class="footer-link" href="#">Partners</a>
-          <a class="footer-link" href="#">Contact Us</a>
+          <a class="footer-link" href="./disclaimer.html" target="_blank">Monvvo Disclaimer</a>
+          <!-- <a class="footer-link" href="#">Privacy Policy</a> -->
+
         </div>
-      </div> -->
+      </div>
     </div>
-    <!-- <hr> -->
+    <hr>
     <div class="footer-bottom">
       Monvvo, 2024
     </div>
   </footer>
-<script defer src="/90.49da349ecf1e8f3794fe.js"></script><script defer src="/main.aaa15419e01ab64ef02c.js"></script><script defer src="/mortgage-calculator.6637d84293bae3ca197d.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script></body>
+<script defer src="/246.8868046f6871e1baec1f.js"></script><script defer src="/426.dd6a226d2b4491033814.js"></script><script defer src="/main.3b643fa4d9d1ae6e2234.js"></script><script defer src="/mortgage-calculator.b474bd8165d3ab1a36b9.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script></body>
 </html>

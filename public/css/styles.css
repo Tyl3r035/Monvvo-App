@@ -428,7 +428,6 @@ select {
 }
 .results-tab{
   display: flex;
-  /* padding: 8px 24px; */
   justify-content: center;
   align-items: center;
   flex: 1 0 0;
@@ -460,7 +459,6 @@ select {
   line-height: normal;
   color: #175134;
   display: flex;
-  /* width: 80%; */
   flex-direction: column;
   justify-content: center;
   align-self: stretch;
@@ -616,13 +614,82 @@ canvas {
 }
 
 
-
 .color-circle {
   width: 12px;
   height: 12px;
   border-radius: 50%;
   margin-right: 8px;
 }
+
+
+
+
+
+
+
+/* Styling for the expand/collapse box */
+.expand-box {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
+
+.expand-text{
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  padding-right: 15px;
+  cursor: pointer;
+}
+
+.expand-icon {
+  width: 10px;
+  height: 10px;
+  color: #555;
+  cursor: pointer;
+}
+
+.expand-box.expanded .expand-icon {
+  transform: rotate(180deg);
+}
+
+
+/* Amortization Table CSS */
+.amortization-table {
+  background-color: transparent; /* Set table background to white */
+  border-collapse: collapse; /* Remove gaps between cells */
+  width: 100%; /* Make table full width */
+  font-family: 'Roboto', sans-serif;
+}
+.amortization-table{
+  vertical-align: middle !important;
+}
+.amortization-table th,
+.amortization-table td {
+  background-color: transparent; /* Make cells transparent */
+  border: none; /* Remove borders */
+  padding: 8px 12px; /* Add padding for spacing inside cells */
+  text-align: left; /* Align text to the left */
+  vertical-align: middle;
+}
+
+/* Styling for the table header */
+.amortization-table th {
+  font-weight: bold; /* Make header text bold */
+  font-size: 16px; /* Set font size for header */
+  color: #000; 
+}
+.amortization-table td{
+  font-size: 14px;
+  color: #171717;
+}
+
+
 
 
 
@@ -844,7 +911,7 @@ canvas {
   background-color: #1C2939;
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 20px;
 }
 .footer-top{
   display: flex;
@@ -871,13 +938,13 @@ canvas {
 }
 .footer-title{
   font-family: 'Times New Roman', Times, serif;
-  font-size: 20px;
+  font-size: 22px;
   color: #fff;
   padding-bottom: 15px;
 }
 .footer-link{
   font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   color: #fff;
   margin-bottom: 8px;
   text-decoration: none;
@@ -922,6 +989,7 @@ canvas {
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   font-weight: 600;
+  line-height: 24px;
   margin-bottom: 10px;
 }
 .disclaimer-text{
@@ -989,7 +1057,6 @@ canvas {
   .results-container {
     width: 100%; /* Allow it to fit within the container */
     height: auto; /* Make height dynamic */
-    aspect-ratio: 16 / 9; /* Maintain a responsive aspect ratio */
     margin: 0 auto; /* Center horizontally */
   }
   .results-content{
@@ -1078,9 +1145,9 @@ canvas {
   }
 }
 @media screen and (max-width: 600px){
-  /* .calculations-container{
-    margin-top: -90px;
-  } */
+  .amortization-table td{
+    padding: 8px;
+  }
   .info-tooltips{
     padding: 5px 10px;
     width: 200px
@@ -1132,6 +1199,12 @@ canvas {
   .label-name, .label-value{
     font-size: 14px;
   }
+  .amortization-table th{
+    font-size: 14px;
+  }
+  .amortization-table td{
+    font-size: 12px;
+  }
   .btn-container{
     margin-bottom: 0;
   }
@@ -1146,7 +1219,6 @@ canvas {
     padding-right: 0 !important;
   }
   .calculation-btn{
-    /* padding: 4px 16px !important; */
     font-size: 15px !important;
     border-radius: 3px;
   }
@@ -1156,14 +1228,6 @@ canvas {
   .input-box input, .input-box select{
     font-size: 16px;
   }
-  /* .percent-icon{
-    width: 8px;
-    height: 9px;
-  }
-  .dollar-icon{
-    width: 8px;
-    height: 11px;
-  } */
   .info-icon{
     width: 16px;
     height: 16px;
@@ -1171,10 +1235,6 @@ canvas {
   #advanced-text-fluid p{
     font-size: 16px;
   }
-  /* .input-dropdown{
-    width: 8px;
-    height: 4px;
-  } */
   .how-text{
     font-size: 16px;
     line-height: 20px;
@@ -1209,6 +1269,9 @@ canvas {
 @media screen and (max-width: 430px){
   #title{
     font-size: 24px;
+  }
+  .amortization-table th, .amortization-table td{
+    text-align: center;
   }
 }
 
@@ -1252,6 +1315,10 @@ canvas {
   .info-tooltips{
     width: 120px;
   }
+  .amortization-table td {
+    padding: 8px 0;
+}
+
   .btn-container{
     font-size: 14px !important;
   }

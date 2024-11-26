@@ -88,3 +88,38 @@ infoIcons.forEach(icon => {
         });
     }
 });
+
+
+
+// Amortization Table Expansion Logic
+const expandBox = document.querySelector(".expand-box");
+const amortizationTableBody = document.getElementById("amortization-table-body");
+const expandText = document.querySelector(".expand-text");
+const expandIcon = document.querySelector(".expand-icon");
+
+// Ensure the elements exist before adding event listeners
+if (expandBox && amortizationTableBody && expandText && expandIcon) {
+    // Initialize the table to show only the first three rows
+    const rows = Array.from(amortizationTableBody.rows);
+    rows.forEach((row, index) => {
+        row.style.display = index < 3 ? "table-row" : "none";
+    });
+
+    // Add click event to the expand-box
+    expandBox.addEventListener("click", function () {
+        const isExpanded = expandText.textContent === "Expand";
+
+        // Toggle row visibility
+        rows.forEach((row, index) => {
+            row.style.display = isExpanded || index < 3 ? "table-row" : "none";
+        });
+
+        // Update the expand/collapse text
+        expandText.textContent = isExpanded ? "Collapse" : "Expand";
+
+        // Rotate the icon
+        expandIcon.style.transform = isExpanded ? "rotate(180deg)" : "rotate(0deg)";
+    });
+} else {
+    console.error("Expand/Collapse elements not found. Ensure the HTML structure is correct.");
+}

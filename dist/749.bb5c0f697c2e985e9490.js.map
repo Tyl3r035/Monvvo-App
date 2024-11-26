@@ -1,0 +1,1 @@
+{"version":3,"file":"749.bb5c0f697c2e985e9490.js","mappings":";;;;;;;;;;AAAA,iEAAe,qBAAuB,2DAA2D","sources":["webpack://monvvo-app/./public/img/icons/down-arrow.svg"],"sourcesContent":["export default __webpack_public_path__ + \"images/down-arrow.10b0fa8821e0ae2b3dae72215646f018.svg\";"],"names":[],"sourceRoot":""}
