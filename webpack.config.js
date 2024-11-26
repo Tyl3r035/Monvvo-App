@@ -15,6 +15,13 @@ const pages = [
         chunks: ['mortgage-calculator', 'mortgagecalcs', 'utils'],
         canonical: 'https://www.monvvo.com'
     },
+    {
+        filename: 'disclaimer.html',
+        template: path.resolve(__dirname, 'public/disclaimer.html'),
+        chunks: ['mortgage-calculator', 'mortgagecalcs', 'utils'],
+        canonical: 'https://www.monvvo.com/disclaimer'
+    },
+
     // Add more pages as needed
 ];
 

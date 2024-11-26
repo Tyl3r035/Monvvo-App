@@ -34,5 +34,9 @@ module.exports = {
             template: './public/404.html',
             filename: '404.html',
         }),
+        new HtmlWebpackPlugin({
+            template: './public/disclaimer.html',
+            filename: 'disclaimer.html',
+        }),
     ],
 };

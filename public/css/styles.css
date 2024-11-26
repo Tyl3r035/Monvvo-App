@@ -686,15 +686,15 @@ canvas {
   align-self: stretch;
 }
 .btn-icon-fluid{
-  display: hidden;
+  display: flex;
   padding: 10px;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  /* cursor: pointer; */
+  cursor: pointer;
 }
 .btn-icon-fluid .btn-icon{
-  display: none !important;
+  display: flex !important;
   width: 18px;
   height: 18px;
   flex-shrink: 0;
@@ -702,7 +702,7 @@ canvas {
   stroke: #232525;
 }
 .btn-icon-fluid .printer-text{
-  display: none !important;
+  display: flex !important;
   color: #232525;
   text-align: center;
   font-family: "Roboto", sans-serif;
@@ -900,8 +900,36 @@ canvas {
   margin: 0;
 }
 
-
-
+/* Disclaimer CSS*/
+.disclaimer-main{
+  width: 90% !important;
+  margin: 100px auto !important;
+}
+.disclaimer-intro{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 30px 0 20px 0;
+  color: #171717;
+}
+.disclaimer-fluid{
+  margin: 40px 20px
+}
+.disclaimer-box{
+  margin: 20px 0 40px 0;
+}
+.disclaimer-title{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.disclaimer-text{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  color: #171717;
+}
 
 
 
