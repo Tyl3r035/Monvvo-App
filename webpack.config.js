@@ -18,8 +18,14 @@ const pages = [
     {
         filename: 'disclaimer.html',
         template: path.resolve(__dirname, 'public/disclaimer.html'),
-        chunks: ['mortgage-calculator', 'mortgagecalcs', 'utils'],
+        chunks: ['utils'],
         canonical: 'https://www.monvvo.com/disclaimer'
+    },
+    {
+        filename: 'privacy-policy.html',
+        template: path.resolve(__dirname, 'public/privacy-policy.html'),
+        chunks: ['utils'],
+        canonical: 'https://www.monvvo.com/privacy-policy'
     },
 
     // Add more pages as needed

@@ -1049,6 +1049,40 @@ canvas {
   color: #171717;
 }
 
+/* Privacy Policy CSS */
+.privacy-main{
+  width: 90% !important;
+  margin: 100px auto !important;
+}
+.privacy-section{
+  margin: 20px auto;
+}
+.privacy-section a{
+  color: inherit;
+}
+.privacy-title{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 10px;
+}
+.privacy-text{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  color: #171717;
+}
+.privacy-list{
+  margin: 10px auto 25px auto;
+  padding-left: 25px;
+}
+.privacy-list li{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  color: #171717;
+}
 
 
 /* Media Queries */
@@ -1397,4 +1431,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.4a78c18529a5bf7a5b02.css.map*/
+/*# sourceMappingURL=main.6730a154c6c43f44dc16.css.map*/
