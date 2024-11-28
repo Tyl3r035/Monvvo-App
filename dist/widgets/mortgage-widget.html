@@ -20,6 +20,14 @@
             margin: 0 auto;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
+        #logo-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        #widget-logo {
+            max-width: 100px;
+            height: auto;
+        }
         h1 {
             font-size: 18px;
             margin-bottom: 15px;
@@ -41,10 +49,14 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+        input::-webkit-inner-spin-button, input::-webkit-outer-spin-button {
+            display: none;
+            appearance: none;
+        }
         button {
             width: 100%;
             padding: 10px;
-            background: #28a745;
+            background: #175134;
             color: white;
             border: none;
             border-radius: 4px;
@@ -52,7 +64,7 @@
             font-size: 16px;
         }
         button:hover {
-            background: #218838;
+            background: #20894D;
         }
         #widget-results {
             text-align: center;
@@ -76,6 +88,10 @@
 </head>
 <body>
     <div id="mortgage-widget">
+        <!-- Logo Section -->
+        <div id="logo-container">
+            <img src="https://www.monvvo.com/img/logos/monvvo-transparent.svg" alt="Monvvo Logo" id="widget-logo">
+        </div>
         <h1>Mortgage Calculator</h1>
         <form id="mortgage-form">
             <div class="form-group">
