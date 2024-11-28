@@ -102,6 +102,7 @@ module.exports = {
                 { from: 'public/css', to: 'css' },
                 { from: 'public/js', to: 'js' },
                 { from: 'public/js/service-worker.js', to: 'service-worker.js' },
+                { from: 'public/widgets', to: 'widgets' },
                 { from: '_headers', to: '_headers', toType: 'file' },
                 { from: '_redirects', to: '_redirects', toType: 'file' },
                 { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' },
@@ -136,6 +137,7 @@ module.exports = {
         liveReload: true, // Automatically refresh on file changes
         historyApiFallback: {
             rewrites: [
+                { from: /^\/widgets\/.*$/, to: '/widgets/mortgage-widget.html' },
                 { from: /./, to: '/404.html' }
             ]
         },
