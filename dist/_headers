@@ -23,3 +23,7 @@ https://fonts.googleapis.com/*
 
 https://fonts.gstatic.com/*
   Cache-Control: public, max-age=2592000  # 30 days for Google Fonts files
+
+# Allow embedding the widget page on any site
+/widgets/mortgage-widget.html
+  Content-Security-Policy: frame-ancestors *;
