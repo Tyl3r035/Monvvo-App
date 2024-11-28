@@ -28,6 +28,15 @@ const pages = [
         canonical: 'https://www.monvvo.com/privacy-policy'
     },
 
+
+    // Widget Pages
+    {
+        filename: 'mortgage-widget.html',
+        template: path.resolve(__dirname, 'public/widgets/mortgage-widget.html'),
+        chunks: ['utils'],
+        canonical: 'https://www.monvvo.com/widgets/mortgage-widget'
+    },
+
     // Add more pages as needed
 ];
 
