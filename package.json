@@ -2,7 +2,7 @@
   "name": "monvvo-app",
   "version": "1.0.0",
   "description": "Monvvo Mortgage Calculator Application",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "build": "webpack --mode production",
