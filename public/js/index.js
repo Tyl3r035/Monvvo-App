@@ -1,7 +1,8 @@
 import '../css/reset.css';
 import '../css/styles.css';
-import './mortgage-calculator.js';
-import './mortgagecalcs.js'
+import './mortgageCalculator.js';
+import './mortgageCalcs.js'
+import './contact.js'
 import './utils.js';
 // Your additional JavaScript logic here
 

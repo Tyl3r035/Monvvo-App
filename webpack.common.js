@@ -35,6 +35,10 @@ module.exports = {
             filename: '404.html',
         }),
         new HtmlWebpackPlugin({
+            template: './public/contact.html',
+            filename: 'contact.html',
+        }),
+        new HtmlWebpackPlugin({
             template: './public/disclaimer.html',
             filename: 'disclaimer.html',
         }),
