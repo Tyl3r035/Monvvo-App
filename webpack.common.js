@@ -35,23 +35,12 @@ module.exports = {
             filename: '404.html',
         }),
         new HtmlWebpackPlugin({
-            template: './public/contact.html',
-            filename: 'contact.html',
-        }),
-        new HtmlWebpackPlugin({
             template: './public/disclaimer.html',
             filename: 'disclaimer.html',
         }),
         new HtmlWebpackPlugin({
             template: './public/privacy-policy.html',
             filename: 'privacy-policy.html',
-        }),
-
-
-        // Widget Sites
-        new HtmlWebpackPlugin({
-            template: './public/widgets/mortgage-widget.html',
-            filename: 'mortgage-widget.html',
         }),
     ],
 };

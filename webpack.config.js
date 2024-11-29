@@ -1,5 +1,3 @@
-
-
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -14,42 +12,31 @@ const pages = [
     {
         filename: 'index.html',
         template: path.resolve(__dirname, 'public/index.html'),
-        chunks: ['main', 'mortgageCalculator', 'mortgageCalcs', 'utils'], // Explicit chunks for index.html
-        canonical: 'https://www.monvvo.com',
-    },
-    {
-        filename: 'contact.html',
-        template: path.resolve(__dirname, 'public/contact.html'),
-        // chunks: ['main','contact', 'utils.js'], // Include only contact.js
-        canonical: 'https://www.monvvo.com/contact',
+        chunks: ['mortgage-calculator', 'mortgagecalcs', 'utils'],
+        canonical: 'https://www.monvvo.com'
     },
     {
         filename: 'disclaimer.html',
         template: path.resolve(__dirname, 'public/disclaimer.html'),
-        // chunks: ['main','utils'], // Include only utils.js
-        canonical: 'https://www.monvvo.com/disclaimer',
+        chunks: ['utils'],
+        canonical: 'https://www.monvvo.com/disclaimer'
     },
     {
         filename: 'privacy-policy.html',
         template: path.resolve(__dirname, 'public/privacy-policy.html'),
-        chunks: ['main','utils'], // Include only utils.js
-        canonical: 'https://www.monvvo.com/privacy-policy',
+        chunks: ['utils'],
+        canonical: 'https://www.monvvo.com/privacy-policy'
     },
-    {
-        filename: 'mortgage-widget.html',
-        template: path.resolve(__dirname, 'public/widgets/mortgage-widget.html'),
-        // chunks: ['main','utils'], // Include only utils.js
-        canonical: 'https://www.monvvo.com/widgets/mortgage-widget',
-    },
+
+    // Add more pages as needed
 ];
 
 module.exports = {
     mode: isProduction ? 'production' : 'development', // Automatically set mode
     entry: {
         main: './public/js/index.js',
-        mortgageCalculator: './public/js/mortgageCalculator.js',
-        contact: './public/js/contact.js',
-        utils: './public/js/utils.js',
+        'mortgage-calculator': './public/js/mortgage-calculator.js',
+        utils: './public/js/utils.js'
     },
     output: {
         filename: '[name].[contenthash].js',
@@ -62,7 +49,7 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
@@ -82,25 +69,23 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env'],
-                    },
-                },
-            },
-        ],
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            }
+        ]
     },
     plugins: [
         new CleanWebpackPlugin(),
-        ...pages.map((page) =>
-            new HtmlWebpackPlugin({
-                filename: page.filename,
-                template: page.template,
-                inject: 'body',
-                minify: isProduction, // Minify only in production
-                canonical: page.canonical,
-            })
-        ),
+        ...pages.map(page => new HtmlWebpackPlugin({
+            filename: page.filename,
+            template: page.template,
+            inject: 'body',
+            minify: isProduction, // Minify only in production
+            canonical: page.canonical
+        })),
         new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].css',
+            filename: '[name].[contenthash].css'
         }),
         new CopyWebpackPlugin({
             patterns: [
@@ -108,14 +93,13 @@ module.exports = {
                 { from: 'public/css', to: 'css' },
                 { from: 'public/js', to: 'js' },
                 { from: 'public/js/service-worker.js', to: 'service-worker.js' },
-                { from: 'public/widgets', to: 'widgets' },
                 { from: '_headers', to: '_headers', toType: 'file' },
                 { from: '_redirects', to: '_redirects', toType: 'file' },
                 { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' },
                 { from: 'ads.txt', to: 'ads.txt', toType: 'file' },
-                { from: 'robots.txt', to: 'robots.txt', toType: 'file' },
-            ],
-        }),
+                { from: 'robots.txt', to: 'robots.txt', toType: 'file' }
+            ]
+        })
     ],
     optimization: {
         minimize: isProduction, // Minimize only in production
@@ -128,11 +112,13 @@ module.exports = {
                 },
             }),
         ],
-        // Removed splitChunks for manual chunk management
+        splitChunks: {
+            chunks: 'all',
+        },
     },
     devServer: {
         static: {
-            directory: path.join(__dirname, 'dist'),
+            directory: path.join(__dirname, 'dist')
         },
         compress: true,
         port: 9000,
@@ -141,16 +127,15 @@ module.exports = {
         liveReload: true, // Automatically refresh on file changes
         historyApiFallback: {
             rewrites: [
-                { from: /^\/widgets\/.*$/, to: '/widgets/mortgage-widget.html' },
-                { from: /./, to: '/404.html' },
-            ],
+                { from: /./, to: '/404.html' }
+            ]
         },
         watchFiles: ['public/**/*'],
         client: {
             logging: 'info',
-        },
+        }
     },
     stats: {
-        children: true,
-    },
+        children: true
+    }
 };

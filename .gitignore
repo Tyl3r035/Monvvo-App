@@ -2,7 +2,3 @@
 
 # Local Netlify folder
 .netlify
-
-
-#Render Server
-.env
