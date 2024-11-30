@@ -35,6 +35,12 @@ const pages = [
         chunks: ['utils'],
         canonical: 'https://www.monvvo.com/widgets/mortgage-widget'
     },
+    {
+        filename: '404.html',
+        template: path.resolve(__dirname, 'public/404.html'),
+        chunks: ['utils'],
+        canonical: 'https://www.monvvo.com/404'
+    },
 
     // Add more pages as needed
 ];

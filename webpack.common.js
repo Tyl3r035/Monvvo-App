@@ -42,6 +42,11 @@ module.exports = {
             template: './public/privacy-policy.html',
             filename: 'privacy-policy.html',
         }),
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: './public/404.html',
+            filename: '404.html',
+        }),
         // Widget Sites
         new HtmlWebpackPlugin({
             template: './public/widgets/mortgage-widget.html',

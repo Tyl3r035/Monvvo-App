@@ -404,6 +404,7 @@ select {
   border-radius: 6px;
   font-size: 14px;
   font-family: "Roboto", sans-serif;
+  line-height: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   width: 250px; /* Set fixed width */
   white-space: normal; /* Allow text to wrap within the fixed width */
@@ -1017,6 +1018,35 @@ canvas {
   margin: 0;
 }
 
+/* 404 CSS */
+.error-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 60px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.error-subtitle{
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  color: #1C2939;
+  margin-top: 15px
+}
+.error-text{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+.error-link{
+  color: #175134;
+}
+
 /* Disclaimer CSS*/
 .disclaimer-main{
   width: 90% !important;
@@ -1431,4 +1461,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.6730a154c6c43f44dc16.css.map*/
+/*# sourceMappingURL=main.d4893f0f258adbcc780b.css.map*/
