@@ -2,15 +2,17 @@
   publish = "dist"
   command = "npm run build"
 
+# Specific CSP for the widget page
 [[headers]]
-  for = "/*.js"
+  for = "/widgets/mortgage-widget.html"
   [headers.values]
-    Content-Type = "application/javascript"
-
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Content-Type = "text/css"
+    Cache-Control = "public, max-age=300, must-revalidate"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; img-src 'self' data:; connect-src 'self'; frame-ancestors *"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "ALLOWALL"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
 # Global CSP for all pages (except the widget)
 [[headers]]
@@ -24,17 +26,15 @@
     Referrer-Policy = "no-referrer-when-downgrade"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
-# Specific CSP for the widget page
 [[headers]]
-  for = "/widgets/mortgage-widget.html"
+  for = "/*.js"
   [headers.values]
-    Cache-Control = "public, max-age=300, must-revalidate"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; img-src 'self' data:; connect-src 'self'; frame-ancestors *"
-    X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "ALLOWALL"
-    X-XSS-Protection = "1; mode=block"
-    Referrer-Policy = "no-referrer-when-downgrade"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Type = "application/javascript"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Content-Type = "text/css"
 
 [[redirects]]
   from = "http://monvvo.com/*"
