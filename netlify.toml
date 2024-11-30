@@ -26,12 +26,23 @@
 
 # Specific CSP for the widget page
 [[headers]]
+  for = "/widgets/mortgage-widget"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; img-src 'self' data:; connect-src 'self'; frame-ancestors *"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "ALLOW"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+[[headers]]
   for = "/widgets/mortgage-widget.html"
   [headers.values]
     Cache-Control = "public, max-age=300, must-revalidate"
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; img-src 'self' data:; connect-src 'self'; frame-ancestors *"
     X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "ALLOWALL"
+    X-Frame-Options = "ALLOW"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "no-referrer-when-downgrade"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
@@ -54,6 +65,13 @@
   status = 301
   force = true
 
+# Redirect for clean URL to .html
+[[redirects]]
+  from = "/widgets/mortgage-widget"
+  to = "/widgets/mortgage-widget.html"
+  status = 200
+
+# Handle 404 errors
 [[redirects]]
   from = "/*"
   to = "/404.html"

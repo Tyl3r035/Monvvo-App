@@ -136,7 +136,7 @@ module.exports = {
         liveReload: true, // Automatically refresh on file changes
         historyApiFallback: {
             rewrites: [
-                
+                { from: /^\/widgets\/mortgage-widget$/, to: '/widgets/mortgage-widget.html' },
                 { from: /./, to: '/404.html' }
             ]
         },
