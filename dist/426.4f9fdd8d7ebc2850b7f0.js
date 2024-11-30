@@ -905,6 +905,43 @@ document.addEventListener("DOMContentLoaded", function () {
   // Add support for touchmove
   amortizationChartCanvas.addEventListener('touchmove', handleTouchEvent);
   amortizationChartCanvas.addEventListener('touchstart', handleTouchEvent);
+
+  // function handleTouchEvent(event) {
+  //     const rect = amortizationChartCanvas.getBoundingClientRect();
+  //     const touch = event.touches[0] || event.changedTouches[0];
+  //     const x = touch.clientX - rect.left;
+
+  //     const padding = { top: 30, right: 20, bottom: 30, left: 70 };
+
+  //     if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
+  //         const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
+
+  //         const index = Math.round(
+  //             ((x - padding.left) / chartWidth) * (lastAmortizationData.balanceData.length - 1)
+  //         );
+
+  //         if (index >= 0 && index < lastAmortizationData.balanceData.length) {
+  //             updateHoverValues(
+  //                 lastAmortizationData.balanceData[index],
+  //                 lastAmortizationData.cumulativeInterestData[index],
+  //                 lastAmortizationData.cumulativePrincipalData[index]
+  //             );
+
+  //             const startDate = new Date();
+  //             const hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
+  //             displayHoverDate(hoverDate);
+
+  //             drawAmortizationChart(
+  //                 lastAmortizationData.balanceData,
+  //                 lastAmortizationData.cumulativeInterestData,
+  //                 lastAmortizationData.cumulativePrincipalData,
+  //                 index
+  //             );
+  //         }
+  //     }
+  //     event.preventDefault(); // Prevent default scrolling
+  // }
+
   function handleTouchEvent(event) {
     var rect = amortizationChartCanvas.getBoundingClientRect();
     var touch = event.touches[0] || event.changedTouches[0];
@@ -915,7 +952,13 @@ document.addEventListener("DOMContentLoaded", function () {
       bottom: 30,
       left: 70
     };
-    if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
+    if (x < padding.left || x > amortizationChartCanvas.offsetWidth - padding.right) {
+      // If touch is outside the chart, clear hover effects
+      revertValuesToTotals();
+      var hoverDateContainer = document.getElementById('amortizationHoverDate');
+      hoverDateContainer.textContent = ''; // Clear the hover date
+      drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData);
+    } else {
       var chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
       var index = Math.round((x - padding.left) / chartWidth * (lastAmortizationData.balanceData.length - 1));
       if (index >= 0 && index < lastAmortizationData.balanceData.length) {
@@ -1049,4 +1092,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=426.5abceff08e39aa4f429a.js.map
+//# sourceMappingURL=426.4f9fdd8d7ebc2850b7f0.js.map
