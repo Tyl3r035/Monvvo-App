@@ -9,7 +9,7 @@
     Cache-Control = "public, max-age=300, must-revalidate"
     Content-Security-Policy = "default-src 'self'; frame-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; img-src 'self' data:; connect-src 'self'"
     X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "ALLOWALL"
+    X-Frame-Options = "ALLOW"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "no-referrer-when-downgrade"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
