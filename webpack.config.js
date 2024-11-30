@@ -136,6 +136,7 @@ module.exports = {
         liveReload: true, // Automatically refresh on file changes
         historyApiFallback: {
             rewrites: [
+                
                 { from: /./, to: '/404.html' }
             ]
         },
