@@ -1291,7 +1291,7 @@ canvas {
   }
   .results-container{
     box-shadow: 
-        0px 3px 8px 1px rgba(0, 0, 0, 0.1), /* Slight shadow on the bottom */
+        0px 3px 3px 1px rgba(0, 0, 0, 0.1), /* Slight shadow on the bottom */
         0px 0px 0px 0px rgba(0, 0, 0, 0.05) , /* Very subtle shadow on the right */
        0px 0px 0px 0px rgba(0, 0, 0, 0.05) !important; /* Very subtle shadow on the left */
   }
@@ -1471,4 +1471,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.b9f2b1cca2006dc51488.css.map*/
+/*# sourceMappingURL=main.43c7d1b4610ca6e3838e.css.map*/

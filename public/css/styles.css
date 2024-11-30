@@ -1241,7 +1241,7 @@ canvas {
   }
   .results-container{
     box-shadow: 
-        0px 3px 8px 1px rgba(0, 0, 0, 0.1), /* Slight shadow on the bottom */
+        0px 3px 3px 1px rgba(0, 0, 0, 0.1), /* Slight shadow on the bottom */
         0px 0px 0px 0px rgba(0, 0, 0, 0.05) , /* Very subtle shadow on the right */
        0px 0px 0px 0px rgba(0, 0, 0, 0.05) !important; /* Very subtle shadow on the left */
   }
