@@ -719,7 +719,160 @@ function updateHoverValues(balance, interest, principal) {
     
     
 
-
+    // function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData, hoverIndex = null) {
+    //     const ctx = amortizationChartCanvas.getContext('2d');
+    //     const dpr = window.devicePixelRatio || 1;
+    
+    //     // Adjust height dynamically based on screen width
+    //     let height = window.innerWidth < 500 ? 200 : 300;
+    
+    //     amortizationChartCanvas.style.width = '100%';
+    //     amortizationChartCanvas.style.height = `${height}px`;
+    
+    //     const width = amortizationChartCanvas.offsetWidth;
+    //     amortizationChartCanvas.width = width * dpr;
+    //     amortizationChartCanvas.height = height * dpr;
+    
+    //     if (dpr > 1) {
+    //         ctx.scale(dpr, dpr);
+    //     }
+    
+    //     ctx.clearRect(0, 0, width * dpr, height * dpr);
+    
+    //     const months = balanceData.length;
+    //     const maxBalance = Math.max(...balanceData);
+    //     const maxCumulative = Math.max(...cumulativeInterestData, ...cumulativePrincipalData);
+    
+    //     const yAxisMax = Math.ceil(Math.max(maxBalance, maxCumulative) / 100000) * 100000;
+    
+    //     const padding = { top: 30, right: 20, bottom: 30, left: 70 };
+    //     const gridColor = '#d0d0d0';
+    //     const labelColor = '#505050';
+    //     const labelFont = '14px Open Sans';
+    
+    //     ctx.font = labelFont;
+    //     ctx.textAlign = 'right';
+    
+    //     function getY(value) {
+    //         return height - padding.bottom - (value / yAxisMax) * (height - padding.top - padding.bottom);
+    //     }
+    
+    //     function getX(index) {
+    //         return padding.left + (index / months) * (width - padding.left - padding.right);
+    //     }
+    
+    //     // Draw horizontal grid lines
+    //     for (let i = 0; i <= 3; i++) { // Include top, middle, and bottom lines
+    //         const yValue = i * (yAxisMax / 3); // Divide Y-axis into 3 segments
+    //         const y = getY(yValue);
+    
+    //         ctx.strokeStyle = gridColor;
+    //         ctx.lineWidth = 1;
+    //         ctx.beginPath();
+    //         ctx.moveTo(padding.left, y);
+    //         ctx.lineTo(width - padding.right, y);
+    //         ctx.stroke();
+    
+    //         // Draw Y-axis labels
+    //         ctx.fillStyle = labelColor;
+    //         ctx.fillText(`$${(yValue / 1000).toFixed(0)}K`, padding.left - 10, y + 4);
+    //     }
+    
+    //     // Draw vertical grid lines and labels for every 5 years, including outermost lines
+    //     ctx.textAlign = 'center';
+    //     const intervalMonths = 12 * 5; // Every 5 years
+    //     const currentYear = new Date().getFullYear();
+    
+    //     // Draw outermost grid lines first
+    //     ctx.strokeStyle = gridColor;
+    //     ctx.lineWidth = 1;
+    
+    //     // Left-most vertical grid line
+    //     ctx.beginPath();
+    //     ctx.moveTo(padding.left, padding.top);
+    //     ctx.lineTo(padding.left, height - padding.bottom);
+    //     ctx.stroke();
+    //     ctx.fillStyle = labelColor;
+    //     ctx.fillText(currentYear, padding.left, height - 5); // Left-most label
+    
+    //     // Right-most vertical grid line
+    //     ctx.beginPath();
+    //     ctx.moveTo(width - padding.right, padding.top);
+    //     ctx.lineTo(width - padding.right, height - padding.bottom);
+    //     ctx.stroke();
+    //     ctx.fillStyle = labelColor;
+    //     ctx.fillText(currentYear + Math.floor(months / 12), width - padding.right, height - 5); // Right-most label
+    
+    //     // Draw intermediate vertical grid lines (every 5 years)
+    //     for (let i = intervalMonths; i < months; i += intervalMonths) {
+    //         const x = getX(i);
+    //         ctx.beginPath();
+    //         ctx.moveTo(x, padding.top);
+    //         ctx.lineTo(x, height - padding.bottom);
+    //         ctx.strokeStyle = gridColor;
+    //         ctx.stroke();
+    
+    //         const yearLabel = currentYear + Math.floor(i / 12);
+    //         ctx.fillStyle = labelColor;
+    //         ctx.fillText(yearLabel, x, height - 5);
+    //     }
+    
+    //     // Draw hover vertical line first (underneath everything else)
+    //     if (hoverIndex !== null) {
+    //         const hoverX = getX(hoverIndex);
+    
+    //         ctx.beginPath();
+    //         ctx.moveTo(hoverX, padding.top);
+    //         ctx.lineTo(hoverX, height - padding.bottom);
+    //         ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)'; // Subtle line
+    //         ctx.lineWidth = 1;
+    //         ctx.stroke();
+    //     }
+    
+    //     // Draw chart lines
+    //     const drawLine = (data, color, lineWidth) => {
+    //         ctx.beginPath();
+    //         ctx.strokeStyle = color; // Ensure this is fully opaque
+    //         ctx.lineWidth = lineWidth;
+    //         ctx.moveTo(getX(0), getY(data[0]));
+    //         for (let i = 1; i < months; i++) {
+    //             ctx.lineTo(getX(i), getY(data[i]));
+    //         }
+    //         ctx.stroke();
+    //     };
+    
+    //     drawLine(balanceData, '#175134', 2); // Balance line
+    //     drawLine(cumulativeInterestData, '#3EB721', 2.5); // Cumulative Interest
+    //     drawLine(cumulativePrincipalData, '#91BBA6', 2.5); // Cumulative Principal
+    
+    //     // Draw hover dots on top (above lines and vertical line)
+    //     if (hoverIndex !== null) {
+    //         const hoverX = getX(hoverIndex);
+    
+    //         const dotData = [
+    //             { y: getY(balanceData[hoverIndex]), color: '#175134' },
+    //             { y: getY(cumulativeInterestData[hoverIndex]), color: '#3EB721' },
+    //             { y: getY(cumulativePrincipalData[hoverIndex]), color: '#91BBA6' },
+    //         ];
+    
+    //         dotData.forEach(({ y, color }) => {
+    //             ctx.beginPath();
+    //             ctx.arc(hoverX, y, 5, 0, 2 * Math.PI);
+    //             ctx.fillStyle = color; // Ensure this is fully opaque
+    //             ctx.fill();
+    //         });
+    //     }
+    
+    //     // Draw border around the chart
+    //     ctx.strokeStyle = gridColor;
+    //     ctx.lineWidth = 1;
+    //     ctx.strokeRect(
+    //         padding.left - 3,
+    //         padding.top - 3,
+    //         width - padding.left - padding.right + 6,
+    //         height - padding.top - padding.bottom + 6
+    //     );
+    // }
     function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData, hoverIndex = null) {
         const ctx = amortizationChartCanvas.getContext('2d');
         const dpr = window.devicePixelRatio || 1;
@@ -762,9 +915,9 @@ function updateHoverValues(balance, interest, principal) {
             return padding.left + (index / months) * (width - padding.left - padding.right);
         }
     
-        // Draw horizontal grid lines (excluding top and bottom)
-        for (let i = 1; i <= 2; i++) { // Only draw inner lines
-            const yValue = i * (yAxisMax / 3);
+        // Draw horizontal grid lines
+        for (let i = 0; i <= 3; i++) { // Include top, middle, and bottom lines
+            const yValue = i * (yAxisMax / 3); // Divide Y-axis into 3 segments
             const y = getY(yValue);
     
             ctx.strokeStyle = gridColor;
@@ -774,15 +927,37 @@ function updateHoverValues(balance, interest, principal) {
             ctx.lineTo(width - padding.right, y);
             ctx.stroke();
     
+            // Draw Y-axis labels
             ctx.fillStyle = labelColor;
             ctx.fillText(`$${(yValue / 1000).toFixed(0)}K`, padding.left - 10, y + 4);
         }
     
-        // Draw vertical grid lines and labels for every 5 years
+        // Draw vertical grid lines and labels for every 5 years, including outermost lines
         ctx.textAlign = 'center';
         const intervalMonths = 12 * 5; // Every 5 years
         const currentYear = new Date().getFullYear();
     
+        // Draw outermost grid lines first
+        ctx.strokeStyle = gridColor;
+        ctx.lineWidth = 1;
+    
+        // Left-most vertical grid line
+        ctx.beginPath();
+        ctx.moveTo(padding.left, padding.top);
+        ctx.lineTo(padding.left, height - padding.bottom);
+        ctx.stroke();
+        ctx.fillStyle = labelColor;
+        ctx.fillText(currentYear, padding.left, height - 5); // Left-most label
+    
+        // Right-most vertical grid line
+        ctx.beginPath();
+        ctx.moveTo(width - padding.right, padding.top);
+        ctx.lineTo(width - padding.right, height - padding.bottom);
+        ctx.stroke();
+        ctx.fillStyle = labelColor;
+        ctx.fillText(currentYear + Math.floor(months / 12), width - padding.right, height - 5); // Right-most label
+    
+        // Draw intermediate vertical grid lines (every 5 years)
         for (let i = intervalMonths; i < months; i += intervalMonths) {
             const x = getX(i);
             ctx.beginPath();
@@ -841,19 +1016,8 @@ function updateHoverValues(balance, interest, principal) {
                 ctx.fill();
             });
         }
-    
-        // Draw border around the chart
-        ctx.strokeStyle = gridColor;
-        ctx.lineWidth = 1;
-        ctx.strokeRect(
-            padding.left - 3,
-            padding.top - 3,
-            width - padding.left - padding.right + 6,
-            height - padding.top - padding.bottom + 6
-        );
     }
     
-  
 
 
 
@@ -897,41 +1061,7 @@ function updateHoverValues(balance, interest, principal) {
     amortizationChartCanvas.addEventListener('touchmove', handleTouchEvent);
     amortizationChartCanvas.addEventListener('touchstart', handleTouchEvent);
     
-    // function handleTouchEvent(event) {
-    //     const rect = amortizationChartCanvas.getBoundingClientRect();
-    //     const touch = event.touches[0] || event.changedTouches[0];
-    //     const x = touch.clientX - rect.left;
-    
-    //     const padding = { top: 30, right: 20, bottom: 30, left: 70 };
-    
-    //     if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
-    //         const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
-    
-    //         const index = Math.round(
-    //             ((x - padding.left) / chartWidth) * (lastAmortizationData.balanceData.length - 1)
-    //         );
-    
-    //         if (index >= 0 && index < lastAmortizationData.balanceData.length) {
-    //             updateHoverValues(
-    //                 lastAmortizationData.balanceData[index],
-    //                 lastAmortizationData.cumulativeInterestData[index],
-    //                 lastAmortizationData.cumulativePrincipalData[index]
-    //             );
-    
-    //             const startDate = new Date();
-    //             const hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
-    //             displayHoverDate(hoverDate);
-    
-    //             drawAmortizationChart(
-    //                 lastAmortizationData.balanceData,
-    //                 lastAmortizationData.cumulativeInterestData,
-    //                 lastAmortizationData.cumulativePrincipalData,
-    //                 index
-    //             );
-    //         }
-    //     }
-    //     event.preventDefault(); // Prevent default scrolling
-    // }
+
     
 
     function handleTouchEvent(event) {

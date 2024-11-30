@@ -548,7 +548,6 @@ canvas {
   width: 100% !important;
   height: auto !important;
   background-color: transparent;
-  margin: 30px auto 0 auto;
 }
 
 #amortizationChartContainer {
@@ -559,11 +558,7 @@ canvas {
   padding: 20px; /* This creates visual padding around the chart */
 }
 
-#amortizationChart {
-  margin-right: 10px; /* Right margin to avoid overflow */
-  margin-bottom: 10px; /* Bottom margin to avoid overflow */
-  box-sizing: border-box;
-}
+
 
 /* Shared styles for all chart labels */
 .chart-labels {
@@ -597,7 +592,7 @@ canvas {
 /* Consistent style for label values */
 #chartLabels .label-value,
 #amortizationLabels .label-value {
-  font-weight: 500;
+  font-weight: 400;
   white-space: nowrap;
 }
 
@@ -1258,11 +1253,6 @@ canvas {
 
   #amortizationChartContainer {
       padding: 0; /* This creates visual padding around the chart */
-  }
-  
-  #amortizationChart {
-    margin-right: 10px; /* Right margin to avoid overflow */
-    margin-bottom: 10px; /* Bottom margin to avoid overflow */
   }
 
   canvas{
