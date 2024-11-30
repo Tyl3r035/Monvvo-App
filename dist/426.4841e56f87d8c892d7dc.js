@@ -901,17 +901,8 @@ document.addEventListener("DOMContentLoaded", function () {
   //             ctx.fill();
   //         });
   //     }
-
-  //     // Draw border around the chart
-  //     ctx.strokeStyle = gridColor;
-  //     ctx.lineWidth = 1;
-  //     ctx.strokeRect(
-  //         padding.left - 3,
-  //         padding.top - 3,
-  //         width - padding.left - padding.right + 6,
-  //         height - padding.top - padding.bottom + 6
-  //     );
   // }
+
   function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData) {
     var hoverIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
     var ctx = amortizationChartCanvas.getContext('2d');
@@ -931,7 +922,10 @@ document.addEventListener("DOMContentLoaded", function () {
     var months = balanceData.length;
     var maxBalance = Math.max.apply(Math, _toConsumableArray(balanceData));
     var maxCumulative = Math.max.apply(Math, _toConsumableArray(cumulativeInterestData).concat(_toConsumableArray(cumulativePrincipalData)));
-    var yAxisMax = Math.ceil(Math.max(maxBalance, maxCumulative) / 100000) * 100000;
+    var originalYAxisMax = Math.ceil(Math.max(maxBalance, maxCumulative) / 100000) * 100000;
+
+    // Scale the y-axis grid height for smaller screens
+    var yAxisMax = window.innerWidth < 500 ? originalYAxisMax * 0.3 : originalYAxisMax;
     var padding = {
       top: 30,
       right: 20,
@@ -953,8 +947,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Draw horizontal grid lines
     for (var i = 0; i <= 3; i++) {
       // Include top, middle, and bottom lines
-      var yValue = i * (yAxisMax / 3); // Divide Y-axis into 3 segments
-      var y = getY(yValue);
+      var yValue = i * (originalYAxisMax / 3); // Use originalYAxisMax for consistent labels
+      var y = getY(i * (yAxisMax / 3)); // Adjust grid spacing based on yAxisMax
+
       ctx.strokeStyle = gridColor;
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -1116,21 +1111,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var year = date.getFullYear();
     hoverDateContainer.textContent = "".concat(month, " ").concat(year);
   }
-
-  // amortizationChartCanvas.addEventListener('mouseout', () => {
-  //     revertValuesToTotals();
-
-  //     // Clear the hover date
-  //     const hoverDateContainer = document.getElementById('amortizationHoverDate');
-  //     hoverDateContainer.textContent = '';
-
-  //     drawAmortizationChart(
-  //         lastAmortizationData.balanceData,
-  //         lastAmortizationData.cumulativeInterestData,
-  //         lastAmortizationData.cumulativePrincipalData
-  //     );
-  // });
-
   amortizationChartCanvas.addEventListener('mouseout', function () {
     revertValuesToTotals();
     var hoverDateContainer = document.getElementById('amortizationHoverDate');
@@ -1252,4 +1232,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=426.8d1336b69fea3e9f965d.js.map
+//# sourceMappingURL=426.4841e56f87d8c892d7dc.js.map

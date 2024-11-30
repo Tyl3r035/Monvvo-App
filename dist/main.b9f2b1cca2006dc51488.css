@@ -1289,7 +1289,12 @@ canvas {
   .calculation-section{
     gap: 30px;
   }
-
+  .results-container{
+    box-shadow: 
+        0px 3px 8px 1px rgba(0, 0, 0, 0.1), /* Slight shadow on the bottom */
+        0px 0px 0px 0px rgba(0, 0, 0, 0.05) , /* Very subtle shadow on the right */
+       0px 0px 0px 0px rgba(0, 0, 0, 0.05) !important; /* Very subtle shadow on the left */
+  }
   .tab-text, .tab-active .tab-text{
     font-size: 14px;
     padding: 8px 0;
@@ -1299,6 +1304,9 @@ canvas {
   }
   .monthly-payment{
     font-size: 24px;
+  }
+  .answer-title{
+    font-size: 16px;
   }
 
   #amortizationChartContainer {
@@ -1423,7 +1431,7 @@ canvas {
 }
 @media screen and (max-width: 360px){
   .answer-title{
-    font-size: 16px;
+    font-size: 14px;
   }
   .answer-disclaimer{
     font-size: 12px;
@@ -1463,4 +1471,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.0793372de7463070b663.css.map*/
+/*# sourceMappingURL=main.b9f2b1cca2006dc51488.css.map*/

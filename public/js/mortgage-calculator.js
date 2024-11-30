@@ -717,8 +717,7 @@ function updateHoverValues(balance, interest, principal) {
         });
     }
     
-    
-
+  
     // function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData, hoverIndex = null) {
     //     const ctx = amortizationChartCanvas.getContext('2d');
     //     const dpr = window.devicePixelRatio || 1;
@@ -862,17 +861,8 @@ function updateHoverValues(balance, interest, principal) {
     //             ctx.fill();
     //         });
     //     }
-    
-    //     // Draw border around the chart
-    //     ctx.strokeStyle = gridColor;
-    //     ctx.lineWidth = 1;
-    //     ctx.strokeRect(
-    //         padding.left - 3,
-    //         padding.top - 3,
-    //         width - padding.left - padding.right + 6,
-    //         height - padding.top - padding.bottom + 6
-    //     );
     // }
+    
     function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData, hoverIndex = null) {
         const ctx = amortizationChartCanvas.getContext('2d');
         const dpr = window.devicePixelRatio || 1;
@@ -897,7 +887,10 @@ function updateHoverValues(balance, interest, principal) {
         const maxBalance = Math.max(...balanceData);
         const maxCumulative = Math.max(...cumulativeInterestData, ...cumulativePrincipalData);
     
-        const yAxisMax = Math.ceil(Math.max(maxBalance, maxCumulative) / 100000) * 100000;
+        const originalYAxisMax = Math.ceil(Math.max(maxBalance, maxCumulative) / 100000) * 100000;
+    
+        // Scale the y-axis grid height for smaller screens
+        const yAxisMax = window.innerWidth < 500 ? originalYAxisMax * 0.3 : originalYAxisMax;
     
         const padding = { top: 30, right: 20, bottom: 30, left: 70 };
         const gridColor = '#d0d0d0';
@@ -917,8 +910,8 @@ function updateHoverValues(balance, interest, principal) {
     
         // Draw horizontal grid lines
         for (let i = 0; i <= 3; i++) { // Include top, middle, and bottom lines
-            const yValue = i * (yAxisMax / 3); // Divide Y-axis into 3 segments
-            const y = getY(yValue);
+            const yValue = i * (originalYAxisMax / 3); // Use originalYAxisMax for consistent labels
+            const y = getY(i * (yAxisMax / 3)); // Adjust grid spacing based on yAxisMax
     
             ctx.strokeStyle = gridColor;
             ctx.lineWidth = 1;
@@ -1021,7 +1014,6 @@ function updateHoverValues(balance, interest, principal) {
 
 
 
-
     
     amortizationChartCanvas.addEventListener('mousemove', (event) => {
         const rect = amortizationChartCanvas.getBoundingClientRect();
@@ -1121,21 +1113,7 @@ function updateHoverValues(balance, interest, principal) {
     
 
 
-   
-    // amortizationChartCanvas.addEventListener('mouseout', () => {
-    //     revertValuesToTotals();
-    
-    //     // Clear the hover date
-    //     const hoverDateContainer = document.getElementById('amortizationHoverDate');
-    //     hoverDateContainer.textContent = '';
-    
-    //     drawAmortizationChart(
-    //         lastAmortizationData.balanceData,
-    //         lastAmortizationData.cumulativeInterestData,
-    //         lastAmortizationData.cumulativePrincipalData
-    //     );
-    // });
-    
+  
     amortizationChartCanvas.addEventListener('mouseout', () => {
         revertValuesToTotals();
     
