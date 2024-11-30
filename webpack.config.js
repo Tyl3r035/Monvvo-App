@@ -28,6 +28,14 @@ const pages = [
         canonical: 'https://www.monvvo.com/privacy-policy'
     },
 
+    // Widget Pages
+    {
+        filename: 'mortgage-widget.html',
+        template: path.resolve(__dirname, 'public/widgets/mortgage-widget.html'),
+        chunks: ['utils'],
+        canonical: 'https://www.monvvo.com/widgets/mortgage-widget'
+    },
+
     // Add more pages as needed
 ];
 
@@ -93,6 +101,7 @@ module.exports = {
                 { from: 'public/css', to: 'css' },
                 { from: 'public/js', to: 'js' },
                 { from: 'public/js/service-worker.js', to: 'service-worker.js' },
+                { from: 'public/widgets', to: 'widgets' },
                 { from: '_headers', to: '_headers', toType: 'file' },
                 { from: '_redirects', to: '_redirects', toType: 'file' },
                 { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' },
