@@ -979,12 +979,35 @@ document.addEventListener("DOMContentLoaded", function () {
     var year = date.getFullYear();
     hoverDateContainer.textContent = "".concat(month, " ").concat(year);
   }
+
+  // amortizationChartCanvas.addEventListener('mouseout', () => {
+  //     revertValuesToTotals();
+
+  //     // Clear the hover date
+  //     const hoverDateContainer = document.getElementById('amortizationHoverDate');
+  //     hoverDateContainer.textContent = '';
+
+  //     drawAmortizationChart(
+  //         lastAmortizationData.balanceData,
+  //         lastAmortizationData.cumulativeInterestData,
+  //         lastAmortizationData.cumulativePrincipalData
+  //     );
+  // });
+
   amortizationChartCanvas.addEventListener('mouseout', function () {
     revertValuesToTotals();
-
-    // Clear the hover date
     var hoverDateContainer = document.getElementById('amortizationHoverDate');
-    hoverDateContainer.textContent = '';
+    hoverDateContainer.textContent = ''; // Clear the hover date
+
+    drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData);
+  });
+
+  // Add touchend for mobile devices
+  amortizationChartCanvas.addEventListener('touchend', function () {
+    revertValuesToTotals();
+    var hoverDateContainer = document.getElementById('amortizationHoverDate');
+    hoverDateContainer.textContent = ''; // Clear the hover date
+
     drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData);
   });
 
@@ -1092,4 +1115,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=426.4f9fdd8d7ebc2850b7f0.js.map
+//# sourceMappingURL=426.b01ebb0e8e845ce515b9.js.map

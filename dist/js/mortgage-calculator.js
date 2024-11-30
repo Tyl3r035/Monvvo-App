@@ -992,12 +992,25 @@ function updateHoverValues(balance, interest, principal) {
 
 
    
+    // amortizationChartCanvas.addEventListener('mouseout', () => {
+    //     revertValuesToTotals();
+    
+    //     // Clear the hover date
+    //     const hoverDateContainer = document.getElementById('amortizationHoverDate');
+    //     hoverDateContainer.textContent = '';
+    
+    //     drawAmortizationChart(
+    //         lastAmortizationData.balanceData,
+    //         lastAmortizationData.cumulativeInterestData,
+    //         lastAmortizationData.cumulativePrincipalData
+    //     );
+    // });
+    
     amortizationChartCanvas.addEventListener('mouseout', () => {
         revertValuesToTotals();
     
-        // Clear the hover date
         const hoverDateContainer = document.getElementById('amortizationHoverDate');
-        hoverDateContainer.textContent = '';
+        hoverDateContainer.textContent = ''; // Clear the hover date
     
         drawAmortizationChart(
             lastAmortizationData.balanceData,
@@ -1006,6 +1019,22 @@ function updateHoverValues(balance, interest, principal) {
         );
     });
     
+    // Add touchend for mobile devices
+    amortizationChartCanvas.addEventListener('touchend', () => {
+        revertValuesToTotals();
+    
+        const hoverDateContainer = document.getElementById('amortizationHoverDate');
+        hoverDateContainer.textContent = ''; // Clear the hover date
+    
+        drawAmortizationChart(
+            lastAmortizationData.balanceData,
+            lastAmortizationData.cumulativeInterestData,
+            lastAmortizationData.cumulativePrincipalData
+        );
+    });
+    
+
+
 
 /* PDF Generation Logic */
     function revertValuesToTotals() {
