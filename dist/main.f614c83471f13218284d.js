@@ -108,7 +108,7 @@ if (tabPaymentBreakdown && tabAmortizationSchedule && paymentBreakdownContent &&
   console.log("Tab elements for Payment Breakdown and Amortization Schedule not found");
 }
 
-//Tooltip Info Icon JS
+// Tooltip Info Icon JS
 var infoIcons = document.querySelectorAll('.info-icon');
 infoIcons.forEach(function (icon) {
   var tooltipText = icon.getAttribute('data-tooltip');
@@ -119,22 +119,41 @@ infoIcons.forEach(function (icon) {
     document.body.appendChild(tooltip); // Append to body for consistent positioning
 
     icon.addEventListener('mouseenter', function () {
-      var iconRect = icon.getBoundingClientRect();
-      var tooltipRect = tooltip.getBoundingClientRect();
-
-      // Adjust position based on page scroll to ensure it remains fixed above and to the left of the icon
-      var tooltipX = window.pageXOffset + iconRect.right - tooltipRect.width - 5; // 5px to the left of the icon's right edge
-      var tooltipY = window.pageYOffset + iconRect.top - tooltipRect.height - 5; // 5px above the icon's top edge
-
-      tooltip.style.left = "".concat(tooltipX, "px");
-      tooltip.style.top = "".concat(tooltipY, "px");
-      tooltip.classList.add('visible');
+      return showTooltip(icon, tooltip);
     });
     icon.addEventListener('mouseleave', function () {
-      tooltip.classList.remove('visible');
+      return hideTooltip(tooltip);
+    });
+    icon.addEventListener('touchstart', function (event) {
+      showTooltip(icon, tooltip);
+      event.stopPropagation(); // Prevent immediate hiding on touchstart
     });
   }
 });
+
+// Hide tooltips on any touch or click outside
+document.addEventListener('click', hideAllTooltips);
+document.addEventListener('touchend', hideAllTooltips);
+function showTooltip(icon, tooltip) {
+  var iconRect = icon.getBoundingClientRect();
+  var tooltipRect = tooltip.getBoundingClientRect();
+
+  // Adjust position based on page scroll
+  var tooltipX = window.pageXOffset + iconRect.right - tooltipRect.width - 5; // 5px left of the icon's right edge
+  var tooltipY = window.pageYOffset + iconRect.top - tooltipRect.height - 5; // 5px above the icon's top edge
+
+  tooltip.style.left = "".concat(tooltipX, "px");
+  tooltip.style.top = "".concat(tooltipY, "px");
+  tooltip.classList.add('visible');
+}
+function hideTooltip(tooltip) {
+  tooltip.classList.remove('visible');
+}
+function hideAllTooltips() {
+  document.querySelectorAll('.info-tooltips.visible').forEach(function (tooltip) {
+    tooltip.classList.remove('visible');
+  });
+}
 
 // Amortization Table Expansion Logic
 var expandBox = document.querySelector(".expand-box");
@@ -558,4 +577,4 @@ module.exports = webpackAsyncContext;
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=main.a23d82aabb79701f6487.js.map
+//# sourceMappingURL=main.f614c83471f13218284d.js.map

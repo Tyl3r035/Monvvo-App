@@ -58,7 +58,7 @@ if (tabPaymentBreakdown && tabAmortizationSchedule && paymentBreakdownContent &&
     console.log("Tab elements for Payment Breakdown and Amortization Schedule not found");
 }
 
-//Tooltip Info Icon JS
+// Tooltip Info Icon JS
 const infoIcons = document.querySelectorAll('.info-icon');
 
 infoIcons.forEach(icon => {
@@ -69,27 +69,42 @@ infoIcons.forEach(icon => {
         tooltip.textContent = tooltipText;
         document.body.appendChild(tooltip); // Append to body for consistent positioning
 
-        icon.addEventListener('mouseenter', () => {
-            const iconRect = icon.getBoundingClientRect();
-            const tooltipRect = tooltip.getBoundingClientRect();
-
-            // Adjust position based on page scroll to ensure it remains fixed above and to the left of the icon
-            const tooltipX = window.pageXOffset + iconRect.right - tooltipRect.width - 5; // 5px to the left of the icon's right edge
-            const tooltipY = window.pageYOffset + iconRect.top - tooltipRect.height - 5;   // 5px above the icon's top edge
-
-            tooltip.style.left = `${tooltipX}px`;
-            tooltip.style.top = `${tooltipY}px`;
-
-            tooltip.classList.add('visible');
-        });
-
-        icon.addEventListener('mouseleave', () => {
-            tooltip.classList.remove('visible');
+        icon.addEventListener('mouseenter', () => showTooltip(icon, tooltip));
+        icon.addEventListener('mouseleave', () => hideTooltip(tooltip));
+        icon.addEventListener('touchstart', (event) => {
+            showTooltip(icon, tooltip);
+            event.stopPropagation(); // Prevent immediate hiding on touchstart
         });
     }
 });
 
+// Hide tooltips on any touch or click outside
+document.addEventListener('click', hideAllTooltips);
+document.addEventListener('touchend', hideAllTooltips);
 
+function showTooltip(icon, tooltip) {
+    const iconRect = icon.getBoundingClientRect();
+    const tooltipRect = tooltip.getBoundingClientRect();
+
+    // Adjust position based on page scroll
+    const tooltipX = window.pageXOffset + iconRect.right - tooltipRect.width - 5; // 5px left of the icon's right edge
+    const tooltipY = window.pageYOffset + iconRect.top - tooltipRect.height - 5;   // 5px above the icon's top edge
+
+    tooltip.style.left = `${tooltipX}px`;
+    tooltip.style.top = `${tooltipY}px`;
+
+    tooltip.classList.add('visible');
+}
+
+function hideTooltip(tooltip) {
+    tooltip.classList.remove('visible');
+}
+
+function hideAllTooltips() {
+    document.querySelectorAll('.info-tooltips.visible').forEach(tooltip => {
+        tooltip.classList.remove('visible');
+    });
+}
 
 // Amortization Table Expansion Logic
 const expandBox = document.querySelector(".expand-box");
