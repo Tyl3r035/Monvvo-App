@@ -2,30 +2,6 @@
   publish = "dist"
   command = "npm run build"
 
-# Specific CSP for the widget page
-[[headers]]
-  for = "/widgets/mortgage-widget.html"
-  [headers.values]
-    Cache-Control = "public, max-age=300, must-revalidate"
-    Content-Security-Policy = "default-src 'self'; frame-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; img-src 'self' data:; connect-src 'self'"
-    X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "ALLOW"
-    X-XSS-Protection = "1; mode=block"
-    Referrer-Policy = "no-referrer-when-downgrade"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-
-# Global CSP for all pages (except the widget)
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Cache-Control = "public, max-age=300, must-revalidate"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; object-src 'none'; img-src 'self' data:; connect-src 'self' https://www.google-analytics.com; frame-src 'none'; frame-ancestors 'none'"
-    X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    Referrer-Policy = "no-referrer-when-downgrade"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-
 [[headers]]
   for = "/*.js"
   [headers.values]
@@ -35,6 +11,30 @@
   for = "/*.css"
   [headers.values]
     Content-Type = "text/css"
+
+# Global CSP for all pages (except the widget)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; object-src 'none'; img-src 'self' data:; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'none'"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# Specific CSP for the widget page
+[[headers]]
+  for = "/widgets/mortgage-widget.html"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; img-src 'self' data:; connect-src 'self'; frame-ancestors *"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "ALLOWALL"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
 [[redirects]]
   from = "http://monvvo.com/*"
