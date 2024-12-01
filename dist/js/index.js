@@ -47,7 +47,7 @@ import emailjs from 'emailjs-com';
 const sendEmail = (e) => {
   e.preventDefault();
 
-  emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID')
+  emailjs.sendForm('service_tq3utyr', 'template_7wx87yw', e.target, 'q40wjm0BzzjWcxsDf')
     .then((result) => {
       alert('Message sent successfully!');
     }, (error) => {

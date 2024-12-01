@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var sendEmail = function sendEmail(e) {
   e.preventDefault();
-  emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID').then(function (result) {
+  emailjs.sendForm('service_tq3utyr', 'template_7wx87yw', e.target, 'q40wjm0BzzjWcxsDf').then(function (result) {
     alert('Message sent successfully!');
   }, function (error) {
     alert('Failed to send message. Please try again.');
@@ -536,7 +536,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference all chunks
 /******/ 		__webpack_require__.miniCssF = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + "main" + "." + "b03a60bd3cf1a35c3f17" + ".css";
+/******/ 			return "" + "main" + "." + "012ddea77677616012d9" + ".css";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -719,4 +719,4 @@ module.exports = webpackAsyncContext;
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=main.5fdcffcf517cd0916739.js.map
+//# sourceMappingURL=main.e1ec57f79dbdc65e1f61.js.map

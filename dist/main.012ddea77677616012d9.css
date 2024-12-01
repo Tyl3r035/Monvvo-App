@@ -1123,6 +1123,7 @@ canvas {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #232525;
+  border-radius: none;
   padding: 10px;
 }
 .contact-form textarea{
@@ -1133,6 +1134,7 @@ canvas {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #232525;
+  border-radius: none;
   padding: 10px;
   resize: none;
 }
@@ -1570,4 +1572,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.b03a60bd3cf1a35c3f17.css.map*/
+/*# sourceMappingURL=main.012ddea77677616012d9.css.map*/

@@ -1073,6 +1073,7 @@ canvas {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #232525;
+  border-radius: none;
   padding: 10px;
 }
 .contact-form textarea{
@@ -1083,6 +1084,7 @@ canvas {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #232525;
+  border-radius: none;
   padding: 10px;
   resize: none;
 }
