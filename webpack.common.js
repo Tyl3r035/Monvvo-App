@@ -47,6 +47,11 @@ module.exports = {
             template: './public/404.html',
             filename: '404.html',
         }),
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: './public/contact.html',
+            filename: 'contact.html',
+        }),
         // Widget Sites
         new HtmlWebpackPlugin({
             template: './public/widgets/mortgage-widget.html',

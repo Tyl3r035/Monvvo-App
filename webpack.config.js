@@ -41,6 +41,12 @@ const pages = [
         chunks: ['utils'],
         canonical: 'https://www.monvvo.com/404'
     },
+    {
+        filename: 'contact.html',
+        template: path.resolve(__dirname, 'public/contact.html'),
+        chunks: ['utils'],
+        canonical: 'https://www.monvvo.com/contact'
+    },
 
     // Add more pages as needed
 ];

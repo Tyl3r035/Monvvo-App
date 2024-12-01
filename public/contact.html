@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Tyler P.">
+    <meta name="description" content="Contact Us | Monvvo">
+    <title>Contact Us | Monvvo</title>
+    <link rel="canonical" href="<%= htmlWebpackPlugin.options.canonical %>" />
+    <link rel="icon" type="image/svg" href="./img/logos/monvvo-favicon.svg">
+    <!-- Google Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap">
+
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var fontLinks = [
+                "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap",
+                "https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+            ];
+            fontLinks.forEach(function(linkHref) {
+                var link = document.createElement("link");
+                link.href = linkHref;
+                link.rel = "stylesheet";
+                link.defer = true;
+                document.head.appendChild(link);
+            });
+        });
+    </script> -->
+</head>
+<body>
+  <header id="header">
+    <div class="logo">
+      <img src="./img/logos/monvvo-transparent.svg" alt="Monvvo Logo" class="monvvo-logo" loading="lazy">
+    </div>
+  </header>
+  <div class="disclaimer-main">
+    <h1 id="title">
+        Contact Us
+    </h1>
+    <br><br>
+    <div class="contact-section">
+        <p class="contact-text">
+            Have questions about the Monvvo mortgage calculator? We’re here to assist with anything you need. Whether you’re unsure how to use the calculator, want help understanding your results, or simply wish to share feedback, we’re happy to hear from you. At Monvvo, we value your thoughts and suggestions—they play a vital role in helping us enhance the tool and create a better experience for everyone. If you notice any issues or have ideas for improvement, don’t hesitate to let us know.
+        </p>
+        <p class="contact-text">
+            Use the contact form below to send us a message, or feel free to reach out to us directly at the emails listed below. A member of our team will get back to you as soon as possible. Your feedback helps us grow, and we appreciate your input every step of the way.
+        </p>
+    </div>
+    <div class="contact-section">
+        <h2 class="contact-title">How To Reach Us</h2>
+        <ul class="contact-list">
+            <li>General Inquiries: <a href="mailto:info@monvvo.com">info@monvvo.com</a></li>
+            <li>Feedback: <a href="mailto:feedback@monvvo.com">feedback@monvvo.com</a></li>
+        </ul>
+    </div>
+    <div class="contact-section">
+        <br><br>
+        <h2 class="contact-title" style="text-align: center;">Message Us Directly</h2>
+        <form onSubmit="sendEmail" class="contact-form">
+            <div class="input-fluid">
+              <label for="contact-name">Your Name:</label>
+              <input type="text" id="contact-name" name="name" required />
+            </div>
+            <div class="input-fluid">
+              <label for="contact-email">Your Email:</label>
+              <input type="email" id="contact-email" name="email" required />
+            </div>
+            <div class="input-fluid">
+              <label for="contact-message">Your Message:</label>
+              <textarea id="contact-message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="contact-submit">Send</button>
+          </form>
+          
+          
+    </div>
+    </div>
+    <footer id="footer">
+        <div class="footer-top">
+    <div class="footer-left"></div>
+        <div class="footer-right">
+            <!-- <div class="footer-col">
+            <h5 class="footer-title">Calculators</h5>
+            <a class="footer-link" href="#">Banking</a>
+            <a class="footer-link" href="#">Mortgage</a>
+            <a class="footer-link" href="#">Loan</a>
+            <a class="footer-link" href="#">Investing</a>
+            <a class="footer-link" href="#">Personal Finance</a>
+            <a class="footer-link" href="#">Taxes</a>
+            </div>
+            <div class="footer-col">
+            <h5 class="footer-title">Resources</h5>
+            <a class="footer-link" href="#">Articles</a>
+            <a class="footer-link" href="#">Videos</a>
+            <a class="footer-link" href="#">Podcasts</a>
+            </div> -->
+            <div class="footer-col">
+            <h5 class="footer-title">Quick Links</h5>
+            <a class="footer-link" href="./disclaimer.html" target="_blank">Monvvo Disclaimer</a>
+            <a class="footer-link" href="./privacy-policy.html" target="_blank">Privacy Policy</a>
+
+            </div>
+        </div>
+        </div>
+        <hr>
+        <div class="footer-bottom">
+        Monvvo, 2024
+        </div>
+    </footer>
+    </body>
+</html>
+

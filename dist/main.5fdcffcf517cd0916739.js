@@ -1,13 +1,156 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 4943:
+/***/ 7522:
 /***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 "use strict";
-/* harmony import */ var _mortgage_calculator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6426);
-/* harmony import */ var _mortgagecalcs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7687);
-/* harmony import */ var _mortgagecalcs_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_mortgagecalcs_js__WEBPACK_IMPORTED_MODULE_1__);
+
+// EXTERNAL MODULE: ./public/js/mortgage-calculator.js + 1 modules
+var mortgage_calculator = __webpack_require__(6426);
+// EXTERNAL MODULE: ./public/js/mortgagecalcs.js
+var mortgagecalcs = __webpack_require__(7687);
+;// ./node_modules/emailjs-com/es/store/store.js
+const store = {
+    _origin: 'https://api.emailjs.com',
+};
+
+;// ./node_modules/emailjs-com/es/methods/init/init.js
+
+/**
+ * Initiation
+ * @param {string} userID - set the EmailJS user ID
+ * @param {string} origin - set the EmailJS origin
+ */
+const init = (userID, origin = 'https://api.emailjs.com') => {
+    store._userID = userID;
+    store._origin = origin;
+};
+
+;// ./node_modules/emailjs-com/es/utils/validateParams.js
+const validateParams = (userID, serviceID, templateID) => {
+    if (!userID) {
+        throw 'The user ID is required. Visit https://dashboard.emailjs.com/admin/integration';
+    }
+    if (!serviceID) {
+        throw 'The service ID is required. Visit https://dashboard.emailjs.com/admin';
+    }
+    if (!templateID) {
+        throw 'The template ID is required. Visit https://dashboard.emailjs.com/admin/templates';
+    }
+    return true;
+};
+
+;// ./node_modules/emailjs-com/es/models/EmailJSResponseStatus.js
+class EmailJSResponseStatus {
+    constructor(httpResponse) {
+        this.status = httpResponse.status;
+        this.text = httpResponse.responseText;
+    }
+}
+
+;// ./node_modules/emailjs-com/es/api/sendPost.js
+
+
+const sendPost = (url, data, headers = {}) => {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener('load', ({ target }) => {
+            const responseStatus = new EmailJSResponseStatus(target);
+            if (responseStatus.status === 200 || responseStatus.text === 'OK') {
+                resolve(responseStatus);
+            }
+            else {
+                reject(responseStatus);
+            }
+        });
+        xhr.addEventListener('error', ({ target }) => {
+            reject(new EmailJSResponseStatus(target));
+        });
+        xhr.open('POST', store._origin + url, true);
+        Object.keys(headers).forEach((key) => {
+            xhr.setRequestHeader(key, headers[key]);
+        });
+        xhr.send(data);
+    });
+};
+
+;// ./node_modules/emailjs-com/es/methods/send/send.js
+
+
+
+/**
+ * Send a template to the specific EmailJS service
+ * @param {string} serviceID - the EmailJS service ID
+ * @param {string} templateID - the EmailJS template ID
+ * @param {object} templatePrams - the template params, what will be set to the EmailJS template
+ * @param {string} userID - the EmailJS user ID
+ * @returns {Promise<EmailJSResponseStatus>}
+ */
+const send = (serviceID, templateID, templatePrams, userID) => {
+    const uID = userID || store._userID;
+    validateParams(uID, serviceID, templateID);
+    const params = {
+        lib_version: '3.2.0',
+        user_id: uID,
+        service_id: serviceID,
+        template_id: templateID,
+        template_params: templatePrams,
+    };
+    return sendPost('/api/v1.0/email/send', JSON.stringify(params), {
+        'Content-type': 'application/json',
+    });
+};
+
+;// ./node_modules/emailjs-com/es/methods/sendForm/sendForm.js
+
+
+
+const findHTMLForm = (form) => {
+    let currentForm;
+    if (typeof form === 'string') {
+        currentForm = document.querySelector(form);
+    }
+    else {
+        currentForm = form;
+    }
+    if (!currentForm || currentForm.nodeName !== 'FORM') {
+        throw 'The 3rd parameter is expected to be the HTML form element or the style selector of form';
+    }
+    return currentForm;
+};
+/**
+ * Send a form the specific EmailJS service
+ * @param {string} serviceID - the EmailJS service ID
+ * @param {string} templateID - the EmailJS template ID
+ * @param {string | HTMLFormElement} form - the form element or selector
+ * @param {string} userID - the EmailJS user ID
+ * @returns {Promise<EmailJSResponseStatus>}
+ */
+const sendForm = (serviceID, templateID, form, userID) => {
+    const uID = userID || store._userID;
+    const currentForm = findHTMLForm(form);
+    validateParams(uID, serviceID, templateID);
+    const formData = new FormData(currentForm);
+    formData.append('lib_version', '3.2.0');
+    formData.append('service_id', serviceID);
+    formData.append('template_id', templateID);
+    formData.append('user_id', uID);
+    return sendPost('/api/v1.0/email/send-form', formData);
+};
+
+;// ./node_modules/emailjs-com/es/index.js
+
+
+
+
+/* harmony default export */ const es = ({
+    init: init,
+    send: send,
+    sendForm: sendForm,
+});
+
+;// ./public/js/index.js
 
 
 
@@ -47,6 +190,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+// EmailJS
+
+var sendEmail = function sendEmail(e) {
+  e.preventDefault();
+  emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID').then(function (result) {
+    alert('Message sent successfully!');
+  }, function (error) {
+    alert('Failed to send message. Please try again.');
+  });
+};
 
 /***/ }),
 
@@ -313,18 +467,6 @@ module.exports = webpackAsyncContext;
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/create fake namespace object */
 /******/ 	(() => {
 /******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
@@ -394,7 +536,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference all chunks
 /******/ 		__webpack_require__.miniCssF = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + "main" + "." + "43c7d1b4610ca6e3838e" + ".css";
+/******/ 			return "" + "main" + "." + "b03a60bd3cf1a35c3f17" + ".css";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -572,9 +714,9 @@ module.exports = webpackAsyncContext;
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [246,426], () => (__webpack_require__(4943)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [246,426], () => (__webpack_require__(7522)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=main.3a58d24e7937f499c7cf.js.map
+//# sourceMappingURL=main.5fdcffcf517cd0916739.js.map
