@@ -252,6 +252,10 @@ var map = {
 		9749,
 		749
 	],
+	"./icons/footer-icon.svg": [
+		7974,
+		974
+	],
 	"./icons/info-icon.svg": [
 		1397,
 		397
@@ -435,7 +439,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + "." + {"5":"783e76ea13c00437d521","354":"6c39a03c95ce14fafea5","397":"d67032c4bd1ad636d6b6","449":"c667166afb4f1fc3aac7","661":"78adcfd3f6a66db4563e","730":"10b1f964bfbcc15a9aeb","749":"bb5c0f697c2e985e9490","805":"113374e6a7cb45c04ad9","838":"f1b59550c4041668c0db","843":"ee906024d82bed614358","867":"4413282f4ba2ff892749","991":"6c46db5e81a3f635e763"}[chunkId] + ".js";
+/******/ 			return "" + chunkId + "." + {"5":"783e76ea13c00437d521","354":"6c39a03c95ce14fafea5","397":"d67032c4bd1ad636d6b6","449":"c667166afb4f1fc3aac7","661":"78adcfd3f6a66db4563e","730":"10b1f964bfbcc15a9aeb","749":"bb5c0f697c2e985e9490","805":"113374e6a7cb45c04ad9","838":"f1b59550c4041668c0db","843":"ee906024d82bed614358","867":"4413282f4ba2ff892749","974":"25dbcf67430104be2b34","991":"6c46db5e81a3f635e763"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -444,7 +448,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference all chunks
 /******/ 		__webpack_require__.miniCssF = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + "main" + "." + "306cbbe293ba8329e922" + ".css";
+/******/ 			return "" + "main" + "." + "2b541186def8af81184c" + ".css";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -627,4 +631,4 @@ module.exports = webpackAsyncContext;
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=main.644bca5ea95e40470d45.js.map
+//# sourceMappingURL=main.eabfb3094602c17f3f8d.js.map
