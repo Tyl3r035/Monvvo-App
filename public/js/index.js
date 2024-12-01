@@ -3,6 +3,8 @@ import '../css/styles.css';
 import './mortgage-calculator.js';
 import './mortgagecalcs.js'
 import './utils.js';
+import emailjs from 'emailjs-com';
+
 // Your additional JavaScript logic here
 
 // Lazy Loading Logic
@@ -40,14 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
-// EmailJS
-import emailjs from 'emailjs-com';
-
 const sendEmail = (e) => {
   e.preventDefault();
 
-  emailjs.sendForm('service_tq3utyr', 'template_7wx87yw', e.target, 'q40wjm0BzzjWcxsDf')
+  emailjs.sendForm('service_tq3utyr', 'template_7wx87yw', e.target, '3oAkujQUbJuuWbt1u')
     .then((result) => {
       alert('Message sent successfully!');
     }, (error) => {

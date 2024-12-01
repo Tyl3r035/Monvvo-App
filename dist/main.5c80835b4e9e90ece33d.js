@@ -156,6 +156,8 @@ const sendForm = (serviceID, templateID, form, userID) => {
 
 
 
+
+
 // Your additional JavaScript logic here
 
 // Lazy Loading Logic
@@ -190,12 +192,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
-
-// EmailJS
-
 var sendEmail = function sendEmail(e) {
   e.preventDefault();
-  emailjs.sendForm('service_tq3utyr', 'template_7wx87yw', e.target, 'q40wjm0BzzjWcxsDf').then(function (result) {
+  emailjs.sendForm('service_tq3utyr', 'template_7wx87yw', e.target, '3oAkujQUbJuuWbt1u').then(function (result) {
     alert('Message sent successfully!');
   }, function (error) {
     alert('Failed to send message. Please try again.');
@@ -719,4 +718,4 @@ module.exports = webpackAsyncContext;
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=main.e1ec57f79dbdc65e1f61.js.map
+//# sourceMappingURL=main.5c80835b4e9e90ece33d.js.map
