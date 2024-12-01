@@ -3,7 +3,6 @@ import '../css/styles.css';
 import './mortgage-calculator.js';
 import './mortgagecalcs.js'
 import './utils.js';
-import emailjs from 'emailjs-com';
 
 // Your additional JavaScript logic here
 
@@ -41,14 +40,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-const sendEmail = (e) => {
-  e.preventDefault();
-
-  emailjs.sendForm('service_tq3utyr', 'template_7wx87yw', e.target, '3oAkujQUbJuuWbt1u')
-    .then((result) => {
-      alert('Message sent successfully!');
-    }, (error) => {
-      alert('Failed to send message. Please try again.');
-    });
-};
