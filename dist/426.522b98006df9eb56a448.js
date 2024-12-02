@@ -758,295 +758,288 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData, hoverIndex = null) {
-  //     const ctx = amortizationChartCanvas.getContext('2d');
+  // function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData) {
+  //     const canvas = document.getElementById('amortizationChart'); // Ensure correct canvas element
+  //     const ctx = canvas.getContext('2d');
   //     const dpr = window.devicePixelRatio || 1;
 
-  //     // Adjust height dynamically based on screen width
-  //     let height = window.innerWidth < 500 ? 200 : 300;
+  //     // Adjust canvas dimensions dynamically
+  //     const isSmallScreen = window.innerWidth < 700;
+  //     const canvasHeight = isSmallScreen ? 200 : 300;
 
-  //     amortizationChartCanvas.style.width = '100%';
-  //     amortizationChartCanvas.style.height = `${height}px`;
+  //     canvas.width = canvas.parentElement.offsetWidth * dpr;
+  //     canvas.height = canvasHeight * dpr; // Dynamically adjust height
+  //     ctx.scale(dpr, dpr);
 
-  //     const width = amortizationChartCanvas.offsetWidth;
-  //     amortizationChartCanvas.width = width * dpr;
-  //     amortizationChartCanvas.height = height * dpr;
+  //     const width = canvas.width / dpr;
+  //     const height = canvas.height / dpr;
 
-  //     if (dpr > 1) {
-  //         ctx.scale(dpr, dpr);
-  //     }
-
-  //     ctx.clearRect(0, 0, width * dpr, height * dpr);
-
-  //     const months = balanceData.length;
-  //     const maxBalance = Math.max(...balanceData);
-  //     const maxCumulative = Math.max(...cumulativeInterestData, ...cumulativePrincipalData);
-
-  //     const yAxisMax = Math.ceil(Math.max(maxBalance, maxCumulative) / 100000) * 100000;
-
-  //     const padding = { top: 30, right: 20, bottom: 30, left: 70 };
+  //     const padding = { top: 30, right: 20, bottom: 50, left: 70 };
   //     const gridColor = '#d0d0d0';
   //     const labelColor = '#505050';
-  //     const labelFont = '14px Open Sans';
 
-  //     ctx.font = labelFont;
-  //     ctx.textAlign = 'right';
+  //     const yAxisMax = Math.ceil(
+  //         Math.max(...balanceData, ...cumulativeInterestData, ...cumulativePrincipalData) / 100000
+  //     ) * 100000;
 
   //     function getY(value) {
   //         return height - padding.bottom - (value / yAxisMax) * (height - padding.top - padding.bottom);
   //     }
 
   //     function getX(index) {
-  //         return padding.left + (index / months) * (width - padding.left - padding.right);
+  //         return padding.left + (index / (balanceData.length - 1)) * (width - padding.left - padding.right);
   //     }
 
-  //     // Draw horizontal grid lines
-  //     for (let i = 0; i <= 3; i++) { // Include top, middle, and bottom lines
-  //         const yValue = i * (yAxisMax / 3); // Divide Y-axis into 3 segments
-  //         const y = getY(yValue);
+  //     // Function to draw vertical hover line and dots
+  //     function drawHoverLineAndDots(hoverIndex) {
+  //         const x = getX(hoverIndex);
+  //         const balanceY = getY(balanceData[hoverIndex]);
+  //         const principalY = getY(cumulativePrincipalData[hoverIndex]);
+  //         const interestY = getY(cumulativeInterestData[hoverIndex]);
 
-  //         ctx.strokeStyle = gridColor;
+  //         // Draw vertical hover line
+  //         ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
   //         ctx.lineWidth = 1;
+  //         ctx.beginPath();
+  //         ctx.moveTo(x, padding.top);
+  //         ctx.lineTo(x, height - padding.bottom);
+  //         ctx.stroke();
+
+  //         // Draw hover dots
+  //         const dotRadius = 4;
+  //         ctx.fillStyle = '#175134'; // Balance dot color
+  //         ctx.beginPath();
+  //         ctx.arc(x, balanceY, dotRadius, 0, Math.PI * 2);
+  //         ctx.fill();
+
+  //         ctx.fillStyle = '#3EB721'; // Principal dot color
+  //         ctx.beginPath();
+  //         ctx.arc(x, principalY, dotRadius, 0, Math.PI * 2);
+  //         ctx.fill();
+
+  //         ctx.fillStyle = '#91BBA6'; // Interest dot color
+  //         ctx.beginPath();
+  //         ctx.arc(x, interestY, dotRadius, 0, Math.PI * 2);
+  //         ctx.fill();
+  //     }
+
+  //     // Clear canvas
+  //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  //     // Draw grid lines and chart
+  //     ctx.font = '14px Arial';
+  //     ctx.textAlign = 'right';
+  //     ctx.fillStyle = labelColor;
+  //     ctx.strokeStyle = gridColor;
+
+  //     for (let i = 0; i <= yAxisMax; i += 100000) {
+  //         const y = getY(i);
   //         ctx.beginPath();
   //         ctx.moveTo(padding.left, y);
   //         ctx.lineTo(width - padding.right, y);
   //         ctx.stroke();
-
-  //         // Draw Y-axis labels
-  //         ctx.fillStyle = labelColor;
-  //         ctx.fillText(`$${(yValue / 1000).toFixed(0)}K`, padding.left - 10, y + 4);
+  //         ctx.fillText(`$${(i / 1000).toFixed(0)}K`, padding.left - 10, y + 5);
   //     }
 
-  //     // Draw vertical grid lines and labels for every 5 years, including outermost lines
+  //     const months = balanceData.length;
+  //     const years = Math.floor(months / 12);
   //     ctx.textAlign = 'center';
-  //     const intervalMonths = 12 * 5; // Every 5 years
-  //     const currentYear = new Date().getFullYear();
 
-  //     // Draw outermost grid lines first
-  //     ctx.strokeStyle = gridColor;
-  //     ctx.lineWidth = 1;
-
-  //     // Left-most vertical grid line
-  //     ctx.beginPath();
-  //     ctx.moveTo(padding.left, padding.top);
-  //     ctx.lineTo(padding.left, height - padding.bottom);
-  //     ctx.stroke();
-  //     ctx.fillStyle = labelColor;
-  //     ctx.fillText(currentYear, padding.left, height - 5); // Left-most label
-
-  //     // Right-most vertical grid line
-  //     ctx.beginPath();
-  //     ctx.moveTo(width - padding.right, padding.top);
-  //     ctx.lineTo(width - padding.right, height - padding.bottom);
-  //     ctx.stroke();
-  //     ctx.fillStyle = labelColor;
-  //     ctx.fillText(currentYear + Math.floor(months / 12), width - padding.right, height - 5); // Right-most label
-
-  //     // Draw intermediate vertical grid lines (every 5 years)
-  //     for (let i = intervalMonths; i < months; i += intervalMonths) {
-  //         const x = getX(i);
+  //     for (let i = 0; i <= years; i += 5) {
+  //         const monthIndex = i * 12;
+  //         const x = getX(monthIndex);
+  //         const yearLabel = new Date().getFullYear() + i;
   //         ctx.beginPath();
   //         ctx.moveTo(x, padding.top);
   //         ctx.lineTo(x, height - padding.bottom);
-  //         ctx.strokeStyle = gridColor;
   //         ctx.stroke();
-
-  //         const yearLabel = currentYear + Math.floor(i / 12);
-  //         ctx.fillStyle = labelColor;
-  //         ctx.fillText(yearLabel, x, height - 5);
+  //         ctx.fillText(yearLabel, x, height - 25);
   //     }
 
-  //     // Draw hover vertical line first (underneath everything else)
-  //     if (hoverIndex !== null) {
-  //         const hoverX = getX(hoverIndex);
-
-  //         ctx.beginPath();
-  //         ctx.moveTo(hoverX, padding.top);
-  //         ctx.lineTo(hoverX, height - padding.bottom);
-  //         ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)'; // Subtle line
-  //         ctx.lineWidth = 1;
-  //         ctx.stroke();
+  //     // Draw balance data line
+  //     ctx.strokeStyle = '#175134';
+  //     ctx.lineWidth = 2;
+  //     ctx.beginPath();
+  //     for (let i = 0; i < balanceData.length; i++) {
+  //         const x = getX(i);
+  //         const y = getY(balanceData[i]);
+  //         if (i === 0) ctx.moveTo(x, y);
+  //         else ctx.lineTo(x, y);
   //     }
+  //     ctx.stroke();
 
-  //     // Draw chart lines
-  //     const drawLine = (data, color, lineWidth) => {
-  //         ctx.beginPath();
-  //         ctx.strokeStyle = color; // Ensure this is fully opaque
-  //         ctx.lineWidth = lineWidth;
-  //         ctx.moveTo(getX(0), getY(data[0]));
-  //         for (let i = 1; i < months; i++) {
-  //             ctx.lineTo(getX(i), getY(data[i]));
+  //     // Draw cumulative principal line
+  //     ctx.strokeStyle = '#3EB721';
+  //     ctx.beginPath();
+  //     for (let i = 0; i < cumulativePrincipalData.length; i++) {
+  //         const x = getX(i);
+  //         const y = getY(cumulativePrincipalData[i]);
+  //         if (i === 0) ctx.moveTo(x, y);
+  //         else ctx.lineTo(x, y);
+  //     }
+  //     ctx.stroke();
+
+  //     // Draw cumulative interest line
+  //     ctx.strokeStyle = '#91BBA6';
+  //     ctx.beginPath();
+  //     for (let i = 0; i < cumulativeInterestData.length; i++) {
+  //         const x = getX(i);
+  //         const y = getY(cumulativeInterestData[i]);
+  //         if (i === 0) ctx.moveTo(x, y);
+  //         else ctx.lineTo(x, y);
+  //     }
+  //     ctx.stroke();
+
+  //     // Add mousemove event for hover effect
+  //     canvas.addEventListener('mousemove', (event) => {
+  //         const rect = canvas.getBoundingClientRect();
+  //         const mouseX = (event.clientX - rect.left) * dpr;
+  //         const closestIndex = Math.round(
+  //             ((mouseX - padding.left) / (width - padding.left - padding.right)) * (balanceData.length - 1)
+  //         );
+
+  //         if (closestIndex >= 0 && closestIndex < balanceData.length) {
+  //             ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear and redraw
+  //             drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
+  //             drawHoverLineAndDots(closestIndex);
   //         }
-  //         ctx.stroke();
-  //     };
-
-  //     drawLine(balanceData, '#175134', 2); // Balance line
-  //     drawLine(cumulativeInterestData, '#3EB721', 2.5); // Cumulative Interest
-  //     drawLine(cumulativePrincipalData, '#91BBA6', 2.5); // Cumulative Principal
-
-  //     // Draw hover dots on top (above lines and vertical line)
-  //     if (hoverIndex !== null) {
-  //         const hoverX = getX(hoverIndex);
-
-  //         const dotData = [
-  //             { y: getY(balanceData[hoverIndex]), color: '#175134' },
-  //             { y: getY(cumulativeInterestData[hoverIndex]), color: '#3EB721' },
-  //             { y: getY(cumulativePrincipalData[hoverIndex]), color: '#91BBA6' },
-  //         ];
-
-  //         dotData.forEach(({ y, color }) => {
-  //             ctx.beginPath();
-  //             ctx.arc(hoverX, y, 5, 0, 2 * Math.PI);
-  //             ctx.fillStyle = color; // Ensure this is fully opaque
-  //             ctx.fill();
-  //         });
-  //     }
+  //     });
   // }
 
   function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData) {
     var hoverIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-    var ctx = amortizationChartCanvas.getContext('2d');
+    var canvas = document.getElementById('amortizationChart');
+    var ctx = canvas.getContext('2d');
     var dpr = window.devicePixelRatio || 1;
 
-    // Adjust height dynamically based on screen width
-    var height = window.innerWidth < 500 ? 200 : 300;
-    amortizationChartCanvas.style.width = '100%';
-    amortizationChartCanvas.style.height = "".concat(height, "px");
-    var width = amortizationChartCanvas.offsetWidth;
-    amortizationChartCanvas.width = width * dpr;
-    amortizationChartCanvas.height = height * dpr;
-    if (dpr > 1) {
-      ctx.scale(dpr, dpr);
-    }
-    ctx.clearRect(0, 0, width * dpr, height * dpr);
-    var months = balanceData.length;
-    var maxBalance = Math.max.apply(Math, _toConsumableArray(balanceData));
-    var maxCumulative = Math.max.apply(Math, _toConsumableArray(cumulativeInterestData).concat(_toConsumableArray(cumulativePrincipalData)));
-    var originalYAxisMax = Math.ceil(Math.max(maxBalance, maxCumulative) / 100000) * 100000;
+    // Adjust canvas dimensions dynamically
+    var isSmallScreen = window.innerWidth < 700;
+    var canvasHeight = isSmallScreen ? 200 : 300;
+    canvas.width = canvas.parentElement.offsetWidth * dpr;
+    canvas.height = canvasHeight * dpr;
+    ctx.scale(dpr, dpr);
+    var width = canvas.width / dpr;
+    var height = canvas.height / dpr;
 
-    // Scale the y-axis grid height for smaller screens
-    var yAxisMax = window.innerWidth < 500 ? originalYAxisMax * 0.3 : originalYAxisMax;
+    // Adjust padding to prevent overlap
     var padding = {
-      top: 30,
-      right: 20,
-      bottom: 30,
-      left: 70
+      top: 10,
+      right: 15,
+      bottom: 50,
+      left: 50
     };
     var gridColor = '#d0d0d0';
     var labelColor = '#505050';
-    var labelFont = '14px Open Sans';
-    ctx.font = labelFont;
-    ctx.textAlign = 'right';
+    var yAxisMax = Math.ceil(Math.max.apply(Math, _toConsumableArray(balanceData).concat(_toConsumableArray(cumulativeInterestData), _toConsumableArray(cumulativePrincipalData))) / 100000) * 100000;
+
+    // Helper functions to calculate positions
     function getY(value) {
       return height - padding.bottom - value / yAxisMax * (height - padding.top - padding.bottom);
     }
     function getX(index) {
-      return padding.left + index / months * (width - padding.left - padding.right);
+      return padding.left + index / (balanceData.length - 1) * (width - padding.left - padding.right);
     }
 
-    // Draw horizontal grid lines
-    for (var i = 0; i <= 3; i++) {
-      // Include top, middle, and bottom lines
-      var yValue = i * (originalYAxisMax / 3); // Use originalYAxisMax for consistent labels
-      var y = getY(i * (yAxisMax / 3)); // Adjust grid spacing based on yAxisMax
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      ctx.strokeStyle = gridColor;
-      ctx.lineWidth = 1;
+    // Draw horizontal grid lines (Y-axis) and labels
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'right';
+    ctx.fillStyle = labelColor;
+    ctx.strokeStyle = gridColor;
+    for (var i = 0; i <= yAxisMax; i += 100000) {
+      var y = getY(i);
+
+      // Grid line
       ctx.beginPath();
       ctx.moveTo(padding.left, y);
       ctx.lineTo(width - padding.right, y);
       ctx.stroke();
 
-      // Draw Y-axis labels
-      ctx.fillStyle = labelColor;
-      ctx.fillText("$".concat((yValue / 1000).toFixed(0), "K"), padding.left - 10, y + 4);
+      // Y-axis label (place left of padding)
+      ctx.fillText("$".concat((i / 1000).toFixed(0), "K"), padding.left - 10, y + 5);
     }
 
-    // Draw vertical grid lines and labels for every 5 years, including outermost lines
+    // Draw vertical grid lines (X-axis) every 5 years
+    var months = balanceData.length;
+    var years = Math.floor(months / 12);
     ctx.textAlign = 'center';
-    var intervalMonths = 12 * 5; // Every 5 years
-    var currentYear = new Date().getFullYear();
+    for (var _i = 0; _i <= years; _i += 5) {
+      var monthIndex = _i * 12;
+      var x = getX(monthIndex);
+      var yearLabel = new Date().getFullYear() + _i;
 
-    // Draw outermost grid lines first
-    ctx.strokeStyle = gridColor;
-    ctx.lineWidth = 1;
-
-    // Left-most vertical grid line
-    ctx.beginPath();
-    ctx.moveTo(padding.left, padding.top);
-    ctx.lineTo(padding.left, height - padding.bottom);
-    ctx.stroke();
-    ctx.fillStyle = labelColor;
-    ctx.fillText(currentYear, padding.left, height - 5); // Left-most label
-
-    // Right-most vertical grid line
-    ctx.beginPath();
-    ctx.moveTo(width - padding.right, padding.top);
-    ctx.lineTo(width - padding.right, height - padding.bottom);
-    ctx.stroke();
-    ctx.fillStyle = labelColor;
-    ctx.fillText(currentYear + Math.floor(months / 12), width - padding.right, height - 5); // Right-most label
-
-    // Draw intermediate vertical grid lines (every 5 years)
-    for (var _i = intervalMonths; _i < months; _i += intervalMonths) {
-      var x = getX(_i);
+      // Grid line
       ctx.beginPath();
       ctx.moveTo(x, padding.top);
       ctx.lineTo(x, height - padding.bottom);
-      ctx.strokeStyle = gridColor;
       ctx.stroke();
-      var yearLabel = currentYear + Math.floor(_i / 12);
-      ctx.fillStyle = labelColor;
-      ctx.fillText(yearLabel, x, height - 5);
+
+      // X-axis label (place below padding)
+      ctx.fillText(yearLabel, x, height - 10);
     }
 
-    // Draw hover vertical line first (underneath everything else)
+    // Draw balance data line
+    ctx.strokeStyle = '#175134';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (var _i2 = 0; _i2 < balanceData.length; _i2++) {
+      var _x = getX(_i2);
+      var _y = getY(balanceData[_i2]);
+      if (_i2 === 0) ctx.moveTo(_x, _y);else ctx.lineTo(_x, _y);
+    }
+    ctx.stroke();
+
+    // Draw cumulative principal line
+    ctx.strokeStyle = '#3EB721';
+    ctx.beginPath();
+    for (var _i3 = 0; _i3 < cumulativePrincipalData.length; _i3++) {
+      var _x2 = getX(_i3);
+      var _y2 = getY(cumulativePrincipalData[_i3]);
+      if (_i3 === 0) ctx.moveTo(_x2, _y2);else ctx.lineTo(_x2, _y2);
+    }
+    ctx.stroke();
+
+    // Draw cumulative interest line
+    ctx.strokeStyle = '#91BBA6';
+    ctx.beginPath();
+    for (var _i4 = 0; _i4 < cumulativeInterestData.length; _i4++) {
+      var _x3 = getX(_i4);
+      var _y3 = getY(cumulativeInterestData[_i4]);
+      if (_i4 === 0) ctx.moveTo(_x3, _y3);else ctx.lineTo(_x3, _y3);
+    }
+    ctx.stroke();
+
+    // Draw hover effects if hoverIndex is provided
     if (hoverIndex !== null) {
-      var hoverX = getX(hoverIndex);
-      ctx.beginPath();
-      ctx.moveTo(hoverX, padding.top);
-      ctx.lineTo(hoverX, height - padding.bottom);
-      ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)'; // Subtle line
+      var _x4 = getX(hoverIndex);
+      var balanceY = getY(balanceData[hoverIndex]);
+      var principalY = getY(cumulativePrincipalData[hoverIndex]);
+      var interestY = getY(cumulativeInterestData[hoverIndex]);
+
+      // Draw vertical hover line
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
       ctx.lineWidth = 1;
-      ctx.stroke();
-    }
-
-    // Draw chart lines
-    var drawLine = function drawLine(data, color, lineWidth) {
       ctx.beginPath();
-      ctx.strokeStyle = color; // Ensure this is fully opaque
-      ctx.lineWidth = lineWidth;
-      ctx.moveTo(getX(0), getY(data[0]));
-      for (var _i2 = 1; _i2 < months; _i2++) {
-        ctx.lineTo(getX(_i2), getY(data[_i2]));
-      }
+      ctx.moveTo(_x4, padding.top);
+      ctx.lineTo(_x4, height - padding.bottom);
       ctx.stroke();
-    };
-    drawLine(balanceData, '#175134', 2); // Balance line
-    drawLine(cumulativeInterestData, '#3EB721', 2.5); // Cumulative Interest
-    drawLine(cumulativePrincipalData, '#91BBA6', 2.5); // Cumulative Principal
 
-    // Draw hover dots on top (above lines and vertical line)
-    if (hoverIndex !== null) {
-      var _hoverX = getX(hoverIndex);
-      var dotData = [{
-        y: getY(balanceData[hoverIndex]),
-        color: '#175134'
-      }, {
-        y: getY(cumulativeInterestData[hoverIndex]),
-        color: '#3EB721'
-      }, {
-        y: getY(cumulativePrincipalData[hoverIndex]),
-        color: '#91BBA6'
-      }];
-      dotData.forEach(function (_ref) {
-        var y = _ref.y,
-          color = _ref.color;
-        ctx.beginPath();
-        ctx.arc(_hoverX, y, 5, 0, 2 * Math.PI);
-        ctx.fillStyle = color; // Ensure this is fully opaque
-        ctx.fill();
-      });
+      // Draw hover dots
+      var dotRadius = 4;
+      ctx.fillStyle = '#175134'; // Balance dot color
+      ctx.beginPath();
+      ctx.arc(_x4, balanceY, dotRadius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#3EB721'; // Principal dot color
+      ctx.beginPath();
+      ctx.arc(_x4, principalY, dotRadius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#91BBA6'; // Interest dot color
+      ctx.beginPath();
+      ctx.arc(_x4, interestY, dotRadius, 0, Math.PI * 2);
+      ctx.fill();
     }
   }
   amortizationChartCanvas.addEventListener('mousemove', function (event) {
@@ -1054,7 +1047,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var x = event.clientX - rect.left;
     var padding = {
       top: 30,
-      right: 20,
+      right: 25,
       bottom: 30,
       left: 70
     };
@@ -1080,7 +1073,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var x = touch.clientX - rect.left;
     var padding = {
       top: 30,
-      right: 20,
+      right: 25,
       bottom: 30,
       left: 70
     };
@@ -1232,4 +1225,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=426.4841e56f87d8c892d7dc.js.map
+//# sourceMappingURL=426.522b98006df9eb56a448.js.map

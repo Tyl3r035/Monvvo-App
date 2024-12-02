@@ -1,7 +1,7 @@
 // Toggle Functionality
 const advancedText = document.getElementById("advanced-text-fluid");
 const additionalInputs = document.getElementById("additional-inputs");
-const advancedArrow = document.getElementById('advanced-arrow');
+const advancedArrow = document.getElementById("advanced-arrow");
 
 if (advancedText && additionalInputs) {
     // Start with the additional inputs hidden
@@ -23,86 +23,128 @@ if (advancedText && additionalInputs) {
 }
 
 // Tab toggle functionality for "Payment Breakdown" and "Amortization Schedule"
-const tabPaymentBreakdown = document.getElementById('tab-payment-breakdown');
-const tabAmortizationSchedule = document.getElementById('tab-amortization-schedule');
-const paymentBreakdownContent = document.getElementById('payment-breakdown-content');
-const amortizationScheduleContent = document.getElementById('amortization-schedule-content');
+const tabPaymentBreakdown = document.getElementById("tab-payment-breakdown");
+const tabAmortizationSchedule = document.getElementById("tab-amortization-schedule");
+const paymentBreakdownContent = document.getElementById("payment-breakdown-content");
+const amortizationScheduleContent = document.getElementById("amortization-schedule-content");
 
-if (tabPaymentBreakdown && tabAmortizationSchedule && paymentBreakdownContent && amortizationScheduleContent) {
+if (
+    tabPaymentBreakdown &&
+    tabAmortizationSchedule &&
+    paymentBreakdownContent &&
+    amortizationScheduleContent
+) {
     function switchTab(selectedTab) {
-        if (selectedTab === 'payment') {
-            paymentBreakdownContent.style.display = 'block';
-            amortizationScheduleContent.style.display = 'none';
-            tabPaymentBreakdown.classList.add('tab-active');
-            tabAmortizationSchedule.classList.remove('tab-active');
-        } else if (selectedTab === 'amortization') {
-            paymentBreakdownContent.style.display = 'none';
-            amortizationScheduleContent.style.display = 'block';
-            tabPaymentBreakdown.classList.remove('tab-active');
-            tabAmortizationSchedule.classList.add('tab-active');
+        if (selectedTab === "payment") {
+            paymentBreakdownContent.style.display = "block";
+            amortizationScheduleContent.style.display = "none";
+            tabPaymentBreakdown.classList.add("tab-active");
+            tabAmortizationSchedule.classList.remove("tab-active");
+        } else if (selectedTab === "amortization") {
+            paymentBreakdownContent.style.display = "none";
+            amortizationScheduleContent.style.display = "block";
+            tabPaymentBreakdown.classList.remove("tab-active");
+            tabAmortizationSchedule.classList.add("tab-active");
         }
     }
 
     // Event listeners for tab clicks
-    tabPaymentBreakdown.addEventListener('click', function () {
-        switchTab('payment');
+    tabPaymentBreakdown.addEventListener("click", function () {
+        switchTab("payment");
     });
 
-    tabAmortizationSchedule.addEventListener('click', function () {
-        switchTab('amortization');
+    tabAmortizationSchedule.addEventListener("click", function () {
+        switchTab("amortization");
     });
 
     // Set initial view to "Payment Breakdown"
-    switchTab('payment');
+    switchTab("payment");
 } else {
     console.log("Tab elements for Payment Breakdown and Amortization Schedule not found");
 }
 
 // Tooltip Info Icon JS
-const infoIcons = document.querySelectorAll('.info-icon');
+const infoIcons = document.querySelectorAll(".info-icon");
 
-infoIcons.forEach(icon => {
-    const tooltipText = icon.getAttribute('data-tooltip');
+// Track currently visible tooltip
+let activeTooltip = null;
+
+infoIcons.forEach((icon) => {
+    const tooltipText = icon.getAttribute("data-tooltip");
     if (tooltipText) {
-        const tooltip = document.createElement('div');
-        tooltip.className = 'info-tooltips';
+        const tooltip = document.createElement("div");
+        tooltip.className = "info-tooltips";
         tooltip.textContent = tooltipText;
         document.body.appendChild(tooltip); // Append to body for consistent positioning
 
-        icon.addEventListener('mouseenter', () => showTooltip(icon, tooltip));
-        icon.addEventListener('mouseleave', () => hideTooltip(tooltip));
-        icon.addEventListener('touchstart', (event) => {
-            showTooltip(icon, tooltip);
-            event.stopPropagation(); // Prevent immediate hiding on touchstart
+        // Show tooltip on click (toggle)
+        icon.addEventListener("click", (event) => {
+            event.stopPropagation(); // Prevent event bubbling
+            if (activeTooltip === tooltip) {
+                // Hide tooltip if already active
+                hideTooltip(tooltip);
+                activeTooltip = null;
+            } else {
+                // Hide any active tooltip and show the clicked one
+                hideAllTooltips();
+                showTooltip(icon, tooltip);
+                activeTooltip = tooltip;
+            }
         });
     }
 });
 
-// Hide tooltips on any touch or click outside
-document.addEventListener('click', hideAllTooltips);
-document.addEventListener('touchend', hideAllTooltips);
+// Hide tooltip when clicking outside
+document.addEventListener("click", () => {
+    hideAllTooltips();
+    activeTooltip = null;
+});
+
+
+// function showTooltip(icon, tooltip) {
+//     const iconRect = icon.getBoundingClientRect();
+//     const tooltipWidth = tooltip.offsetWidth; // Get tooltip width dynamically
+
+//     // Position tooltip to the left of the icon and vertically aligned below
+//     tooltip.style.left = `${window.pageXOffset + iconRect.left - tooltipWidth - 5}px`; // Align to the left
+//     tooltip.style.top = `${window.pageYOffset + iconRect.bottom + 5}px`; // Align below
+
+//     tooltip.classList.add("visible");
+// }
+
 
 function showTooltip(icon, tooltip) {
     const iconRect = icon.getBoundingClientRect();
-    const tooltipRect = tooltip.getBoundingClientRect();
+    const tooltipWidth = tooltip.offsetWidth; // Dynamically calculate width
+    const tooltipHeight = tooltip.offsetHeight; // Dynamically calculate height
 
-    // Adjust position based on page scroll
-    const tooltipX = window.pageXOffset + iconRect.right - tooltipRect.width - 5; // 5px left of the icon's right edge
-    const tooltipY = window.pageYOffset + iconRect.top - tooltipRect.height - 5;   // 5px above the icon's top edge
+    // Align the tooltip's right edge with the left edge of the icon
+    const tooltipX = window.pageXOffset + iconRect.left - tooltipWidth - 5;
+    // Position tooltip directly above the icon with a 5px gap
+    const tooltipY = window.pageYOffset + iconRect.top - tooltipHeight - 5;
 
     tooltip.style.left = `${tooltipX}px`;
     tooltip.style.top = `${tooltipY}px`;
 
-    tooltip.classList.add('visible');
+    tooltip.classList.add("visible");
 }
 
+
+
+
+
+
+
+
+
+
 function hideTooltip(tooltip) {
-    tooltip.classList.remove('visible');
+    tooltip.classList.remove("visible");
 }
 
 function hideAllTooltips() {
-    document.querySelectorAll('.info-tooltips.visible').forEach(tooltip => {
-        tooltip.classList.remove('visible');
+    document.querySelectorAll(".info-tooltips.visible").forEach((tooltip) => {
+        tooltip.classList.remove("visible");
     });
 }
 
