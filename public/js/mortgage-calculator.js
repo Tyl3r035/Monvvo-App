@@ -303,7 +303,7 @@ function showTab(tabName) {
             periodicHOA: adjustedHOA,
         };
 
-        // initializeExpandCollapseLogic();
+        initializeExpandCollapseLogic();
 
     
         console.log("Updated lastAmortizationData:", {

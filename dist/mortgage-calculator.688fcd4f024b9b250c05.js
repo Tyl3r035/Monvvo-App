@@ -396,9 +396,7 @@ document.addEventListener("DOMContentLoaded", function () {
       periodicPMI: adjustedPMI,
       periodicHOA: adjustedHOA
     });
-
-    // initializeExpandCollapseLogic();
-
+    initializeExpandCollapseLogic();
     console.log("Updated lastAmortizationData:", {
       principal: principal,
       monthlyInterestRate: monthlyInterestRate,
@@ -1336,4 +1334,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=mortgage-calculator.1bd242235386c768f942.js.map
+//# sourceMappingURL=mortgage-calculator.688fcd4f024b9b250c05.js.map
