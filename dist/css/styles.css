@@ -1070,7 +1070,7 @@ canvas {
 .contact-list a{
   font-weight: 400;
   cursor: pointer;
-  color: inherit;
+  color: #20894D;
 }
 .contact-form{
   display: flex;
@@ -1130,7 +1130,7 @@ canvas {
   width: 50%;
   min-width: 300px;
   padding: 15px 25px;
-  background-color: #1C2939;
+  background-color: #20894D;
   color: #fff;
   border: none;
   border-radius: 3px;
@@ -1189,6 +1189,9 @@ canvas {
   line-height: 20px;
   color: #171717;
 }
+.disclaimer-text a{
+  color: #20894D
+}
 
 /* Privacy Policy CSS */
 .privacy-main{
@@ -1199,7 +1202,7 @@ canvas {
   margin: 20px auto;
 }
 .privacy-section a{
-  color: inherit;
+  color: #20894D;
 }
 .privacy-title{
   font-family: 'Open Sans', sans-serif;
