@@ -49,6 +49,22 @@ document.addEventListener('DOMContentLoaded', function () {
     };
   }());
 
+  // // FAQ toggle functionality
+  // const faqQuestions = document.querySelectorAll('.faq-question');
+
+  // faqQuestions.forEach(question => {
+  //     question.addEventListener('click', () => {
+  //         const answer = question.nextElementSibling;
+  //         const isVisible = answer.style.display === 'block';
+
+  //         // Close all open answers
+  //         document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+
+  //         // Toggle the clicked question
+  //         answer.style.display = isVisible ? 'none' : 'block';
+  //     });
+  // });
+
   // FAQ toggle functionality
   var faqQuestions = document.querySelectorAll('.faq-question');
   faqQuestions.forEach(function (question) {
@@ -56,13 +72,19 @@ document.addEventListener('DOMContentLoaded', function () {
       var answer = question.nextElementSibling;
       var isVisible = answer.style.display === 'block';
 
-      // Close all open answers
+      // Close all open answers and reset rotation
       document.querySelectorAll('.faq-answer').forEach(function (ans) {
         return ans.style.display = 'none';
       });
+      document.querySelectorAll('.faq-question').forEach(function (q) {
+        return q.classList.remove('active');
+      });
 
-      // Toggle the clicked question
-      answer.style.display = isVisible ? 'none' : 'block';
+      // Toggle the clicked question and rotation
+      if (!isVisible) {
+        answer.style.display = 'block';
+        question.classList.add('active');
+      }
     });
   });
 
@@ -113,4 +135,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 /******/ })()
 ;
-//# sourceMappingURL=contact.91007345633d392d6c95.js.map
+//# sourceMappingURL=contact.9f20c584420914d5529f.js.map

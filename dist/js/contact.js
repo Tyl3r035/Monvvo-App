@@ -27,21 +27,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // // FAQ toggle functionality
+    // const faqQuestions = document.querySelectorAll('.faq-question');
+
+    // faqQuestions.forEach(question => {
+    //     question.addEventListener('click', () => {
+    //         const answer = question.nextElementSibling;
+    //         const isVisible = answer.style.display === 'block';
+
+    //         // Close all open answers
+    //         document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+
+    //         // Toggle the clicked question
+    //         answer.style.display = isVisible ? 'none' : 'block';
+    //     });
+    // });
+
     // FAQ toggle functionality
-    const faqQuestions = document.querySelectorAll('.faq-question');
+const faqQuestions = document.querySelectorAll('.faq-question');
 
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-            const answer = question.nextElementSibling;
-            const isVisible = answer.style.display === 'block';
+faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        const isVisible = answer.style.display === 'block';
 
-            // Close all open answers
-            document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+        // Close all open answers and reset rotation
+        document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+        document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
 
-            // Toggle the clicked question
-            answer.style.display = isVisible ? 'none' : 'block';
-        });
+        // Toggle the clicked question and rotation
+        if (!isVisible) {
+            answer.style.display = 'block';
+            question.classList.add('active');
+        }
     });
+});
+
 
     // Existing contact form functionality
     document.getElementById('contact-form').addEventListener('submit', async function(event) {
