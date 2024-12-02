@@ -48,7 +48,69 @@ document.addEventListener('DOMContentLoaded', function () {
       return _ref.apply(this, arguments);
     };
   }());
+
+  // FAQ toggle functionality
+  var faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach(function (question) {
+    question.addEventListener('click', function () {
+      var answer = question.nextElementSibling;
+      var isVisible = answer.style.display === 'block';
+
+      // Close all open answers
+      document.querySelectorAll('.faq-answer').forEach(function (ans) {
+        return ans.style.display = 'none';
+      });
+
+      // Toggle the clicked question
+      answer.style.display = isVisible ? 'none' : 'block';
+    });
+  });
+
+  // Existing contact form functionality
+  document.getElementById('contact-form').addEventListener('submit', /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(event) {
+      var form, formData, response;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            event.preventDefault(); // Prevent page reload
+            form = event.target;
+            formData = new FormData(form);
+            _context2.prev = 3;
+            _context2.next = 6;
+            return fetch('https://formspree.io/f/myzybazr', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'Accept': 'application/json'
+              }
+            });
+          case 6:
+            response = _context2.sent;
+            if (response.ok) {
+              alert('Thank you! Your message has been sent.');
+              form.reset();
+            } else {
+              alert('Oops! There was a problem submitting your form.');
+            }
+            _context2.next = 14;
+            break;
+          case 10:
+            _context2.prev = 10;
+            _context2.t0 = _context2["catch"](3);
+            console.error('Error:', _context2.t0);
+            alert('An unexpected error occurred.');
+          case 14:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[3, 10]]);
+    }));
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }());
 });
 /******/ })()
 ;
-//# sourceMappingURL=contact.e6fb15db17d2e8709915.js.map
+//# sourceMappingURL=contact.91007345633d392d6c95.js.map

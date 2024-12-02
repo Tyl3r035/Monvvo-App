@@ -1039,6 +1039,10 @@ canvas {
 }
 
 /* Contact CSS */
+.contact-main{
+  width: 90% !important;
+  margin: 100px auto !important;
+}
 .contact-section{
   margin-bottom: 50px;
 }
@@ -1109,7 +1113,7 @@ canvas {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #232525;
-  border-radius: none;
+  border-radius: 0 !important;
   padding: 10px;
 }
 .contact-form textarea{
@@ -1141,6 +1145,35 @@ canvas {
   transition: .4s ease-in-out;
 }
 
+/* Contact FAQ CSS */
+.faq-section {
+  margin: 20px 0 40px 0;
+}
+
+.faq-question {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px !important;
+  background-color: #f9f9f9;
+  border: none;
+  font-size: 16px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.faq-answer {
+  display: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  padding: 10px;
+  margin-bottom: 25px;
+  border-left: 4px solid #20894D;
+  background-color: #f1f1f1;
+}
+
+
 /* Form Message Sent CSS */
 #form-response {
   margin-top: 15px;
@@ -1157,6 +1190,8 @@ canvas {
   background-color: #f8d7da;
   border: 1px solid #f5c6cb;
 }
+
+
 
 /* Disclaimer CSS*/
 .disclaimer-main{
