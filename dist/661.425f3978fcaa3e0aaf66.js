@@ -4990,7 +4990,7 @@ if (NOT_GENERIC || INCORRECT_NAME) {
 
 /***/ }),
 
-/***/ 9449:
+/***/ 1830:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -5664,7 +5664,7 @@ function _defineProperty(e, r, t) {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
 var es_array_reduce = __webpack_require__(2712);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.ends-with.js
-var es_string_ends_with = __webpack_require__(9449);
+var es_string_ends_with = __webpack_require__(1830);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
 var es_string_split = __webpack_require__(744);
 // EXTERNAL MODULE: ./node_modules/raf/index.js
@@ -12897,4 +12897,4 @@ class Canvg {
 /***/ })
 
 }]);
-//# sourceMappingURL=661.78adcfd3f6a66db4563e.js.map
+//# sourceMappingURL=661.425f3978fcaa3e0aaf66.js.map

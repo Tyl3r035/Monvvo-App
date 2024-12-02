@@ -1,6 +1,117 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ({});
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 4943:
+/***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+
+
+
+// Your additional JavaScript logic here
+
+// Lazy Loading Logic
+document.addEventListener('DOMContentLoaded', function () {
+  var lazyImages = document.querySelectorAll('img[data-src]');
+  if ('IntersectionObserver' in window) {
+    var lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var lazyImage = entry.target;
+          __webpack_require__(6705)("./".concat(lazyImage.dataset.src)).then(function (module) {
+            lazyImage.src = module["default"];
+            lazyImage.classList.remove('lazy');
+          })["catch"](function (err) {
+            return console.error('Failed to load image', err);
+          });
+          lazyImageObserver.unobserve(lazyImage);
+        }
+      });
+    });
+    lazyImages.forEach(function (lazyImage) {
+      lazyImageObserver.observe(lazyImage);
+    });
+  } else {
+    lazyImages.forEach(function (lazyImage) {
+      __webpack_require__(6705)("./".concat(lazyImage.dataset.src)).then(function (module) {
+        lazyImage.src = module["default"];
+        lazyImage.classList.remove('lazy');
+      })["catch"](function (err) {
+        return console.error('Failed to load image', err);
+      });
+    });
+  }
+});
+
+/***/ }),
+
+/***/ 6705:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var map = {
+	"./icons/dollar.svg": [
+		1867,
+		867
+	],
+	"./icons/down-arrow.svg": [
+		9749,
+		749
+	],
+	"./icons/footer-icon.svg": [
+		7974,
+		974
+	],
+	"./icons/info-icon.svg": [
+		1397,
+		397
+	],
+	"./icons/item-corner.svg": [
+		8730,
+		730
+	],
+	"./icons/percentage.svg": [
+		1805,
+		805
+	],
+	"./icons/printer-icon.svg": [
+		3991,
+		991
+	],
+	"./logos/Monvvo-Transparent.svg": [
+		9843,
+		843
+	],
+	"./logos/monvvo-favicon.svg": [
+		3005,
+		5
+	],
+	"./logos/monvvo-logo.png": [
+		9449,
+		449
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(() => {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return __webpack_require__.e(ids[1]).then(() => {
+		return __webpack_require__(id);
+	});
+}
+webpackAsyncContext.keys = () => (Object.keys(map));
+webpackAsyncContext.id = 6705;
+module.exports = webpackAsyncContext;
+
+/***/ })
+
+/******/ 	});
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
@@ -20,7 +131,7 @@
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -62,36 +173,6 @@
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/create fake namespace object */
-/******/ 	(() => {
-/******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
-/******/ 		var leafPrototypes;
-/******/ 		// create a fake namespace object
-/******/ 		// mode & 1: value is a module id, require it
-/******/ 		// mode & 2: merge all properties of value into the ns
-/******/ 		// mode & 4: return value when already ns object
-/******/ 		// mode & 16: return value when it's Promise-like
-/******/ 		// mode & 8|1: behave like require
-/******/ 		__webpack_require__.t = function(value, mode) {
-/******/ 			if(mode & 1) value = this(value);
-/******/ 			if(mode & 8) return value;
-/******/ 			if(typeof value === 'object' && value) {
-/******/ 				if((mode & 4) && value.__esModule) return value;
-/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
-/******/ 			}
-/******/ 			var ns = Object.create(null);
-/******/ 			__webpack_require__.r(ns);
-/******/ 			var def = {};
-/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
-/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
-/******/ 				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => (value[key])));
-/******/ 			}
-/******/ 			def['default'] = () => (value);
-/******/ 			__webpack_require__.d(ns, def);
-/******/ 			return ns;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -122,7 +203,7 @@
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + "." + {"354":"6c39a03c95ce14fafea5","661":"78adcfd3f6a66db4563e","838":"f1b59550c4041668c0db"}[chunkId] + ".js";
+/******/ 			return "" + chunkId + "." + {"5":"783e76ea13c00437d521","397":"d67032c4bd1ad636d6b6","449":"46e18aee73dab7551c07","730":"10b1f964bfbcc15a9aeb","749":"bb5c0f697c2e985e9490","805":"113374e6a7cb45c04ad9","843":"ee906024d82bed614358","867":"4413282f4ba2ff892749","974":"25dbcf67430104be2b34","991":"6c46db5e81a3f635e763"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -131,20 +212,8 @@
 /******/ 		// This function allow to reference all chunks
 /******/ 		__webpack_require__.miniCssF = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return undefined;
+/******/ 			return "" + "styles" + "." + "0e47bf1b0cd47e5ed276" + ".css";
 /******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
@@ -222,7 +291,8 @@
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			954: 0
+/******/ 			792: 0,
+/******/ 			869: 0
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.j = (chunkId, promises) => {
@@ -234,7 +304,7 @@
 /******/ 					if(installedChunkData) {
 /******/ 						promises.push(installedChunkData[2]);
 /******/ 					} else {
-/******/ 						if(true) { // all chunks have JS
+/******/ 						if(869 != chunkId) {
 /******/ 							// setup Promise in chunk cache
 /******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
 /******/ 							promises.push(installedChunkData[2] = promise);
@@ -259,7 +329,7 @@
 /******/ 								}
 /******/ 							};
 /******/ 							__webpack_require__.l(url, loadingEnded, "chunk-" + chunkId, chunkId);
-/******/ 						}
+/******/ 						} else installedChunks[chunkId] = 0;
 /******/ 					}
 /******/ 				}
 /******/ 		};
@@ -309,9 +379,9 @@
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [246,426], () => (__webpack_require__(6426)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [869], () => (__webpack_require__(4943)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=mortgage-calculator.33f0769e12a82143371b.js.map
+//# sourceMappingURL=main.9ba9e322de49d61bef6c.js.map

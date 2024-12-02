@@ -127,64 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-// function showTab(tabName) {
-//     if (tabName === "payment") {
-//         paymentBreakdownContent.style.display = "block";
-//         amortizationScheduleContent.style.display = "none";
-//         tabPaymentBreakdown.classList.add("tab-active");
-//         tabAmortizationSchedule.classList.remove("tab-active");
-
-//         if (lastAmortizationData) {
-//             const {
-//                 periodicPrincipalAndInterest,
-//                 periodicPropertyTax,
-//                 periodicPMI,
-//                 periodicHOA,
-//             } = lastAmortizationData;
-
-//             // Redraw the stacked bar chart
-//             updateHorizontalStackedBarChart(
-//                 periodicPrincipalAndInterest,
-//                 periodicPropertyTax,
-//                 periodicPMI,
-//                 periodicHOA
-//             );
-//         }
-//     } else if (tabName === "amortization") {
-//         paymentBreakdownContent.style.display = "none";
-//         amortizationScheduleContent.style.display = "block";
-//         tabPaymentBreakdown.classList.remove("tab-active");
-//         tabAmortizationSchedule.classList.add("tab-active");
-
-//         if (lastAmortizationData) {
-//             const {
-//                 balanceData,
-//                 cumulativeInterestData,
-//                 cumulativePrincipalData,
-//                 totalInterestPaid,
-//                 totalPrincipalPaid,
-//                 totalAmountPaid,
-//             } = lastAmortizationData;
-
-//             drawAmortizationChart(
-//                 balanceData,
-//                 cumulativeInterestData,
-//                 cumulativePrincipalData
-//             );
-//             updateAmortizationLabels(
-//                 totalInterestPaid,
-//                 totalPrincipalPaid,
-//                 totalAmountPaid
-//             );
-//         }
-//     }
-// }
-
-
-
-
-
 function showTab(tabName) {
     if (tabName === "payment") {
         // Show Payment Breakdown tab
@@ -717,155 +659,6 @@ function updateHoverValues(balance, interest, principal) {
         });
     }
     
-  
-
-    // function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData) {
-    //     const canvas = document.getElementById('amortizationChart'); // Ensure correct canvas element
-    //     const ctx = canvas.getContext('2d');
-    //     const dpr = window.devicePixelRatio || 1;
-    
-    //     // Adjust canvas dimensions dynamically
-    //     const isSmallScreen = window.innerWidth < 700;
-    //     const canvasHeight = isSmallScreen ? 200 : 300;
-    
-    //     canvas.width = canvas.parentElement.offsetWidth * dpr;
-    //     canvas.height = canvasHeight * dpr; // Dynamically adjust height
-    //     ctx.scale(dpr, dpr);
-    
-    //     const width = canvas.width / dpr;
-    //     const height = canvas.height / dpr;
-    
-    //     const padding = { top: 30, right: 20, bottom: 50, left: 70 };
-    //     const gridColor = '#d0d0d0';
-    //     const labelColor = '#505050';
-    
-    //     const yAxisMax = Math.ceil(
-    //         Math.max(...balanceData, ...cumulativeInterestData, ...cumulativePrincipalData) / 100000
-    //     ) * 100000;
-    
-    //     function getY(value) {
-    //         return height - padding.bottom - (value / yAxisMax) * (height - padding.top - padding.bottom);
-    //     }
-    
-    //     function getX(index) {
-    //         return padding.left + (index / (balanceData.length - 1)) * (width - padding.left - padding.right);
-    //     }
-    
-    //     // Function to draw vertical hover line and dots
-    //     function drawHoverLineAndDots(hoverIndex) {
-    //         const x = getX(hoverIndex);
-    //         const balanceY = getY(balanceData[hoverIndex]);
-    //         const principalY = getY(cumulativePrincipalData[hoverIndex]);
-    //         const interestY = getY(cumulativeInterestData[hoverIndex]);
-    
-    //         // Draw vertical hover line
-    //         ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
-    //         ctx.lineWidth = 1;
-    //         ctx.beginPath();
-    //         ctx.moveTo(x, padding.top);
-    //         ctx.lineTo(x, height - padding.bottom);
-    //         ctx.stroke();
-    
-    //         // Draw hover dots
-    //         const dotRadius = 4;
-    //         ctx.fillStyle = '#175134'; // Balance dot color
-    //         ctx.beginPath();
-    //         ctx.arc(x, balanceY, dotRadius, 0, Math.PI * 2);
-    //         ctx.fill();
-    
-    //         ctx.fillStyle = '#3EB721'; // Principal dot color
-    //         ctx.beginPath();
-    //         ctx.arc(x, principalY, dotRadius, 0, Math.PI * 2);
-    //         ctx.fill();
-    
-    //         ctx.fillStyle = '#91BBA6'; // Interest dot color
-    //         ctx.beginPath();
-    //         ctx.arc(x, interestY, dotRadius, 0, Math.PI * 2);
-    //         ctx.fill();
-    //     }
-    
-    //     // Clear canvas
-    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    //     // Draw grid lines and chart
-    //     ctx.font = '14px Arial';
-    //     ctx.textAlign = 'right';
-    //     ctx.fillStyle = labelColor;
-    //     ctx.strokeStyle = gridColor;
-    
-    //     for (let i = 0; i <= yAxisMax; i += 100000) {
-    //         const y = getY(i);
-    //         ctx.beginPath();
-    //         ctx.moveTo(padding.left, y);
-    //         ctx.lineTo(width - padding.right, y);
-    //         ctx.stroke();
-    //         ctx.fillText(`$${(i / 1000).toFixed(0)}K`, padding.left - 10, y + 5);
-    //     }
-    
-    //     const months = balanceData.length;
-    //     const years = Math.floor(months / 12);
-    //     ctx.textAlign = 'center';
-    
-    //     for (let i = 0; i <= years; i += 5) {
-    //         const monthIndex = i * 12;
-    //         const x = getX(monthIndex);
-    //         const yearLabel = new Date().getFullYear() + i;
-    //         ctx.beginPath();
-    //         ctx.moveTo(x, padding.top);
-    //         ctx.lineTo(x, height - padding.bottom);
-    //         ctx.stroke();
-    //         ctx.fillText(yearLabel, x, height - 25);
-    //     }
-    
-    //     // Draw balance data line
-    //     ctx.strokeStyle = '#175134';
-    //     ctx.lineWidth = 2;
-    //     ctx.beginPath();
-    //     for (let i = 0; i < balanceData.length; i++) {
-    //         const x = getX(i);
-    //         const y = getY(balanceData[i]);
-    //         if (i === 0) ctx.moveTo(x, y);
-    //         else ctx.lineTo(x, y);
-    //     }
-    //     ctx.stroke();
-    
-    //     // Draw cumulative principal line
-    //     ctx.strokeStyle = '#3EB721';
-    //     ctx.beginPath();
-    //     for (let i = 0; i < cumulativePrincipalData.length; i++) {
-    //         const x = getX(i);
-    //         const y = getY(cumulativePrincipalData[i]);
-    //         if (i === 0) ctx.moveTo(x, y);
-    //         else ctx.lineTo(x, y);
-    //     }
-    //     ctx.stroke();
-    
-    //     // Draw cumulative interest line
-    //     ctx.strokeStyle = '#91BBA6';
-    //     ctx.beginPath();
-    //     for (let i = 0; i < cumulativeInterestData.length; i++) {
-    //         const x = getX(i);
-    //         const y = getY(cumulativeInterestData[i]);
-    //         if (i === 0) ctx.moveTo(x, y);
-    //         else ctx.lineTo(x, y);
-    //     }
-    //     ctx.stroke();
-    
-    //     // Add mousemove event for hover effect
-    //     canvas.addEventListener('mousemove', (event) => {
-    //         const rect = canvas.getBoundingClientRect();
-    //         const mouseX = (event.clientX - rect.left) * dpr;
-    //         const closestIndex = Math.round(
-    //             ((mouseX - padding.left) / (width - padding.left - padding.right)) * (balanceData.length - 1)
-    //         );
-    
-    //         if (closestIndex >= 0 && closestIndex < balanceData.length) {
-    //             ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear and redraw
-    //             drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData);
-    //             drawHoverLineAndDots(closestIndex);
-    //         }
-    //     });
-    // }
 
     function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData, hoverIndex = null) {
         const canvas = document.getElementById('amortizationChart');
@@ -1238,6 +1031,11 @@ document.querySelector(".btn-icon-fluid").addEventListener("click", () => {
 
     const amortizationData = calculateAmortizationData(homePrice, downPaymentAmount, interestRate, loanTerm);
 
+
+
+
+
+    
     // Generate the PDF
     generateMortgagePdf(paymentData, amortizationData);
 });

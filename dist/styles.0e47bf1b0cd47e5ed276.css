@@ -464,11 +464,11 @@ select {
 .results-container{
   position: relative;
   display: flex;
-  min-height: 600px;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   margin-top: 20px;
+  padding-bottom: 20px;
   align-self: stretch;
   background: #fff;
   border: 1px solid #232525;
@@ -551,7 +551,7 @@ select {
   line-height: normal;
   color: #232525;
   padding-top: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   text-align: left;
 }
 .monthly-answer{
@@ -1646,4 +1646,4 @@ canvas {
   }
 }
 
-/*# sourceMappingURL=main.576d975112086720104e.css.map*/
+/*# sourceMappingURL=styles.0e47bf1b0cd47e5ed276.css.map*/

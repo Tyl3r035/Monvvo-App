@@ -1,26 +1,33 @@
-// Toggle Functionality
-const advancedText = document.getElementById("advanced-text-fluid");
-const additionalInputs = document.getElementById("additional-inputs");
-const advancedArrow = document.getElementById("advanced-arrow");
+document.addEventListener("DOMContentLoaded", function () {
+    const advancedText = document.getElementById("advanced-text-fluid");
+    const additionalInputs = document.getElementById("additional-inputs");
+    const advancedArrow = document.getElementById("advanced-arrow");
 
-if (advancedText && additionalInputs) {
-    // Start with the additional inputs hidden
-    additionalInputs.style.display = "none";
+    if (!advancedText || !additionalInputs || !advancedArrow) {
+        console.error("One or more required elements are missing");
+        return;
+    }
 
-    // Toggle display style directly in JavaScript
+    console.log("Elements found, initializing event listener");
+
     advancedText.addEventListener("click", function () {
-        console.log("Advanced options toggled");
-        if (additionalInputs.style.display === "none") {
-            additionalInputs.style.display = "flex";
-            advancedArrow.style.rotate = "180deg";
+        console.log("Click event triggered");
+
+        if (additionalInputs.classList.contains("visible")) {
+            console.log("Hiding additional inputs");
+            additionalInputs.classList.remove("visible");
+            advancedArrow.style.transform = "rotate(0deg)";
         } else {
-            additionalInputs.style.display = "none";
-            advancedArrow.style.rotate = "0deg";
+            console.log("Showing additional inputs");
+            additionalInputs.classList.add("visible");
+            advancedArrow.style.transform = "rotate(180deg)";
         }
     });
-} else {
-    console.log("Advanced options elements not found");
-}
+});
+
+
+
+
 
 // Tab toggle functionality for "Payment Breakdown" and "Amortization Schedule"
 const tabPaymentBreakdown = document.getElementById("tab-payment-breakdown");
