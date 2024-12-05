@@ -1106,82 +1106,79 @@ function updateAmortizationLabels(totalInterestPaid, totalPrincipalPaid, totalAm
     //     event.preventDefault(); // Prevent default scrolling
     // }
 
+    let activeHoverIndex = null; // Global variable to track the active hover index
 
-    let activeHoverIndex = null; // Track the active hover index
-
-function handleTouchEvent(event) {
-    const rect = amortizationChartCanvas.getBoundingClientRect();
-    const touch = event.touches[0] || event.changedTouches[0];
-    const x = touch.clientX - rect.left;
-    const padding = { top: 30, right: 25, bottom: 30, left: 70 };
-
-    if (x < padding.left || x > amortizationChartCanvas.offsetWidth - padding.right) {
-        // If touch is outside the chart, clear hover effects
-        resetHover();
-    } else {
-        const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
-        const index = Math.round(
-            ((x - padding.left) / chartWidth) * (lastAmortizationData.balanceData.length - 1)
-        );
-
-        if (index >= 0 && index < lastAmortizationData.balanceData.length) {
-            activeHoverIndex = index; // Keep track of the active hover index
-
-            updateHoverValues(
-                lastAmortizationData.balanceData[index],
-                lastAmortizationData.cumulativeInterestData[index],
-                lastAmortizationData.cumulativePrincipalData[index]
+    function handleTouchEvent(event) {
+        const rect = amortizationChartCanvas.getBoundingClientRect();
+        const touch = event.touches[0] || event.changedTouches[0];
+        const x = touch.clientX - rect.left;
+        const padding = { top: 30, right: 25, bottom: 30, left: 70 };
+    
+        if (x < padding.left || x > amortizationChartCanvas.offsetWidth - padding.right) {
+            // If touch is outside the chart, reset hover
+            resetHover();
+        } else {
+            const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
+            const index = Math.round(
+                ((x - padding.left) / chartWidth) * (lastAmortizationData.balanceData.length - 1)
             );
-
-            const startDate = new Date();
-            const hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
-            displayHoverDate(hoverDate);
-
-            drawAmortizationChart(
-                lastAmortizationData.balanceData,
-                lastAmortizationData.cumulativeInterestData,
-                lastAmortizationData.cumulativePrincipalData,
-                index
-            );
+    
+            if (index >= 0 && index < lastAmortizationData.balanceData.length) {
+                activeHoverIndex = index; // Track the active hover index
+    
+                updateHoverValues(
+                    lastAmortizationData.balanceData[index],
+                    lastAmortizationData.cumulativeInterestData[index],
+                    lastAmortizationData.cumulativePrincipalData[index]
+                );
+    
+                const startDate = new Date();
+                const hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
+                displayHoverDate(hoverDate);
+    
+                drawAmortizationChart(
+                    lastAmortizationData.balanceData,
+                    lastAmortizationData.cumulativeInterestData,
+                    lastAmortizationData.cumulativePrincipalData,
+                    index
+                );
+            }
         }
+    
+        event.preventDefault(); // Prevent default scrolling
     }
-
-    event.preventDefault(); // Prevent default scrolling
-}
-
-function resetHover() {
-    activeHoverIndex = null; // Clear the active hover index
-    revertValuesToTotals();
-
-    const hoverDateContainer = document.getElementById('amortizationHoverDate');
-    hoverDateContainer.textContent = ''; // Clear the hover date
-
-    drawAmortizationChart(
-        lastAmortizationData.balanceData,
-        lastAmortizationData.cumulativeInterestData,
-        lastAmortizationData.cumulativePrincipalData
-    );
-}
-
-// Add event listeners
-amortizationChartCanvas.addEventListener('touchmove', handleTouchEvent);
-amortizationChartCanvas.addEventListener('touchstart', handleTouchEvent);
-
-amortizationChartCanvas.addEventListener('touchend', () => {
-    // Do not reset immediately; keep the hover effect
-    if (activeHoverIndex === null) {
-        resetHover();
+    
+    function resetHover() {
+        activeHoverIndex = null; // Clear the active hover index
+        revertValuesToTotals();
+    
+        const hoverDateContainer = document.getElementById('amortizationHoverDate');
+        hoverDateContainer.textContent = ''; // Clear the hover date
+    
+        drawAmortizationChart(
+            lastAmortizationData.balanceData,
+            lastAmortizationData.cumulativeInterestData,
+            lastAmortizationData.cumulativePrincipalData
+        );
     }
-});
-
-// Add a global touchstart listener to detect touches outside the chart
-document.addEventListener('touchstart', (event) => {
-    const rect = amortizationChartCanvas.getBoundingClientRect();
-    const touch = event.touches[0];
-    if (!touch || (touch.clientX < rect.left || touch.clientX > rect.right || touch.clientY < rect.top || touch.clientY > rect.bottom)) {
-        resetHover(); // Reset only if the touch is outside the chart
-    }
-});
+    
+    amortizationChartCanvas.addEventListener('touchmove', handleTouchEvent);
+    amortizationChartCanvas.addEventListener('touchstart', handleTouchEvent);
+    
+    // Prevent resetting immediately after touch ends
+    amortizationChartCanvas.addEventListener('touchend', (event) => {
+        event.preventDefault(); // Ensure no scrolling or immediate reset
+    });
+    
+    // Add global touchstart listener to reset hover when touching outside the chart
+    document.addEventListener('touchstart', (event) => {
+        const rect = amortizationChartCanvas.getBoundingClientRect();
+        const touch = event.touches[0];
+        if (!touch || (touch.clientX < rect.left || touch.clientX > rect.right || touch.clientY < rect.top || touch.clientY > rect.bottom)) {
+            resetHover(); // Reset only when touching outside the chart
+        }
+    });
+    
 
     
    

@@ -905,7 +905,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //     event.preventDefault(); // Prevent default scrolling
   // }
 
-  var activeHoverIndex = null; // Track the active hover index
+  var activeHoverIndex = null; // Global variable to track the active hover index
 
   function handleTouchEvent(event) {
     var rect = amortizationChartCanvas.getBoundingClientRect();
@@ -918,13 +918,13 @@ document.addEventListener("DOMContentLoaded", function () {
       left: 70
     };
     if (x < padding.left || x > amortizationChartCanvas.offsetWidth - padding.right) {
-      // If touch is outside the chart, clear hover effects
+      // If touch is outside the chart, reset hover
       resetHover();
     } else {
       var chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
       var index = Math.round((x - padding.left) / chartWidth * (lastAmortizationData.balanceData.length - 1));
       if (index >= 0 && index < lastAmortizationData.balanceData.length) {
-        activeHoverIndex = index; // Keep track of the active hover index
+        activeHoverIndex = index; // Track the active hover index
 
         updateHoverValues(lastAmortizationData.balanceData[index], lastAmortizationData.cumulativeInterestData[index], lastAmortizationData.cumulativePrincipalData[index]);
         var startDate = new Date();
@@ -943,23 +943,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData);
   }
-
-  // Add event listeners
   amortizationChartCanvas.addEventListener('touchmove', handleTouchEvent);
   amortizationChartCanvas.addEventListener('touchstart', handleTouchEvent);
-  amortizationChartCanvas.addEventListener('touchend', function () {
-    // Do not reset immediately; keep the hover effect
-    if (activeHoverIndex === null) {
-      resetHover();
-    }
+
+  // Prevent resetting immediately after touch ends
+  amortizationChartCanvas.addEventListener('touchend', function (event) {
+    event.preventDefault(); // Ensure no scrolling or immediate reset
   });
 
-  // Add a global touchstart listener to detect touches outside the chart
+  // Add global touchstart listener to reset hover when touching outside the chart
   document.addEventListener('touchstart', function (event) {
     var rect = amortizationChartCanvas.getBoundingClientRect();
     var touch = event.touches[0];
     if (!touch || touch.clientX < rect.left || touch.clientX > rect.right || touch.clientY < rect.top || touch.clientY > rect.bottom) {
-      resetHover(); // Reset only if the touch is outside the chart
+      resetHover(); // Reset only when touching outside the chart
     }
   });
   function displayHoverDate(date) {
@@ -1087,4 +1084,4 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 /******/ })()
 ;
-//# sourceMappingURL=loan-calculator.c9a55344c9e32864d0d0.js.map
+//# sourceMappingURL=loan-calculator.79db4b46d08b656e20be.js.map
