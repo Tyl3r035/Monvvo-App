@@ -6,7 +6,7 @@
     <meta name="author" content="Tyler P.">
     <meta name="description" content="Use our free Mortgage Calculator by monthly payment to estimate your mortgage payments. Easily calculate your monthly payments, explore different scenarios, and find the best loan options for home buyers and refinancers.">
     <title>Calculate Mortgage by Monthly Payment | Free Mortgage Calculator</title>
-    <link rel="canonical" href="https://www.monvvo.com" />
+    <link rel="canonical" href="https://www.monvvo.com/loan-calculator" />
     <link rel="icon" type="image/svg" href="./img/logos/monvvo-favicon.svg">
     <!-- Google Fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap" as="style">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap">
 
-<script defer src="/main.1f18baeba5f246ecc64f.js"></script><script defer src="/generalCalcs.3c65207f15cf99592190.js"></script><script defer src="/246.8868046f6871e1baec1f.js"></script><script defer src="/mortgage-calculator.688fcd4f024b9b250c05.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><link href="/styles.b761c13f9276fd555f99.css" rel="stylesheet"></head>
+<script defer src="/main.1f18baeba5f246ecc64f.js"></script><script defer src="/generalCalcs.3c65207f15cf99592190.js"></script><script defer src="/loan-calculator.c9a55344c9e32864d0d0.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><link href="/styles.b761c13f9276fd555f99.css" rel="stylesheet"></head>
 <body>
   <header id="header">
     <div class="logo">
@@ -28,58 +28,21 @@
   </header>
   <main id="main">
     <section class="calculation-section">
-      <h1 id="title">Mortgage Calculator</h1>
+      <h1 id="title">Loan Calculator</h1>
       <div class="calculator-wrap">
         <div class="calculator-inputs">
-          <div class="main-inputs mortgage-inputs">
-            <div class="input-box home-price-box">
-              <label for="home-price">Home Price</label>
+          <div class="main-inputs loan-inputs">
+            <div class="input-box loan-amount-box">
+              <label for="loan-amount">Loan Amount</label>
               <div class="input-fluid">
                 <div class="input-content">
                   <img src="./img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
                   <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="home-price" name="mortgage_input__home_price" placeholder="500000">
+                  <input type="number" class="number-input" id="loan-amount" name="loan_input__loan_price" placeholder="20000">
                 </div>
               </div>
             </div>
-            <div class="input-box down-payment-box">
-              <label for="down-payment-amount">Down Payment</label>
-              <div class="multiple-inputs">
-                <div class="input-left">
-                  <div class="input-content">
-                    <img src="./img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
-                    <div class="input-separator"></div>
-                    <input type="number" class="number-input" id="down-payment-amount" name="mortgage_input__dp_amount" placeholder="25000">
-                  </div>
-                </div>
-                <div class="input-right">
-                  <div class="input-content">
-                    <input type="number" step=".01" class="number-input percentage-input" id="down-payment-percentage" name="mortgage_input__dp_percentage" placeholder="5">
-                    <div class="input-separator"></div>
-                    <img class="percent-icon" src="./img/icons/percentage.svg" alt="%" class="input-icon" loading="lazy">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="input-box loan-term-box">
-              <div class="input-top">
-                <label for="loan-term">Loan Term</label>
-                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the length of time (in years) over which you plan to repay the mortgage loan." loading="lazy">
-  
-              </div>
-              <div class="input-bottom">
-                <div class="input-inner">
-                  <select id="loan-term" name="mortgage_input__loan_term" aria-label="term-dropdown">
-                    <option value="25" class="calculation-option">25</option>
-                    <option value="30" class="calculation-option">30</option>
-                    <option value="15" class="calculation-option">15</option>
-                    <option value="10" class="calculation-option">10</option>
-                  </select>
-                  <img  src="./img/icons/down-arrow.svg" alt="down-arrrow" class="input-dropdown" loading="lazy">
-                </div>
-              </div>
-            </div>
-            <div class="input-box interest-rate-box">
+            <div class="input-box loan-interest-box">
               <div class="input-top">
                 <label for="interest-rate">Interest Rate</label>
                 <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the annual interest rate on the mortgage loan as a percentage." loading="lazy">
@@ -87,7 +50,7 @@
               </div>
               <div class="input-bottom">
                 <div class="input-bottom-inner">
-                  <input type="number" step="0.01" id="interest-rate" name="mortgage_input__interest_rate" placeholder="7.04">
+                  <input type="number" step="0.01" id="interest-rate" name="loan_input__interest_rate" placeholder="7.04">
                   <div class="input-bottom-right">
                     <div class="input-separator"></div>
                     <img src="./img/icons/percentage.svg" alt="%" class="input-icon percent-icon" loading="lazy">
@@ -95,7 +58,24 @@
                 </div>
               </div>
             </div>
-            <div class="input-box payment-frequency-box">
+            
+            <div class="input-box personal-loan-term-box">
+              <div class="input-top">
+                <label for="loan-term">Loan Term</label>
+                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the annual interest rate on the mortgage loan as a percentage." loading="lazy">
+  
+              </div>
+              <div class="input-bottom">
+                <div class="input-bottom-inner">
+                  <input type="number" class="number-input" id="loan-term" name="loan_input__loan Term" placeholder="60">
+                  <div class="input-bottom-right">
+                    <div class="input-separator"></div>
+                    <p class="input-text">Months</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="input-box loan-frequency-box">
               <div class="input-top">
                 <label for="payment-frequency">Payment Frequency</label>
                 <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter how often you plan to make mortgage payments, such as monthly, bi-weekly, or weekly." loading="lazy">
@@ -106,8 +86,7 @@
                     <option value="monthly" class="calculation-option">Monthly</option>
                     <option value="biweekly" class="calculation-option">Bi-Weekly</option>
                     <option value="weekly" class="calculation-option">Weekly</option>
-                    <option value="accelerated-biweekly" class="calculation-option">Accelerated Bi-Weekly Payments</option>
-                    <option value="accelerated-weekly" class="calculation-option">Accelerated Weekly Payments</option>
+                    <option value="semi-monthly" class="calculation-option">Semi-Monthly</option>
                   </select>
                   <img src="./img/icons/down-arrow.svg" alt="down-arrrow" class="input-dropdown" loading="lazy">
                 </div>
@@ -119,22 +98,22 @@
               <p>Advanced Options</p>
               <img src="./img/icons/down-arrow.svg" alt="down-arrrow" class="input-dropdown" id="advanced-arrow" loading="lazy">
             </div>
-            <p class="additional-subtext">(Add additional monthly expenses)</p>
+            <p class="additional-subtext">(Add additional expenses)</p>
           </div>
           <div id="additional-inputs">
             <div class="input-box">
-              <label for="property-tax">Property Tax</label>
+              <label for="origination-fees">Origination Fees</label>
               <div class="input-fluid">
                 <div class="input-content">
                   <img src="./img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
                   <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="property-tax" name="mortgage_input__property_tax" placeholder="250">
+                  <input type="number" class="number-input" id="origination-fees" name="loan_input__origination_fees" placeholder="0">
                 </div>
               </div>
             </div>
             <div class="input-box">
               <div class="input-top">
-                <label for="pmi-expense">PMI Expense</label>
+                <label for="extra-payment">Recurring Extra Payment</label>
                 <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the monthly cost of Private Mortgage Insurance (PMI), if required, typically for down payments less than 20%." loading="lazy">
 
               </div>
@@ -142,21 +121,7 @@
                 <div class="input-content">
                   <img src="./img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
                   <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="pmi-expense" name="mortgage_input__pmi_expense" placeholder="200">
-                </div>
-              </div>
-            </div>
-            <div class="input-box">
-              <div class="input-top">
-                <label for="hoa-expense">Homeowners Association (HOA) Fees</label>
-                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the monthly Homeowners Association (HOA) fees if applicable to the property." loading="lazy">
-
-              </div>
-              <div class="input-fluid">
-                <div class="input-content">
-                  <img src="./img/icons/dollar.svg" alt="$" class="input-icon dollar icon" loading="lazy">
-                  <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="hoa-expense" name="mortgage_input__hoa_expense" placeholder="0">
+                  <input type="number" class="number-input" id="extra-payment" name="loan_input__extra_payment" placeholder="0">
                 </div>
               </div>
             </div>
@@ -175,12 +140,15 @@
             <div class="results-content">
               <div id="payment-breakdown-content">
                 <h2 class="answer-title">Estimated Payment:</h2>
-                <p fetchpriority="high" class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="./disclaimer.html" target="_blank" style="color: initial;">See Disclaimer</a>.)</p>
+                <p fetchpriority="high" class="answer-disclaimer">
+                    (Actual mortgage amount may vary, this is only an estimate.
+                    <a href="./disclaimer.html" target="_blank" style="color: initial;">See Disclaimer</a>.)
+                </p>
                 <div id="monthly-payment-value"></div>
-              
-                <canvas id="mortgageChart" loading="lazy"></canvas>
+                <canvas id="loanChart" loading="lazy"></canvas>
                 <div id="chartLabels" class="chart-labels"></div>
-              </div>
+            </div>
+            
               <div id="amortization-schedule-content" style="display: none;">
                 <h2 class="answer-title">Amortization for Mortgage Loan</h2>
                 <p fetchpriority="high" class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="./disclaimer.html" target="_blank" style="color: initial;">See Disclaimer</a>.)</p>
@@ -227,66 +195,51 @@
     </section>
     <section class="how-section">
       <div class="how-inner">
-        <h3 class="how-title">How to use Monvvo mortgage calculator</h3>
+        <h3 class="how-title">How to use Monvvo loan calculator</h3>
         <ol class="how-list">
-          <li class="how-text">Enter the total purchase price of the home or its current market value if you're refinancing.</li>
-          <li class="how-text">Specify your down payment amount and choose the mortgage term length, typically 30, 20, 15, or 10 years.</li>
-          <li class="how-text">Provide the anticipated or current interest rate, adjusting if necessary to reflect your actual rate.</li>
-          <li class="how-text">Include the annual property tax amount for a more accurate monthly payment estimate.</li>
-          <li class="how-text">If applicable, enter the cost of private mortgage insurance (PMI) for down payments less than 20%.</li>
-          <li class="how-text">Finally, click the calculate button to get an estimate of your monthly mortgage payment.</li>
+          <li class="how-text">Enter the total loan amount you want to borrow.</li>
+          <li class="how-text">Specify the loan term length, typically 12, 24, 36, 48, or 60 months, based on your repayment timeline.</li>
+          <li class="how-text">Provide the anticipated or current interest rate (APR), adjusting if necessary to reflect your actual rate.</li>
+          <li class="how-text">If applicable, include any additional fees, such as origination fees, for a more accurate estimate of your loan costs.</li>
+          <li class="how-text">Finally, click the calculate button to get an estimate of your monthly payment, total payment, and total interest over the loan term.</li>
         </ol>
       </div>
     </section>
     <section class="terms-section">
-      <h3 class="terms-title">Mortgage Terms</h3>
+      <h3 class="terms-title">Loan Terms</h3>
       <div class="terms-content">
         <div class="terms-item">
           <div class="item-inner">
-            <h4 class="item-title">Home Price</h4>
-            <p class="item-text">The home price is the total cost of purchasing the property, including the base price of the house and any additional fees or costs associated with the purchase.</p>
-          </div>
-          <img src="./img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
-        </div>
-        <div class="terms-item">
-          <div class="item-inner">
-            <h4 class="item-title">Down Payment</h4>
-            <p class="item-text">The down payment is the initial amount of money you pay upfront when purchasing a home, which is typically a percentage of the total home price. This amount reduces the loan amount you need to borrow.</p>
-          </div>
-          <img src="./img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
-        </div>
-        <div class="terms-item">
-          <div class="item-inner">
-            <h4 class="item-title">Loan Term</h4>
-            <p class="item-text">The loan term is the length of time over which you agree to repay your mortgage loan. It is typically expressed in years, such as 15 or 30 years.</p>
+            <h4 class="item-title">Loan Amount</h4>
+            <p class="item-text">The loan amount is the total amount of money you borrow from the lender. It represents the principal amount of the loan that you will repay over time, along with interest.</p>
           </div>
           <img src="./img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
         </div>
         <div class="terms-item">
           <div class="item-inner">
             <h4 class="item-title">Interest Rate</h4>
-            <p class="item-text">The interest rate is the percentage charged on the loan amount by the lender, which determines the cost of borrowing money for your mortgage.</p>
+            <p class="item-text">The interest rate is the percentage charged on the loan amount by the lender. It determines the cost of borrowing money and is factored into your monthly payments.</p>
           </div>
           <img src="./img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
         </div>
         <div class="terms-item">
           <div class="item-inner">
-            <h4 class="item-title">Property Taxes</h4>
-            <p class="item-text">Property taxes are annual/monthly taxes paid by homeowners to local government authorities, based on the assessed value of the property.</p>
+            <h4 class="item-title">Loan Term</h4>
+            <p class="item-text">The loan term is the length of time over which you agree to repay your personal loan. It is typically expressed in months, such as 12, 24, 36, or 60 months.</p>
           </div>
           <img src="./img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
         </div>
         <div class="terms-item">
           <div class="item-inner">
-            <h4 class="item-title">PMI Expense</h4>
-            <p class="item-text">Private Mortgage Insurance (PMI) is a type of insurance that protects the lender if you default on your mortgage. It is typically required if your down payment is less than 20%.</p>
+            <h4 class="item-title">Origination Fees</h4>
+            <p class="item-text">Origination fees are the upfront costs charged by the lender to process your loan. These fees, if applicable, are usually deducted from the loan amount.</p>
           </div>
           <img src="./img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
         </div>
         <div class="terms-item">
           <div class="item-inner">
-            <h4 class="item-title">HOA Fees</h4>
-            <p class="item-text">Homeowner's Association (HOA) fees are monthly or annual dues paid by homeowners in a residential community to cover the maintenance of common areas.</p>
+            <h4 class="item-title">Extra Payments</h4>
+            <p class="item-text">Extra payments are additional amounts you can pay toward the loan’s principal. Making extra payments can reduce the total interest paid and shorten the loan term.</p>
           </div>
           <img src="./img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
         </div>

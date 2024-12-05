@@ -111,7 +111,10 @@ body,html{
   align-items: flex-start;
   flex-shrink: 1;
 }
-.main-inputs{
+
+
+/* Mortgage Input Section */
+.mortgage-inputs{
   display: grid;
   grid-template-areas: 
   "home-price home-price"
@@ -126,6 +129,22 @@ body,html{
 .loan-term-box{grid-area: loan-term;}
 .interest-rate-box{grid-area: interest-rate;}
 .payment-frequency-box{grid-area: payment-frequency;}
+
+
+/* Loan Input Section */
+.loan-inputs{
+  display: grid;
+  grid-template-areas: 
+  "loan-amount loan-amount"
+  "loan-interest loan-interest"
+  "personal-loan-term personal-loan-term"
+  "loan-frequency loan-frequency";
+  width: 100%;
+}
+.loan-amount-box{grid-area: loan-amount;}
+.loan-interest-box{grid-area: loan-interest;}
+.personal-loan-term-box{grid-area: personal-loan-term;}
+.loan-frequency-box{grid-area: loan-frequency;}
 
 /* No Info Icon Generalized Input CSS */
 .input-box{
@@ -183,6 +202,11 @@ body,html{
 .input-box input::placeholder{
   color: #232525;
   opacity: .8;
+}
+.input-box .input-text{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #6C6C70 !important;
 }
 
 /* Get Rid of webkit spinners */
@@ -1392,7 +1416,7 @@ canvas {
   .calculator-inputs{
     width: 100%;
   }
-  .main-inputs{
+  .mortgage-inputs{
 
     grid-template-areas:
     "down-payment down-payment"
@@ -1499,9 +1523,6 @@ canvas {
     width: 95%;
     height: 150px;
   }
-  #mortgage-chart{
-    height: 150px;
-  }
   .label-name, .label-value{
     font-size: 14px;
   }
@@ -1597,7 +1618,7 @@ canvas {
   .results-tab{
     padding: 8px 0;
   }
-  .main-inputs{
+  .mortgage-inputs{
     grid-template-areas:
     "home-price interest-rate"
     "loan-term payment-frequency"
@@ -1657,7 +1678,7 @@ canvas {
   }
 }
 @media screen and (max-width: 320px){
-  .main-inputs{
+  .mortgage-inputs{
     gap: 0 15px;
   }
   .calculation-btn{

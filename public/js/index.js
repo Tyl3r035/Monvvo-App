@@ -1,6 +1,6 @@
 import '../css/reset.css';
 import '../css/styles.css';
-import './utils.js';
+// import './utils.js';
 
 // Your additional JavaScript logic here
 

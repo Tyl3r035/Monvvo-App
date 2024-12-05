@@ -13,8 +13,14 @@ const pages = [
     {
         filename: 'index.html',
         template: path.resolve(__dirname, 'public/index.html'),
-        chunks: ['main', 'mortgage-calculator', 'mortgagecalcs', 'utils'], // Include relevant chunks
+        chunks: ['main', 'mortgage-calculator', 'generalCalcs', 'utils'], // Include relevant chunks
         canonical: 'https://www.monvvo.com',
+    },
+    {
+        filename: 'loan-calculator.html',
+        template: path.resolve(__dirname, 'public/loan-calculator.html'),
+        chunks: ['main', 'loan-calculator', 'generalCalcs','utils'], // Exclude unnecessary chunks
+        canonical: 'https://www.monvvo.com/loan-calculator',
     },
     {
         filename: 'disclaimer.html',
@@ -52,9 +58,15 @@ module.exports = {
     mode: isProduction ? 'production' : 'development',
     entry: {
         main: './public/js/index.js', // Main entry point
+        // General JS
+        generalCalcs: './public/js/generalCalcs.js',
+        // Mortgage Calculator JS
         'mortgage-calculator': './public/js/mortgage-calculator.js',
-        mortgagecalcs: './public/js/mortgagecalcs.js',
+        // Loan Calculator JS
+        'loan-calculator': './public/js/loan-calculator.js',
+        // Contact JS
         contact: './public/js/contact.js',
+        // Utils JS
         utils: './public/js/utils.js',
     },
     output: {

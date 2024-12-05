@@ -30,6 +30,11 @@ module.exports = {
             template: './public/index.html',
             filename: 'index.html',
         }),
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: './public/loan-calculator.html',
+            filename: 'loan-calculator.html',
+        }),
         new HtmlWebpackPlugin({
             template: './public/404.html',
             filename: '404.html',

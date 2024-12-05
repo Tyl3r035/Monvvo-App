@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkmonvvo_app"] = self["webpackChunkmonvvo_app"] || []).push([[449],{
+(self["webpackChunkmonvvo_app"] = self["webpackChunkmonvvo_app"] || []).push([[830],{
 
 /***/ 9449:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -13,4 +13,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
-//# sourceMappingURL=449.46e18aee73dab7551c07.js.map
+//# sourceMappingURL=830.25092cecf7e3f2672899.js.map

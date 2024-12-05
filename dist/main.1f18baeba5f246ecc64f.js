@@ -7,7 +7,7 @@
 "use strict";
 
 
-
+// import './utils.js';
 
 // Your additional JavaScript logic here
 
@@ -88,7 +88,7 @@ var map = {
 	],
 	"./logos/monvvo-logo.png": [
 		9449,
-		449
+		830
 	]
 };
 function webpackAsyncContext(req) {
@@ -203,7 +203,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + "." + {"5":"783e76ea13c00437d521","397":"d67032c4bd1ad636d6b6","449":"46e18aee73dab7551c07","730":"10b1f964bfbcc15a9aeb","749":"bb5c0f697c2e985e9490","805":"113374e6a7cb45c04ad9","843":"ee906024d82bed614358","867":"4413282f4ba2ff892749","974":"25dbcf67430104be2b34","991":"6c46db5e81a3f635e763"}[chunkId] + ".js";
+/******/ 			return "" + chunkId + "." + {"5":"783e76ea13c00437d521","397":"d67032c4bd1ad636d6b6","730":"10b1f964bfbcc15a9aeb","749":"bb5c0f697c2e985e9490","805":"113374e6a7cb45c04ad9","830":"25092cecf7e3f2672899","843":"ee906024d82bed614358","867":"4413282f4ba2ff892749","974":"25dbcf67430104be2b34","991":"6c46db5e81a3f635e763"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -212,7 +212,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference all chunks
 /******/ 		__webpack_require__.miniCssF = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + "styles" + "." + "1f4b2d3ba983c98d2ed9" + ".css";
+/******/ 			return "" + "styles" + "." + "b761c13f9276fd555f99" + ".css";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -384,4 +384,4 @@ module.exports = webpackAsyncContext;
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=main.410b6dca94b5ad853e1d.js.map
+//# sourceMappingURL=main.1f18baeba5f246ecc64f.js.map
