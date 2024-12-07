@@ -1,10 +1,4 @@
 /******/ (() => { // webpackBootstrap
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 // import { generateMortgagePdf } from "./pdf/mortgage-pdf.js";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -64,6 +58,12 @@ document.addEventListener("DOMContentLoaded", function () {
   var lastAmortizationData = null;
 
   // function updateHorizontalStackedBarChart(principalAndInterest, extraPayment, frequency) {
+  //     console.log("Updating Horizontal Stacked Bar Chart with:", {
+  //         principalAndInterest,
+  //         extraPayment,
+  //         frequency
+  //     });
+
   //     const canvas = document.getElementById('loanChart');
   //     if (!canvas) {
   //         console.error("Canvas element for loan chart not found.");
@@ -73,20 +73,19 @@ document.addEventListener("DOMContentLoaded", function () {
   //     const ctx = canvas.getContext('2d');
   //     const parentWidth = canvas.parentElement.offsetWidth;
 
-  //     // Ensure the canvas is resized
+  //     // Resize canvas
   //     canvas.width = parentWidth;
   //     canvas.height = 100;
 
   //     // Clear the canvas
   //     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  //     // Adjust payments for frequency
+  //     // Adjust data for frequency
   //     const adjustedPrincipalAndInterest = adjustPaymentForFrequency(principalAndInterest, frequency);
   //     const adjustedExtraPayment = adjustPaymentForFrequency(extraPayment, frequency);
 
-  //     // Data and colors
   //     const data = [adjustedPrincipalAndInterest, adjustedExtraPayment];
-  //     const colors = ['#175134', '#91BBA6']; // Principal & Interest, Extra Payment
+  //     const colors = ['#175134', '#91BBA6'];
   //     const total = data.reduce((a, b) => a + b, 0);
 
   //     if (total === 0) {
@@ -94,41 +93,28 @@ document.addEventListener("DOMContentLoaded", function () {
   //         return;
   //     }
 
-  //     const chartHeight = 60;
-  //     const yOffset = canvas.height / 2 - chartHeight / 2;
-  //     const borderRadius = 10; // Radius for rounded corners
   //     let cumulativeWidth = 0;
 
-  //     // Draw each segment with rounded corners
   //     data.forEach((value, index) => {
   //         if (value > 0) {
   //             const segmentWidth = (value / total) * canvas.width;
 
   //             ctx.fillStyle = colors[index];
-
-  //             // Determine if the segment is the first or last
-  //             const isFirst = index === 0;
-  //             const isLast = index === data.length - 1;
-
-  //             drawOuterRoundedRect(
-  //                 ctx,
-  //                 cumulativeWidth,
-  //                 yOffset,
-  //                 segmentWidth,
-  //                 chartHeight,
-  //                 borderRadius,
-  //                 isFirst,
-  //                 isLast
-  //             );
+  //             ctx.fillRect(cumulativeWidth, 0, segmentWidth, canvas.height);
 
   //             cumulativeWidth += segmentWidth;
   //         }
   //     });
 
-  //     console.log("Stacked bar chart updated with rounded corners.");
+  //     console.log("Stacked bar chart updated successfully.");
   // }
 
   function updateHorizontalStackedBarChart(principalAndInterest, extraPayment, frequency) {
+    console.log("Updating Horizontal Stacked Bar Chart with:", {
+      principalAndInterest: principalAndInterest,
+      extraPayment: extraPayment,
+      frequency: frequency
+    });
     var canvas = document.getElementById('loanChart');
     if (!canvas) {
       console.error("Canvas element for loan chart not found.");
@@ -137,20 +123,18 @@ document.addEventListener("DOMContentLoaded", function () {
     var ctx = canvas.getContext('2d');
     var parentWidth = canvas.parentElement.offsetWidth;
 
-    // Ensure the canvas is resized
+    // Resize canvas
     canvas.width = parentWidth;
     canvas.height = 100;
 
     // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Adjust payments for frequency
+    // Adjust data for frequency
     var adjustedPrincipalAndInterest = adjustPaymentForFrequency(principalAndInterest, frequency);
     var adjustedExtraPayment = adjustPaymentForFrequency(extraPayment, frequency);
-
-    // Data and colors
     var data = [adjustedPrincipalAndInterest, adjustedExtraPayment];
-    var colors = ['#175134', '#91BBA6']; // Principal & Interest, Extra Payment
+    var colors = ['#175134', '#91BBA6'];
     var total = data.reduce(function (a, b) {
       return a + b;
     }, 0);
@@ -158,30 +142,28 @@ document.addEventListener("DOMContentLoaded", function () {
       console.warn("Total data for stacked bar chart is 0. Skipping rendering.");
       return;
     }
-    var chartHeight = 60;
-    var yOffset = canvas.height / 2 - chartHeight / 2;
+    var chartHeight = 60; // Set a fixed chart height
+    var yOffset = canvas.height / 2 - chartHeight / 2; // Center the bar vertically
     var borderRadius = 10; // Radius for rounded corners
     var cumulativeWidth = 0;
 
-    // Check for only one active segment
+    // Determine how many active segments are present
     var activeSegments = data.filter(function (value) {
       return value > 0;
     }).length;
-
-    // Draw each segment
     data.forEach(function (value, index) {
       if (value > 0) {
         var segmentWidth = value / total * canvas.width;
         ctx.fillStyle = colors[index];
 
-        // Apply rounded corners for single or multiple segments
+        // Apply rounded corners for the first and last segment
         var isFirst = activeSegments === 1 || index === 0;
         var isLast = activeSegments === 1 || index === data.length - 1;
         drawOuterRoundedRect(ctx, cumulativeWidth, yOffset, segmentWidth, chartHeight, borderRadius, isFirst, isLast);
         cumulativeWidth += segmentWidth;
       }
     });
-    console.log("Stacked bar chart updated with rounded corners.");
+    console.log("Stacked bar chart updated successfully.");
   }
   function updateChartLabels(principalAndInterest, extraPayment, frequency) {
     var labelsContainer = document.getElementById('chartLabels');
@@ -234,52 +216,59 @@ document.addEventListener("DOMContentLoaded", function () {
     var interestRate = parseFloat(interestRateInput.value) || defaultValues.interestRate;
     var originationFees = parseFloat(originationFeesInput.value) || defaultValues.originationFees;
     var extraPayment = parseFloat(extraPaymentInput.value) || defaultValues.extraPayment;
-    var paymentFrequency = paymentFrequencyInput.value || defaultValues.paymentFrequency;
+    console.log("Inputs:", {
+      loanAmount: loanAmount,
+      loanTerm: loanTerm,
+      interestRate: interestRate,
+      originationFees: originationFees,
+      extraPayment: extraPayment
+    });
     var netLoanAmount = loanAmount - originationFees;
     if (netLoanAmount <= 0) {
       console.error("Loan amount is insufficient to cover origination fees.");
       return;
     }
-
-    // Calculate full amortization data
     lastAmortizationData = calculateAmortizationData(netLoanAmount, interestRate, loanTerm, extraPayment);
     if (!lastAmortizationData) {
       console.error("Failed to calculate amortization data.");
       return;
     }
+    console.log("Amortization Data:", lastAmortizationData);
+    var frequency = paymentFrequencyInput.value || defaultValues.paymentFrequency;
+
+    // Adjust payments for frequency
     var monthlyInterestRate = interestRate / 100 / 12;
     var monthlyPayment = netLoanAmount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loanTerm));
 
-    // Update global variables for the stacked bar chart
-    adjustedPrincipalAndInterest = adjustPaymentForFrequency(monthlyPayment, paymentFrequency);
-    adjustedExtraPayment = adjustPaymentForFrequency(extraPayment, paymentFrequency);
+    // Update global values for use in other functions
+    adjustedPrincipalAndInterest = adjustPaymentForFrequency(monthlyPayment, frequency);
+    adjustedExtraPayment = adjustPaymentForFrequency(extraPayment, frequency);
 
-    // Update the UI
-    updatePaymentBreakdown(adjustedPrincipalAndInterest, adjustedExtraPayment, paymentFrequency);
-    updateHorizontalStackedBarChart(adjustedPrincipalAndInterest, adjustedExtraPayment, paymentFrequency);
-    updateChartLabels(adjustedPrincipalAndInterest, adjustedExtraPayment, paymentFrequency);
+    // Update payment breakdown
+    updatePaymentBreakdown(adjustedPrincipalAndInterest, adjustedExtraPayment, frequency);
+
+    // Update horizontal stacked bar chart
+    updateHorizontalStackedBarChart(adjustedPrincipalAndInterest, adjustedExtraPayment, frequency);
+
+    // Update chart labels
+    updateChartLabels(adjustedPrincipalAndInterest, adjustedExtraPayment, frequency);
+
+    // Redraw amortization chart
+    drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData);
     console.log("Results displayed successfully.");
   }
-
-  // function updatePaymentBreakdown(principalAndInterest, extraPayment, frequency) {
-  //     const paymentElement = document.getElementById('monthly-payment-value');
-  //     const frequencyLabel = paymentFrequencyInput.options[paymentFrequencyInput.selectedIndex].text;
-
-  //     const totalPayment = principalAndInterest + extraPayment;
-
-  //     paymentElement.innerHTML = `
-  //         <span class="payment-amount">${formatter.format(totalPayment)}</span>
-  //         <span class="payment-frequency"> / ${frequencyLabel}</span>
-  //     `;
-
-  //     console.log("Payment breakdown updated with per-frequency amounts:", {
-  //         principalAndInterest,
-  //         extraPayment,
-  //         totalPayment,
-  //         frequencyLabel,
-  //     });
-  // }
-
+  function updatePaymentBreakdown(principalAndInterest, extraPayment, frequency) {
+    var paymentElement = document.getElementById('monthly-payment-value');
+    var frequencyLabel = paymentFrequencyInput.options[paymentFrequencyInput.selectedIndex].text;
+    var totalPayment = principalAndInterest + extraPayment;
+    paymentElement.innerHTML = "\n            <span class=\"payment-amount\">".concat(formatter.format(totalPayment), "</span>\n            <span class=\"payment-frequency\"> / ").concat(frequencyLabel, "</span>\n        ");
+    console.log("Payment breakdown updated with per-frequency amounts:", {
+      principalAndInterest: principalAndInterest,
+      extraPayment: extraPayment,
+      totalPayment: totalPayment,
+      frequencyLabel: frequencyLabel
+    });
+  }
   function updatePaymentBreakdown(principalAndInterest, extraPayment, frequency) {
     var paymentElement = document.getElementById('monthly-payment-value');
     var frequencyLabel = paymentFrequencyInput.options[paymentFrequencyInput.selectedIndex].text;
@@ -357,11 +346,19 @@ document.addEventListener("DOMContentLoaded", function () {
   var amortizationScheduleContent = document.getElementById("amortization-schedule-content");
 
   // function showTab(tabName) {
-  //     if (tabName === "amortization") {
+  //     const paymentBreakdownContent = document.getElementById("payment-breakdown-content");
+  //     const amortizationScheduleContent = document.getElementById("amortization-schedule-content");
+
+  //     if (tabName === "payment") {
+  //         paymentBreakdownContent.style.display = "block";
+  //         amortizationScheduleContent.style.display = "none";
+
+  //         if (adjustedPrincipalAndInterest && adjustedExtraPayment) {
+  //             updateHorizontalStackedBarChart(adjustedPrincipalAndInterest, adjustedExtraPayment, frequency);
+  //         }
+  //     } else if (tabName === "amortization") {
   //         paymentBreakdownContent.style.display = "none";
   //         amortizationScheduleContent.style.display = "block";
-  //         tabPaymentBreakdown.classList.remove("tab-active");
-  //         tabAmortizationSchedule.classList.add("tab-active");
 
   //         if (lastAmortizationData) {
   //             drawAmortizationChart(
@@ -369,41 +366,66 @@ document.addEventListener("DOMContentLoaded", function () {
   //                 lastAmortizationData.cumulativeInterestData,
   //                 lastAmortizationData.cumulativePrincipalData
   //             );
-  //         } else {
-  //             console.warn("No amortization data available for the chart.");
+  //             populateAmortizationTable(lastAmortizationData);
   //         }
-  //     } else if (tabName === "payment") {
-  //         // Logic for Payment Breakdown tab
   //     }
   // }
 
   function showTab(tabName) {
-    if (tabName === "amortization") {
-      // Show amortization schedule tab
-      paymentBreakdownContent.style.display = "none";
-      amortizationScheduleContent.style.display = "block";
-      tabPaymentBreakdown.classList.remove("tab-active");
-      tabAmortizationSchedule.classList.add("tab-active");
-      if (lastAmortizationData) {
-        drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData);
-      } else {
-        console.warn("No amortization data available for the chart.");
-      }
-    } else if (tabName === "payment") {
-      // Show payment breakdown tab
+    var paymentBreakdownContent = document.getElementById("payment-breakdown-content");
+    var amortizationScheduleContent = document.getElementById("amortization-schedule-content");
+    if (tabName === "payment") {
       paymentBreakdownContent.style.display = "block";
       amortizationScheduleContent.style.display = "none";
-      tabPaymentBreakdown.classList.add("tab-active");
-      tabAmortizationSchedule.classList.remove("tab-active");
-
-      // Redraw the stacked bar chart
-      var frequency = paymentFrequencyInput.value; // Current frequency
-      updateHorizontalStackedBarChart(adjustedPrincipalAndInterest,
-      // Pre-calculated in calculateAndDisplayResults
-      adjustedExtraPayment,
-      // Pre-calculated in calculateAndDisplayResults
-      frequency);
+      if (adjustedPrincipalAndInterest && adjustedExtraPayment) {
+        updateHorizontalStackedBarChart(adjustedPrincipalAndInterest, adjustedExtraPayment, frequency);
+      }
+    } else if (tabName === "amortization") {
+      paymentBreakdownContent.style.display = "none";
+      amortizationScheduleContent.style.display = "block";
+      if (lastAmortizationData) {
+        drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData);
+        populateAmortizationTable(lastAmortizationData);
+      } else {
+        console.error("No amortization data available.");
+      }
     }
+  }
+  function calculateAndDisplayResults() {
+    console.log("Calculating loan results...");
+    var loanAmount = parseFloat(loanAmountInput.value) || defaultValues.loanAmount;
+    var loanTerm = parseInt(loanTermInput.value) || defaultValues.loanTerm;
+    var interestRate = parseFloat(interestRateInput.value) || defaultValues.interestRate;
+    var originationFees = parseFloat(originationFeesInput.value) || defaultValues.originationFees;
+    var extraPayment = parseFloat(extraPaymentInput.value) || defaultValues.extraPayment;
+    var netLoanAmount = loanAmount - originationFees;
+    if (netLoanAmount <= 0) {
+      console.error("Loan amount is insufficient to cover origination fees.");
+      return;
+    }
+    lastAmortizationData = calculateAmortizationData(netLoanAmount, interestRate, loanTerm, extraPayment);
+    var frequency = paymentFrequencyInput.value || defaultValues.paymentFrequency;
+
+    // Adjust payments for frequency
+    var monthlyInterestRate = interestRate / 100 / 12;
+    var monthlyPayment = netLoanAmount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loanTerm));
+
+    // Update global variables
+    adjustedPrincipalAndInterest = adjustPaymentForFrequency(monthlyPayment, frequency);
+    adjustedExtraPayment = adjustPaymentForFrequency(extraPayment, frequency);
+
+    // Update payment breakdown
+    updatePaymentBreakdown(adjustedPrincipalAndInterest, adjustedExtraPayment, frequency);
+
+    // Update horizontal stacked bar chart
+    updateHorizontalStackedBarChart(adjustedPrincipalAndInterest, adjustedExtraPayment, frequency);
+
+    // Update chart labels
+    updateChartLabels(adjustedPrincipalAndInterest, adjustedExtraPayment, frequency);
+
+    // Redraw amortization chart
+    drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData);
+    console.log("Results displayed successfully.");
   }
   tabPaymentBreakdown.addEventListener("click", function () {
     return showTab("payment");
@@ -477,51 +499,6 @@ document.addEventListener("DOMContentLoaded", function () {
   /**
    * Helper function to draw rounded rectangles only on outer edges.
    */
-  // function drawOuterRoundedRect(ctx, x, y, width, height, radius, isFirst, isLast) {
-  //     ctx.beginPath();
-
-  //     // Start at the top-left corner
-  //     if (isFirst) {
-  //         ctx.moveTo(x + radius, y); // Move to the right to account for the radius
-  //     } else {
-  //         ctx.moveTo(x, y); // Start at the corner without radius
-  //     }
-
-  //     // Top edge
-  //     ctx.lineTo(x + width - (isLast ? radius : 0), y);
-
-  //     // Top-right corner
-  //     if (isLast) {
-  //         ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-  //     }
-
-  //     // Right edge
-  //     ctx.lineTo(x + width, y + height - (isLast ? radius : 0));
-
-  //     // Bottom-right corner
-  //     if (isLast) {
-  //         ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  //     }
-
-  //     // Bottom edge
-  //     ctx.lineTo(x + (isFirst ? radius : 0), y + height);
-
-  //     // Bottom-left corner
-  //     if (isFirst) {
-  //         ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-  //     }
-
-  //     // Left edge
-  //     ctx.lineTo(x, y + (isFirst ? radius : 0));
-
-  //     // Top-left corner
-  //     if (isFirst) {
-  //         ctx.quadraticCurveTo(x, y, x + radius, y);
-  //     }
-
-  //     ctx.closePath();
-  //     ctx.fill();
-  // }
   function drawOuterRoundedRect(ctx, x, y, width, height, radius, isFirst, isLast) {
     ctx.beginPath();
 
@@ -566,26 +543,65 @@ document.addEventListener("DOMContentLoaded", function () {
     ctx.closePath();
     ctx.fill();
   }
-  function calculateAmortizationSchedule(principal, monthlyInterestRate, monthlyPayment, numberOfPayments) {
-    var amortizationData = []; // Array to store each period's data
-    var balance = principal;
+
+  // function calculateAmortizationSchedule(principal, monthlyInterestRate, monthlyPayment, numberOfPayments) {
+  //     const amortizationData = []; // Array to store each period's data
+  //     let balance = principal;
+  //     let totalInterestPaid = 0;
+  //     let totalPrincipalPaid = 0;
+
+  //     for (let i = 0; i < numberOfPayments; i++) {
+  //         const interestPayment = balance * monthlyInterestRate;
+  //         const principalPayment = Math.min(monthlyPayment - interestPayment, balance); // Avoid overpayment
+  //         balance = Math.max(balance - principalPayment, 0); // Ensure no negative balance
+
+  //         totalInterestPaid += interestPayment;
+  //         totalPrincipalPaid += principalPayment;
+
+  //         amortizationData.push({
+  //             period: i + 1, // Start periods from 1
+  //             principal: principalPayment,
+  //             interest: interestPayment,
+  //             balance: balance,
+  //         });
+
+  //         if (balance <= 0) break; // Stop if the loan is fully paid
+  //     }
+
+  //     return {
+  //         schedule: amortizationData,
+  //         balanceData: amortizationData.map(row => row.balance),
+  //         cumulativeInterestData: amortizationData.map((_, index) =>
+  //             amortizationData.slice(0, index + 1).reduce((sum, row) => sum + row.interest, 0)
+  //         ),
+  //         cumulativePrincipalData: amortizationData.map((_, index) =>
+  //             amortizationData.slice(0, index + 1).reduce((sum, row) => sum + row.principal, 0)
+  //         ),
+  //         totalInterestPaid,
+  //         totalPrincipalPaid,
+  //         totalAmountPaid: totalInterestPaid + totalPrincipalPaid,
+  //     };
+  // }
+
+  function calculateAmortizationSchedule(loanAmount, monthlyInterestRate, monthlyPayment, numberOfPayments) {
+    var extraPayment = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+    var amortizationData = [];
+    var balance = loanAmount;
     var totalInterestPaid = 0;
     var totalPrincipalPaid = 0;
     for (var i = 0; i < numberOfPayments; i++) {
       var interestPayment = balance * monthlyInterestRate;
-      var principalPayment = Math.min(monthlyPayment - interestPayment, balance); // Avoid overpayment
-      balance = Math.max(balance - principalPayment, 0); // Ensure no negative balance
-
+      var principalPayment = Math.min(monthlyPayment - interestPayment + extraPayment, balance);
+      balance = Math.max(balance - principalPayment, 0);
       totalInterestPaid += interestPayment;
       totalPrincipalPaid += principalPayment;
       amortizationData.push({
         period: i + 1,
-        // Start periods from 1
         principal: principalPayment,
         interest: interestPayment,
         balance: balance
       });
-      if (balance <= 0) break; // Stop if the loan is fully paid
+      if (balance <= 0) break; // Stop when the loan is paid off
     }
     return {
       schedule: amortizationData,
@@ -603,8 +619,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 0);
       }),
       totalInterestPaid: totalInterestPaid,
-      totalPrincipalPaid: totalPrincipalPaid,
-      totalAmountPaid: totalInterestPaid + totalPrincipalPaid
+      totalPrincipalPaid: totalPrincipalPaid
     };
   }
 
@@ -627,153 +642,178 @@ document.addEventListener("DOMContentLoaded", function () {
   populateAmortizationTable(amortizationData);
 
   // Draw Amortization Chart
+  // function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData, hoverIndex = null) {
+  //     const canvas = document.getElementById('amortizationChart');
+  //     const ctx = canvas.getContext('2d');
+  //     const dpr = window.devicePixelRatio || 1;
+
+  //     // Adjust canvas dimensions dynamically
+  //     const isSmallScreen = window.innerWidth < 700;
+  //     const canvasHeight = isSmallScreen ? 200 : 300;
+
+  //     canvas.width = canvas.parentElement.offsetWidth * dpr;
+  //     canvas.height = canvasHeight * dpr;
+  //     ctx.scale(dpr, dpr);
+
+  //     const width = canvas.width / dpr;
+  //     const height = canvas.height / dpr;
+
+  //     const padding = { top: 10, right: 20, bottom: 50, left: 50 };
+  //     const gridColor = '#d0d0d0';
+  //     const labelColor = '#505050';
+  //     const labelFont = 'normal 12px Arial';
+
+  //     const maxValue = Math.max(...balanceData, ...cumulativeInterestData, ...cumulativePrincipalData);
+  //     const yAxisMax = Math.ceil(maxValue / 5000) * 5000;
+
+  //     function getY(value) {
+  //         return height - padding.bottom - (value / yAxisMax) * (height - padding.top - padding.bottom);
+  //     }
+
+  //     function getX(index) {
+  //         return padding.left + (index / (months - 1)) * (width - padding.left - padding.right);
+  //     }
+
+  //     const months = balanceData.length; // Dynamically set the length of the chart
+
+  //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  //     // Y-axis labels and grid lines
+  //     ctx.font = labelFont;
+  //     ctx.textAlign = 'right';
+  //     ctx.fillStyle = labelColor;
+  //     ctx.strokeStyle = gridColor;
+
+  //     for (let i = 0; i <= yAxisMax; i += 5000) {
+  //         const y = getY(i);
+  //         ctx.beginPath();
+  //         ctx.moveTo(padding.left, y);
+  //         ctx.lineTo(width - padding.right, y);
+  //         ctx.stroke();
+  //         ctx.fillText(`$${i / 1000}K`, padding.left - 10, y + 5);
+  //     }
+
+  //     ctx.textAlign = 'center';
+
+  //     // X-axis labels and grid lines
+  //     for (let i = 0; i < months; i += 12) {
+  //         const x = getX(i);
+  //         const monthLabel = `${i} mo`;
+
+  //         ctx.beginPath();
+  //         ctx.moveTo(x, padding.top);
+  //         ctx.lineTo(x, height - padding.bottom);
+  //         ctx.stroke();
+
+  //         ctx.font = labelFont;
+  //         ctx.fillText(monthLabel, x, height - 10);
+  //     }
+
+  //     const xLast = getX(months - 1);
+  //     const lastMonthLabel = `${months} mo`;
+  //     ctx.fillText(lastMonthLabel, xLast, height - 10);
+
+  //     // Draw the chart lines
+  //     ctx.save();
+  //     ctx.beginPath();
+  //     ctx.rect(padding.left, padding.top, width - padding.left - padding.right, height - padding.top - padding.bottom);
+  //     ctx.clip();
+
+  //     // Draw Balance Line
+  //     ctx.strokeStyle = '#175134';
+  //     ctx.lineWidth = 2;
+  //     ctx.beginPath();
+  //     for (let i = 0; i < balanceData.length; i++) {
+  //         const x = getX(i);
+  //         const y = getY(balanceData[i]);
+  //         if (i === 0) ctx.moveTo(x, y);
+  //         else ctx.lineTo(x, y);
+  //     }
+  //     ctx.stroke();
+
+  //     // Draw Principal Line
+  //     ctx.strokeStyle = '#3EB721';
+  //     ctx.beginPath();
+  //     for (let i = 0; i < cumulativePrincipalData.length; i++) {
+  //         const x = getX(i);
+  //         const y = getY(cumulativePrincipalData[i]);
+  //         if (i === 0) ctx.moveTo(x, y);
+  //         else ctx.lineTo(x, y);
+  //     }
+  //     ctx.stroke();
+
+  //     // Draw Interest Line
+  //     ctx.strokeStyle = '#91BBA6';
+  //     ctx.beginPath();
+  //     for (let i = 0; i < cumulativeInterestData.length; i++) {
+  //         const x = getX(i);
+  //         const y = getY(cumulativeInterestData[i]);
+  //         if (i === 0) ctx.moveTo(x, y);
+  //         else ctx.lineTo(x, y);
+  //     }
+  //     ctx.stroke();
+
+  //     ctx.restore();
+
+  //     // Draw the right Y-axis line (final grid line)
+  //     ctx.strokeStyle = gridColor;
+  //     ctx.lineWidth = 1;
+  //     ctx.beginPath();
+  //     ctx.moveTo(width - padding.right, padding.top);
+  //     ctx.lineTo(width - padding.right, height - padding.bottom);
+  //     ctx.stroke();
+
+  //     // Draw hover effects if hoverIndex is provided
+  //     if (hoverIndex !== null) {
+  //         const x = getX(hoverIndex);
+  //         const balanceY = getY(balanceData[hoverIndex]);
+  //         const principalY = getY(cumulativePrincipalData[hoverIndex]);
+  //         const interestY = getY(cumulativeInterestData[hoverIndex]);
+
+  //         // Draw vertical hover line
+  //         ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+  //         ctx.lineWidth = 1;
+  //         ctx.beginPath();
+  //         ctx.moveTo(x, padding.top);
+  //         ctx.lineTo(x, height - padding.bottom);
+  //         ctx.stroke();
+
+  //         // Draw hover dots
+  //         const dotRadius = 4;
+  //         ctx.fillStyle = '#175134'; // Balance dot color
+  //         ctx.beginPath();
+  //         ctx.arc(x, balanceY, dotRadius, 0, Math.PI * 2);
+  //         ctx.fill();
+
+  //         ctx.fillStyle = '#3EB721'; // Principal dot color
+  //         ctx.beginPath();
+  //         ctx.arc(x, principalY, dotRadius, 0, Math.PI * 2);
+  //         ctx.fill();
+
+  //         ctx.fillStyle = '#91BBA6'; // Interest dot color
+  //         ctx.beginPath();
+  //         ctx.arc(x, interestY, dotRadius, 0, Math.PI * 2);
+  //         ctx.fill();
+
+  //         // Update labels with hover values
+  //         const hoverPrincipal = cumulativePrincipalData[hoverIndex];
+  //         const hoverInterest = cumulativeInterestData[hoverIndex];
+  //         const hoverBalance = balanceData[hoverIndex];
+
+  //         updateHoverValues(hoverBalance, hoverInterest, hoverPrincipal);
+  //     }
+  // }
+
   function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData) {
     var hoverIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
     var canvas = document.getElementById('amortizationChart');
     var ctx = canvas.getContext('2d');
     var dpr = window.devicePixelRatio || 1;
-
-    // Adjust canvas dimensions dynamically
-    var isSmallScreen = window.innerWidth < 700;
-    var canvasHeight = isSmallScreen ? 200 : 300;
     canvas.width = canvas.parentElement.offsetWidth * dpr;
-    canvas.height = canvasHeight * dpr;
+    canvas.height = 300 * dpr; // Adjust height as needed
     ctx.scale(dpr, dpr);
-    var width = canvas.width / dpr;
-    var height = canvas.height / dpr;
-    var padding = {
-      top: 10,
-      right: 20,
-      bottom: 50,
-      left: 50
-    };
-    var gridColor = '#d0d0d0';
-    var labelColor = '#505050';
-    var labelFont = 'normal 12px Arial';
-    var maxValue = Math.max.apply(Math, _toConsumableArray(balanceData).concat(_toConsumableArray(cumulativeInterestData), _toConsumableArray(cumulativePrincipalData)));
-    var yAxisMax = Math.ceil(maxValue / 5000) * 5000;
-    function getY(value) {
-      return height - padding.bottom - value / yAxisMax * (height - padding.top - padding.bottom);
-    }
-    function getX(index) {
-      return padding.left + index / (months - 1) * (width - padding.left - padding.right);
-    }
-    var months = balanceData.length; // Dynamically set the length of the chart
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Y-axis labels and grid lines
-    ctx.font = labelFont;
-    ctx.textAlign = 'right';
-    ctx.fillStyle = labelColor;
-    ctx.strokeStyle = gridColor;
-    for (var i = 0; i <= yAxisMax; i += 5000) {
-      var y = getY(i);
-      ctx.beginPath();
-      ctx.moveTo(padding.left, y);
-      ctx.lineTo(width - padding.right, y);
-      ctx.stroke();
-      ctx.fillText("$".concat(i / 1000, "K"), padding.left - 10, y + 5);
-    }
-    ctx.textAlign = 'center';
-
-    // X-axis labels and grid lines
-    for (var _i = 0; _i < months; _i += 12) {
-      var x = getX(_i);
-      var monthLabel = "".concat(_i, " mo");
-      ctx.beginPath();
-      ctx.moveTo(x, padding.top);
-      ctx.lineTo(x, height - padding.bottom);
-      ctx.stroke();
-      ctx.font = labelFont;
-      ctx.fillText(monthLabel, x, height - 10);
-    }
-    var xLast = getX(months - 1);
-    var lastMonthLabel = "".concat(months, " mo");
-    ctx.fillText(lastMonthLabel, xLast, height - 10);
-
-    // Draw the chart lines
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(padding.left, padding.top, width - padding.left - padding.right, height - padding.top - padding.bottom);
-    ctx.clip();
-
-    // Draw Balance Line
-    ctx.strokeStyle = '#175134';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    for (var _i2 = 0; _i2 < balanceData.length; _i2++) {
-      var _x = getX(_i2);
-      var _y = getY(balanceData[_i2]);
-      if (_i2 === 0) ctx.moveTo(_x, _y);else ctx.lineTo(_x, _y);
-    }
-    ctx.stroke();
-
-    // Draw Principal Line
-    ctx.strokeStyle = '#3EB721';
-    ctx.beginPath();
-    for (var _i3 = 0; _i3 < cumulativePrincipalData.length; _i3++) {
-      var _x2 = getX(_i3);
-      var _y2 = getY(cumulativePrincipalData[_i3]);
-      if (_i3 === 0) ctx.moveTo(_x2, _y2);else ctx.lineTo(_x2, _y2);
-    }
-    ctx.stroke();
-
-    // Draw Interest Line
-    ctx.strokeStyle = '#91BBA6';
-    ctx.beginPath();
-    for (var _i4 = 0; _i4 < cumulativeInterestData.length; _i4++) {
-      var _x3 = getX(_i4);
-      var _y3 = getY(cumulativeInterestData[_i4]);
-      if (_i4 === 0) ctx.moveTo(_x3, _y3);else ctx.lineTo(_x3, _y3);
-    }
-    ctx.stroke();
-    ctx.restore();
-
-    // Draw the right Y-axis line (final grid line)
-    ctx.strokeStyle = gridColor;
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(width - padding.right, padding.top);
-    ctx.lineTo(width - padding.right, height - padding.bottom);
-    ctx.stroke();
-
-    // Draw hover effects if hoverIndex is provided
-    if (hoverIndex !== null) {
-      var _x4 = getX(hoverIndex);
-      var balanceY = getY(balanceData[hoverIndex]);
-      var principalY = getY(cumulativePrincipalData[hoverIndex]);
-      var interestY = getY(cumulativeInterestData[hoverIndex]);
-
-      // Draw vertical hover line
-      ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(_x4, padding.top);
-      ctx.lineTo(_x4, height - padding.bottom);
-      ctx.stroke();
-
-      // Draw hover dots
-      var dotRadius = 4;
-      ctx.fillStyle = '#175134'; // Balance dot color
-      ctx.beginPath();
-      ctx.arc(_x4, balanceY, dotRadius, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = '#3EB721'; // Principal dot color
-      ctx.beginPath();
-      ctx.arc(_x4, principalY, dotRadius, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = '#91BBA6'; // Interest dot color
-      ctx.beginPath();
-      ctx.arc(_x4, interestY, dotRadius, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Update labels with hover values
-      var hoverPrincipal = cumulativePrincipalData[hoverIndex];
-      var hoverInterest = cumulativeInterestData[hoverIndex];
-      var hoverBalance = balanceData[hoverIndex];
-      updateHoverValues(hoverBalance, hoverInterest, hoverPrincipal);
-    }
+    // Implement chart rendering logic, similar to the mortgage calculator
   }
   function updateAmortizationLabels(totalInterestPaid, totalPrincipalPaid, totalAmountPaid) {
     var amortizationLabelsContainer = document.getElementById('amortizationLabels');
@@ -812,6 +852,7 @@ document.addEventListener("DOMContentLoaded", function () {
       labelElement.appendChild(labelValue);
       amortizationLabelsContainer.appendChild(labelElement);
     });
+    console.log("Amortization labels updated successfully.");
   }
 
   // Add event listeners directly within the function
@@ -859,52 +900,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Add support for touchmove
   amortizationChartCanvas.addEventListener('touchmove', handleTouchEvent);
   amortizationChartCanvas.addEventListener('touchstart', handleTouchEvent);
-
-  // function handleTouchEvent(event) {
-  //     const rect = amortizationChartCanvas.getBoundingClientRect();
-  //     const touch = event.touches[0] || event.changedTouches[0];
-  //     const x = touch.clientX - rect.left;
-  //     const padding = { top: 30, right: 25, bottom: 30, left: 70 };
-
-  //     if (x < padding.left || x > amortizationChartCanvas.offsetWidth - padding.right) {
-  //         // If touch is outside the chart, clear hover effects
-  //         revertValuesToTotals();
-  //         const hoverDateContainer = document.getElementById('amortizationHoverDate');
-  //         hoverDateContainer.textContent = ''; // Clear the hover date
-  //         drawAmortizationChart(
-  //             lastAmortizationData.balanceData,
-  //             lastAmortizationData.cumulativeInterestData,
-  //             lastAmortizationData.cumulativePrincipalData
-  //         );
-  //     } else {
-  //         const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
-  //         const index = Math.round(
-  //             ((x - padding.left) / chartWidth) * (lastAmortizationData.balanceData.length - 1)
-  //         );
-
-  //         if (index >= 0 && index < lastAmortizationData.balanceData.length) {
-  //             updateHoverValues(
-  //                 lastAmortizationData.balanceData[index],
-  //                 lastAmortizationData.cumulativeInterestData[index],
-  //                 lastAmortizationData.cumulativePrincipalData[index]
-  //             );
-
-  //             const startDate = new Date();
-  //             const hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
-  //             displayHoverDate(hoverDate);
-
-  //             drawAmortizationChart(
-  //                 lastAmortizationData.balanceData,
-  //                 lastAmortizationData.cumulativeInterestData,
-  //                 lastAmortizationData.cumulativePrincipalData,
-  //                 index
-  //             );
-  //         }
-  //     }
-
-  //     event.preventDefault(); // Prevent default scrolling
-  // }
-
   var activeHoverIndex = null; // Global variable to track the active hover index
 
   function handleTouchEvent(event) {
@@ -1055,18 +1050,52 @@ document.addEventListener("DOMContentLoaded", function () {
       totalPrincipalPaid: totalPrincipalPaid
     };
   }
+
+  // function populateAmortizationTable(amortizationData) {
+  //     const tableBody = document.getElementById('amortization-table-body');
+  //     tableBody.innerHTML = ''; // Clear existing rows
+
+  //     amortizationData.schedule.forEach((row, index) => {
+  //         const tr = document.createElement('tr');
+
+  //         const dateCell = document.createElement('td');
+  //         const date = new Date();
+  //         date.setMonth(date.getMonth() + index);
+  //         dateCell.textContent = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  //         tr.appendChild(dateCell);
+
+  //         const principalCell = document.createElement('td');
+  //         principalCell.textContent = `$${formatter.format(row.principal)}`;
+  //         tr.appendChild(principalCell);
+
+  //         const interestCell = document.createElement('td');
+  //         interestCell.textContent = `$${formatter.format(row.interest)}`;
+  //         tr.appendChild(interestCell);
+
+  //         const balanceCell = document.createElement('td');
+  //         balanceCell.textContent = `$${formatter.format(row.balance)}`;
+  //         tr.appendChild(balanceCell);
+
+  //         tr.style.display = index < 3 ? "table-row" : "none"; // Show only the first 3 rows
+  //         tableBody.appendChild(tr);
+  //     });
+
+  //     initializeExpandCollapseLogic();
+  // }
+
   function populateAmortizationTable(amortizationData) {
     var tableBody = document.getElementById('amortization-table-body');
     tableBody.innerHTML = ''; // Clear existing rows
 
-    if (!amortizationData || amortizationData.schedule.length === 0) {
-      console.warn("No amortization data available to populate the table.");
-      return;
-    }
-    amortizationData.schedule.forEach(function (row) {
+    amortizationData.schedule.forEach(function (row, index) {
       var tr = document.createElement('tr');
       var dateCell = document.createElement('td');
-      dateCell.textContent = row.date;
+      var date = new Date();
+      date.setMonth(date.getMonth() + index);
+      dateCell.textContent = date.toLocaleDateString('en-US', {
+        month: 'short',
+        year: 'numeric'
+      });
       tr.appendChild(dateCell);
       var principalCell = document.createElement('td');
       principalCell.textContent = "$".concat(row.principal.toFixed(2));
@@ -1077,11 +1106,61 @@ document.addEventListener("DOMContentLoaded", function () {
       var balanceCell = document.createElement('td');
       balanceCell.textContent = "$".concat(row.balance.toFixed(2));
       tr.appendChild(balanceCell);
+      tr.style.display = index < 3 ? "table-row" : "none"; // Show only the first 3 rows
       tableBody.appendChild(tr);
     });
-    console.log("Amortization table populated successfully.");
+    initializeExpandCollapseLogic();
+  }
+
+  // Add expand/collapse functionality to the amortization table
+
+  // function initializeExpandCollapseLogic() {
+  //     const expandBox = document.querySelector(".expand-box");
+  //     const expandText = document.querySelector(".expand-text");
+  //     const amortizationTableBody = document.getElementById("amortization-table-body");
+
+  //     if (!expandBox || !expandText || !amortizationTableBody) {
+  //         console.error("Expand/Collapse elements not found.");
+  //         return;
+  //     }
+
+  //     const rows = Array.from(amortizationTableBody.rows);
+  //     let isExpanded = false;
+
+  //     expandBox.addEventListener("click", function () {
+  //         rows.forEach((row, index) => {
+  //             row.style.display = isExpanded || index < 3 ? "table-row" : "none";
+  //         });
+
+  //         expandText.textContent = isExpanded ? "Expand" : "Collapse";
+  //         isExpanded = !isExpanded;
+  //     });
+  // }
+
+  function initializeExpandCollapseLogic() {
+    var expandBox = document.querySelector(".expand-box");
+    var expandText = document.querySelector(".expand-text");
+    var amortizationTableBody = document.getElementById("amortization-table-body");
+    if (!expandBox || !expandText || !amortizationTableBody) {
+      console.error("Expand/Collapse elements not found.");
+      return;
+    }
+    var rows = Array.from(amortizationTableBody.rows);
+    var isExpanded = false;
+    expandBox.addEventListener("click", function () {
+      if (document.getElementById("amortization-schedule-content").style.display === "block") {
+        rows.forEach(function (row, index) {
+          row.style.display = isExpanded || index < 3 ? "table-row" : "none";
+        });
+        expandText.textContent = isExpanded ? "Expand" : "Collapse";
+        isExpanded = !isExpanded;
+
+        // Show or hide the table based on expansion state
+        document.getElementById("amortization-schedule").style.display = isExpanded ? "block" : "none";
+      }
+    });
   }
 });
 /******/ })()
 ;
-//# sourceMappingURL=loan-calculator.79db4b46d08b656e20be.js.map
+//# sourceMappingURL=loan-calculator.bc0dfaf9e7e49e7cadd0.js.map

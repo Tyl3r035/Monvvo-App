@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap">
 
-<script defer src="/main.1f18baeba5f246ecc64f.js"></script><script defer src="/generalCalcs.3c65207f15cf99592190.js"></script><script defer src="/loan-calculator.79db4b46d08b656e20be.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><link href="/styles.b761c13f9276fd555f99.css" rel="stylesheet"></head>
+<script defer src="/main.3a87fa8b92f37140ed4c.js"></script><script defer src="/generalCalcs.3c65207f15cf99592190.js"></script><script defer src="/loan-calculator.bc0dfaf9e7e49e7cadd0.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><link href="/styles.f94a999f32c9d956282a.css" rel="stylesheet"></head>
 <body>
   <header id="header">
     <div class="logo">
@@ -45,7 +45,7 @@
             <div class="input-box loan-interest-box">
               <div class="input-top">
                 <label for="interest-rate">Interest Rate</label>
-                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the annual interest rate on the mortgage loan as a percentage." loading="lazy">
+                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the annual interest rate for the loan as a percentage (e.g., 5.25)." loading="lazy">
   
               </div>
               <div class="input-bottom">
@@ -62,7 +62,7 @@
             <div class="input-box personal-loan-term-box">
               <div class="input-top">
                 <label for="loan-term">Loan Term</label>
-                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the annual interest rate on the mortgage loan as a percentage." loading="lazy">
+                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the duration of the loan in months (e.g., 12 for 1 year, 60 for 5 years)." loading="lazy">
   
               </div>
               <div class="input-bottom">
@@ -78,7 +78,7 @@
             <div class="input-box loan-frequency-box">
               <div class="input-top">
                 <label for="payment-frequency">Payment Frequency</label>
-                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter how often you plan to make mortgage payments, such as monthly, bi-weekly, or weekly." loading="lazy">
+                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Select how often you plan to make payments (e.g., monthly, bi-weekly, weekly)." loading="lazy">
               </div>
               <div class="input-bottom">
                 <div class="input-inner">
@@ -102,7 +102,10 @@
           </div>
           <div id="additional-inputs">
             <div class="input-box">
-              <label for="origination-fees">Origination Fees</label>
+              <div class="input-top">
+                <label for="extra-payment">Origination Fees</label>
+                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Specify any upfront fees charged by the lender for processing your loan, typically subtracted off of the total loan amount. This is optional." loading="lazy">
+              </div>
               <div class="input-fluid">
                 <div class="input-content">
                   <img src="./img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
@@ -114,8 +117,7 @@
             <div class="input-box">
               <div class="input-top">
                 <label for="extra-payment">Recurring Extra Payment</label>
-                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the monthly cost of Private Mortgage Insurance (PMI), if required, typically for down payments less than 20%." loading="lazy">
-
+                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter any additional payments you plan to make regularly to reduce your loan balance faster." loading="lazy">
               </div>
               <div class="input-fluid">
                 <div class="input-content">
@@ -131,10 +133,10 @@
           <div class="results-container">
             <div class="results-top">
               <div class="results-tab tab-active" id="tab-payment-breakdown">
-                <p class="tab-text">Payment Breakdown</p>
+                <p class="tab-text">Payment</p>
               </div>
               <div class="results-tab" id="tab-amortization-schedule">
-                <p class="tab-text">Amortization Schedule</p>
+                <p class="tab-text">Amortization</p>
               </div>
             </div>
             <div class="results-content">
@@ -159,7 +161,7 @@
                 <div class="expand-box">
                   <p class="expand-text">Expand</p>
                   <img class="expand-icon" src="./img/icons/down-arrow.svg" alt="expand icon">
-                </div>
+                </div> 
                 <div id="amortization-schedule" style="display:none;">
                   <table class="amortization-table">
                     <thead>
@@ -174,7 +176,7 @@
                       <!-- Rows will be populated dynamically -->
                     </tbody>
                   </table>
-                </div>                
+                </div>               
               </div>
             </div>
           </div>

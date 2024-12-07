@@ -95,24 +95,20 @@
                 </div>
               </div>
             </div>
-            <div class="input-box payment-frequency-box">
-              <div class="input-top">
-                <label for="payment-frequency">Payment Frequency</label>
-                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter how often you plan to make mortgage payments, such as monthly, bi-weekly, or weekly." loading="lazy">
+
+
+
+
+            <div class="input-box mortgage-extra-box">
+              <label for="extra-payment">Extra Payment</label>
+              <div class="input-fluid">
+                  <div class="input-content">
+                      <img src="./img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
+                      <div class="input-separator"></div>
+                      <input type="number" class="number-input" id="extra-payment" name="mortgage_input__extra_payment" placeholder="0">
+                  </div>
               </div>
-              <div class="input-bottom">
-                <div class="input-inner">
-                  <select id="payment-frequency" aria-label="payment-dropdown" name="mortgage_input__payment_frequency">
-                    <option value="monthly" class="calculation-option">Monthly</option>
-                    <option value="biweekly" class="calculation-option">Bi-Weekly</option>
-                    <option value="weekly" class="calculation-option">Weekly</option>
-                    <option value="accelerated-biweekly" class="calculation-option">Accelerated Bi-Weekly Payments</option>
-                    <option value="accelerated-weekly" class="calculation-option">Accelerated Weekly Payments</option>
-                  </select>
-                  <img src="./img/icons/down-arrow.svg" alt="down-arrrow" class="input-dropdown" loading="lazy">
-                </div>
-              </div>
-            </div>
+          </div>
           </div>
           <div class="advanced-box">
             <div id="advanced-text-fluid">
@@ -177,9 +173,10 @@
                 <h2 class="answer-title">Estimated Payment:</h2>
                 <p fetchpriority="high" class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="./disclaimer.html" target="_blank" style="color: initial;">See Disclaimer</a>.)</p>
                 <div id="monthly-payment-value"></div>
-              
-                <canvas id="mortgageChart" loading="lazy"></canvas>
-                <div id="chartLabels" class="chart-labels"></div>
+                <div class="results-data">
+                  <canvas id="mortgageChart" class="payment-chart" loading="lazy"></canvas>
+                  <div id="chartLabels" class="chart-labels"></div>
+                </div>
               </div>
               <div id="amortization-schedule-content" style="display: none;">
                 <h2 class="answer-title">Amortization for Mortgage Loan</h2>
@@ -206,8 +203,9 @@
                       <!-- Rows will be populated dynamically -->
                     </tbody>
                   </table>
-                </div>                
+                </div>   
               </div>
+
             </div>
           </div>
           <div class="btn-container">

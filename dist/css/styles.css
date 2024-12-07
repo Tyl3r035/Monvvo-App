@@ -121,14 +121,14 @@ body,html{
   "down-payment down-payment"
   "loan-term loan-term"
   "interest-rate interest-rate"
-  "payment-frequency payment-frequency";
+  "mortgage-extra mortgage-extra";
   width: 100%
 }
 .home-price-box{grid-area: home-price;}
 .down-payment-box{grid-area: down-payment;}
 .loan-term-box{grid-area: loan-term;}
 .interest-rate-box{grid-area: interest-rate;}
-.payment-frequency-box{grid-area: payment-frequency;}
+.mortgage-extra-box{grid-area: mortgage-extra;}
 
 
 /* Loan Input Section */
@@ -152,7 +152,7 @@ body,html{
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 .input-box label{
   font-family: "Roboto", sans-serif;
@@ -177,11 +177,11 @@ body,html{
 }
 .input-icon{
   font-family: Inter;
-  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  color: #6C6C70;
+  /* color: #6C6C70; */
+  color: #5F5F63
 }
 .input-separator{
   width: 1px;
@@ -256,16 +256,16 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
   outline: none;
 }
 .multiple-inputs .percentage-input{
-  width: 40px;
+  width: 100px;
   text-align: right;
 }
 .percent-icon{
   width: 10px;
-  height: 11px;
+  height: 16px;
 }
 .dollar-icon{
-  width: 9px;
-  height: 14px;
+  width: 12px;
+  height: 16px;
 }
 
 /* Info Icon Input Specific CSS */
@@ -373,13 +373,16 @@ select {
 .info-tooltips {
   position: absolute;
   width: 300px; /* Fixed width */
-  background-color: #175134;
+  /* background-color: rgb(67, 70, 75); */
+  background-color: rgb(57, 60, 65);
   color: #fff;
   padding: 10px 15px;
   border-radius: 6px;
+  border-bottom-right-radius: 4px;
   font-size: 14px;
   font-family: "Roboto", sans-serif;
   line-height: 20px;
+  text-align: center;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   white-space: normal;
   opacity: 0;
@@ -497,13 +500,11 @@ select {
 .results-content{
   display: flex;
   width: 100%;
-  max-width: 700px;
-  padding: 0 40px 30px 40px;
+  max-width: 800px;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  gap: 40px;
-  align-self: stretch;
+  gap: 20px;
   margin: 20px auto 0 auto;
   
 }
@@ -516,6 +517,7 @@ select {
   line-height: normal;
   text-align: left;
   color: #232525;
+  padding-left: 40px;
 }
 .answer-disclaimer{
   font-family: "Roboto", sans-serif;
@@ -525,6 +527,7 @@ select {
   line-height: normal;
   color: #232525;
   padding-top: 8px;
+  padding-left: 40px;
   margin-bottom: 25px;
   text-align: left;
 }
@@ -532,13 +535,14 @@ select {
   display: flex;
   align-items: flex-end;
   gap: 16px;
+  padding-left: 40px;
 }
 #monthly-payment-value {
   display: flex;
   align-items: baseline;
   font-family: 'Open Sans', sans-serif;
   color: #232525;
-  margin-top: 20px
+  margin: 20px 40px;
 }
 
 .payment-amount {
@@ -574,12 +578,27 @@ select {
 
 
 
+.results-data{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
 
-canvas {
-  position: relative;
-  width: 100% !important;
+.payment-chart{
+  max-width: 250px;
+  height: auto;
+  display: flex;
+  margin: 50px 25px;
+  
+  background-color: transparent;
+  padding: 0 30px;
+}
+#amortizationChart{
+  max-width: 100% !important;
   height: auto !important;
   background-color: transparent;
+  padding: 0 30px;
 }
 
 #amortizationChartContainer {
@@ -601,6 +620,8 @@ canvas {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   color: #232525;
+  padding: 0 40px;
+  flex-grow: 1;
 }
 
 /* Specific styles for label items */
@@ -663,6 +684,7 @@ canvas {
   justify-content: flex-end;
   margin-top: 15px;
   margin-bottom: 25px;
+  padding-right: 40px;
 }
 
 
@@ -687,6 +709,9 @@ canvas {
 }
 
 
+#amortization-schedule{
+  width: 100% !important;
+}
 /* Amortization Table CSS */
 .amortization-table {
   background-color: transparent; /* Set table background to white */
@@ -701,8 +726,8 @@ canvas {
 .amortization-table td {
   background-color: transparent; /* Make cells transparent */
   border: none; /* Remove borders */
-  padding: 8px 12px; /* Add padding for spacing inside cells */
-  text-align: left; /* Align text to the left */
+  /* padding: 8px 12px; */
+  text-align: center; /* Align text to the center */
   vertical-align: middle;
 }
 
@@ -711,10 +736,12 @@ canvas {
   font-weight: bold; /* Make header text bold */
   font-size: 16px; /* Set font size for header */
   color: #000; 
+  padding: 8px 12px;
 }
 .amortization-table td{
   font-size: 14px;
   color: #171717;
+  padding: 8px 0;
 }
 
 
@@ -1365,7 +1392,6 @@ canvas {
   }
   .input-box{
     margin-right: 0;
-    margin-bottom: 25px;
   }
   #additional-inputs{
     width: 100%;
@@ -1380,9 +1406,7 @@ canvas {
     height: auto; /* Make height dynamic */
     margin: 0 auto; /* Center horizontally */
   }
-  .results-content{
-    width: 100%;
-  }
+
   .btn-container{
     margin-bottom: 50px;
   }
@@ -1421,7 +1445,7 @@ canvas {
     grid-template-areas:
     "down-payment down-payment"
     "home-price interest-rate"
-    "loan-term payment-frequency" !important;
+    "loan-term mortgage-extra" !important;
 
     gap: 0 30px;
   }
@@ -1449,6 +1473,17 @@ canvas {
   }
   .item-text{
     font-size: 14px;
+  }
+}
+@media screen and (max-width: 750px){
+  .results-data{
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+  }
+  .payment-chart{
+    max-width: 300px;
+    margin: 30px auto;
   }
 }
 @media screen and (max-width: 700px){
@@ -1493,6 +1528,7 @@ canvas {
     font-size: 32px;
   }
   .calculation-section{
+    width: 98%;
     gap: 30px;
   }
   .results-container{
@@ -1503,6 +1539,7 @@ canvas {
   }
   .tab-text, .tab-active .tab-text{
     font-size: 14px;
+    font-weight: 500;
     padding: 8px 0;
   }
   .results-content{
@@ -1520,8 +1557,10 @@ canvas {
   }
 
   canvas{
-    width: 95%;
-    height: 150px;
+    padding: 0;
+  }
+  .chart-labels{
+    padding: 0;
   }
   .label-name, .label-value{
     font-size: 14px;
