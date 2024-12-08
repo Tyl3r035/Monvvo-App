@@ -708,10 +708,32 @@ select {
   transform: rotate(180deg);
 }
 
-
+/* Scrollbar CSS */
 #amortization-schedule{
   width: 100% !important;
+  overflow-y: auto;
 }
+
+
+/* Custom Scrollbar Styling */
+
+#amortization-schedule::-webkit-scrollbar-track {
+  display: initial;
+  color: #ccc;
+}
+#amortization-schedule::-webkit-scrollbar-thumb {
+  display: none !important;
+}
+
+
+
+
+
+
+
+
+
+
 /* Amortization Table CSS */
 .amortization-table {
   background-color: transparent; /* Set table background to white */
@@ -743,6 +765,16 @@ select {
   color: #171717;
   padding: 8px 0;
 }
+
+
+/* CSS Specific to make the headings stick for amortization table*/ 
+.amortization-table thead th {
+  position: sticky; /* Makes the headers stick to the top */
+  top: 0; /* Stick to the top of the container */
+  z-index: 1; /* Ensure it stays above table rows */
+  background-color: #ffffff; /* Match the table's background color */
+}
+
 
 
 
@@ -1556,7 +1588,7 @@ select {
       padding: 0; /* This creates visual padding around the chart */
   }
 
-  canvas{
+  #amortizationChart{
     padding: 0;
   }
   .chart-labels{

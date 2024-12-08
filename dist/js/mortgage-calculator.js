@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
         homePrice: 500000,
         downPaymentAmount: 25000,
         downPaymentPercentage: 5,
-        loanTerm: 25,
+        loanTerm: 30,
         interestRate: 7.04,
         propertyTax: 250,
         extraPayment: 0,
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const height = canvas.height / dpr;
     
         // Adjust padding to prevent overlap
-        const padding = { top: 10, right: 15, bottom: 50, left: 50 };
+        const padding = { top: 10, right: 35, bottom: 50, left: 50 };
         const gridColor = '#d0d0d0';
         const labelColor = '#505050';
     
@@ -171,9 +171,10 @@ document.addEventListener("DOMContentLoaded", function () {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     
         // Draw horizontal grid lines (Y-axis) and labels
-        ctx.font = '12px Arial';
+        ctx.font = '14px Roboto';
         ctx.textAlign = 'right';
-        ctx.fillStyle = labelColor;
+        // ctx.fillStyle = labelColor;
+        ctx.fillStyle = '#232525';
         ctx.strokeStyle = gridColor;
     
         for (let i = 0; i <= yAxisMax; i += 100000) {
@@ -212,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Draw data lines
         function drawLine(data, color) {
             ctx.strokeStyle = color;
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 3;
             ctx.beginPath();
             for (let i = 0; i < data.length; i++) {
                 const x = getX(i);
@@ -234,15 +235,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const interestY = getY(cumulativeInterestData[hoverIndex]);
     
         // Draw vertical line
-        ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.4)';
+        ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.moveTo(x, padding.top);
         ctx.lineTo(x, height - padding.bottom);
         ctx.stroke();
     
         // Draw hover dots
-        const dotRadius = 4;
+        const dotRadius = 6;
         ctx.fillStyle = '#175134'; // Balance dot color
         ctx.beginPath();
         ctx.arc(x, balanceY, dotRadius, 0, Math.PI * 2);
@@ -292,10 +293,10 @@ document.addEventListener("DOMContentLoaded", function () {
         ctx.clearRect(0, 0, size, size);
     
         const outerRadius = size / 2; // Outer radius of the doughnut
-        const innerRadius = outerRadius - 80; // Inner radius of the doughnut
+        const innerRadius = outerRadius - 70; // Inner radius of the doughnut
         const centerX = size / 2; // Center X
         const centerY = size / 2; // Center Y
-        const gapWidth = 3; // Width of the gap between segments
+        const gapWidth = 5; // Width of the gap between segments
     
         let startAngle = -Math.PI / 2; // Start at the top
     
@@ -324,7 +325,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     
         // Responsive font size for the total amount in the center
-        const fontSize = size / 10; // Adjust ratio for desired responsiveness
+        const fontSize = size / 7; // Adjust ratio for desired responsiveness
         ctx.font = `bold ${fontSize}px Roboto`;
         ctx.fillStyle = '#232525'; // Text color
         ctx.textAlign = 'center';
@@ -346,16 +347,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Reset functionality
     function resetInputs() {
-        homePriceInput.value = defaultValues.homePrice;
-        downPaymentAmountInput.value = defaultValues.downPaymentAmount;
+        // Reset all input fields to blank
+        homePriceInput.value = '';
+        downPaymentAmountInput.value = '';
+        downPaymentPercentageInput.value = '';
         loanTermInput.value = defaultValues.loanTerm;
-        interestRateInput.value = defaultValues.interestRate;
-        extraPaymentInput.value = defaultValues.extraPayment;
-        propertyTaxInput.value = defaultValues.propertyTax;
-        pmiExpenseInput.value = defaultValues.pmiExpense;
-        hoaExpenseInput.value = defaultValues.hoaExpense;
+    interestRateInput.value = '';
+        extraPaymentInput.value = '';
+        propertyTaxInput.value = '';
+        pmiExpenseInput.value = '';
+        hoaExpenseInput.value = '';
+    
+        // Recalculate using default values
         calculateAndDisplayResults();
+    
+        console.log("Inputs reset while preserving placeholder values.");
     }
+
+
+    
 
     // Event listeners
     updateBtn.addEventListener('click', calculateAndDisplayResults);
@@ -435,6 +445,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (tabName === 'amortization-schedule') {
             if (lastAmortizationData) {
                 populateAmortizationTable(lastAmortizationData);
+                initializeExpandCollapseLogic();
     
                 drawAmortizationChart(
                     lastAmortizationData.balanceData,
@@ -451,6 +462,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
+    
 
     
 
@@ -534,7 +546,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    
+
     function populateAmortizationTable(amortizationData) {
         const tableBody = document.getElementById('amortization-table-body');
         tableBody.innerHTML = ''; // Clear existing rows
@@ -563,48 +575,143 @@ document.addEventListener("DOMContentLoaded", function () {
             tableBody.appendChild(tr);
         });
     
-        document.getElementById('amortization-schedule').style.display = 'block'; // Show table
+        // Display the amortization schedule container
+        document.getElementById('amortization-schedule').style.display = 'block';
     
-        // Ensure toggle functionality works with the new rows
-        initializeExpandCollapseLogic(); // Call the toggle initialization
+        // Initialize expand/collapse logic
+        initializeExpandCollapseLogic();
     }
+
     
     
-  
+
+
+
+    // function initializeExpandCollapseLogic() {
+    //     const expandBox = document.querySelector(".expand-box");
+    //     const amortizationTableBody = document.getElementById("amortization-table-body");
+    //     const amortizationScheduleContainer = document.getElementById("amortization-schedule");
+    //     const expandText = document.querySelector(".expand-text");
+    
+    //     if (!expandBox || !amortizationTableBody || !expandText || !amortizationScheduleContainer) {
+    //         console.error("Expand/Collapse elements not found.");
+    //         return;
+    //     }
+    
+    //     console.log("Expand/Collapse Logic Initialized");
+    
+    //     // Ensure the amortization schedule container is visible
+    //     amortizationScheduleContainer.style.display = "block";
+    
+    //     expandBox.addEventListener("click", function () {
+    //         const rows = Array.from(amortizationTableBody.rows); // Refresh rows dynamically
+    //         const isExpanded = expandText.textContent === "Expand";
+    
+    //         console.log(`Expand box clicked. Current state: ${isExpanded ? "Expanding" : "Collapsing"}`);
+    
+    //         // Toggle row visibility
+    //         rows.forEach((row, index) => {
+    //             row.style.display = isExpanded || index < 3 ? "table-row" : "none";
+    //         });
+    
+    //         // Update the expand/collapse text
+    //         expandText.textContent = isExpanded ? "Collapse" : "Expand";
+    //     });
+    
+    //     // Set initial state: Show only the first three rows
+    //     const rows = Array.from(amortizationTableBody.rows);
+    //     rows.forEach((row, index) => {
+    //         row.style.display = index < 3 ? "table-row" : "none";
+    //     });
+    // }
+    
+
+    // function initializeExpandCollapseLogic() {
+    //     const expandBox = document.querySelector(".expand-box");
+    //     const amortizationScheduleContainer = document.getElementById("amortization-schedule");
+    //     const expandText = document.querySelector(".expand-text");
+    //     const tableBody = document.getElementById("amortization-table-body");
+    //     const rows = Array.from(tableBody.rows);
+    
+    //     if (!expandBox || !amortizationScheduleContainer || !expandText) {
+    //         console.error("Expand/Collapse elements not found.");
+    //         return;
+    //     }
+    
+    //     console.log("Expand/Collapse Logic Initialized");
+    
+    //     expandBox.addEventListener("click", function () {
+    //         const isExpanded = expandText.textContent === "Expand";
+    
+    //         if (isExpanded) {
+    //             // Expand: Show the first 10 rows and make the container scrollable
+    //             amortizationScheduleContainer.style.maxHeight = "300px"; // Limit the height
+    //             amortizationScheduleContainer.style.overflowY = "auto"; // Enable scroll
+    //             rows.forEach((row, index) => {
+    //                 row.style.display = index < 10 ? "table-row" : "none"; // Show the first 10 rows
+    //             });
+    //             expandText.textContent = "Collapse";
+    //         } else {
+    //             // Collapse: Show only the first 3 rows, hide the rest
+    //             amortizationScheduleContainer.style.maxHeight = "300px"; // Keep container height
+    //             amortizationScheduleContainer.style.overflowY = "hidden"; // Hide scroll
+    //             rows.forEach((row, index) => {
+    //                 row.style.display = index < 3 ? "table-row" : "none"; // Show only the first 3 rows
+    //             });
+    //             expandText.textContent = "Expand";
+    //         }
+    //     });
+    
+    //     // Initial state: Show only the first 3 rows
+    //     rows.forEach((row, index) => {
+    //         row.style.display = index < 3 ? "table-row" : "none";
+    //     });
+    // }
+    
+
     function initializeExpandCollapseLogic() {
         const expandBox = document.querySelector(".expand-box");
-        const amortizationTableBody = document.getElementById("amortization-table-body");
+        const amortizationScheduleContainer = document.getElementById("amortization-schedule");
         const expandText = document.querySelector(".expand-text");
+        const tableBody = document.getElementById("amortization-table-body");
+        const rows = Array.from(tableBody.rows);
     
-        // Ensure the elements exist
-        if (!expandBox || !amortizationTableBody || !expandText) {
+        if (!expandBox || !amortizationScheduleContainer || !expandText) {
             console.error("Expand/Collapse elements not found.");
             return;
         }
     
         console.log("Expand/Collapse Logic Initialized");
     
-        // Initial state: show only the first three rows
-        const rows = Array.from(amortizationTableBody.rows);
-        rows.forEach((row, index) => {
-            row.style.display = index < 3 ? "table-row" : "none";
-        });
-    
-        // Add click event for toggling
         expandBox.addEventListener("click", function () {
             const isExpanded = expandText.textContent === "Expand";
     
-            console.log(`Expand box clicked. Current state: ${isExpanded ? "Expanding" : "Collapsing"}`);
+            if (isExpanded) {
+                // Expand: Show the first 10 rows and make the container scrollable for the rest
+                amortizationScheduleContainer.style.maxHeight = "300px"; // Set height for the scrollable area
+                amortizationScheduleContainer.style.overflowY = "auto"; // Enable scrolling
+                rows.forEach((row, index) => {
+                    row.style.display = "table-row"; // Ensure all rows are visible in the scrollable container
+                });
+                expandText.textContent = "Collapse";
+            } else {
+                // Collapse: Show only the first 3 rows, hide the rest
+                amortizationScheduleContainer.style.maxHeight = "300px"; // Limit height
+                amortizationScheduleContainer.style.overflowY = "hidden"; // Hide scroll
+                rows.forEach((row, index) => {
+                    row.style.display = index < 3 ? "table-row" : "none"; // Show only the first 3 rows
+                });
+                expandText.textContent = "Expand";
+            }
+        });
     
-            // Toggle row visibility
-            rows.forEach((row, index) => {
-                row.style.display = isExpanded || index < 3 ? "table-row" : "none";
-            });
-    
-            // Update the expand/collapse text
-            expandText.textContent = isExpanded ? "Collapse" : "Expand";
+        // Initial state: Show only the first 3 rows
+        rows.forEach((row, index) => {
+            row.style.display = index < 3 ? "table-row" : "none";
         });
     }
+    
+    
     
 
     
@@ -642,7 +749,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const rect = amortizationChartCanvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
     
-        const padding = { top: 30, right: 25, bottom: 30, left: 70 };
+        const padding = { top: 30, right: 100, bottom: 30, left: 50 };
         const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
     
         if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
@@ -692,11 +799,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const rect = amortizationChartCanvas.getBoundingClientRect();
         const touch = event.touches[0] || event.changedTouches[0];
         const x = touch.clientX - rect.left;
-        const padding = { top: 30, right: 25, bottom: 30, left: 70 };
+        const padding = { top: 30, right: 35, bottom: 30, left: 50 };
     
         if (x < padding.left || x > amortizationChartCanvas.offsetWidth - padding.right) {
             // If touch is outside the chart, clear hover effects
-            revertValuesToTotals();
+            // revertValuesToTotals();
             const hoverDateContainer = document.getElementById('amortizationHoverDate');
             hoverDateContainer.textContent = ''; // Clear the hover date
             drawAmortizationChart(
@@ -752,38 +859,9 @@ document.addEventListener("DOMContentLoaded", function () {
     
     
 
-
-  
-    amortizationChartCanvas.addEventListener('mouseout', () => {
-        revertValuesToTotals(); // Reset labels
-    
-        // Clear hover date
-        const hoverDateContainer = document.getElementById('amortizationHoverDate');
-        if (hoverDateContainer) {
-            hoverDateContainer.textContent = ''; // Clear the hover date
-        }
-    });
-    
-    
-    
-    // Add touchend for mobile devices
-    amortizationChartCanvas.addEventListener('touchend', () => {
-        revertValuesToTotals();
-    
-        const hoverDateContainer = document.getElementById('amortizationHoverDate');
-        hoverDateContainer.textContent = ''; // Clear the hover date
-    
-        drawAmortizationChart(
-            lastAmortizationData.balanceData,
-            lastAmortizationData.cumulativeInterestData,
-            lastAmortizationData.cumulativePrincipalData
-        );
-    });
     
 
 
-
-    
 
 
 
@@ -795,6 +873,9 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
     
+        // Use the first month's balance as the default remaining balance
+        const initialBalance = lastAmortizationData?.balanceData[0] || 0;
+    
         // Use 0 as fallback if any value is NaN or undefined
         totalInterestPaid = isNaN(totalInterestPaid) ? 0 : Math.ceil(totalInterestPaid);
         totalPrincipalPaid = isNaN(totalPrincipalPaid) ? 0 : Math.ceil(totalPrincipalPaid);
@@ -804,8 +885,8 @@ document.addEventListener("DOMContentLoaded", function () {
         labelsContainer.innerHTML = `
             <div class="label-item">
                 <span class="color-circle" style="background-color: #175134;"></span>
-                <span class="label-name">Total Balance</span>
-                <span class="label-value" id="label-balance">$${formatter.format(totalAmountPaid)}</span>
+                <span class="label-name">Remaining Balance</span>
+                <span class="label-value" id="label-balance">$${formatter.format(initialBalance)}</span>
             </div>
             <div class="label-item">
                 <span class="color-circle" style="background-color: #91BBA6;"></span>
@@ -819,12 +900,14 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         `;
     
-        console.log("Amortization labels updated with rounded values:", {
+        console.log("Amortization labels updated with initial balance and totals:", {
+            initialBalance,
             totalInterestPaid,
             totalPrincipalPaid,
             totalAmountPaid,
         });
     }
+    
     
     
 
@@ -874,7 +957,7 @@ document.querySelector(".btn-icon-fluid").addEventListener("click", () => {
     const homePrice = parseFloat(document.getElementById("home-price").value) || 500000;
     const downPaymentAmount = parseFloat(document.getElementById("down-payment-amount").value) || 25000;
     const interestRate = parseFloat(document.getElementById("interest-rate").value) || 7.04;
-    const loanTerm = parseInt(document.getElementById("loan-term").value) || 25;
+    const loanTerm = parseInt(document.getElementById("loan-term").value) || 30;
 
     const paymentData = [
         { label: "Home Price", value: homePrice },
