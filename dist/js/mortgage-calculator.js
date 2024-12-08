@@ -34,8 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Helper: Format currency
     const formatter = new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
     });
 
     // Restrict invalid characters in inputs
@@ -74,17 +74,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
  
-    
+
+
+
+
+
     
     function calculateAndDisplayResults() {
         console.log("Calculating and displaying results...");
     
-        // Retrieve input values
         const homePrice = parseFloat(document.getElementById('home-price').value) || defaultValues.homePrice;
         const downPaymentAmount = parseFloat(document.getElementById('down-payment-amount').value) || defaultValues.downPaymentAmount;
         const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 || defaultValues.interestRate / 100;
         const loanTerm = parseInt(document.getElementById('loan-term').value) || defaultValues.loanTerm;
         const extraPayment = parseFloat(document.getElementById('extra-payment').value) || defaultValues.extraPayment;
+        const propertyTax = Math.ceil(parseFloat(document.getElementById('property-tax').value) || defaultValues.propertyTax);
+        const pmiExpense = Math.ceil(parseFloat(document.getElementById('pmi-expense').value) || defaultValues.pmiExpense);
+        const hoaExpense = Math.ceil(parseFloat(document.getElementById('hoa-expense').value) || defaultValues.hoaExpense);
     
         const principal = homePrice - downPaymentAmount;
     
@@ -93,50 +99,47 @@ document.addEventListener("DOMContentLoaded", function () {
     
         lastAmortizationData = {
             ...amortizationData,
-            periodicPrincipalAndInterest: amortizationData.schedule[0].principal + amortizationData.schedule[0].interest,
+            periodicPrincipalAndInterest: Math.ceil(amortizationData.schedule[0].principal + amortizationData.schedule[0].interest),
         };
     
-        // Update Payment Breakdown tab
-        updateDoughnutChart(
-            lastAmortizationData.periodicPrincipalAndInterest,
-            defaultValues.propertyTax,
-            defaultValues.pmiExpense,
-            defaultValues.hoaExpense
+        // Update the doughnut chart
+        const monthlyPrincipalAndInterest = lastAmortizationData.periodicPrincipalAndInterest;
+        updateDoughnutChart(monthlyPrincipalAndInterest, propertyTax, pmiExpense, hoaExpense);
+    
+        // Update amortization labels
+        updateAmortizationLabels(
+            Math.ceil(amortizationData.totalInterestPaid),
+            Math.ceil(amortizationData.totalPrincipalPaid),
+            Math.ceil(amortizationData.schedule.reduce((sum, row) => sum + row.principal + row.interest, 0))
         );
     
-        // Update Amortization Schedule tab labels
-        updateAmortizationLabels(
-            lastAmortizationData.totalInterestPaid,
-            lastAmortizationData.totalPrincipalPaid,
-            lastAmortizationData.schedule.reduce((sum, row) => sum + row.principal + row.interest, 0)
+        // Draw amortization chart
+        drawAmortizationChart(
+            amortizationData.balanceData,
+            amortizationData.cumulativeInterestData,
+            amortizationData.cumulativePrincipalData,
+            0 // Set default hoverIndex to the first month
         );
+    
+        // Set the hover date to the first month on load
+        const startDate = new Date();
+        const firstMonthDate = new Date(startDate.setMonth(startDate.getMonth()));
+        displayHoverDate(firstMonthDate);
     
         console.log("Results calculated and displayed.");
     }
     
 
 
+
+
     // Amortization chart
-    // function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData) {
-    //     const ctx = amortizationChartCanvas.getContext('2d');
-    //     const dpr = window.devicePixelRatio || 1;
-    //     amortizationChartCanvas.width = amortizationChartCanvas.parentElement.offsetWidth * dpr;
-    //     amortizationChartCanvas.height = 300 * dpr;
-    //     ctx.scale(dpr, dpr);
-
-    //     // Custom drawing logic here...
-    //     console.log("Amortization chart updated");
-    // }
-
-
-
-
-    function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData, hoverIndex = null) {
+    function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData, hoverIndex = 0) {
         const canvas = document.getElementById('amortizationChart');
         const ctx = canvas.getContext('2d');
         const dpr = window.devicePixelRatio || 1;
     
-        // Adjust canvas dimensions
+        // Adjust canvas dimensions dynamically
         const isSmallScreen = window.innerWidth < 700;
         const canvasHeight = isSmallScreen ? 200 : 300;
     
@@ -147,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const width = canvas.width / dpr;
         const height = canvas.height / dpr;
     
-        // Padding and grid settings
+        // Adjust padding to prevent overlap
         const padding = { top: 10, right: 15, bottom: 50, left: 50 };
         const gridColor = '#d0d0d0';
         const labelColor = '#505050';
@@ -167,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Clear canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-        // Draw grid lines and labels
+        // Draw horizontal grid lines (Y-axis) and labels
         ctx.font = '12px Arial';
         ctx.textAlign = 'right';
         ctx.fillStyle = labelColor;
@@ -175,10 +178,14 @@ document.addEventListener("DOMContentLoaded", function () {
     
         for (let i = 0; i <= yAxisMax; i += 100000) {
             const y = getY(i);
+    
+            // Grid line
             ctx.beginPath();
             ctx.moveTo(padding.left, y);
             ctx.lineTo(width - padding.right, y);
             ctx.stroke();
+    
+            // Y-axis label (place left of padding)
             ctx.fillText(`$${(i / 1000).toFixed(0)}K`, padding.left - 10, y + 5);
         }
     
@@ -191,10 +198,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const monthIndex = i * 12;
             const x = getX(monthIndex);
             const yearLabel = new Date().getFullYear() + i;
+    
+            // Grid line
             ctx.beginPath();
             ctx.moveTo(x, padding.top);
             ctx.lineTo(x, height - padding.bottom);
             ctx.stroke();
+    
+            // X-axis label (place below padding)
             ctx.fillText(yearLabel, x, height - 10);
         }
     
@@ -216,43 +227,38 @@ document.addEventListener("DOMContentLoaded", function () {
         drawLine(cumulativePrincipalData, '#3EB721'); // Principal line
         drawLine(cumulativeInterestData, '#91BBA6'); // Interest line
     
-        // Draw hover effects if hoverIndex is provided
-        if (hoverIndex !== null) {
-            const x = getX(hoverIndex);
-            const balanceY = getY(balanceData[hoverIndex]);
-            const principalY = getY(cumulativePrincipalData[hoverIndex]);
-            const interestY = getY(cumulativeInterestData[hoverIndex]);
+        // Always draw the vertical line at hoverIndex
+        const x = getX(hoverIndex);
+        const balanceY = getY(balanceData[hoverIndex]);
+        const principalY = getY(cumulativePrincipalData[hoverIndex]);
+        const interestY = getY(cumulativeInterestData[hoverIndex]);
     
-            // Draw vertical line
-            ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(x, padding.top);
-            ctx.lineTo(x, height - padding.bottom);
-            ctx.stroke();
+        // Draw vertical line
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(x, padding.top);
+        ctx.lineTo(x, height - padding.bottom);
+        ctx.stroke();
     
-            // Draw hover dots
-            const dotRadius = 4;
-            ctx.fillStyle = '#175134'; // Balance dot color
-            ctx.beginPath();
-            ctx.arc(x, balanceY, dotRadius, 0, Math.PI * 2);
-            ctx.fill();
+        // Draw hover dots
+        const dotRadius = 4;
+        ctx.fillStyle = '#175134'; // Balance dot color
+        ctx.beginPath();
+        ctx.arc(x, balanceY, dotRadius, 0, Math.PI * 2);
+        ctx.fill();
     
-            ctx.fillStyle = '#3EB721'; // Principal dot color
-            ctx.beginPath();
-            ctx.arc(x, principalY, dotRadius, 0, Math.PI * 2);
-            ctx.fill();
+        ctx.fillStyle = '#3EB721'; // Principal dot color
+        ctx.beginPath();
+        ctx.arc(x, principalY, dotRadius, 0, Math.PI * 2);
+        ctx.fill();
     
-            ctx.fillStyle = '#91BBA6'; // Interest dot color
-            ctx.beginPath();
-            ctx.arc(x, interestY, dotRadius, 0, Math.PI * 2);
-            ctx.fill();
-        }
+        ctx.fillStyle = '#91BBA6'; // Interest dot color
+        ctx.beginPath();
+        ctx.arc(x, interestY, dotRadius, 0, Math.PI * 2);
+        ctx.fill();
     }
     
-
-
-
 
 
 
@@ -265,28 +271,78 @@ document.addEventListener("DOMContentLoaded", function () {
     // Doughnut chart
     function updateDoughnutChart(principalAndInterest, propertyTax, pmi, hoa) {
         const ctx = mortgageChartCanvas.getContext('2d');
-        const size = 400;
+        const size = 400; // Canvas size
+    
+        // Set canvas size
         mortgageChartCanvas.width = size;
         mortgageChartCanvas.height = size;
-
+    
         const data = [principalAndInterest, propertyTax, pmi, hoa];
         const colors = ['#175134', '#3EB721', '#91BBA6', '#B3D4C2'];
-
-        let total = data.reduce((a, b) => a + b, 0);
-        let startAngle = -Math.PI / 2;
-
+        const total = data.reduce((a, b) => a + b, 0);
+    
+        // Formatter to add commas to the total
+        const formattedTotal = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0, // No decimals for simplicity
+        }).format(total);
+    
+        // Clear the canvas
+        ctx.clearRect(0, 0, size, size);
+    
+        const outerRadius = size / 2; // Outer radius of the doughnut
+        const innerRadius = outerRadius - 80; // Inner radius of the doughnut
+        const centerX = size / 2; // Center X
+        const centerY = size / 2; // Center Y
+        const gapWidth = 3; // Width of the gap between segments
+    
+        let startAngle = -Math.PI / 2; // Start at the top
+    
+        // Draw each segment of the doughnut
         data.forEach((value, index) => {
             const segmentAngle = (value / total) * Math.PI * 2;
+            const endAngle = startAngle + segmentAngle;
+    
+            // Draw the segment
             ctx.beginPath();
-            ctx.arc(size / 2, size / 2, size / 2, startAngle, startAngle + segmentAngle);
-            ctx.lineTo(size / 2, size / 2);
+            ctx.arc(centerX, centerY, outerRadius, startAngle, endAngle);
+            ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
+            ctx.closePath();
+    
+            // Fill with the segment color
             ctx.fillStyle = colors[index];
             ctx.fill();
-            startAngle += segmentAngle;
+    
+            // Add spacing (stroke)
+            ctx.strokeStyle = 'white'; // Color of the gap
+            ctx.lineWidth = gapWidth;
+            ctx.stroke();
+    
+            // Update the start angle for the next segment
+            startAngle = endAngle;
         });
-
-        console.log("Doughnut chart updated");
+    
+        // Responsive font size for the total amount in the center
+        const fontSize = size / 10; // Adjust ratio for desired responsiveness
+        ctx.font = `bold ${fontSize}px Roboto`;
+        ctx.fillStyle = '#232525'; // Text color
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+    
+        // Draw total amount in the center
+        ctx.fillText(formattedTotal, centerX, centerY);
+    
+        // Always call the chart label update function
+        updateDoughnutLabels(principalAndInterest, propertyTax, pmi, hoa);
+    
+        console.log("Doughnut chart updated with formatted total price and labels.");
     }
+    
+
+
+
+
 
     // Reset functionality
     function resetInputs() {
@@ -312,84 +368,12 @@ document.addEventListener("DOMContentLoaded", function () {
     
 
     
-    function updateDoughnutChart(principalAndInterest, propertyTax, pmi, hoa) {
-        const ctx = mortgageChartCanvas.getContext('2d');
-        const size = 400;
-    
-        // Set canvas size
-        mortgageChartCanvas.width = size;
-        mortgageChartCanvas.height = size;
-    
-        const data = [principalAndInterest, propertyTax, pmi, hoa];
-        const colors = ['#175134', '#3EB721', '#91BBA6', '#B3D4C2'];
-        const total = data.reduce((a, b) => a + b, 0);
-    
-        // Formatter to add commas to the total
-        const formattedTotal = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        }).format(total);
-    
-        // Clear the canvas
-        ctx.clearRect(0, 0, size, size);
-    
-        const outerRadius = size / 2; // Outer radius of the doughnut
-        const innerRadius = outerRadius - 60; // Inner radius of the doughnut
-        const centerX = size / 2; // Center X
-        const centerY = size / 2; // Center Y
-        const gapWidth = 4; // Width of the gap
-    
-        let startAngle = -Math.PI / 2; // Start at the top
-    
-        data.forEach((value, index) => {
-            const segmentAngle = (value / total) * Math.PI * 2;
-            const endAngle = startAngle + segmentAngle;
-    
-            // Draw the segment
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, outerRadius, startAngle, endAngle);
-            ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
-            ctx.closePath();
-    
-            // Fill with the segment color
-            ctx.fillStyle = colors[index];
-            ctx.fill();
-    
-            // Add spacing (stroke)
-            ctx.strokeStyle = 'white'; // Color of the gap
-            ctx.lineWidth = gapWidth;
-            ctx.stroke();
-    
-            // Update the start angle for the next segment
-            startAngle = endAngle;
-        });
-    
-        // Responsive font size based on canvas size
-        const fontSize = size / 8; // Adjust this ratio for desired responsiveness
-        ctx.font = `bold ${fontSize}px Roboto`;
-        ctx.fillStyle = '#232525'; // Text color
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-    
-        // Draw total mortgage price in the center
-        ctx.fillText(formattedTotal, centerX, centerY);
-    
-        // Always call the chart label update function
-        updateDoughnutLabels(principalAndInterest, propertyTax, pmi, hoa);
-    
-        console.log("Doughnut chart updated with formatted total price and labels.");
-    }
-    
-    
-
-    
+ 
     
 
     
 
-    
+
 
 
 
@@ -416,7 +400,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
             const labelValue = document.createElement('span');
             labelValue.classList.add('label-value');
-            labelValue.textContent = `$${value.toFixed(2)}`;
+            labelValue.textContent = `$${formatter.format(Math.ceil(value))}`; // Round up here
     
             labelItem.appendChild(colorCircle);
             labelItem.appendChild(labelName);
@@ -424,46 +408,14 @@ document.addEventListener("DOMContentLoaded", function () {
     
             labelsContainer.appendChild(labelItem);
         });
+    
+        console.log("Doughnut labels updated with rounded values.");
     }
+    
+    
 
 
 
-    // function showTab(tabName) {
-    //     const tabs = document.querySelectorAll('.tab-content');
-    //     const navButtons = document.querySelectorAll('.results-tab');
-    
-    //     // Hide all tabs and remove active class from buttons
-    //     tabs.forEach(tab => (tab.style.display = 'none'));
-    //     navButtons.forEach(button => button.classList.remove('tab-active'));
-    
-    //     // Show the selected tab
-    //     const selectedTab = document.getElementById(`${tabName}-content`);
-    //     if (selectedTab) {
-    //         selectedTab.style.display = 'block';
-    //         document.querySelector(`#tab-${tabName}`).classList.add('tab-active');
-    //     }
-    
-    //     // Handle Amortization Schedule tab
-    //     if (tabName === 'amortization-schedule') {
-    //         if (lastAmortizationData) {
-    //             populateAmortizationTable(lastAmortizationData);
-    
-    //             drawAmortizationChart(
-    //                 lastAmortizationData.balanceData,
-    //                 lastAmortizationData.cumulativeInterestData,
-    //                 lastAmortizationData.cumulativePrincipalData
-    //             );
-    
-    //             // Update labels to total values immediately
-    //             updateAmortizationLabels(
-    //                 lastAmortizationData.totalInterestPaid,
-    //                 lastAmortizationData.totalPrincipalPaid,
-    //                 lastAmortizationData.schedule.reduce((sum, row) => sum + row.principal + row.interest, 0)
-    //             );
-    //         }
-    //     }
-    // }
-    
     function showTab(tabName) {
         const tabs = document.querySelectorAll('.tab-content');
         const navButtons = document.querySelectorAll('.results-tab');
@@ -655,151 +607,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     
 
-    function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData, hoverIndex = null) {
-        const canvas = document.getElementById('amortizationChart');
-        const ctx = canvas.getContext('2d');
-        const dpr = window.devicePixelRatio || 1;
     
-        // Adjust canvas dimensions dynamically
-        const isSmallScreen = window.innerWidth < 700;
-        const canvasHeight = isSmallScreen ? 200 : 300;
-    
-        canvas.width = canvas.parentElement.offsetWidth * dpr;
-        canvas.height = canvasHeight * dpr;
-        ctx.scale(dpr, dpr);
-    
-        const width = canvas.width / dpr;
-        const height = canvas.height / dpr;
-    
-        // Adjust padding to prevent overlap
-        const padding = { top: 10, right: 15, bottom: 50, left: 50 };
-        const gridColor = '#d0d0d0';
-        const labelColor = '#505050';
-    
-        const yAxisMax = Math.ceil(
-            Math.max(...balanceData, ...cumulativeInterestData, ...cumulativePrincipalData) / 100000
-        ) * 100000;
-    
-        // Helper functions to calculate positions
-        function getY(value) {
-            return height - padding.bottom - (value / yAxisMax) * (height - padding.top - padding.bottom);
-        }
-    
-        function getX(index) {
-            return padding.left + (index / (balanceData.length - 1)) * (width - padding.left - padding.right);
-        }
-    
-        // Clear canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-        // Draw horizontal grid lines (Y-axis) and labels
-        ctx.font = '12px Arial';
-        ctx.textAlign = 'right';
-        ctx.fillStyle = labelColor;
-        ctx.strokeStyle = gridColor;
-    
-        for (let i = 0; i <= yAxisMax; i += 100000) {
-            const y = getY(i);
-    
-            // Grid line
-            ctx.beginPath();
-            ctx.moveTo(padding.left, y);
-            ctx.lineTo(width - padding.right, y);
-            ctx.stroke();
-    
-            // Y-axis label (place left of padding)
-            ctx.fillText(`$${(i / 1000).toFixed(0)}K`, padding.left - 10, y + 5);
-        }
-    
-        // Draw vertical grid lines (X-axis) every 5 years
-        const months = balanceData.length;
-        const years = Math.floor(months / 12);
-        ctx.textAlign = 'center';
-    
-        for (let i = 0; i <= years; i += 5) {
-            const monthIndex = i * 12;
-            const x = getX(monthIndex);
-            const yearLabel = new Date().getFullYear() + i;
-    
-            // Grid line
-            ctx.beginPath();
-            ctx.moveTo(x, padding.top);
-            ctx.lineTo(x, height - padding.bottom);
-            ctx.stroke();
-    
-            // X-axis label (place below padding)
-            ctx.fillText(yearLabel, x, height - 10);
-        }
-    
-        // Draw balance data line
-        ctx.strokeStyle = '#175134';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        for (let i = 0; i < balanceData.length; i++) {
-            const x = getX(i);
-            const y = getY(balanceData[i]);
-            if (i === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-    
-        // Draw cumulative principal line
-        ctx.strokeStyle = '#3EB721';
-        ctx.beginPath();
-        for (let i = 0; i < cumulativePrincipalData.length; i++) {
-            const x = getX(i);
-            const y = getY(cumulativePrincipalData[i]);
-            if (i === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-    
-        // Draw cumulative interest line
-        ctx.strokeStyle = '#91BBA6';
-        ctx.beginPath();
-        for (let i = 0; i < cumulativeInterestData.length; i++) {
-            const x = getX(i);
-            const y = getY(cumulativeInterestData[i]);
-            if (i === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-    
-        // Draw hover effects if hoverIndex is provided
-        if (hoverIndex !== null) {
-            const x = getX(hoverIndex);
-            const balanceY = getY(balanceData[hoverIndex]);
-            const principalY = getY(cumulativePrincipalData[hoverIndex]);
-            const interestY = getY(cumulativeInterestData[hoverIndex]);
-    
-            // Draw vertical hover line
-            ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(x, padding.top);
-            ctx.lineTo(x, height - padding.bottom);
-            ctx.stroke();
-    
-            // Draw hover dots
-            const dotRadius = 4;
-            ctx.fillStyle = '#175134'; // Balance dot color
-            ctx.beginPath();
-            ctx.arc(x, balanceY, dotRadius, 0, Math.PI * 2);
-            ctx.fill();
-    
-            ctx.fillStyle = '#3EB721'; // Principal dot color
-            ctx.beginPath();
-            ctx.arc(x, principalY, dotRadius, 0, Math.PI * 2);
-            ctx.fill();
-    
-            ctx.fillStyle = '#91BBA6'; // Interest dot color
-            ctx.beginPath();
-            ctx.arc(x, interestY, dotRadius, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
     
 
+  
+  
 
 
     function updateHoverValues(balance, interest, principal) {
@@ -807,98 +619,64 @@ document.addEventListener("DOMContentLoaded", function () {
         const interestLabel = document.getElementById('label-interest');
         const principalLabel = document.getElementById('label-principal');
     
-        if (balanceLabel) balanceLabel.textContent = `$${balance.toFixed(2)}`;
-        if (interestLabel) interestLabel.textContent = `$${interest.toFixed(2)}`;
-        if (principalLabel) principalLabel.textContent = `$${principal.toFixed(2)}`;
+        if (balanceLabel) balanceLabel.textContent = `$${formatter.format(Math.ceil(balance))}`;
+        if (interestLabel) interestLabel.textContent = `$${formatter.format(Math.ceil(interest))}`;
+        if (principalLabel) principalLabel.textContent = `$${formatter.format(Math.ceil(principal))}`;
     
-        console.log("Hover values updated:", { balance, interest, principal });
+        console.log("Hover values updated with rounded values:", {
+            balance: Math.ceil(balance),
+            interest: Math.ceil(interest),
+            principal: Math.ceil(principal),
+        });
     }
     
     
     
     
+    
+    
+    let currentHoverIndex = 0; // Default to the first month
+
+
     amortizationChartCanvas.addEventListener('mousemove', (event) => {
         const rect = amortizationChartCanvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
     
         const padding = { top: 30, right: 25, bottom: 30, left: 70 };
-        if (x < padding.left || x > amortizationChartCanvas.offsetWidth - padding.right) {
-            revertValuesToTotals(); // Reset to totals if outside chart area
-    
-            // Clear hover date
-            const hoverDateContainer = document.getElementById('amortizationHoverDate');
-            if (hoverDateContainer) {
-                hoverDateContainer.textContent = ''; // Clear the hover date
-            }
-    
-            drawAmortizationChart(
-                lastAmortizationData.balanceData,
-                lastAmortizationData.cumulativeInterestData,
-                lastAmortizationData.cumulativePrincipalData
-            );
-            return;
-        }
-    
         const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
-        const index = Math.round(
-            ((x - padding.left) / chartWidth) * (lastAmortizationData.balanceData.length - 1)
-        );
     
-        if (index >= 0 && index < lastAmortizationData.balanceData.length) {
-            updateHoverValues(
-                lastAmortizationData.balanceData[index],
-                lastAmortizationData.cumulativeInterestData[index],
-                lastAmortizationData.cumulativePrincipalData[index]
+        if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
+            const index = Math.round(
+                ((x - padding.left) / chartWidth) * (lastAmortizationData.balanceData.length - 1)
             );
     
-            // Display hover date
-            const startDate = new Date();
-            const hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
-            displayHoverDate(hoverDate);
+            if (index >= 0 && index < lastAmortizationData.balanceData.length) {
+                currentHoverIndex = index; // Save the current hover index
     
-            drawAmortizationChart(
-                lastAmortizationData.balanceData,
-                lastAmortizationData.cumulativeInterestData,
-                lastAmortizationData.cumulativePrincipalData,
-                index
-            );
+                updateHoverValues(
+                    lastAmortizationData.balanceData[index],
+                    lastAmortizationData.cumulativeInterestData[index],
+                    lastAmortizationData.cumulativePrincipalData[index]
+                );
+    
+                const startDate = new Date();
+                const hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
+                displayHoverDate(hoverDate);
+    
+                drawAmortizationChart(
+                    lastAmortizationData.balanceData,
+                    lastAmortizationData.cumulativeInterestData,
+                    lastAmortizationData.cumulativePrincipalData,
+                    index
+                );
+            }
         }
     });
     
-    
-    amortizationChartCanvas.addEventListener('mouseout', () => {
-        revertValuesToTotals(); // Reset labels to totals
-    });
-        
+ 
     
 
 
-    
-    
-    
-
-
-    function revertValuesToTotals() {
-        if (!lastAmortizationData) {
-            console.error("No amortization data available to revert values.");
-            return;
-        }
-    
-        const { totalInterestPaid, totalPrincipalPaid, totalAmountPaid } = lastAmortizationData;
-    
-        updateAmortizationLabels(totalInterestPaid, totalPrincipalPaid, totalAmountPaid);
-    
-        // Clear the hover date if applicable
-        const hoverDateContainer = document.getElementById('amortizationHoverDate');
-        if (hoverDateContainer) {
-            hoverDateContainer.textContent = ''; // Clear the hover date
-        }
-    
-        console.log("Labels reverted to totals after hover.");
-    }
-    
-    
-    
 
     
 
@@ -957,6 +735,9 @@ document.addEventListener("DOMContentLoaded", function () {
     
    
    
+
+
+
     function displayHoverDate(date) {
         const hoverDateContainer = document.getElementById('amortizationHoverDate');
         if (!hoverDateContainer) {
@@ -968,6 +749,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const year = date.getFullYear();
         hoverDateContainer.textContent = `${month} ${year}`;
     }
+    
     
 
 
@@ -1001,47 +783,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    function updateHoverValues(balance, interest, principal) {
-        const labelsContainer = document.getElementById('amortizationLabels');
-        if (!labelsContainer) {
-            console.error("Amortization labels container not found.");
-            return;
-        }
-    
-        labelsContainer.innerHTML = ''; // Clear existing labels
-    
-        const labels = [
-            { name: "Total Balance", value: balance, color: "#175134" },
-            { name: "Total Interest Paid", value: interest, color: "#91BBA6" },
-            { name: "Total Principal Paid", value: principal, color: "#3EB721" },
-        ];
-    
-        labels.forEach(label => {
-            const labelItem = document.createElement('div');
-            labelItem.classList.add('label-item');
-    
-            const colorCircle = document.createElement('span');
-            colorCircle.classList.add('color-circle');
-            colorCircle.style.backgroundColor = label.color;
-    
-            const labelName = document.createElement('span');
-            labelName.classList.add('label-name');
-            labelName.textContent = label.name;
-    
-            const labelValue = document.createElement('span');
-            labelValue.classList.add('label-value');
-            labelValue.textContent = `$${label.value.toFixed(2)}`;
-    
-            labelItem.appendChild(colorCircle);
-            labelItem.appendChild(labelName);
-            labelItem.appendChild(labelValue);
-    
-            labelsContainer.appendChild(labelItem);
-        });
-    
-        console.log("Hover values updated:", { balance, interest, principal });
-    }
-    
     
 
 
@@ -1054,30 +795,40 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
     
-        // Render the static labels only if they don't exist
+        // Use 0 as fallback if any value is NaN or undefined
+        totalInterestPaid = isNaN(totalInterestPaid) ? 0 : Math.ceil(totalInterestPaid);
+        totalPrincipalPaid = isNaN(totalPrincipalPaid) ? 0 : Math.ceil(totalPrincipalPaid);
+        totalAmountPaid = isNaN(totalAmountPaid) ? 0 : Math.ceil(totalAmountPaid);
+    
+        // Render the static labels
         labelsContainer.innerHTML = `
             <div class="label-item">
                 <span class="color-circle" style="background-color: #175134;"></span>
                 <span class="label-name">Total Balance</span>
-                <span class="label-value" id="label-balance">$${totalAmountPaid.toFixed(2)}</span>
+                <span class="label-value" id="label-balance">$${formatter.format(totalAmountPaid)}</span>
             </div>
             <div class="label-item">
                 <span class="color-circle" style="background-color: #91BBA6;"></span>
                 <span class="label-name">Total Interest Paid</span>
-                <span class="label-value" id="label-interest">$${totalInterestPaid.toFixed(2)}</span>
+                <span class="label-value" id="label-interest">$${formatter.format(totalInterestPaid)}</span>
             </div>
             <div class="label-item">
                 <span class="color-circle" style="background-color: #3EB721;"></span>
                 <span class="label-name">Total Principal Paid</span>
-                <span class="label-value" id="label-principal">$${totalPrincipalPaid.toFixed(2)}</span>
+                <span class="label-value" id="label-principal">$${formatter.format(totalPrincipalPaid)}</span>
             </div>
         `;
     
-        console.log("Amortization labels rendered with totals.");
+        console.log("Amortization labels updated with rounded values:", {
+            totalInterestPaid,
+            totalPrincipalPaid,
+            totalAmountPaid,
+        });
     }
     
     
-    
+
+
 
     
 
