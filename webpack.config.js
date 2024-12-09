@@ -140,32 +140,7 @@ module.exports = {
             ],
         }),
     ],
-    // optimization: {
-    //     minimize: isProduction,
-    //     minimizer: [
-    //         new TerserPlugin({
-    //             terserOptions: {
-    //                 compress: {
-    //                     drop_console: isProduction,
-    //                 },
-    //             },
-    //         }),
-    //     ],
-    //     splitChunks: {
-    //         chunks: 'all',
-    //         cacheGroups: {
-    //             styles: {
-    //                 name: 'styles',
-    //                 test: /\.css$/,
-    //                 chunks: 'all',
-    //                 enforce: true,
-    //             },
-    //         },
-    //     },
-    // },
 
-
-    
     optimization: {
         minimize: isProduction,
         minimizer: [
