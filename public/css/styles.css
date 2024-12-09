@@ -709,77 +709,55 @@ select {
   transform: rotate(180deg);
 }
 
-/* Scrollbar CSS */
-#amortization-schedule{
-  width: 100% !important;
-  overflow-y: auto;
+
+
+
+.amortization-table th{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  color: #232525;
 }
 
+.amortization-table td{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: #000;
 
-/* Custom Scrollbar Styling */
-#amortization-shedule::-webkit-scrollbar{
-  z-index: 2;
 }
-
-#amortization-schedule::-webkit-scrollbar-track {
-  display: initial;
-  color: #ccc;
-  z-index: 2;
-}
-#amortization-schedule::-webkit-scrollbar-thumb {
-  display: none !important;
-}
-
-
-
-
-
-
 
 
 
 
 /* Amortization Table CSS */
+#amortization-schedule {
+  width: 100%; /* Full width */
+  overflow-y: unset;
+}
+#amortization-schedule::-webkit-scrollbar{
+  display: none !important;
+}
+
+.scrollable-tbody {
+  max-height: 280px; /* Limit the height for scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
 .amortization-table {
-  background-color: transparent; /* Set table background to white */
-  border-collapse: collapse; /* Remove gaps between cells */
-  width: 100%; /* Make table full width */
-  font-family: 'Roboto', sans-serif;
-}
-.amortization-table{
-  vertical-align: middle !important;
-}
-.amortization-table th,
-.amortization-table td {
-  background-color: transparent; /* Make cells transparent */
-  border: none; /* Remove borders */
-  /* padding: 8px 12px; */
-  text-align: center; /* Align text to the center */
-  vertical-align: middle;
+  width: 100%; /* Ensure the table spans the full width */
+  border-collapse: collapse;
 }
 
-/* Styling for the table header */
-.amortization-table th {
-  font-weight: bold; /* Make header text bold */
-  font-size: 16px; /* Set font size for header */
-  color: #000; 
-  padding: 8px 12px;
-}
-.amortization-table td{
-  font-size: 14px;
-  color: #171717;
-  padding: 8px 0;
-}
-
-
-/* CSS Specific to make the headings stick for amortization table*/ 
 .amortization-table thead th {
-  position: sticky; /* Makes the headers stick to the top */
-  top: 0; /* Stick to the top of the container */
-  /* z-index: 1; Ensure it stays above table rows */
-  background-color: #ffffff; /* Match the table's background color */
+  position: relative; /* No sticky needed since it's above the scroll */
+  top: 0;
+  background-color: #fff; /* Match background color */
+  z-index: 1;
 }
 
+.amortization-table th, .amortization-table td {
+  padding: 8px 12px;
+  text-align: center;
+}
 
 
 

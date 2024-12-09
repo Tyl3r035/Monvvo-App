@@ -58,22 +58,47 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Update dependent inputs
-    downPaymentAmountInput.addEventListener('input', function () {
-        const homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
-        const downPaymentAmount = parseFloat(downPaymentAmountInput.value) || 0;
-        const downPaymentPercentage = (downPaymentAmount / homePrice) * 100;
-        downPaymentPercentageInput.value = downPaymentPercentage.toFixed(2);
-    });
 
-    downPaymentPercentageInput.addEventListener('input', function () {
-        const homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
-        const downPaymentPercentage = parseFloat(downPaymentPercentageInput.value) || 0;
-        const downPaymentAmount = (downPaymentPercentage / 100) * homePrice;
-        downPaymentAmountInput.value = downPaymentAmount.toFixed(2);
-    });
+ // Update dependent inputs and handle PMI logic
+downPaymentAmountInput.addEventListener('input', function () {
+    const homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
+    const downPaymentAmount = parseFloat(downPaymentAmountInput.value) || 0;
+    const downPaymentPercentage = (downPaymentAmount / homePrice) * 100;
+    downPaymentPercentageInput.value = downPaymentPercentage.toFixed(2);
 
- 
+    // Adjust PMI if not manually updated
+    adjustPMI(homePrice, downPaymentPercentage);
+});
+
+downPaymentPercentageInput.addEventListener('input', function () {
+    const homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
+    const downPaymentPercentage = parseFloat(downPaymentPercentageInput.value) || 0;
+    const downPaymentAmount = (downPaymentPercentage / 100) * homePrice;
+    downPaymentAmountInput.value = downPaymentAmount.toFixed(2);
+
+    // Adjust PMI if not manually updated
+    adjustPMI(homePrice, downPaymentPercentage);
+});
+
+// Helper function to adjust PMI
+function adjustPMI(homePrice, downPaymentPercentage) {
+    const pmiInput = document.getElementById('pmi-expense');
+    if (!pmiInput.hasAttribute('data-manual')) { // Only adjust if not manually updated
+        if (downPaymentPercentage >= 20) {
+            pmiInput.value = 0; // Set PMI to 0 for 20%+ down payment
+        } else {
+            const annualPMI = homePrice * 0.0085; // 0.85% of loan amount
+            const monthlyPMI = Math.ceil(annualPMI / 12); // Round up to nearest dollar
+            pmiInput.value = monthlyPMI;
+        }
+    }
+}
+
+// Mark PMI as manually updated
+pmiExpenseInput.addEventListener('input', function () {
+    this.setAttribute('data-manual', 'true');
+});
+
 
 
 

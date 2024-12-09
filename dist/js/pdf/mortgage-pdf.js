@@ -82,14 +82,17 @@ export function generateMortgagePdf(paymentData, amortizationData) {
     const amortizationY = doc.lastAutoTable.finalY + 10;
     doc.text("Amortization Schedule", 14, amortizationY);
 
+    
     const amortizationDetails = amortizationData.map((row, index) => [
-        index + 1,
-        row.date,
-        `$${row.principal.toFixed(2)}`,
-        `$${row.interest.toFixed(2)}`,
-        `$${row.balance.toFixed(2)}`
+        index + 1, // Month
+        row.date, // Date
+        `$${Number(row.principal).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, // Principal
+        `$${Number(row.interest).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, // Interest
+        `$${Number(row.balance).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`  // Remaining Balance
     ]);
+    
 
+    
     doc.autoTable({
         startY: amortizationY + 5,
         head: [
@@ -104,6 +107,7 @@ export function generateMortgagePdf(paymentData, amortizationData) {
         body: amortizationDetails,
         styles: { fontStyle: "sans-serif" },
     });
+    
 
     // Footer
     const pageHeight = doc.internal.pageSize.height;

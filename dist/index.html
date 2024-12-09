@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap">
 
-<script defer src="/main.2e431e93199364e0b31b.js"></script><script defer src="/generalCalcs.3c65207f15cf99592190.js"></script><script defer src="/246.8868046f6871e1baec1f.js"></script><script defer src="/mortgage-calculator.0822aa285f0d44f963de.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><link href="/styles.a3315be1243f8c0b05f6.css" rel="stylesheet"></head>
+<script defer src="/main.8808ee0534bcd791b92e.js"></script><script defer src="/generalCalcs.3c65207f15cf99592190.js"></script><script defer src="/246.8868046f6871e1baec1f.js"></script><script defer src="/mortgage-calculator.78663cbe049f207325fd.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><link href="/styles.403aed68b87dacd654e3.css" rel="stylesheet"></head>
 <body>
   <header id="header">
     <div class="logo">
@@ -190,7 +190,7 @@
                   <p class="expand-text">Expand</p>
                   <img class="expand-icon" src="./img/icons/down-arrow.svg" alt="expand icon">
                 </div>
-                <div id="amortization-schedule" style="display:none;">
+                <div id="amortization-schedule">
                   <table class="amortization-table">
                     <thead>
                       <tr>
@@ -200,11 +200,15 @@
                         <th>Balance</th>
                       </tr>
                     </thead>
-                    <tbody id="amortization-table-body">
-                      <!-- Rows will be populated dynamically -->
-                    </tbody>
                   </table>
-                </div>   
+                  <div class="scrollable-tbody">
+                    <table class="amortization-table">
+                      <tbody id="amortization-table-body">
+                        <!-- Rows dynamically added here -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
 
             </div>
@@ -327,6 +331,5 @@
     </div>
     <img src="./img/icons/footer-icon.svg" class="bottom-icon" alt="footer-icon">
 </footer>
-<!-- <script type="module" src="./js/pdf/mortgage-pdf.js"></script> -->
 </body>
 </html>

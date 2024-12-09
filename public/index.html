@@ -190,7 +190,7 @@
                   <p class="expand-text">Expand</p>
                   <img class="expand-icon" src="./img/icons/down-arrow.svg" alt="expand icon">
                 </div>
-                <div id="amortization-schedule" style="display:none;">
+                <div id="amortization-schedule">
                   <table class="amortization-table">
                     <thead>
                       <tr>
@@ -200,11 +200,15 @@
                         <th>Balance</th>
                       </tr>
                     </thead>
-                    <tbody id="amortization-table-body">
-                      <!-- Rows will be populated dynamically -->
-                    </tbody>
                   </table>
-                </div>   
+                  <div class="scrollable-tbody">
+                    <table class="amortization-table">
+                      <tbody id="amortization-table-body">
+                        <!-- Rows dynamically added here -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
 
             </div>
@@ -327,6 +331,5 @@
     </div>
     <img src="./img/icons/footer-icon.svg" class="bottom-icon" alt="footer-icon">
 </footer>
-<!-- <script type="module" src="./js/pdf/mortgage-pdf.js"></script> -->
 </body>
 </html>

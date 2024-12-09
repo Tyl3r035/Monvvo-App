@@ -104,7 +104,22 @@ function generateMortgagePdf(paymentData, amortizationData) {
   var amortizationY = doc.lastAutoTable.finalY + 10;
   doc.text("Amortization Schedule", 14, amortizationY);
   var amortizationDetails = amortizationData.map(function (row, index) {
-    return [index + 1, row.date, "$".concat(row.principal.toFixed(2)), "$".concat(row.interest.toFixed(2)), "$".concat(row.balance.toFixed(2))];
+    return [index + 1,
+    // Month
+    row.date, // Date
+    "$".concat(Number(row.principal).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })), // Principal
+    "$".concat(Number(row.interest).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })), // Interest
+    "$".concat(Number(row.balance).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })) // Remaining Balance
+    ];
   });
   doc.autoTable({
     startY: amortizationY + 5,
@@ -222,18 +237,44 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Update dependent inputs
+  // Update dependent inputs and handle PMI logic
   downPaymentAmountInput.addEventListener('input', function () {
     var homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
     var downPaymentAmount = parseFloat(downPaymentAmountInput.value) || 0;
     var downPaymentPercentage = downPaymentAmount / homePrice * 100;
     downPaymentPercentageInput.value = downPaymentPercentage.toFixed(2);
+
+    // Adjust PMI if not manually updated
+    adjustPMI(homePrice, downPaymentPercentage);
   });
   downPaymentPercentageInput.addEventListener('input', function () {
     var homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
     var downPaymentPercentage = parseFloat(downPaymentPercentageInput.value) || 0;
     var downPaymentAmount = downPaymentPercentage / 100 * homePrice;
     downPaymentAmountInput.value = downPaymentAmount.toFixed(2);
+
+    // Adjust PMI if not manually updated
+    adjustPMI(homePrice, downPaymentPercentage);
+  });
+
+  // Helper function to adjust PMI
+  function adjustPMI(homePrice, downPaymentPercentage) {
+    var pmiInput = document.getElementById('pmi-expense');
+    if (!pmiInput.hasAttribute('data-manual')) {
+      // Only adjust if not manually updated
+      if (downPaymentPercentage >= 20) {
+        pmiInput.value = 0; // Set PMI to 0 for 20%+ down payment
+      } else {
+        var annualPMI = homePrice * 0.0085; // 0.85% of loan amount
+        var monthlyPMI = Math.ceil(annualPMI / 12); // Round up to nearest dollar
+        pmiInput.value = monthlyPMI;
+      }
+    }
+  }
+
+  // Mark PMI as manually updated
+  pmiExpenseInput.addEventListener('input', function () {
+    this.setAttribute('data-manual', 'true');
   });
   function calculateAndDisplayResults() {
     console.log("Calculating and displaying results...");
@@ -1271,4 +1312,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=mortgage-calculator.0822aa285f0d44f963de.js.map
+//# sourceMappingURL=mortgage-calculator.78663cbe049f207325fd.js.map
