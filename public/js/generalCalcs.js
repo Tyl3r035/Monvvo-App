@@ -110,15 +110,19 @@ document.addEventListener("click", () => {
 
 // function showTooltip(icon, tooltip) {
 //     const iconRect = icon.getBoundingClientRect();
-//     const tooltipWidth = tooltip.offsetWidth; // Get tooltip width dynamically
+//     const tooltipWidth = tooltip.offsetWidth; // Dynamically calculate width
+//     const tooltipHeight = tooltip.offsetHeight; // Dynamically calculate height
 
-//     // Position tooltip to the left of the icon and vertically aligned below
-//     tooltip.style.left = `${window.pageXOffset + iconRect.left - tooltipWidth - 5}px`; // Align to the left
-//     tooltip.style.top = `${window.pageYOffset + iconRect.bottom + 5}px`; // Align below
+//     // Align the tooltip's right edge with the left edge of the icon
+//     const tooltipX = window.pageXOffset + iconRect.left - tooltipWidth - 5;
+//     // Position tooltip directly above the icon with a 5px gap
+//     const tooltipY = window.pageYOffset + iconRect.top - tooltipHeight - 5;
+
+//     tooltip.style.left = `${tooltipX}px`;
+//     tooltip.style.top = `${tooltipY}px`;
 
 //     tooltip.classList.add("visible");
 // }
-
 
 function showTooltip(icon, tooltip) {
     const iconRect = icon.getBoundingClientRect();
@@ -126,16 +130,15 @@ function showTooltip(icon, tooltip) {
     const tooltipHeight = tooltip.offsetHeight; // Dynamically calculate height
 
     // Align the tooltip's right edge with the left edge of the icon
-    const tooltipX = window.pageXOffset + iconRect.left - tooltipWidth - 5;
+    const tooltipX = window.scrollX + iconRect.left - tooltipWidth - 5;
     // Position tooltip directly above the icon with a 5px gap
-    const tooltipY = window.pageYOffset + iconRect.top - tooltipHeight - 5;
+    const tooltipY = window.scrollY + iconRect.top - tooltipHeight - 5;
 
     tooltip.style.left = `${tooltipX}px`;
     tooltip.style.top = `${tooltipY}px`;
 
     tooltip.classList.add("visible");
 }
-
 
 
 
