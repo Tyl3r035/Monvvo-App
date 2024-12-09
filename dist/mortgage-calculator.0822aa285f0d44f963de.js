@@ -239,13 +239,27 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Calculating and displaying results...");
     var homePrice = parseFloat(document.getElementById('home-price').value) || defaultValues.homePrice;
     var downPaymentAmount = parseFloat(document.getElementById('down-payment-amount').value) || defaultValues.downPaymentAmount;
+    var downPaymentPercentage = downPaymentAmount / homePrice * 100;
     var interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 || defaultValues.interestRate / 100;
     var loanTerm = parseInt(document.getElementById('loan-term').value) || defaultValues.loanTerm;
     var extraPayment = parseFloat(document.getElementById('extra-payment').value) || defaultValues.extraPayment;
     var propertyTax = Math.ceil(parseFloat(document.getElementById('property-tax').value) || defaultValues.propertyTax);
-    var pmiExpense = Math.ceil(parseFloat(document.getElementById('pmi-expense').value) || defaultValues.pmiExpense);
     var hoaExpense = Math.ceil(parseFloat(document.getElementById('hoa-expense').value) || defaultValues.hoaExpense);
+    var pmiInput = document.getElementById('pmi-expense');
     var principal = homePrice - downPaymentAmount;
+
+    // Automatically calculate PMI if down payment < 20%, unless manually overridden
+    if (downPaymentPercentage < 20) {
+      var annualPMI = homePrice * 0.0085; // 0.85% of loan amount
+      var monthlyPMI = Math.ceil(annualPMI / 12); // Round up to nearest dollar
+      if (!pmiInput.hasAttribute('data-manual')) {
+        // Only update if not manually changed
+        pmiInput.value = monthlyPMI; // Show as whole number
+      }
+    }
+
+    // Parse the user-input PMI value
+    var pmiExpense = parseFloat(pmiInput.value) || 0; // Default to 0 if user enters an empty or invalid value
 
     // Calculate amortization data
     var amortizationData = calculateAmortizationSchedule(principal, interestRate, loanTerm * 12, extraPayment);
@@ -272,6 +286,16 @@ document.addEventListener("DOMContentLoaded", function () {
     displayHoverDate(firstMonthDate);
     console.log("Results calculated and displayed.");
   }
+
+  // Add a listener to detect manual changes to the PMI input
+  document.getElementById('pmi-expense').addEventListener('input', function () {
+    this.setAttribute('data-manual', 'true'); // Mark as manually updated
+  });
+
+  // Add a listener to detect manual changes to the PMI input
+  document.getElementById('pmi-expense').addEventListener('input', function () {
+    this.setAttribute('data-manual', 'true'); // Mark as manually updated
+  });
 
   // Amortization chart
   function drawAmortizationChart(balanceData, cumulativeInterestData, cumulativePrincipalData) {
@@ -465,7 +489,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Reset functionality
   function resetInputs() {
-    // Reset all input fields to blank
+    // Reset all input fields to blank or default
     homePriceInput.value = '';
     downPaymentAmountInput.value = '';
     downPaymentPercentageInput.value = '';
@@ -473,12 +497,25 @@ document.addEventListener("DOMContentLoaded", function () {
     interestRateInput.value = '';
     extraPaymentInput.value = '';
     propertyTaxInput.value = '';
-    pmiExpenseInput.value = '';
     hoaExpenseInput.value = '';
 
-    // Recalculate using default values
+    // Reset PMI to the calculated value
+    var homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
+    var downPaymentAmount = parseFloat(downPaymentAmountInput.value) || defaultValues.downPaymentAmount;
+    var downPaymentPercentage = downPaymentAmount / homePrice * 100;
+    if (downPaymentPercentage < 20) {
+      var annualPMI = homePrice * 0.0085; // 0.85% of loan amount
+      var monthlyPMI = Math.ceil(annualPMI / 12); // Round up to nearest dollar
+      pmiExpenseInput.value = monthlyPMI;
+      pmiExpenseInput.removeAttribute('data-manual'); // Remove manual override
+    } else {
+      pmiExpenseInput.value = '';
+      pmiExpenseInput.removeAttribute('data-manual'); // Reset manual flag
+    }
+
+    // Recalculate results using the default or blank inputs
     calculateAndDisplayResults();
-    console.log("Inputs reset while preserving placeholder values.");
+    console.log("Inputs reset and PMI recalculated.");
   }
 
   // Event listeners
@@ -1234,4 +1271,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=mortgage-calculator.c54be6516d6562d4ecb7.js.map
+//# sourceMappingURL=mortgage-calculator.0822aa285f0d44f963de.js.map

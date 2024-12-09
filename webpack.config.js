@@ -43,7 +43,7 @@ const pages = [
     {
         filename: '404.html',
         template: path.resolve(__dirname, 'public/404.html'),
-        chunks: [], // Minimal or no chunks
+        chunks: ['main'], // Minimal or no chunks
         canonical: 'https://www.monvvo.com/404',
     },
     {

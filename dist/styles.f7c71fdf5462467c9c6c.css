@@ -172,7 +172,8 @@ body,html{
   "loan-term loan-term"
   "interest-rate interest-rate"
   "mortgage-extra mortgage-extra";
-  width: 100%
+  width: 100%;
+  padding: 0 15px;
 }
 .home-price-box{grid-area: home-price;}
 .down-payment-box{grid-area: down-payment;}
@@ -770,6 +771,7 @@ select {
 #amortization-schedule::-webkit-scrollbar-track {
   display: initial;
   color: #ccc;
+  z-index: 2;
 }
 #amortization-schedule::-webkit-scrollbar-thumb {
   display: none !important;
@@ -1528,7 +1530,6 @@ select {
     "down-payment down-payment"
     "home-price interest-rate"
     "loan-term mortgage-extra" !important;
-
     gap: 0 30px;
   }
 
@@ -1565,7 +1566,7 @@ select {
   }
   .payment-chart{
     max-width: 300px;
-    margin: 30px auto;
+    margin: 0 auto;
   }
 }
 @media screen and (max-width: 700px){
@@ -1619,9 +1620,14 @@ select {
         0px 0px 0px 0px rgba(0, 0, 0, 0.05) , /* Very subtle shadow on the right */
        0px 0px 0px 0px rgba(0, 0, 0, 0.05) !important; /* Very subtle shadow on the left */
   }
-  .tab-text, .tab-active .tab-text{
-    font-size: 14px;
+  .tab-text{
+    font-size: 15px;
     font-weight: 500;
+    padding: 8px 0;
+  }
+  .tab-active .tab-text{
+    font-size: 15px;
+    font-weight: 800;
     padding: 8px 0;
   }
   .results-content{
@@ -1632,6 +1638,10 @@ select {
   }
   .answer-title{
     font-size: 16px;
+    padding: 0;
+  }
+  .answer-disclaimer{
+    padding-left: 0;
   }
 
   #amortizationChartContainer {
@@ -1644,6 +1654,9 @@ select {
   .chart-labels{
     padding: 0;
   }
+  .expand-box{
+    padding-right: 0;
+  }
   .label-name, .label-value{
     font-size: 14px;
   }
@@ -1655,6 +1668,7 @@ select {
   }
   .btn-container{
     margin-bottom: 0;
+    padding: 0 15px;
   }
   .btn-left{
     gap: 10px;
@@ -1742,7 +1756,7 @@ select {
   .mortgage-inputs{
     grid-template-areas:
     "home-price interest-rate"
-    "loan-term payment-frequency"
+    "loan-term mortgage-extra"
     "down-payment down-payment" !important;
   }
   .label-name, .label-value{
@@ -1807,4 +1821,4 @@ select {
   }
 }
 
-/*# sourceMappingURL=styles.7890decd23ed98a4a8bc.css.map*/
+/*# sourceMappingURL=styles.f7c71fdf5462467c9c6c.css.map*/
