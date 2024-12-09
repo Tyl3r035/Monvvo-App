@@ -717,6 +717,9 @@ select {
 
 
 /* Custom Scrollbar Styling */
+#amortization-shedule::-webkit-scrollbar{
+  z-index: 2;
+}
 
 #amortization-schedule::-webkit-scrollbar-track {
   display: initial;
