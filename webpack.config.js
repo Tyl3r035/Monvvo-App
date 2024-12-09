@@ -142,8 +142,7 @@ module.exports = {
     ],
 
     optimization: {
-        // minimize: isProduction,
-        minimize: false,
+        minimize: isProduction,
         minimizer: [
             new TerserPlugin({
                 terserOptions: {

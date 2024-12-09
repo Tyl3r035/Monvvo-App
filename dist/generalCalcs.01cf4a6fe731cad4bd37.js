@@ -89,23 +89,6 @@ document.addEventListener("click", function () {
   hideAllTooltips();
   activeTooltip = null;
 });
-
-// function showTooltip(icon, tooltip) {
-//     const iconRect = icon.getBoundingClientRect();
-//     const tooltipWidth = tooltip.offsetWidth; // Dynamically calculate width
-//     const tooltipHeight = tooltip.offsetHeight; // Dynamically calculate height
-
-//     // Align the tooltip's right edge with the left edge of the icon
-//     const tooltipX = window.pageXOffset + iconRect.left - tooltipWidth - 5;
-//     // Position tooltip directly above the icon with a 5px gap
-//     const tooltipY = window.pageYOffset + iconRect.top - tooltipHeight - 5;
-
-//     tooltip.style.left = `${tooltipX}px`;
-//     tooltip.style.top = `${tooltipY}px`;
-
-//     tooltip.classList.add("visible");
-// }
-
 function showTooltip(icon, tooltip) {
   var iconRect = icon.getBoundingClientRect();
   var tooltipWidth = tooltip.offsetWidth; // Dynamically calculate width
@@ -162,4 +145,4 @@ if (expandBox && amortizationTableBody && expandText && expandIcon) {
 }
 /******/ })()
 ;
-//# sourceMappingURL=generalCalcs.84405d47e3f3c5961ec1.js.map
+//# sourceMappingURL=generalCalcs.01cf4a6fe731cad4bd37.js.map

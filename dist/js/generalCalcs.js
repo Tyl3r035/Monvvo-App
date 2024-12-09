@@ -108,21 +108,6 @@ document.addEventListener("click", () => {
 });
 
 
-// function showTooltip(icon, tooltip) {
-//     const iconRect = icon.getBoundingClientRect();
-//     const tooltipWidth = tooltip.offsetWidth; // Dynamically calculate width
-//     const tooltipHeight = tooltip.offsetHeight; // Dynamically calculate height
-
-//     // Align the tooltip's right edge with the left edge of the icon
-//     const tooltipX = window.pageXOffset + iconRect.left - tooltipWidth - 5;
-//     // Position tooltip directly above the icon with a 5px gap
-//     const tooltipY = window.pageYOffset + iconRect.top - tooltipHeight - 5;
-
-//     tooltip.style.left = `${tooltipX}px`;
-//     tooltip.style.top = `${tooltipY}px`;
-
-//     tooltip.classList.add("visible");
-// }
 
 function showTooltip(icon, tooltip) {
     const iconRect = icon.getBoundingClientRect();
