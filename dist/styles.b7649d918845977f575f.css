@@ -249,6 +249,7 @@ body,html{
   background: transparent;
   border: none;
   outline: none;
+  height: 24px !important;
 }
 .input-box input::placeholder{
   color: #232525;
@@ -1802,4 +1803,4 @@ select {
   }
 }
 
-/*# sourceMappingURL=styles.403aed68b87dacd654e3.css.map*/
+/*# sourceMappingURL=styles.b7649d918845977f575f.css.map*/

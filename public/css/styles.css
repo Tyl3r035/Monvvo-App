@@ -199,6 +199,7 @@ body,html{
   background: transparent;
   border: none;
   outline: none;
+  height: 24px !important;
 }
 .input-box input::placeholder{
   color: #232525;
