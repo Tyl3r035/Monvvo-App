@@ -845,34 +845,90 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   var currentHoverIndex = 0; // Default to the first month
 
+  // function calculateHoverIndex(x, chartWidth, padding, dataLength) {
+  //     const rawIndex = ((x - padding.left) / chartWidth) * (dataLength - 1);
+  //     return Math.min(Math.max(Math.round(rawIndex), 0), dataLength - 1);
+  // }
+
+  function calculateHoverIndex(x, chartWidth, padding, dataLength) {
+    var rawIndex = (x - padding.left) / chartWidth * (dataLength - 1);
+
+    // Ensure rounding bias towards edges for better coverage
+    var adjustedIndex = Math.round(rawIndex);
+    if (adjustedIndex >= dataLength - 1) {
+      return dataLength - 1; // Snap to last index
+    }
+    return Math.min(Math.max(adjustedIndex, 0), dataLength - 1);
+  }
+
+  // amortizationChartCanvas.addEventListener('mousemove', (event) => {
+  //     const rect = amortizationChartCanvas.getBoundingClientRect();
+  //     const x = event.clientX - rect.left;
+
+  //     const padding = { top: 10, right: 35, bottom: 50, left: 50 };
+  //     const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
+
+  //     if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
+  //         const index = calculateHoverIndex(x, chartWidth, padding, lastAmortizationData.balanceData.length);
+  //         updateHoverEffects(index);
+  //     }
+  // });
+
+  // amortizationChartCanvas.addEventListener('touchmove', (event) => {
+  //     const rect = amortizationChartCanvas.getBoundingClientRect();
+  //     const touch = event.touches[0] || event.changedTouches[0];
+  //     const x = touch.clientX - rect.left;
+
+  //     const padding = { top: 10, right: 35, bottom: 50, left: 50 };
+  //     const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
+
+  //     if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
+  //         const index = calculateHoverIndex(x, chartWidth, padding, lastAmortizationData.balanceData.length);
+  //         updateHoverEffects(index);
+  //     }
+  // });
+
   amortizationChartCanvas.addEventListener('mousemove', function (event) {
     var rect = amortizationChartCanvas.getBoundingClientRect();
     var x = event.clientX - rect.left;
     var padding = {
-      top: 30,
-      right: 100,
-      bottom: 30,
+      top: 10,
+      right: 35,
+      bottom: 50,
       left: 50
     };
+    var buffer = 10; // Extend sensitivity by 10px
     var chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
-    if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
-      var index = Math.round((x - padding.left) / chartWidth * (lastAmortizationData.balanceData.length - 1));
-      if (index >= 0 && index < lastAmortizationData.balanceData.length) {
-        currentHoverIndex = index; // Save the current hover index
-
-        updateHoverValues(lastAmortizationData.balanceData[index], lastAmortizationData.cumulativeInterestData[index], lastAmortizationData.cumulativePrincipalData[index]);
-        var startDate = new Date();
-        var hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
-        displayHoverDate(hoverDate);
-        drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData, index);
-      }
+    if (x >= padding.left - buffer && x <= amortizationChartCanvas.offsetWidth - padding.right + buffer) {
+      var index = calculateHoverIndex(x, chartWidth, padding, lastAmortizationData.balanceData.length);
+      updateHoverEffects(index);
     }
   });
-
-  // Add support for touchmove
-  // amortizationChartCanvas.addEventListener('touchmove', handleTouchEvent);
-  // amortizationChartCanvas.addEventListener('touchstart', handleTouchEvent);
-
+  amortizationChartCanvas.addEventListener('touchmove', function (event) {
+    var rect = amortizationChartCanvas.getBoundingClientRect();
+    var touch = event.touches[0] || event.changedTouches[0];
+    var x = touch.clientX - rect.left;
+    var padding = {
+      top: 10,
+      right: 35,
+      bottom: 50,
+      left: 50
+    };
+    var buffer = 10; // Extend sensitivity by 10px
+    var chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
+    if (x >= padding.left - buffer && x <= amortizationChartCanvas.offsetWidth - padding.right + buffer) {
+      var index = calculateHoverIndex(x, chartWidth, padding, lastAmortizationData.balanceData.length);
+      updateHoverEffects(index);
+    }
+  });
+  function updateHoverEffects(index) {
+    currentHoverIndex = index; // Save the current hover index
+    updateHoverValues(lastAmortizationData.balanceData[index], lastAmortizationData.cumulativeInterestData[index], lastAmortizationData.cumulativePrincipalData[index]);
+    var startDate = new Date();
+    var hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
+    displayHoverDate(hoverDate);
+    drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData, index);
+  }
   amortizationChartCanvas.addEventListener('touchmove', handleTouchEvent, {
     passive: true
   });
@@ -884,27 +940,28 @@ document.addEventListener("DOMContentLoaded", function () {
     var touch = event.touches[0] || event.changedTouches[0];
     var x = touch.clientX - rect.left;
     var padding = {
-      top: 30,
+      top: 10,
       right: 35,
-      bottom: 30,
+      bottom: 50,
       left: 50
     };
-    if (x < padding.left || x > amortizationChartCanvas.offsetWidth - padding.right) {
-      // If touch is outside the chart, clear hover effects
-      // revertValuesToTotals();
-      var hoverDateContainer = document.getElementById('amortizationHoverDate');
-      hoverDateContainer.textContent = ''; // Clear the hover date
-      drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData);
+    var chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
+
+    // Calculate index with better coverage across the full chart
+    var rawIndex = (x - padding.left) / chartWidth * (lastAmortizationData.balanceData.length - 1);
+    var index = Math.min(Math.max(Math.round(rawIndex), 0), lastAmortizationData.balanceData.length - 1);
+    if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
+      currentHoverIndex = index; // Save the current hover index
+
+      updateHoverValues(lastAmortizationData.balanceData[index], lastAmortizationData.cumulativeInterestData[index], lastAmortizationData.cumulativePrincipalData[index]);
+      var startDate = new Date();
+      var hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
+      displayHoverDate(hoverDate);
+      drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData, index);
     } else {
-      var chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
-      var index = Math.round((x - padding.left) / chartWidth * (lastAmortizationData.balanceData.length - 1));
-      if (index >= 0 && index < lastAmortizationData.balanceData.length) {
-        updateHoverValues(lastAmortizationData.balanceData[index], lastAmortizationData.cumulativeInterestData[index], lastAmortizationData.cumulativePrincipalData[index]);
-        var startDate = new Date();
-        var hoverDate = new Date(startDate.setMonth(startDate.getMonth() + index));
-        displayHoverDate(hoverDate);
-        drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData, index);
-      }
+      // Handle touch/mouse events outside the chart bounds if necessary
+      drawAmortizationChart(lastAmortizationData.balanceData, lastAmortizationData.cumulativeInterestData, lastAmortizationData.cumulativePrincipalData, currentHoverIndex // Retain the last valid hover index
+      );
     }
     event.preventDefault(); // Prevent default scrolling
   }
@@ -1220,4 +1277,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=mortgage-calculator.85d23f2571dbbc478ec5.js.map
+//# sourceMappingURL=mortgage-calculator.aae637ce5de53bfc5032.js.map
