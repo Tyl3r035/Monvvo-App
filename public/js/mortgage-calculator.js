@@ -859,11 +859,14 @@ pmiExpenseInput.addEventListener('input', function () {
 
 
     // Add support for touchmove
-    amortizationChartCanvas.addEventListener('touchmove', handleTouchEvent);
-    amortizationChartCanvas.addEventListener('touchstart', handleTouchEvent);
+    // amortizationChartCanvas.addEventListener('touchmove', handleTouchEvent);
+    // amortizationChartCanvas.addEventListener('touchstart', handleTouchEvent);
     
 
-    
+    amortizationChartCanvas.addEventListener('touchmove', handleTouchEvent, { passive: true });
+    amortizationChartCanvas.addEventListener('touchstart', handleTouchEvent, { passive: true });
+
+
 
     function handleTouchEvent(event) {
         const rect = amortizationChartCanvas.getBoundingClientRect();

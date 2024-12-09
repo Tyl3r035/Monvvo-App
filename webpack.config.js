@@ -5,6 +5,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -99,7 +101,7 @@ module.exports = {
             },
             {
                 test: /\.js$/i,
-                exclude: /node_modules/,
+                // exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -119,6 +121,7 @@ module.exports = {
             minify: isProduction,
             canonical: page.canonical,
         })),
+        new BundleAnalyzerPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css', // Ensure CSS is hashed for cache busting
         }),
@@ -137,6 +140,32 @@ module.exports = {
             ],
         }),
     ],
+    // optimization: {
+    //     minimize: isProduction,
+    //     minimizer: [
+    //         new TerserPlugin({
+    //             terserOptions: {
+    //                 compress: {
+    //                     drop_console: isProduction,
+    //                 },
+    //             },
+    //         }),
+    //     ],
+    //     splitChunks: {
+    //         chunks: 'all',
+    //         cacheGroups: {
+    //             styles: {
+    //                 name: 'styles',
+    //                 test: /\.css$/,
+    //                 chunks: 'all',
+    //                 enforce: true,
+    //             },
+    //         },
+    //     },
+    // },
+
+
+    
     optimization: {
         minimize: isProduction,
         minimizer: [
@@ -151,15 +180,29 @@ module.exports = {
         splitChunks: {
             chunks: 'all',
             cacheGroups: {
+                // Existing styles cache group
                 styles: {
                     name: 'styles',
                     test: /\.css$/,
                     chunks: 'all',
                     enforce: true,
                 },
+                // New cache group for jsPDF and related libraries
+                jsPDFVendor: {
+                    test: /[\\/]node_modules[\\/](jspdf|jspdf-autotable|fflate)[\\/]/,
+                    name: 'jspdf',
+                    chunks: 'all',
+                },
+                // Additional cache group for shared vendor libraries
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all',
+                    priority: -10,
+                },
             },
         },
-    },
+    },    
     devServer: {
         static: {
             directory: path.join(__dirname, 'dist'),
