@@ -100,6 +100,30 @@ pmiExpenseInput.addEventListener('input', function () {
 });
 
 
+// homePriceInput.addEventListener('input', function () {
+//     const homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
+//     const downPaymentAmount = parseFloat(downPaymentAmountInput.value) || 0;
+//     const downPaymentPercentage = (downPaymentAmount / homePrice) * 100;
+//     downPaymentPercentageInput.value = downPaymentPercentage.toFixed(2);
+// });
+
+
+
+homePriceInput.addEventListener('input', function () {
+    const homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice; // Get the updated home price
+    const downPaymentAmount = parseFloat(downPaymentAmountInput.value) || defaultValues.downPaymentAmount; // Default to $25,000 if empty
+
+    // Calculate and update the down payment percentage
+    const downPaymentPercentage = (downPaymentAmount / homePrice) * 100;
+    downPaymentPercentageInput.value = downPaymentPercentage.toFixed(2);
+
+    // Optional: Adjust PMI dynamically here if necessary
+    adjustPMI(homePrice, downPaymentPercentage);
+});
+
+
+
+
 
 
 
@@ -131,6 +155,20 @@ pmiExpenseInput.addEventListener('input', function () {
         // Parse the user-input PMI value
         const pmiExpense = parseFloat(pmiInput.value) || 0; // Default to 0 if user enters an empty or invalid value
     
+
+        // Select all mortgage input fields
+        const mortgageInputs = document.querySelectorAll('.number-input');
+
+        // Prevent scroll on all number inputs, including interest rate
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener('wheel', function (event) {
+            event.preventDefault();
+    });
+});
+
+
+
+
         // Calculate amortization data
         const amortizationData = calculateAmortizationSchedule(principal, interestRate, loanTerm * 12, extraPayment);
     
@@ -1095,9 +1133,9 @@ if (!downPaymentWarning) {
     return;
 }
 
-// Event listener for input changes on the down payment or home price
+// Attach event listeners for down payment and home price inputs
 downPaymentAmountInput.addEventListener('input', handleDownPaymentWarning);
-homePriceInput.addEventListener('input', handleDownPaymentWarning);
+homePriceInput.addEventListener('blur', handleDownPaymentWarning);
 
 function handleDownPaymentWarning() {
     const homePrice = parseFloat(homePriceInput.value) || parseFloat(homePriceInput.placeholder) || 0;
@@ -1118,25 +1156,23 @@ function showDownPaymentWarning() {
     downPaymentWarning.classList.remove('hidden');
 
     if (screenWidth > 768) {
-        // Align with the down payment input for larger screens
-        downPaymentWarning.style.top = `${downPaymentAmountInput.offsetTop - downPaymentWarning.offsetHeight - 10}px`; // Above the input
-        downPaymentWarning.style.left = `${downPaymentAmountInput.offsetLeft - 38}px`; // Align with the input
-        downPaymentWarning.style.width = `90%`; // Match input width
-        downPaymentWarning.style.transform = 'none'; // No centering transform
+        downPaymentWarning.style.top = `${downPaymentAmountInput.offsetTop - downPaymentWarning.offsetHeight - 10}px`;
+        downPaymentWarning.style.left = `${downPaymentAmountInput.offsetLeft - 38}px`;
+        downPaymentWarning.style.width = `90%`;
+        downPaymentWarning.style.transform = 'none';
     } else {
-        // Center the tooltip for smaller screens
-        downPaymentWarning.style.top = `${downPaymentAmountInput.offsetTop - downPaymentWarning.offsetHeight - 10}px`; // Above the input
-        downPaymentWarning.style.left = '50%'; // Center horizontally
-        downPaymentWarning.style.transform = 'translateX(-50%)'; // Center properly
-        downPaymentWarning.style.width = '90%'; // Allow it to span most of the screen
+        downPaymentWarning.style.top = `${downPaymentAmountInput.offsetTop - downPaymentWarning.offsetHeight - 10}px`;
+        downPaymentWarning.style.left = '50%';
+        downPaymentWarning.style.transform = 'translateX(-50%)';
+        downPaymentWarning.style.width = '90%';
     }
 }
-
 
 // Function to hide the down payment warning
 function hideDownPaymentWarning() {
     downPaymentWarning.classList.add('hidden');
 }
+
 
 // Attach the hide function to the global window object
 window.hideDownPaymentWarning = hideDownPaymentWarning;

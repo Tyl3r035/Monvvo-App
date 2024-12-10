@@ -1385,6 +1385,9 @@ select {
   border-left: 4px solid #20894D;
   background-color: #f1f1f1;
 }
+.faq-answer .faq-strong{
+  font-weight: 700;
+}
 
 
 /* Form Message Sent CSS */
@@ -1873,4 +1876,4 @@ select {
   }
 }
 
-/*# sourceMappingURL=styles.50f7824f58c726419829.css.map*/
+/*# sourceMappingURL=styles.45fc00adc863d0046fc2.css.map*/

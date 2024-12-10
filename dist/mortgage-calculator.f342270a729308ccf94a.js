@@ -276,6 +276,25 @@ document.addEventListener("DOMContentLoaded", function () {
   pmiExpenseInput.addEventListener('input', function () {
     this.setAttribute('data-manual', 'true');
   });
+
+  // homePriceInput.addEventListener('input', function () {
+  //     const homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
+  //     const downPaymentAmount = parseFloat(downPaymentAmountInput.value) || 0;
+  //     const downPaymentPercentage = (downPaymentAmount / homePrice) * 100;
+  //     downPaymentPercentageInput.value = downPaymentPercentage.toFixed(2);
+  // });
+
+  homePriceInput.addEventListener('input', function () {
+    var homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice; // Get the updated home price
+    var downPaymentAmount = parseFloat(downPaymentAmountInput.value) || defaultValues.downPaymentAmount; // Default to $25,000 if empty
+
+    // Calculate and update the down payment percentage
+    var downPaymentPercentage = downPaymentAmount / homePrice * 100;
+    downPaymentPercentageInput.value = downPaymentPercentage.toFixed(2);
+
+    // Optional: Adjust PMI dynamically here if necessary
+    adjustPMI(homePrice, downPaymentPercentage);
+  });
   function calculateAndDisplayResults() {
     console.log("Calculating and displaying results...");
     var homePrice = parseFloat(document.getElementById('home-price').value) || defaultValues.homePrice;
@@ -301,6 +320,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Parse the user-input PMI value
     var pmiExpense = parseFloat(pmiInput.value) || 0; // Default to 0 if user enters an empty or invalid value
+
+    // Select all mortgage input fields
+    var mortgageInputs = document.querySelectorAll('.number-input');
+
+    // Prevent scroll on all number inputs, including interest rate
+    document.querySelectorAll('input[type="number"]').forEach(function (input) {
+      input.addEventListener('wheel', function (event) {
+        event.preventDefault();
+      });
+    });
 
     // Calculate amortization data
     var amortizationData = calculateAmortizationSchedule(principal, interestRate, loanTerm * 12, extraPayment);
@@ -1034,9 +1063,9 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  // Event listener for input changes on the down payment or home price
+  // Attach event listeners for down payment and home price inputs
   downPaymentAmountInput.addEventListener('input', handleDownPaymentWarning);
-  homePriceInput.addEventListener('input', handleDownPaymentWarning);
+  homePriceInput.addEventListener('blur', handleDownPaymentWarning);
   function handleDownPaymentWarning() {
     var homePrice = parseFloat(homePriceInput.value) || parseFloat(homePriceInput.placeholder) || 0;
     var downPayment = parseFloat(downPaymentAmountInput.value) || parseFloat(downPaymentAmountInput.placeholder) || 0;
@@ -1054,17 +1083,15 @@ document.addEventListener("DOMContentLoaded", function () {
     var screenWidth = window.innerWidth;
     downPaymentWarning.classList.remove('hidden');
     if (screenWidth > 768) {
-      // Align with the down payment input for larger screens
-      downPaymentWarning.style.top = "".concat(downPaymentAmountInput.offsetTop - downPaymentWarning.offsetHeight - 10, "px"); // Above the input
-      downPaymentWarning.style.left = "".concat(downPaymentAmountInput.offsetLeft - 38, "px"); // Align with the input
-      downPaymentWarning.style.width = "90%"; // Match input width
-      downPaymentWarning.style.transform = 'none'; // No centering transform
+      downPaymentWarning.style.top = "".concat(downPaymentAmountInput.offsetTop - downPaymentWarning.offsetHeight - 10, "px");
+      downPaymentWarning.style.left = "".concat(downPaymentAmountInput.offsetLeft - 38, "px");
+      downPaymentWarning.style.width = "90%";
+      downPaymentWarning.style.transform = 'none';
     } else {
-      // Center the tooltip for smaller screens
-      downPaymentWarning.style.top = "".concat(downPaymentAmountInput.offsetTop - downPaymentWarning.offsetHeight - 10, "px"); // Above the input
-      downPaymentWarning.style.left = '50%'; // Center horizontally
-      downPaymentWarning.style.transform = 'translateX(-50%)'; // Center properly
-      downPaymentWarning.style.width = '90%'; // Allow it to span most of the screen
+      downPaymentWarning.style.top = "".concat(downPaymentAmountInput.offsetTop - downPaymentWarning.offsetHeight - 10, "px");
+      downPaymentWarning.style.left = '50%';
+      downPaymentWarning.style.transform = 'translateX(-50%)';
+      downPaymentWarning.style.width = '90%';
     }
   }
 
@@ -1358,4 +1385,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=mortgage-calculator.a1be279d1c60099d6fe7.js.map
+//# sourceMappingURL=mortgage-calculator.f342270a729308ccf94a.js.map

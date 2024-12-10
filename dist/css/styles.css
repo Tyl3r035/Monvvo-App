@@ -1335,6 +1335,9 @@ select {
   border-left: 4px solid #20894D;
   background-color: #f1f1f1;
 }
+.faq-answer .faq-strong{
+  font-weight: 700;
+}
 
 
 /* Form Message Sent CSS */
