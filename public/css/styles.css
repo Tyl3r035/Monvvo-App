@@ -338,6 +338,76 @@ select {
   gap: 12px;
 }
 
+
+
+
+/* Warning Tooltip CSS */
+.warning-tooltip {
+  position: absolute;
+  top: -50px; /* Position above the input */
+  left: 0;
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px 15px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  white-space: normal; /* Allow wrapping */
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: auto; /* Adapt to content */
+  /* max-width: 400px; */
+  text-align: left; /* Align text to the left for readability */
+  width: 90%;
+}
+
+/* Hidden tooltip */
+.warning-tooltip.hidden {
+  display: none;
+}
+
+/* Tooltip text */
+.warning-tooltip p {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding-right: 10px;
+  white-space: normal; /* Allow text to wrap */
+}
+
+/* Close button */
+.warning-tooltip .close-alert {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  line-height: 1;
+  color: #721c24;
+  cursor: pointer;
+}
+
+.close-alert .close-btn {
+  width: 14px;
+  height: 14px;
+}
+
+/* Adjust tooltip for smaller screens */
+@media screen and (max-width: 768px) {
+  .warning-tooltip {
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust to keep it centered */
+    width: 90%; /* Allow it to span most of the screen */
+    max-width: none; /* Remove max-width restriction */
+    white-space: normal; /* Allow text to wrap */
+    text-align: center; /* Center align the text for better readability */
+  }
+}
+
+
+
+
+
+
 /* Advanced Options CSS */
 .advanced-box{
   display: flex;

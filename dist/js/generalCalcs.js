@@ -129,10 +129,6 @@ function showTooltip(icon, tooltip) {
 
 
 
-
-
-
-
 function hideTooltip(tooltip) {
     tooltip.classList.remove("visible");
 }

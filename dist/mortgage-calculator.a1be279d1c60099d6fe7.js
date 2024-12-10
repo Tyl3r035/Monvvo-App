@@ -845,11 +845,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   var currentHoverIndex = 0; // Default to the first month
 
-  // function calculateHoverIndex(x, chartWidth, padding, dataLength) {
-  //     const rawIndex = ((x - padding.left) / chartWidth) * (dataLength - 1);
-  //     return Math.min(Math.max(Math.round(rawIndex), 0), dataLength - 1);
-  // }
-
   function calculateHoverIndex(x, chartWidth, padding, dataLength) {
     var rawIndex = (x - padding.left) / chartWidth * (dataLength - 1);
 
@@ -860,34 +855,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     return Math.min(Math.max(adjustedIndex, 0), dataLength - 1);
   }
-
-  // amortizationChartCanvas.addEventListener('mousemove', (event) => {
-  //     const rect = amortizationChartCanvas.getBoundingClientRect();
-  //     const x = event.clientX - rect.left;
-
-  //     const padding = { top: 10, right: 35, bottom: 50, left: 50 };
-  //     const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
-
-  //     if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
-  //         const index = calculateHoverIndex(x, chartWidth, padding, lastAmortizationData.balanceData.length);
-  //         updateHoverEffects(index);
-  //     }
-  // });
-
-  // amortizationChartCanvas.addEventListener('touchmove', (event) => {
-  //     const rect = amortizationChartCanvas.getBoundingClientRect();
-  //     const touch = event.touches[0] || event.changedTouches[0];
-  //     const x = touch.clientX - rect.left;
-
-  //     const padding = { top: 10, right: 35, bottom: 50, left: 50 };
-  //     const chartWidth = amortizationChartCanvas.offsetWidth - padding.left - padding.right;
-
-  //     if (x >= padding.left && x <= amortizationChartCanvas.offsetWidth - padding.right) {
-  //         const index = calculateHoverIndex(x, chartWidth, padding, lastAmortizationData.balanceData.length);
-  //         updateHoverEffects(index);
-  //     }
-  // });
-
   amortizationChartCanvas.addEventListener('mousemove', function (event) {
     var rect = amortizationChartCanvas.getBoundingClientRect();
     var x = event.clientX - rect.left;
@@ -1053,10 +1020,124 @@ document.addEventListener("DOMContentLoaded", function () {
       value: interestRate
     }];
     var amortizationData = calculateAmortizationData(homePrice, downPaymentAmount, interestRate, loanTerm);
+    console.log(document.getElementById('interest-rate'));
+    console.log(document.getElementById('interest-rate-warning'));
 
     // Generate the PDF
     generateMortgagePdf(paymentData, amortizationData);
   });
+
+  // Down Payment Warning JS
+  var downPaymentWarning = document.getElementById('down-payment-warning');
+  if (!downPaymentWarning) {
+    console.error('Down payment warning element not found.');
+    return;
+  }
+
+  // Event listener for input changes on the down payment or home price
+  downPaymentAmountInput.addEventListener('input', handleDownPaymentWarning);
+  homePriceInput.addEventListener('input', handleDownPaymentWarning);
+  function handleDownPaymentWarning() {
+    var homePrice = parseFloat(homePriceInput.value) || parseFloat(homePriceInput.placeholder) || 0;
+    var downPayment = parseFloat(downPaymentAmountInput.value) || parseFloat(downPaymentAmountInput.placeholder) || 0;
+
+    // Show warning if down payment exceeds 100% of home price
+    if (downPayment >= homePrice) {
+      showDownPaymentWarning();
+    } else {
+      hideDownPaymentWarning();
+    }
+  }
+
+  // Function to show the warning
+  function showDownPaymentWarning() {
+    var screenWidth = window.innerWidth;
+    downPaymentWarning.classList.remove('hidden');
+    if (screenWidth > 768) {
+      // Align with the down payment input for larger screens
+      downPaymentWarning.style.top = "".concat(downPaymentAmountInput.offsetTop - downPaymentWarning.offsetHeight - 10, "px"); // Above the input
+      downPaymentWarning.style.left = "".concat(downPaymentAmountInput.offsetLeft - 38, "px"); // Align with the input
+      downPaymentWarning.style.width = "90%"; // Match input width
+      downPaymentWarning.style.transform = 'none'; // No centering transform
+    } else {
+      // Center the tooltip for smaller screens
+      downPaymentWarning.style.top = "".concat(downPaymentAmountInput.offsetTop - downPaymentWarning.offsetHeight - 10, "px"); // Above the input
+      downPaymentWarning.style.left = '50%'; // Center horizontally
+      downPaymentWarning.style.transform = 'translateX(-50%)'; // Center properly
+      downPaymentWarning.style.width = '90%'; // Allow it to span most of the screen
+    }
+  }
+
+  // Function to hide the down payment warning
+  function hideDownPaymentWarning() {
+    downPaymentWarning.classList.add('hidden');
+  }
+
+  // Attach the hide function to the global window object
+  window.hideDownPaymentWarning = hideDownPaymentWarning;
+
+  // Attach event listener for the down payment warning close button
+  var downPaymentCloseButton = downPaymentWarning.querySelector('.down-payment-close');
+  if (downPaymentCloseButton) {
+    downPaymentCloseButton.addEventListener('click', hideDownPaymentWarning);
+  } else {
+    console.error('Close button not found in the down payment warning element.');
+  }
+
+  // Interest Rate Warning JS
+  var warning = document.getElementById('interest-rate-warning');
+  if (!warning) {
+    console.error('Interest rate warning element not found.');
+    return;
+  }
+
+  // Event listener for input changes on the interest rate input
+  interestRateInput.addEventListener('input', function () {
+    var value = parseFloat(this.value);
+
+    // Automatically show the warning if the value is 10 or greater
+    if (value >= 10) {
+      showWarning();
+      console.log("Interest rate is 10% or higher.");
+    } else {
+      hideWarning();
+    }
+  });
+
+  // Function to show the warning
+  function showWarning() {
+    var screenWidth = window.innerWidth;
+    warning.classList.remove('hidden');
+    if (screenWidth > 768) {
+      // Position warning above the input box for larger screens
+      warning.style.top = "".concat(interestRateInput.offsetTop - warning.offsetHeight - 10, "px"); // Above the input
+      warning.style.left = "".concat(interestRateInput.offsetLeft, "px"); // Align with the input field
+      warning.style.width = '90%'; // Match input width
+      warning.style.transform = 'none'; // Reset transform for larger screens
+    } else {
+      // Center warning and make it wider for smaller screens
+      warning.style.top = "".concat(interestRateInput.offsetTop - warning.offsetHeight - 10, "px"); // Above the input
+      warning.style.left = '50%'; // Center horizontally
+      warning.style.transform = 'translateX(-50%)'; // Center it properly
+      warning.style.width = '90%'; // Allow it to span most of the screen
+    }
+  }
+
+  // Function to hide the interest rate warning
+  function hideInterestRateWarning() {
+    warning.classList.add('hidden');
+  }
+
+  // Attach the hide function to the global window object
+  window.hideInterestRateWarning = hideInterestRateWarning;
+
+  // Attach event listener for the interest rate warning close button
+  var interestCloseButton = warning.querySelector('.interest-close');
+  if (interestCloseButton) {
+    interestCloseButton.addEventListener('click', hideInterestRateWarning);
+  } else {
+    console.error('Close button not found in the interest rate warning element.');
+  }
   console.log("End of script reached");
 });
 
@@ -1277,4 +1358,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=mortgage-calculator.aae637ce5de53bfc5032.js.map
+//# sourceMappingURL=mortgage-calculator.a1be279d1c60099d6fe7.js.map
