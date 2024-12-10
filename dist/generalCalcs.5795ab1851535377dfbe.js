@@ -1,26 +1,30 @@
 /******/ (() => { // webpackBootstrap
-document.addEventListener("DOMContentLoaded", function () {
-  var advancedText = document.getElementById("advanced-text-fluid");
-  var additionalInputs = document.getElementById("additional-inputs");
-  var advancedArrow = document.getElementById("advanced-arrow");
-  if (!advancedText || !additionalInputs || !advancedArrow) {
-    console.error("One or more required elements are missing");
-    return;
-  }
-  console.log("Elements found, initializing event listener");
-  advancedText.addEventListener("click", function () {
-    console.log("Click event triggered");
-    if (additionalInputs.classList.contains("visible")) {
-      console.log("Hiding additional inputs");
-      additionalInputs.classList.remove("visible");
-      advancedArrow.style.transform = "rotate(0deg)";
-    } else {
-      console.log("Showing additional inputs");
-      additionalInputs.classList.add("visible");
-      advancedArrow.style.transform = "rotate(180deg)";
-    }
-  });
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//     const advancedText = document.getElementById("advanced-text-fluid");
+//     const additionalInputs = document.getElementById("additional-inputs");
+//     const advancedArrow = document.getElementById("advanced-arrow");
+
+//     if (!advancedText || !additionalInputs || !advancedArrow) {
+//         console.error("One or more required elements are missing");
+//         return;
+//     }
+
+//     console.log("Elements found, initializing event listener");
+
+//     advancedText.addEventListener("click", function () {
+//         console.log("Click event triggered");
+
+//         if (additionalInputs.classList.contains("visible")) {
+//             console.log("Hiding additional inputs");
+//             additionalInputs.classList.remove("visible");
+//             advancedArrow.style.transform = "rotate(0deg)";
+//         } else {
+//             console.log("Showing additional inputs");
+//             additionalInputs.classList.add("visible");
+//             advancedArrow.style.transform = "rotate(180deg)";
+//         }
+//     });
+// });
 
 // Tab toggle functionality for "Payment Breakdown" and "Amortization Schedule"
 var tabPaymentBreakdown = document.getElementById("tab-payment-breakdown");
@@ -145,4 +149,4 @@ if (expandBox && amortizationTableBody && expandText && expandIcon) {
 }
 /******/ })()
 ;
-//# sourceMappingURL=generalCalcs.01cf4a6fe731cad4bd37.js.map
+//# sourceMappingURL=generalCalcs.5795ab1851535377dfbe.js.map

@@ -151,7 +151,7 @@ body,html{
   width: 100%;
   height: auto;
   margin: 0;
-  padding: 0;
+  padding: 0 0 60px 0;
 }
 .calculator-inputs{
   position: relative;
@@ -711,7 +711,7 @@ select {
   max-width: 250px;
   height: auto;
   display: flex;
-  margin: 50px 25px;
+  margin: 0 25px;
   
   background-color: transparent;
   padding: 0 30px;
@@ -769,6 +769,49 @@ select {
 #amortizationLabels .label-value {
   font-weight: 400;
   white-space: nowrap;
+}
+
+
+
+
+.label-input{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 1;
+}
+.label-input img{
+  padding-right: 5px;
+  color: #232525;
+}
+.label-input p{
+  padding-right: 5px;
+  color: #232525;
+}
+.chart-labels .label-value{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #232525;
+}
+
+.chart-labels .value-input{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  flex-shrink: 1;
+  max-width: 50px;
+  border: 1.5px solid #333333;
+  border-radius: 3px;
+  text-align: right;
+  padding: 3px 5px;
+}
+.chart-labels .label-value:active{
+  border: 1.5px solid #000;
+}
+.chart-labels .value-input::placeholder{
+  color: #232525;
+}
+.chart-labels #value-principal-interest:active{
+  border: none !important;
 }
 
 
@@ -1580,7 +1623,6 @@ select {
     width: 100%;
   }
   .mortgage-inputs{
-
     grid-template-areas:
     "down-payment down-payment"
     "home-price interest-rate"
@@ -1598,6 +1640,9 @@ select {
   }
   .input-box label, .input-top label{
     font-size: 14px;
+  }
+  .calculator-wrap{
+    padding: 0;
   }
   .terms-content{
     gap: 30px;
@@ -1876,4 +1921,4 @@ select {
   }
 }
 
-/*# sourceMappingURL=styles.45fc00adc863d0046fc2.css.map*/
+/*# sourceMappingURL=styles.ab1214c0cf855cc1af89.css.map*/

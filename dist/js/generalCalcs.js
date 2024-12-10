@@ -1,29 +1,29 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const advancedText = document.getElementById("advanced-text-fluid");
-    const additionalInputs = document.getElementById("additional-inputs");
-    const advancedArrow = document.getElementById("advanced-arrow");
+// document.addEventListener("DOMContentLoaded", function () {
+//     const advancedText = document.getElementById("advanced-text-fluid");
+//     const additionalInputs = document.getElementById("additional-inputs");
+//     const advancedArrow = document.getElementById("advanced-arrow");
 
-    if (!advancedText || !additionalInputs || !advancedArrow) {
-        console.error("One or more required elements are missing");
-        return;
-    }
+//     if (!advancedText || !additionalInputs || !advancedArrow) {
+//         console.error("One or more required elements are missing");
+//         return;
+//     }
 
-    console.log("Elements found, initializing event listener");
+//     console.log("Elements found, initializing event listener");
 
-    advancedText.addEventListener("click", function () {
-        console.log("Click event triggered");
+//     advancedText.addEventListener("click", function () {
+//         console.log("Click event triggered");
 
-        if (additionalInputs.classList.contains("visible")) {
-            console.log("Hiding additional inputs");
-            additionalInputs.classList.remove("visible");
-            advancedArrow.style.transform = "rotate(0deg)";
-        } else {
-            console.log("Showing additional inputs");
-            additionalInputs.classList.add("visible");
-            advancedArrow.style.transform = "rotate(180deg)";
-        }
-    });
-});
+//         if (additionalInputs.classList.contains("visible")) {
+//             console.log("Hiding additional inputs");
+//             additionalInputs.classList.remove("visible");
+//             advancedArrow.style.transform = "rotate(0deg)";
+//         } else {
+//             console.log("Showing additional inputs");
+//             additionalInputs.classList.add("visible");
+//             advancedArrow.style.transform = "rotate(180deg)";
+//         }
+//     });
+// });
 
 
 

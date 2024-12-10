@@ -116,53 +116,6 @@
               </div>
           </div>
           </div>
-          <div class="advanced-box">
-            <div id="advanced-text-fluid">
-              <p>Advanced Options</p>
-              <img src="./img/icons/down-arrow.svg" alt="down-arrrow" class="input-dropdown" id="advanced-arrow" loading="lazy">
-            </div>
-            <p class="additional-subtext">(Add additional monthly expenses)</p>
-          </div>
-          <div id="additional-inputs">
-            <div class="input-box">
-              <label for="property-tax">Property Tax</label>
-              <div class="input-fluid">
-                <div class="input-content">
-                  <img src="./img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
-                  <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="property-tax" name="mortgage_input__property_tax" placeholder="250">
-                </div>
-              </div>
-            </div>
-            <div class="input-box">
-              <div class="input-top">
-                <label for="pmi-expense">PMI Expense</label>
-                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the monthly cost of Private Mortgage Insurance (PMI), if required, typically for down payments less than 20%. If the down payment is less than 20% this will automatically be calculated but you can manually change it to whatever you'd like." loading="lazy">
-
-              </div>
-              <div class="input-fluid">
-                <div class="input-content">
-                  <img src="./img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
-                  <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="pmi-expense" name="mortgage_input__pmi_expense" placeholder="200">
-                </div>
-              </div>
-            </div>
-            <div class="input-box">
-              <div class="input-top">
-                <label for="hoa-expense">Homeowners Association (HOA) Fees</label>
-                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the monthly Homeowners Association (HOA) fees if applicable to the property." loading="lazy">
-
-              </div>
-              <div class="input-fluid">
-                <div class="input-content">
-                  <img src="./img/icons/dollar.svg" alt="$" class="input-icon dollar icon" loading="lazy">
-                  <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="hoa-expense" name="mortgage_input__hoa_expense" placeholder="0">
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="calculations-container">
           <div class="results-container">
@@ -181,7 +134,38 @@
                 <div id="monthly-payment-value"></div>
                 <div class="results-data">
                   <canvas id="mortgageChart" class="payment-chart" loading="lazy"></canvas>
-                  <div id="chartLabels" class="chart-labels"></div>
+                  <div id="chartLabels" class="chart-labels">
+                    <div class="label-item">
+                      <span class="color-circle" style="background-color: #175134;"></span>
+                      <span class="label-name" id="label-principal-interest">Principal & Interest</span>
+                      <span class="label-value" id="value-principal-interest">$3,173</span>
+                    </div>
+                    <div class="label-item">
+                      <span class="color-circle" style="background-color: #3EB721;"></span>
+                      <span class="label-name" id="label-property-tax" data-manual="false">Property Tax</span>
+                      <div class="label-input">
+                        <p>$</p>
+                        <input class="label-value value-input" id="value-property-tax" placeholder="250"></input>
+                      </div>
+                    </div>
+                    <div class="label-item">
+                      <span class="color-circle" style="background-color: #91BBA6;"></span>
+                      <span class="label-name" id="label-pmi" data-manual="false">PMI</span>
+                      <div class="label-input">
+                        <p>$</p>
+                        <input class="label-value value-input" id="value-pmi" placeholder="200"></input>
+                      </div>
+                    </div>
+                    <div class="label-item">
+                      <span class="color-circle" style="background-color: #B3D4C2;"></span>
+                      <span class="label-name" id="label-hoa" data-manual="false">HOA</span>
+                      <div class="label-input">
+                        <p>$</p>
+                        <input class="label-value value-input" id="value-hoa" placeholder="0"></input>
+                      </div>
+                    </div>
+                  </div>
+                  
                 </div>
               </div>
               <div id="amortization-schedule-content" style="display: none;">

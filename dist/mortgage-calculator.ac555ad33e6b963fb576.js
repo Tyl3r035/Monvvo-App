@@ -201,9 +201,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var loanTermInput = document.getElementById('loan-term');
   var interestRateInput = document.getElementById('interest-rate');
   var extraPaymentInput = document.getElementById('extra-payment');
-  var propertyTaxInput = document.getElementById('property-tax');
-  var pmiExpenseInput = document.getElementById('pmi-expense');
-  var hoaExpenseInput = document.getElementById('hoa-expense');
+  var propertyTaxInput = document.getElementById('value-property-tax');
+  var pmiExpenseInput = document.getElementById('value-pmi');
+  var hoaExpenseInput = document.getElementById('value-hoa');
   var updateBtn = document.getElementById('update-btn');
   var resetBtn = document.getElementById('reset-btn');
   var mortgageChartCanvas = document.getElementById('mortgageChart');
@@ -256,34 +256,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Adjust PMI if not manually updated
     adjustPMI(homePrice, downPaymentPercentage);
   });
-
-  // Helper function to adjust PMI
-  function adjustPMI(homePrice, downPaymentPercentage) {
-    var pmiInput = document.getElementById('pmi-expense');
-    if (!pmiInput.hasAttribute('data-manual')) {
-      // Only adjust if not manually updated
-      if (downPaymentPercentage >= 20) {
-        pmiInput.value = 0; // Set PMI to 0 for 20%+ down payment
-      } else {
-        var annualPMI = homePrice * 0.0085; // 0.85% of loan amount
-        var monthlyPMI = Math.ceil(annualPMI / 12); // Round up to nearest dollar
-        pmiInput.value = monthlyPMI;
-      }
-    }
-  }
-
-  // Mark PMI as manually updated
-  pmiExpenseInput.addEventListener('input', function () {
-    this.setAttribute('data-manual', 'true');
-  });
-
-  // homePriceInput.addEventListener('input', function () {
-  //     const homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
-  //     const downPaymentAmount = parseFloat(downPaymentAmountInput.value) || 0;
-  //     const downPaymentPercentage = (downPaymentAmount / homePrice) * 100;
-  //     downPaymentPercentageInput.value = downPaymentPercentage.toFixed(2);
-  // });
-
   homePriceInput.addEventListener('input', function () {
     var homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice; // Get the updated home price
     var downPaymentAmount = parseFloat(downPaymentAmountInput.value) || defaultValues.downPaymentAmount; // Default to $25,000 if empty
@@ -297,48 +269,49 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   function calculateAndDisplayResults() {
     console.log("Calculating and displaying results...");
-    var homePrice = parseFloat(document.getElementById('home-price').value) || defaultValues.homePrice;
-    var downPaymentAmount = parseFloat(document.getElementById('down-payment-amount').value) || defaultValues.downPaymentAmount;
+
+    // Fetch main input values
+    var homePrice = parseFloat(document.getElementById('home-price').value.replace(/,/g, '')) || defaultValues.homePrice;
+    var downPaymentAmount = parseFloat(document.getElementById('down-payment-amount').value.replace(/,/g, '')) || defaultValues.downPaymentAmount;
     var downPaymentPercentage = downPaymentAmount / homePrice * 100;
+
+    // Validate down payment
+    if (downPaymentAmount >= homePrice) {
+      console.warn("Down payment is 100% or more of the home price. Calculation skipped.");
+      alert("Your down payment exceeds or equals the home price. Please adjust your inputs.");
+      return;
+    }
+    var loanTerm = parseInt(document.getElementById('loan-term').value, 10) || defaultValues.loanTerm;
     var interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 || defaultValues.interestRate / 100;
-    var loanTerm = parseInt(document.getElementById('loan-term').value) || defaultValues.loanTerm;
-    var extraPayment = parseFloat(document.getElementById('extra-payment').value) || defaultValues.extraPayment;
-    var propertyTax = Math.ceil(parseFloat(document.getElementById('property-tax').value) || defaultValues.propertyTax);
-    var hoaExpense = Math.ceil(parseFloat(document.getElementById('hoa-expense').value) || defaultValues.hoaExpense);
-    var pmiInput = document.getElementById('pmi-expense');
+    var extraPayment = parseFloat(document.getElementById('extra-payment').value.replace(/,/g, '')) || defaultValues.extraPayment;
+
+    // Fetch values directly from chart label inputs or use placeholders
+    var propertyTaxInput = document.getElementById('value-property-tax');
+    var pmiInput = document.getElementById('value-pmi');
+    var hoaInput = document.getElementById('value-hoa');
+    var propertyTax = parseFloat(propertyTaxInput.value.replace(/,/g, '')) || parseFloat(propertyTaxInput.placeholder.replace(/,/g, '')) || 0;
+    var pmiExpense = parseFloat(pmiInput.value.replace(/,/g, '')) || parseFloat(pmiInput.placeholder.replace(/,/g, '')) || 0;
+    var hoaExpense = parseFloat(hoaInput.value.replace(/,/g, '')) || parseFloat(hoaInput.placeholder.replace(/,/g, '')) || 0;
+
+    // Log values for debugging
+    console.log("Chart Labels as Inputs:");
+    console.log("Property Tax: ".concat(propertyTax, ", PMI: ").concat(pmiExpense, ", HOA: ").concat(hoaExpense));
+
+    // Calculate principal
     var principal = homePrice - downPaymentAmount;
 
-    // Automatically calculate PMI if down payment < 20%, unless manually overridden
-    if (downPaymentPercentage < 20) {
-      var annualPMI = homePrice * 0.0085; // 0.85% of loan amount
-      var monthlyPMI = Math.ceil(annualPMI / 12); // Round up to nearest dollar
-      if (!pmiInput.hasAttribute('data-manual')) {
-        // Only update if not manually changed
-        pmiInput.value = monthlyPMI; // Show as whole number
-      }
-    }
-
-    // Parse the user-input PMI value
-    var pmiExpense = parseFloat(pmiInput.value) || 0; // Default to 0 if user enters an empty or invalid value
-
-    // Select all mortgage input fields
-    var mortgageInputs = document.querySelectorAll('.number-input');
-
-    // Prevent scroll on all number inputs, including interest rate
-    document.querySelectorAll('input[type="number"]').forEach(function (input) {
-      input.addEventListener('wheel', function (event) {
-        event.preventDefault();
-      });
-    });
-
-    // Calculate amortization data
+    // Generate amortization data
     var amortizationData = calculateAmortizationSchedule(principal, interestRate, loanTerm * 12, extraPayment);
+    if (!amortizationData || !amortizationData.schedule.length) {
+      console.error("Invalid amortization data. Calculation aborted.");
+      return;
+    }
     lastAmortizationData = _objectSpread(_objectSpread({}, amortizationData), {}, {
       periodicPrincipalAndInterest: Math.ceil(amortizationData.schedule[0].principal + amortizationData.schedule[0].interest)
     });
+    var monthlyPrincipalAndInterest = lastAmortizationData.periodicPrincipalAndInterest;
 
     // Update the doughnut chart
-    var monthlyPrincipalAndInterest = lastAmortizationData.periodicPrincipalAndInterest;
     updateDoughnutChart(monthlyPrincipalAndInterest, propertyTax, pmiExpense, hoaExpense);
 
     // Update amortization labels
@@ -347,24 +320,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 0)));
 
     // Draw amortization chart
-    drawAmortizationChart(amortizationData.balanceData, amortizationData.cumulativeInterestData, amortizationData.cumulativePrincipalData, 0 // Set default hoverIndex to the first month
+    drawAmortizationChart(amortizationData.balanceData, amortizationData.cumulativeInterestData, amortizationData.cumulativePrincipalData, 0 // Default hover index
     );
 
-    // Set the hover date to the first month on load
-    var startDate = new Date();
-    var firstMonthDate = new Date(startDate.setMonth(startDate.getMonth()));
+    // Set hover date to the first month
+    var firstMonthDate = new Date();
     displayHoverDate(firstMonthDate);
     console.log("Results calculated and displayed.");
   }
 
-  // Add a listener to detect manual changes to the PMI input
-  document.getElementById('pmi-expense').addEventListener('input', function () {
-    this.setAttribute('data-manual', 'true'); // Mark as manually updated
-  });
-
-  // Add a listener to detect manual changes to the PMI input
-  document.getElementById('pmi-expense').addEventListener('input', function () {
-    this.setAttribute('data-manual', 'true'); // Mark as manually updated
+  // Add listeners to chart label inputs to dynamically update chart
+  ['value-property-tax', 'value-pmi', 'value-hoa'].forEach(function (id) {
+    var input = document.getElementById(id);
+    if (input) {
+      input.addEventListener('input', function () {
+        input.setAttribute('data-manual', 'true'); // Mark as manually updated
+        calculateAndDisplayResults(); // Recalculate results
+      });
+    }
   });
 
   // Amortization chart
@@ -487,7 +460,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ctx.fill();
   }
 
-  // Doughnut chart
+  // Doughnut Chart
   function updateDoughnutChart(principalAndInterest, propertyTax, pmi, hoa) {
     var ctx = mortgageChartCanvas.getContext('2d');
     var size = 400; // Canvas size
@@ -552,9 +525,38 @@ document.addEventListener("DOMContentLoaded", function () {
     // Draw total amount in the center
     ctx.fillText(formattedTotal, centerX, centerY);
 
-    // Always call the chart label update function
-    updateDoughnutLabels(principalAndInterest, propertyTax, pmi, hoa);
+    // Update labels dynamically
+    updateChartLabels(principalAndInterest, propertyTax, pmi, hoa);
     console.log("Doughnut chart updated with formatted total price and labels.");
+  }
+
+  //Chart Labels
+  function updateChartLabels(principalAndInterest, propertyTax, pmi, hoa) {
+    // Update Principal & Interest
+    var principalValueElement = document.getElementById('value-principal-interest');
+    if (principalValueElement) {
+      principalValueElement.textContent = "$".concat(Math.ceil(principalAndInterest).toLocaleString());
+    }
+
+    // Update Property Tax, PMI, and HOA only if not manually overridden
+    var inputs = [{
+      id: 'value-property-tax',
+      value: propertyTax
+    }, {
+      id: 'value-pmi',
+      value: pmi
+    }, {
+      id: 'value-hoa',
+      value: hoa
+    }];
+    inputs.forEach(function (_ref) {
+      var id = _ref.id,
+        value = _ref.value;
+      var input = document.getElementById(id);
+      if (input && !input.hasAttribute('data-manual')) {
+        input.value = Math.ceil(value).toLocaleString();
+      }
+    });
   }
 
   // Reset functionality
@@ -566,26 +568,18 @@ document.addEventListener("DOMContentLoaded", function () {
     loanTermInput.value = defaultValues.loanTerm;
     interestRateInput.value = '';
     extraPaymentInput.value = '';
-    propertyTaxInput.value = '';
-    hoaExpenseInput.value = '';
 
-    // Reset PMI to the calculated value
-    var homePrice = parseFloat(homePriceInput.value) || defaultValues.homePrice;
-    var downPaymentAmount = parseFloat(downPaymentAmountInput.value) || defaultValues.downPaymentAmount;
-    var downPaymentPercentage = downPaymentAmount / homePrice * 100;
-    if (downPaymentPercentage < 20) {
-      var annualPMI = homePrice * 0.0085; // 0.85% of loan amount
-      var monthlyPMI = Math.ceil(annualPMI / 12); // Round up to nearest dollar
-      pmiExpenseInput.value = monthlyPMI;
-      pmiExpenseInput.removeAttribute('data-manual'); // Remove manual override
-    } else {
-      pmiExpenseInput.value = '';
-      pmiExpenseInput.removeAttribute('data-manual'); // Reset manual flag
-    }
+    // Reset Property Tax, PMI, and HOA to placeholder values
+    propertyTaxInput.value = propertyTaxInput.placeholder || '';
+    pmiExpenseInput.value = pmiExpenseInput.placeholder || '';
+    hoaExpenseInput.value = hoaExpenseInput.placeholder || '';
+
+    // Ensure PMI manual override flag is removed
+    pmiExpenseInput.removeAttribute('data-manual');
 
     // Recalculate results using the default or blank inputs
     calculateAndDisplayResults();
-    console.log("Inputs reset and PMI recalculated.");
+    console.log("Inputs reset to placeholder values, and calculations refreshed.");
   }
 
   // Event listeners
@@ -594,33 +588,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initial calculation
   calculateAndDisplayResults();
-  function updateDoughnutLabels(principalAndInterest, propertyTax, pmi, hoa) {
-    var labelsContainer = document.getElementById('chartLabels');
-    labelsContainer.innerHTML = ''; // Clear existing labels
 
-    var data = [principalAndInterest, propertyTax, pmi, hoa];
-    var labels = ['Principal & Interest', 'Property Tax', 'PMI', 'HOA'];
-    var colors = ['#175134', '#3EB721', '#91BBA6', '#B3D4C2'];
-    data.forEach(function (value, index) {
-      var labelItem = document.createElement('div');
-      labelItem.classList.add('label-item');
-      var colorCircle = document.createElement('span');
-      colorCircle.classList.add('color-circle');
-      colorCircle.style.backgroundColor = colors[index];
-      var labelName = document.createElement('span');
-      labelName.classList.add('label-name');
-      labelName.textContent = labels[index];
-      var labelValue = document.createElement('span');
-      labelValue.classList.add('label-value');
-      labelValue.textContent = "$".concat(formatter.format(Math.ceil(value))); // Round up here
-
-      labelItem.appendChild(colorCircle);
-      labelItem.appendChild(labelName);
-      labelItem.appendChild(labelValue);
-      labelsContainer.appendChild(labelItem);
-    });
-    console.log("Doughnut labels updated with rounded values.");
-  }
+  // Show Tab
   function showTab(tabName) {
     var tabs = document.querySelectorAll('.tab-content');
     var navButtons = document.querySelectorAll('.results-tab');
@@ -741,87 +710,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initialize expand/collapse logic
     initializeExpandCollapseLogic();
   }
-
-  // function initializeExpandCollapseLogic() {
-  //     const expandBox = document.querySelector(".expand-box");
-  //     const amortizationTableBody = document.getElementById("amortization-table-body");
-  //     const amortizationScheduleContainer = document.getElementById("amortization-schedule");
-  //     const expandText = document.querySelector(".expand-text");
-
-  //     if (!expandBox || !amortizationTableBody || !expandText || !amortizationScheduleContainer) {
-  //         console.error("Expand/Collapse elements not found.");
-  //         return;
-  //     }
-
-  //     console.log("Expand/Collapse Logic Initialized");
-
-  //     // Ensure the amortization schedule container is visible
-  //     amortizationScheduleContainer.style.display = "block";
-
-  //     expandBox.addEventListener("click", function () {
-  //         const rows = Array.from(amortizationTableBody.rows); // Refresh rows dynamically
-  //         const isExpanded = expandText.textContent === "Expand";
-
-  //         console.log(`Expand box clicked. Current state: ${isExpanded ? "Expanding" : "Collapsing"}`);
-
-  //         // Toggle row visibility
-  //         rows.forEach((row, index) => {
-  //             row.style.display = isExpanded || index < 3 ? "table-row" : "none";
-  //         });
-
-  //         // Update the expand/collapse text
-  //         expandText.textContent = isExpanded ? "Collapse" : "Expand";
-  //     });
-
-  //     // Set initial state: Show only the first three rows
-  //     const rows = Array.from(amortizationTableBody.rows);
-  //     rows.forEach((row, index) => {
-  //         row.style.display = index < 3 ? "table-row" : "none";
-  //     });
-  // }
-
-  // function initializeExpandCollapseLogic() {
-  //     const expandBox = document.querySelector(".expand-box");
-  //     const amortizationScheduleContainer = document.getElementById("amortization-schedule");
-  //     const expandText = document.querySelector(".expand-text");
-  //     const tableBody = document.getElementById("amortization-table-body");
-  //     const rows = Array.from(tableBody.rows);
-
-  //     if (!expandBox || !amortizationScheduleContainer || !expandText) {
-  //         console.error("Expand/Collapse elements not found.");
-  //         return;
-  //     }
-
-  //     console.log("Expand/Collapse Logic Initialized");
-
-  //     expandBox.addEventListener("click", function () {
-  //         const isExpanded = expandText.textContent === "Expand";
-
-  //         if (isExpanded) {
-  //             // Expand: Show the first 10 rows and make the container scrollable
-  //             amortizationScheduleContainer.style.maxHeight = "300px"; // Limit the height
-  //             amortizationScheduleContainer.style.overflowY = "auto"; // Enable scroll
-  //             rows.forEach((row, index) => {
-  //                 row.style.display = index < 10 ? "table-row" : "none"; // Show the first 10 rows
-  //             });
-  //             expandText.textContent = "Collapse";
-  //         } else {
-  //             // Collapse: Show only the first 3 rows, hide the rest
-  //             amortizationScheduleContainer.style.maxHeight = "300px"; // Keep container height
-  //             amortizationScheduleContainer.style.overflowY = "hidden"; // Hide scroll
-  //             rows.forEach((row, index) => {
-  //                 row.style.display = index < 3 ? "table-row" : "none"; // Show only the first 3 rows
-  //             });
-  //             expandText.textContent = "Expand";
-  //         }
-  //     });
-
-  //     // Initial state: Show only the first 3 rows
-  //     rows.forEach((row, index) => {
-  //         row.style.display = index < 3 ? "table-row" : "none";
-  //     });
-  // }
-
   function initializeExpandCollapseLogic() {
     var expandBox = document.querySelector(".expand-box");
     var amortizationScheduleContainer = document.getElementById("amortization-schedule");
@@ -1385,4 +1273,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=mortgage-calculator.f342270a729308ccf94a.js.map
+//# sourceMappingURL=mortgage-calculator.ac555ad33e6b963fb576.js.map
