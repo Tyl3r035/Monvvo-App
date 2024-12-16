@@ -50,6 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./icons/close-black.svg": [
+		481,
+		481
+	],
 	"./icons/close-icon.svg": [
 		7259,
 		259
@@ -57,6 +61,10 @@ var map = {
 	"./icons/dollar.svg": [
 		1867,
 		867
+	],
+	"./icons/double-arrow-black.svg": [
+		6608,
+		608
 	],
 	"./icons/down-arrow.svg": [
 		9749,
@@ -207,7 +215,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + "." + {"5":"783e76ea13c00437d521","259":"7be279d049f745f2fd25","397":"d67032c4bd1ad636d6b6","730":"10b1f964bfbcc15a9aeb","749":"bb5c0f697c2e985e9490","805":"113374e6a7cb45c04ad9","830":"25092cecf7e3f2672899","843":"ee906024d82bed614358","867":"4413282f4ba2ff892749","974":"25dbcf67430104be2b34","991":"6c46db5e81a3f635e763"}[chunkId] + ".js";
+/******/ 			return "" + chunkId + "." + {"5":"783e76ea13c00437d521","259":"7be279d049f745f2fd25","397":"d67032c4bd1ad636d6b6","481":"2537d9650ee66ec63acb","608":"c86a29cf44138b6f51b0","730":"10b1f964bfbcc15a9aeb","749":"bb5c0f697c2e985e9490","805":"113374e6a7cb45c04ad9","830":"25092cecf7e3f2672899","843":"ee906024d82bed614358","867":"4413282f4ba2ff892749","974":"25dbcf67430104be2b34","991":"6c46db5e81a3f635e763"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -388,4 +396,4 @@ module.exports = webpackAsyncContext;
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=main.ed493d85f72b58f06c76.js.map
+//# sourceMappingURL=main.0d9c73871f345ac385d7.js.map
