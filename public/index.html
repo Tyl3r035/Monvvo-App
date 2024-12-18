@@ -28,7 +28,39 @@
 
     <!-- Full Font Stylesheets (Non-Critical) -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap">
-</head>
+
+    <!-- Schema Code -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Monvvo Mortgage Calculator",
+        "url": "https://www.monvvo.com",
+        "operatingSystem": "All",
+        "applicationCategory": "FinancialApplication",
+        "description": "The Monvvo Mortgage Calculator helps you estimate monthly payments, total interest, and loan affordability with ease.",
+        "featureList": [
+          "Monthly payment calculations",
+          "Total interest estimation",
+          "Loan term customization",
+          "Amortization schedule"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Monvvo",
+          "url": "https://www.monvvo.com"
+        }
+      }
+      </script>
+      
+
+  </head>
 <body>
   <header id="header">
     <div class="logo">
@@ -52,7 +84,10 @@
               </div>
             </div>
             <div class="input-box down-payment-box">
-              <label for="down-payment-amount">Down Payment</label>
+              <div class="input-top">
+                <label for="down-payment-amount">Down Payment</label>
+                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the amount you plan to pay upfront for the home. If your down payment is less than 20% of the home price, you may be required to pay for Private Mortgage Insurance (PMI)." loading="lazy">
+            </div>
               <div class="multiple-inputs">
                 <div class="input-left">
                   <div class="input-content">
@@ -79,8 +114,7 @@
             <div class="input-box loan-term-box">
               <div class="input-top">
                 <label for="loan-term">Loan Term</label>
-                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the length of time (in years) over which you plan to repay the mortgage loan." loading="lazy">
-  
+                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Select the length of time (in years) over which you plan to repay the mortgage loan." loading="lazy">
               </div>
               <div class="input-bottom">
                 <div class="input-inner">
@@ -116,7 +150,10 @@
               </div>
           </div>
             <div class="input-box mortgage-extra-box">
-              <label for="extra-payment">Extra Payment</label>
+              <div class="input-top">
+                <label for="extra-payment">Extra Payment</label>
+                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter any extra amount you plan to pay each month toward the loan. This will be added to your monthly payment, helping reduce the loan balance faster and save on interest." loading="lazy">
+            </div>
               <div class="input-fluid">
                   <div class="input-content">
                       <img src="./img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">

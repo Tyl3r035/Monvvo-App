@@ -81,7 +81,7 @@ body,html{
   left: 0;
   right: 0;
   display: flex;
-  padding: 14px 145px;
+  padding: 14px 80px;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
@@ -211,7 +211,7 @@ body,html{
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  color: #6C6C70;
+  color: #616164;
 }
 .input-fluid{
   display: flex;
@@ -251,9 +251,12 @@ body,html{
   outline: none;
   height: 24px !important;
 }
+.input-box select{
+  padding-left: 10px;
+}
 .input-box input::placeholder{
   color: #232525;
-  opacity: .8;
+  opacity: .9;
 }
 .input-box .input-text{
   font-family: 'Roboto', sans-serif;
@@ -1921,4 +1924,4 @@ select {
   }
 }
 
-/*# sourceMappingURL=styles.ab1214c0cf855cc1af89.css.map*/
+/*# sourceMappingURL=styles.8fc5824ae8358366f261.css.map*/

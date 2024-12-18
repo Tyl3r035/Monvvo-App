@@ -28,7 +28,39 @@
 
     <!-- Full Font Stylesheets (Non-Critical) -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap">
-<script defer src="/main.0d9c73871f345ac385d7.js"></script><script defer src="/generalCalcs.5795ab1851535377dfbe.js"></script><script defer src="/jspdf.1449be6428a83f7b1749.js"></script><script defer src="/vendors.adbba0be25ae0a7b97a4.js"></script><script defer src="/mortgage-calculator.ac555ad33e6b963fb576.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><link href="/styles.ab1214c0cf855cc1af89.css" rel="stylesheet"></head>
+
+    <!-- Schema Code -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Monvvo Mortgage Calculator",
+        "url": "https://www.monvvo.com",
+        "operatingSystem": "All",
+        "applicationCategory": "FinancialApplication",
+        "description": "The Monvvo Mortgage Calculator helps you estimate monthly payments, total interest, and loan affordability with ease.",
+        "featureList": [
+          "Monthly payment calculations",
+          "Total interest estimation",
+          "Loan term customization",
+          "Amortization schedule"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Monvvo",
+          "url": "https://www.monvvo.com"
+        }
+      }
+      </script>
+      
+
+  <script defer src="/main.4c7694a3fca28c9a4e0a.js"></script><script defer src="/generalCalcs.5795ab1851535377dfbe.js"></script><script defer src="/jspdf.1449be6428a83f7b1749.js"></script><script defer src="/vendors.adbba0be25ae0a7b97a4.js"></script><script defer src="/mortgage-calculator.ac555ad33e6b963fb576.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><link href="/styles.8fc5824ae8358366f261.css" rel="stylesheet"></head>
 <body>
   <header id="header">
     <div class="logo">
@@ -52,7 +84,10 @@
               </div>
             </div>
             <div class="input-box down-payment-box">
-              <label for="down-payment-amount">Down Payment</label>
+              <div class="input-top">
+                <label for="down-payment-amount">Down Payment</label>
+                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the amount you plan to pay upfront for the home. If your down payment is less than 20% of the home price, you may be required to pay for Private Mortgage Insurance (PMI)." loading="lazy">
+            </div>
               <div class="multiple-inputs">
                 <div class="input-left">
                   <div class="input-content">
@@ -79,8 +114,7 @@
             <div class="input-box loan-term-box">
               <div class="input-top">
                 <label for="loan-term">Loan Term</label>
-                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the length of time (in years) over which you plan to repay the mortgage loan." loading="lazy">
-  
+                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Select the length of time (in years) over which you plan to repay the mortgage loan." loading="lazy">
               </div>
               <div class="input-bottom">
                 <div class="input-inner">
@@ -116,7 +150,10 @@
               </div>
           </div>
             <div class="input-box mortgage-extra-box">
-              <label for="extra-payment">Extra Payment</label>
+              <div class="input-top">
+                <label for="extra-payment">Extra Payment</label>
+                <img src="./img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter any extra amount you plan to pay each month toward the loan. This will be added to your monthly payment, helping reduce the loan balance faster and save on interest." loading="lazy">
+            </div>
               <div class="input-fluid">
                   <div class="input-content">
                       <img src="./img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
