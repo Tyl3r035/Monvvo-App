@@ -468,7 +468,19 @@ function calculateAndDisplayResults() {
     
 
     // Event listeners
-    updateBtn.addEventListener('click', calculateAndDisplayResults);
+    // updateBtn.addEventListener('click', calculateAndDisplayResults);
+
+        updateBtn.addEventListener('click', function() {
+            // Track the Google Ads conversion event
+            gtag('event', 'conversion', {
+                'send_to': 'AW-11495710624/WkaLCNPA6_kZEKC_yukq'
+            });
+
+            // Call the existing calculation function
+            calculateAndDisplayResults();
+        });
+
+
     resetBtn.addEventListener('click', resetInputs);
 
     // Initial calculation
