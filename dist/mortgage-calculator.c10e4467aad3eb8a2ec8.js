@@ -583,12 +583,25 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Event listeners
-  // updateBtn.addEventListener('click', calculateAndDisplayResults);
+  // updateBtn.addEventListener('click', function() {
+  // // Track the Google Ads conversion event
+  // gtag('event', 'conversion', {
+  //     'send_to': 'AW-11495710624/WkaLCNPA6_kZEKC_yukq'
+  // });
+
+  //     // Call the existing calculation function
+  //     calculateAndDisplayResults();
+  // });
 
   updateBtn.addEventListener('click', function () {
     // Track the Google Ads conversion event
     gtag('event', 'conversion', {
       'send_to': 'AW-11495710624/WkaLCNPA6_kZEKC_yukq'
+    });
+
+    // Send event to Google Analytics 4
+    gtag('event', 'Update_Btn_Click', {
+      'button_type': 'update' // Optional parameter
     });
 
     // Call the existing calculation function
@@ -1283,4 +1296,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=mortgage-calculator.c7d0bec062ed054bfbf1.js.map
+//# sourceMappingURL=mortgage-calculator.c10e4467aad3eb8a2ec8.js.map

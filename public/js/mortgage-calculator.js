@@ -468,18 +468,32 @@ function calculateAndDisplayResults() {
     
 
     // Event listeners
-    // updateBtn.addEventListener('click', calculateAndDisplayResults);
+        // updateBtn.addEventListener('click', function() {
+            // // Track the Google Ads conversion event
+            // gtag('event', 'conversion', {
+            //     'send_to': 'AW-11495710624/WkaLCNPA6_kZEKC_yukq'
+            // });
 
-        updateBtn.addEventListener('click', function() {
+        //     // Call the existing calculation function
+        //     calculateAndDisplayResults();
+        // });
+
+
+        updateBtn.addEventListener('click', function () {
             // Track the Google Ads conversion event
             gtag('event', 'conversion', {
                 'send_to': 'AW-11495710624/WkaLCNPA6_kZEKC_yukq'
             });
-
+            
+            // Send event to Google Analytics 4
+            gtag('event', 'Update_Btn_Click', {
+                'button_type': 'update' // Optional parameter
+            });
+        
             // Call the existing calculation function
             calculateAndDisplayResults();
         });
-
+        
 
     resetBtn.addEventListener('click', resetInputs);
 
