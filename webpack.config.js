@@ -43,6 +43,12 @@ const pages = [
         canonical: 'https://www.monvvo.com/widgets/mortgage-widget',
     },
     {
+        filename: 'private-mortgage-insurance.html',
+        template: path.resolve(__dirname, 'public/articles/mortgage/private-mortgage-insurance.html'),
+        chunks: ['main', 'utils'], // Exclude calculator-specific scripts
+        canonical: 'https://www.monvvo.com/articles/mortgage/private-mortgage-insurance',
+    },
+    {
         filename: '404.html',
         template: path.resolve(__dirname, 'public/404.html'),
         chunks: ['main'], // Minimal or no chunks
@@ -132,6 +138,9 @@ module.exports = {
                 { from: 'public/js', to: 'js' },
                 { from: 'public/js/service-worker.js', to: 'service-worker.js' },
                 { from: 'public/widgets', to: 'widgets' },
+                { from: 'public/articles', to: 'articles' },
+                { from: 'public/articles/mortgage', to: 'mortgage' },
+                
                 { from: '_headers', to: '_headers', toType: 'file' },
                 { from: '_redirects', to: '_redirects', toType: 'file' },
                 { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' },

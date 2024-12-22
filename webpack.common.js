@@ -61,6 +61,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './public/widgets/mortgage-widget.html',
             filename: 'mortgage-widget.html',
-        }),            
+        }),
+        // Mortgage Articles
+        new HtmlWebpackPlugin({
+            template: './public/articles/mortgage/private-mortgage-insurance.html',
+            filename: 'private-mortgage-insurance.html',
+        }),        
     ],
 };
