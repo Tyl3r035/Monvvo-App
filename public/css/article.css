@@ -67,7 +67,7 @@ body,html{
     line-height: normal;
     color: #000;
     align-self: stretch;
-    margin: 0 35px;
+    padding: 0 35px;
     width: 75%;
 }
 .article-publish{
@@ -96,7 +96,7 @@ body,html{
     padding: 70px;
     border-right: 0.5px solid #e4e4e4;
     flex-shrink: 1;
-    width: auto;
+    width: 100%;
 }
 #table-of-contents-section{
     position: sticky;
@@ -207,9 +207,13 @@ body,html{
 }
 #article-section a{
     color: #20894D;
-}
-
-
+    word-wrap: break-word; /* Allows the link to break onto the next line */
+    overflow-wrap: anywhere; /* Ensures breaking happens at allowed characters */
+  }
+  
+  a::before {
+    content: ""; /* Prevent pseudo-elements or spacing issues */
+  }
 
 
 
@@ -231,23 +235,35 @@ body,html{
 /* Media Queries */
 
 @media screen and (max-width: 850px){
+    #title-section{
+        min-height: auto;
+        margin: 30px auto;
+    }
+    #title{
+        width: 100%;
+    }
+    .article-publish{
+        font-size: 16px;
+    }
     #table-of-contents-section{
         display: none;
     }
-}
-  @media screen and (max-width: 500px){
-    #main{
-      margin-top: 100px;
+    #article-section{
+        padding: 20px;
     }
+}
+@media screen and (max-width: 750px){
     #title{
       font-family: 'Roboto', sans-serif;
-      font-size: 32px;
-    }
-}
-
-
-@media screen and (max-width: 430px){
-    #title{
       font-size: 24px;
     }
+    .article-publish{
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 500px){
+    #main{
+        margin-top: 20px;
+    }
+
 }
