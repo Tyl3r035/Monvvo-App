@@ -1,0 +1,253 @@
+*{
+    box-sizing: border-box;
+  }  
+body,html{
+    display: flex;
+    flex-direction: column;
+    background-color: #F6F4F2;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+  /* Header CSS */
+#header{
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    padding: 14px 80px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    border-bottom: .5px solid #8D8D91;
+    height: 50px;
+    background-color: #F6F4F2;
+    z-index: 999;
+}
+.logo{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5.984px;
+}
+.logo .monvvo-logo{
+    width: 127.2px;
+    height: 19.2px;
+}
+
+  /* Main CSS */
+#main{
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0 auto;
+    width: 100%;
+}
+#title-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 300px;
+    background: transparent;
+}
+#title{
+    font-family: "Times New Roman", serif;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    color: #000;
+    align-self: stretch;
+    margin: 0 35px;
+    width: 75%;
+}
+.article-publish{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+    padding-left: 45px;
+}
+
+.article-fluid{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    overflow: visible;
+}
+
+  /* Main Section CSS */
+#article-section{
+    background-color: #fff;
+    padding: 70px;
+    border-right: 0.5px solid #e4e4e4;
+    flex-shrink: 1;
+    width: auto;
+}
+#table-of-contents-section{
+    position: sticky;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-grow: 1;
+    padding: 25px 15px 25px 20px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 25%;
+    height: auto;
+    min-width: 350px;
+}
+
+
+.toc-title{
+    font-family: 'Times New Roman', serif;
+    font-size: 32px;
+    font-weight: 800;
+    width: 100%;
+    color: #232525;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.toc-inner{
+    margin-top: 25px;
+    padding: 0 20px;
+    width: 100%;
+}
+.toc-heading{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0;
+    margin: 0 0 0 25px;
+    cursor: pointer;
+}
+.toc-circle{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1.5px solid #000;
+    background: transparent;
+    margin-right: 15px;
+}
+.toc-circle-active{
+    background-color: #000;
+}
+.toc-heading a{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 8px 0 !important;
+    color: #232525;
+    text-decoration: none;
+}
+.toc-heading a:hover{
+    transition: .3s ease-in-out;
+    color: #333535;
+}
+
+
+
+/* Article CSS */
+.article-title{
+    font-family: "Roboto", sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: #232525;
+    line-height: 1.1em;
+}
+.article-subtitle{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #232525;
+    line-height: 1.1em;
+}
+.list-title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #232525;
+    margin-bottom: 10px;
+}
+#article-section ul, #article-section ol{
+    margin-top: 0 !important;
+}
+#article-section li{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 25px;
+}
+.article-text{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: 400;
+    color: #232525;
+    padding-bottom: 10px;
+}
+.article-bold{
+    font-weight: 500;
+}
+#article-section a{
+    color: #20894D;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Media Queries */
+
+@media screen and (max-width: 850px){
+    #table-of-contents-section{
+        display: none;
+    }
+}
+  @media screen and (max-width: 500px){
+    #main{
+      margin-top: 100px;
+    }
+    #title{
+      font-family: 'Roboto', sans-serif;
+      font-size: 32px;
+    }
+}
+
+
+@media screen and (max-width: 430px){
+    #title{
+      font-size: 24px;
+    }
+}

@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "glob": "^11.0.0",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.4"
   }
