@@ -269,13 +269,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   function calculateAndDisplayResults() {
     console.log("Calculating and displaying results...");
-
-    // Fetch main input values
     var homePrice = parseFloat(document.getElementById('home-price').value.replace(/,/g, '')) || defaultValues.homePrice;
     var downPaymentAmount = parseFloat(document.getElementById('down-payment-amount').value.replace(/,/g, '')) || defaultValues.downPaymentAmount;
     var downPaymentPercentage = downPaymentAmount / homePrice * 100;
-
-    // Validate down payment
     if (downPaymentAmount >= homePrice) {
       console.warn("Down payment is 100% or more of the home price. Calculation skipped.");
       alert("Your down payment exceeds or equals the home price. Please adjust your inputs.");
@@ -284,24 +280,22 @@ document.addEventListener("DOMContentLoaded", function () {
     var loanTerm = parseInt(document.getElementById('loan-term').value, 10) || defaultValues.loanTerm;
     var interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 || defaultValues.interestRate / 100;
     var extraPayment = parseFloat(document.getElementById('extra-payment').value.replace(/,/g, '')) || defaultValues.extraPayment;
-
-    // Fetch values directly from chart label inputs or use placeholders
-    var propertyTaxInput = document.getElementById('value-property-tax');
-    var pmiInput = document.getElementById('value-pmi');
-    var hoaInput = document.getElementById('value-hoa');
-    var propertyTax = parseFloat(propertyTaxInput.value.replace(/,/g, '')) || parseFloat(propertyTaxInput.placeholder.replace(/,/g, '')) || 0;
-    var pmiExpense = parseFloat(pmiInput.value.replace(/,/g, '')) || parseFloat(pmiInput.placeholder.replace(/,/g, '')) || 0;
-    var hoaExpense = parseFloat(hoaInput.value.replace(/,/g, '')) || parseFloat(hoaInput.placeholder.replace(/,/g, '')) || 0;
-
-    // Log values for debugging
-    console.log("Chart Labels as Inputs:");
-    console.log("Property Tax: ".concat(propertyTax, ", PMI: ").concat(pmiExpense, ", HOA: ").concat(hoaExpense));
-
-    // Calculate principal
+    var propertyTax = parseFloat(document.getElementById('value-property-tax').value.replace(/,/g, '')) || 0;
+    var pmiExpense = parseFloat(document.getElementById('value-pmi').value.replace(/,/g, '')) || 0;
+    var hoaExpense = parseFloat(document.getElementById('value-hoa').value.replace(/,/g, '')) || 0;
+    console.log("Inputs:", {
+      homePrice: homePrice,
+      downPaymentAmount: downPaymentAmount,
+      loanTerm: loanTerm,
+      interestRate: interestRate,
+      extraPayment: extraPayment,
+      propertyTax: propertyTax,
+      pmiExpense: pmiExpense,
+      hoaExpense: hoaExpense
+    });
     var principal = homePrice - downPaymentAmount;
-
-    // Generate amortization data
     var amortizationData = calculateAmortizationSchedule(principal, interestRate, loanTerm * 12, extraPayment);
+    console.log("Generated amortization data:", amortizationData);
     if (!amortizationData || !amortizationData.schedule.length) {
       console.error("Invalid amortization data. Calculation aborted.");
       return;
@@ -309,21 +303,14 @@ document.addEventListener("DOMContentLoaded", function () {
     lastAmortizationData = _objectSpread(_objectSpread({}, amortizationData), {}, {
       periodicPrincipalAndInterest: Math.ceil(amortizationData.schedule[0].principal + amortizationData.schedule[0].interest)
     });
+    console.log("Updated lastAmortizationData:", lastAmortizationData);
     var monthlyPrincipalAndInterest = lastAmortizationData.periodicPrincipalAndInterest;
-
-    // Update the doughnut chart
     updateDoughnutChart(monthlyPrincipalAndInterest, propertyTax, pmiExpense, hoaExpense);
-
-    // Update amortization labels
     updateAmortizationLabels(Math.ceil(amortizationData.totalInterestPaid), Math.ceil(amortizationData.totalPrincipalPaid), Math.ceil(amortizationData.schedule.reduce(function (sum, row) {
       return sum + row.principal + row.interest;
     }, 0)));
-
-    // Draw amortization chart
-    drawAmortizationChart(amortizationData.balanceData, amortizationData.cumulativeInterestData, amortizationData.cumulativePrincipalData, 0 // Default hover index
-    );
-
-    // Set hover date to the first month
+    drawAmortizationChart(amortizationData.balanceData, amortizationData.cumulativeInterestData, amortizationData.cumulativePrincipalData, 0);
+    populateAmortizationTable(lastAmortizationData);
     var firstMonthDate = new Date();
     displayHoverDate(firstMonthDate);
     console.log("Results calculated and displayed.");
@@ -1296,4 +1283,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=mortgage-calculator.c10e4467aad3eb8a2ec8.js.map
+//# sourceMappingURL=mortgage-calculator.ee8e444e4c3a79ff5645.js.map

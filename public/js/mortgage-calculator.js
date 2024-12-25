@@ -98,17 +98,13 @@ homePriceInput.addEventListener('input', function () {
 
 
 
-
-
 function calculateAndDisplayResults() {
     console.log("Calculating and displaying results...");
 
-    // Fetch main input values
     const homePrice = parseFloat(document.getElementById('home-price').value.replace(/,/g, '')) || defaultValues.homePrice;
     const downPaymentAmount = parseFloat(document.getElementById('down-payment-amount').value.replace(/,/g, '')) || defaultValues.downPaymentAmount;
     const downPaymentPercentage = (downPaymentAmount / homePrice) * 100;
 
-    // Validate down payment
     if (downPaymentAmount >= homePrice) {
         console.warn("Down payment is 100% or more of the home price. Calculation skipped.");
         alert("Your down payment exceeds or equals the home price. Please adjust your inputs.");
@@ -119,32 +115,16 @@ function calculateAndDisplayResults() {
     const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 || defaultValues.interestRate / 100;
     const extraPayment = parseFloat(document.getElementById('extra-payment').value.replace(/,/g, '')) || defaultValues.extraPayment;
 
-    // Fetch values directly from chart label inputs or use placeholders
-    const propertyTaxInput = document.getElementById('value-property-tax');
-    const pmiInput = document.getElementById('value-pmi');
-    const hoaInput = document.getElementById('value-hoa');
+    const propertyTax = parseFloat(document.getElementById('value-property-tax').value.replace(/,/g, '')) || 0;
+    const pmiExpense = parseFloat(document.getElementById('value-pmi').value.replace(/,/g, '')) || 0;
+    const hoaExpense = parseFloat(document.getElementById('value-hoa').value.replace(/,/g, '')) || 0;
 
-    const propertyTax = parseFloat(propertyTaxInput.value.replace(/,/g, '')) 
-        || parseFloat(propertyTaxInput.placeholder.replace(/,/g, '')) 
-        || 0;
+    console.log("Inputs:", { homePrice, downPaymentAmount, loanTerm, interestRate, extraPayment, propertyTax, pmiExpense, hoaExpense });
 
-    const pmiExpense = parseFloat(pmiInput.value.replace(/,/g, '')) 
-        || parseFloat(pmiInput.placeholder.replace(/,/g, '')) 
-        || 0;
-
-    const hoaExpense = parseFloat(hoaInput.value.replace(/,/g, '')) 
-        || parseFloat(hoaInput.placeholder.replace(/,/g, '')) 
-        || 0;
-
-    // Log values for debugging
-    console.log("Chart Labels as Inputs:");
-    console.log(`Property Tax: ${propertyTax}, PMI: ${pmiExpense}, HOA: ${hoaExpense}`);
-
-    // Calculate principal
     const principal = homePrice - downPaymentAmount;
 
-    // Generate amortization data
     const amortizationData = calculateAmortizationSchedule(principal, interestRate, loanTerm * 12, extraPayment);
+    console.log("Generated amortization data:", amortizationData);
 
     if (!amortizationData || !amortizationData.schedule.length) {
         console.error("Invalid amortization data. Calculation aborted.");
@@ -156,34 +136,32 @@ function calculateAndDisplayResults() {
         periodicPrincipalAndInterest: Math.ceil(amortizationData.schedule[0].principal + amortizationData.schedule[0].interest),
     };
 
+    console.log("Updated lastAmortizationData:", lastAmortizationData);
+
     const monthlyPrincipalAndInterest = lastAmortizationData.periodicPrincipalAndInterest;
 
-    // Update the doughnut chart
     updateDoughnutChart(monthlyPrincipalAndInterest, propertyTax, pmiExpense, hoaExpense);
 
-    // Update amortization labels
     updateAmortizationLabels(
         Math.ceil(amortizationData.totalInterestPaid),
         Math.ceil(amortizationData.totalPrincipalPaid),
         Math.ceil(amortizationData.schedule.reduce((sum, row) => sum + row.principal + row.interest, 0))
     );
 
-    // Draw amortization chart
     drawAmortizationChart(
         amortizationData.balanceData,
         amortizationData.cumulativeInterestData,
         amortizationData.cumulativePrincipalData,
-        0 // Default hover index
+        0
     );
 
-    // Set hover date to the first month
+    populateAmortizationTable(lastAmortizationData);
+
     const firstMonthDate = new Date();
     displayHoverDate(firstMonthDate);
 
     console.log("Results calculated and displayed.");
 }
-
-
 
 
 

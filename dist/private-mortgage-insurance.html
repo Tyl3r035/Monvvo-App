@@ -32,10 +32,46 @@
           <main id="main">
             <section id="title-section">
               <h1 id="title">Private Mortgage Insurance (PMI): What It Is, How It Works, and How to Save</h1>
-              <p class="article-publish">Published December 23<sup>rd</sup>, 2024.</p>
+              <p class="article-publish">Written December 23rd, 2024.</p>
+              <p class="article-read">15 min. Read</p>
             </section>
             <div class="article-fluid">
+              <section id="table-of-contents-section">
+                <div class="toc-container">
+                  <h2 class="toc-title">Table of Contents</h2>
+                  <div class="toc-inner">
+                    <h3 class="toc-heading">
+                      <a href="#introduction">Introduction</a>
+                    </h3>
+                    <h3 class="toc-heading">
+                      <a href="#what-is-pmi">What is PMI?</a>
+                    </h3>
+                    <h3 class="toc-heading">
+                      <a href="#types-of-pmi">Types of PMI</a>
+                    </h3>
+                    <h3 class="toc-heading">
+                      <a href="#pmi-cost-factors">PMI Cost & Factors</a>
+                    </h3>
+                    <h3 class="toc-heading">
+                      <a href="#pmi-strategies">PMI Strategies</a>
+                    </h3>
+                    <h3 class="toc-heading">
+                      <a href="#remove-pmi">How to Remove PMI</a>
+                    </h3>
+                    <h3 class="toc-heading">
+                      <a href="#pmi-vs-fha">PMI vs. FHA</a>
+                    </h3>
+                    <h3 class="toc-heading">
+                      <a href="#faq-pmi">PMI FAQs</a>
+                    </h3>
+                    <h3 class="toc-heading">
+                      <a href="#conclusion">Conclusion</a>
+                    </h3>
+                  </div>
+                </div>
+              </section>
               <section id="article-section">
+                <div class="article-inner">
                 <h2 id="introduction" class="article-title">Introduction</h2>
                 <p class="article-text">
                   Buying a home is a dream for many, but it often comes with the challenge of saving for a sizable down payment. For those unable to reach the traditional 20% threshold, Private Mortgage Insurance (PMI) offers a solution that can make homeownership a reality sooner rather than later.
@@ -479,87 +515,26 @@
                       </ul>
                     </li>
                   </ol>
-              </section>
-              <section id="table-of-contents-section">
-                <div class="toc-container">
-                  <h2 class="toc-title">Table of Contents</h2>
-                  <div class="toc-inner">
-                    <h3 class="toc-heading">
-                      <div class="toc-circle"></div>
-                      <a href="#introduction">Introduction</a>
-                    </h3>
-                    <h3 class="toc-heading">
-                      <div class="toc-circle"></div>
-                      <a href="#what-is-pmi">What is PMI?</a>
-                    </h3>
-                    <h3 class="toc-heading">
-                      <div class="toc-circle"></div>
-                      <a href="#types-of-pmi">Types of PMI</a>
-                    </h3>
-                    <h3 class="toc-heading">
-                      <div class="toc-circle"></div>
-                      <a href="#pmi-cost-factors">PMI Cost & Factors</a>
-                    </h3>
-                    <h3 class="toc-heading">
-                      <div class="toc-circle"></div>
-                      <a href="#pmi-strategies">PMI Strategies</a>
-                    </h3>
-                    <h3 class="toc-heading">
-                      <div class="toc-circle"></div>
-                      <a href="#remove-pmi">How to Remove PMI</a>
-                    </h3>
-                    <h3 class="toc-heading">
-                      <div class="toc-circle"></div>
-                      <a href="#pmi-vs-fha">PMI vs. FHA</a>
-                    </h3>
-                    <h3 class="toc-heading">
-                      <div class="toc-circle"></div>
-                      <a href="#faq-pmi">PMI FAQs</a>
-                    </h3>
-                    <h3 class="toc-heading">
-                      <div class="toc-circle"></div>
-                      <a href="#conclusion">Conclusion</a>
-                    </h3>
-                  </div>
                 </div>
               </section>
             </div>
           </main>
-           <script>
+          <script>
             document.addEventListener('DOMContentLoaded', () => {
-              const tocLinks = document.querySelectorAll('.toc-heading a');
-              const tocCircles = document.querySelectorAll('.toc-circle');
+              const tocHeadings = document.querySelectorAll('.toc-heading'); // Select the h3 elements
               const sections = document.querySelectorAll('#article-section h2');
               const offset = 40; // Offset in pixels
               let initialized = false; // Flag to avoid immediate observer triggers during initialization
           
-              // Function to update active TOC circle
+              // Function to update active TOC heading
               function setActiveTOC(index) {
-                tocCircles.forEach((circle, i) => {
+                tocHeadings.forEach((heading, i) => {
                   if (i === index) {
-                    circle.classList.add('toc-circle-active');
+                    heading.classList.add('toc-active');
                   } else {
-                    circle.classList.remove('toc-circle-active');
+                    heading.classList.remove('toc-active');
                   }
                 });
-              }
-          
-              // Function to determine the active section on page load
-              function setActiveOnPageLoad() {
-                let currentSectionIndex = -1;
-          
-                sections.forEach((section, index) => {
-                  const sectionTop = section.getBoundingClientRect().top - offset;
-                  if (sectionTop <= 0) {
-                    currentSectionIndex = index; // The last section above the offset
-                  }
-                });
-          
-                if (currentSectionIndex === -1) {
-                  currentSectionIndex = 0; // Default to the first section if none are above the offset
-                }
-          
-                setActiveTOC(currentSectionIndex);
               }
           
               // Intersection Observer to detect sections in viewport
@@ -577,7 +552,7 @@
                     // Find the index of the intersecting section
                     const index = Array.from(sections).indexOf(entry.target);
           
-                    // Set the active TOC circle
+                    // Set the active TOC heading
                     setActiveTOC(index);
                   }
                 });
@@ -589,10 +564,10 @@
               });
           
               // Smooth scroll to the target section on TOC link click
-              tocLinks.forEach((link, index) => {
-                link.addEventListener('click', (e) => {
+              tocHeadings.forEach((heading) => {
+                heading.querySelector('a').addEventListener('click', (e) => {
                   e.preventDefault();
-                  const targetId = link.getAttribute('href').substring(1);
+                  const targetId = heading.querySelector('a').getAttribute('href').substring(1);
                   const targetElement = document.getElementById(targetId);
           
                   // Scroll to the target section with offset
@@ -603,26 +578,14 @@
                     behavior: 'smooth',
                   });
           
-                  // Immediately set the clicked TOC link as active
-                  setActiveTOC(index);
+                  // DO NOT set the clicked TOC heading as active
+                  // Rely on the observer to handle activation
                 });
               });
           
-              // Set active section on page load
-              setActiveOnPageLoad();
-          
-              // Mark initialization as complete
+              // Initial update to mark the correct heading as active
               initialized = true;
             });
           </script>
-          
-          
-          
-
-
-
-
-
-
     </body>
 </html>
