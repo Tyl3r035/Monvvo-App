@@ -1,3 +1,4 @@
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -6,6 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
+
 const isProduction = process.env.NODE_ENV === 'production';
 
 // Define pages with templates and chunks
@@ -13,19 +15,19 @@ const pages = [
     {
         filename: 'index.html',
         template: path.resolve(__dirname, 'public/index.html'),
-        chunks: ['main', 'mortgage-calculator', 'generalCalcs', 'utils'],
+        chunks: ['main', 'mortgage-calculator', 'generalCalcs', 'utils'], // Include relevant chunks
         canonical: 'https://www.monvvo.com',
     },
     {
         filename: 'loan-calculator.html',
         template: path.resolve(__dirname, 'public/loan-calculator.html'),
-        chunks: ['main', 'loan-calculator', 'generalCalcs', 'utils'],
+        chunks: ['main', 'loan-calculator', 'generalCalcs','utils'], // Exclude unnecessary chunks
         canonical: 'https://www.monvvo.com/loan-calculator',
     },
     {
         filename: 'disclaimer.html',
         template: path.resolve(__dirname, 'public/disclaimer.html'),
-        chunks: ['main', 'utils'],
+        chunks: ['main', 'utils'], // Exclude unnecessary chunks
         canonical: 'https://www.monvvo.com/disclaimer',
     },
     {
@@ -37,23 +39,13 @@ const pages = [
     {
         filename: 'mortgage-widget.html',
         template: path.resolve(__dirname, 'public/widgets/mortgage-widget.html'),
-        chunks: ['main', 'utils'],
+        chunks: ['main', 'utils'], // Exclude calculator-specific scripts
         canonical: 'https://www.monvvo.com/widgets/mortgage-widget',
     },
     {
-        filename: 'private-mortgage-insurance.html',
-        template: path.resolve(__dirname, 'public/articles/mortgage/private-mortgage-insurance.html'),
-        chunks: ['main', 'utils'],
-        canonical: 'https://www.monvvo.com/articles/mortgage/private-mortgage-insurance',
-        templateParameters: {
-            publicPath: '/articles/mortgage/', // Custom publicPath
-        },
-    },
-    
-    {
         filename: '404.html',
         template: path.resolve(__dirname, 'public/404.html'),
-        chunks: ['main'],
+        chunks: ['main'], // Minimal or no chunks
         canonical: 'https://www.monvvo.com/404',
     },
     {
@@ -67,11 +59,16 @@ const pages = [
 module.exports = {
     mode: isProduction ? 'production' : 'development',
     entry: {
-        main: './public/js/index.js',
+        main: './public/js/index.js', // Main entry point
+        // General JS
         generalCalcs: './public/js/generalCalcs.js',
+        // Mortgage Calculator JS
         'mortgage-calculator': './public/js/mortgage-calculator.js',
+        // Loan Calculator JS
         'loan-calculator': './public/js/loan-calculator.js',
+        // Contact JS
         contact: './public/js/contact.js',
+        // Utils JS
         utils: './public/js/utils.js',
     },
     output: {
@@ -85,7 +82,10 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                ],
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
@@ -101,6 +101,7 @@ module.exports = {
             },
             {
                 test: /\.js$/i,
+                // exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -115,45 +116,31 @@ module.exports = {
         ...pages.map(page => new HtmlWebpackPlugin({
             filename: page.filename,
             template: page.template,
-            inject: true,
-            chunks: page.chunks,
+            inject: true, // Ensure CSS/JS is injected properly
+            chunks: page.chunks, // Include only relevant chunks
             minify: isProduction,
             canonical: page.canonical,
-            templateParameters: {
-                publicPath: page.templateParameters?.publicPath || '/', // Pass the custom publicPath
-            },
         })),
-        
-        
-        
-
-
+        // new BundleAnalyzerPlugin(),
         new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].css',
+            filename: '[name].[contenthash].css', // Ensure CSS is hashed for cache busting
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: path.resolve(__dirname, 'public/img'), to: 'img' },
-                { from: path.resolve(__dirname, 'public/css'), to: 'css' },
-                { from: path.resolve(__dirname, 'public/js'), to: 'js' },
-                { from: path.resolve(__dirname, 'public/js/service-worker.js'), to: 'service-worker.js' },
-                { from: path.resolve(__dirname, 'public/widgets'), to: 'widgets' },
-                {
-                    from: path.resolve(__dirname, 'public/articles'),
-                    to: 'articles',
-                    globOptions: {
-                        ignore: [], // Allow all files
-                    },
-                    noErrorOnMissing: true,
-                },                
-                { from: path.resolve(__dirname, '_headers'), to: '_headers', toType: 'file' },
-                { from: path.resolve(__dirname, '_redirects'), to: '_redirects', toType: 'file' },
-                { from: path.resolve(__dirname, 'public/sitemap.xml'), to: 'sitemap.xml', toType: 'file' },
-                { from: path.resolve(__dirname, 'ads.txt'), to: 'ads.txt', toType: 'file' },
-                { from: path.resolve(__dirname, 'robots.txt'), to: 'robots.txt', toType: 'file' },
+                { from: 'public/img', to: 'img' },
+                { from: 'public/css', to: 'css' },
+                { from: 'public/js', to: 'js' },
+                { from: 'public/js/service-worker.js', to: 'service-worker.js' },
+                { from: 'public/widgets', to: 'widgets' },
+                { from: '_headers', to: '_headers', toType: 'file' },
+                { from: '_redirects', to: '_redirects', toType: 'file' },
+                { from: 'public/sitemap.xml', to: 'sitemap.xml', toType: 'file' },
+                { from: 'ads.txt', to: 'ads.txt', toType: 'file' },
+                { from: 'robots.txt', to: 'robots.txt', toType: 'file' },
             ],
         }),
     ],
+
     optimization: {
         minimize: isProduction,
         minimizer: [
@@ -168,17 +155,20 @@ module.exports = {
         splitChunks: {
             chunks: 'all',
             cacheGroups: {
+                // Existing styles cache group
                 styles: {
                     name: 'styles',
                     test: /\.css$/,
                     chunks: 'all',
                     enforce: true,
                 },
+                // New cache group for jsPDF and related libraries
                 jsPDFVendor: {
                     test: /[\\/]node_modules[\\/](jspdf|jspdf-autotable|fflate)[\\/]/,
                     name: 'jspdf',
                     chunks: 'all',
                 },
+                // Additional cache group for shared vendor libraries
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
@@ -187,7 +177,7 @@ module.exports = {
                 },
             },
         },
-    },
+    },    
     devServer: {
         static: {
             directory: path.join(__dirname, 'dist'),

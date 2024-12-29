@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Tyler P.">
     <meta name="description" content="Use our free Mortgage Calculator by monthly payment to estimate your mortgage payments. Easily calculate your monthly payments, explore different scenarios, and find the best loan options for home buyers and refinancers.">
@@ -82,7 +81,7 @@
       
       
 
-  <script defer src="/main.65f8dc366c95e4f21808.js"></script><script defer src="/generalCalcs.5795ab1851535377dfbe.js"></script><script defer src="/jspdf.1449be6428a83f7b1749.js"></script><script defer src="/vendors.adbba0be25ae0a7b97a4.js"></script><script defer src="/mortgage-calculator.ee8e444e4c3a79ff5645.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><link href="/styles.a3165633e79a30ea7da7.css" rel="stylesheet"></head>
+  <script defer src="/main.1c2e2d17de16992803e9.js"></script><script defer src="/generalCalcs.5795ab1851535377dfbe.js"></script><script defer src="/jspdf.1449be6428a83f7b1749.js"></script><script defer src="/vendors.adbba0be25ae0a7b97a4.js"></script><script defer src="/mortgage-calculator.9007bdd6ab2d8e2100c7.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><link href="/styles.8fc5824ae8358366f261.css" rel="stylesheet"></head>
 <body>
   <header id="header">
     <div class="logo">
@@ -199,10 +198,10 @@
             <div class="results-content">
               <div id="payment-breakdown-content">
                 <h2 class="answer-title">Estimated Payment:</h2>
-                <p fetchpriority="high" class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="./disclaimer.html" target="_blank" style="color: initial;">See Disclaimer</a>.)</p>
+                <pclass="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="./disclaimer.html" target="_blank" style="color: initial;">See Disclaimer</a>.)</p>
                 <div id="monthly-payment-value"></div>
                 <div class="results-data">
-                  <canvas id="mortgageChart" class="payment-chart" loading="lazy"></canvas>
+                  <canvas id="mortgageChart" class="payment-chart"></canvas>
                   <div id="chartLabels" class="chart-labels">
                     <div class="label-item">
                       <span class="color-circle" style="background-color: #175134;"></span>
@@ -214,7 +213,7 @@
                       <span class="label-name" id="label-property-tax" data-manual="false">Property Tax</span>
                       <div class="label-input">
                         <p>$</p>
-                        <input class="label-value value-input" id="value-property-tax" placeholder="250"></input>
+                        <input class="label-value value-input" id="value-property-tax" placeholder="250">
                       </div>
                     </div>
                     <div class="label-item">
@@ -222,7 +221,7 @@
                       <span class="label-name" id="label-pmi" data-manual="false">PMI</span>
                       <div class="label-input">
                         <p>$</p>
-                        <input class="label-value value-input" id="value-pmi" placeholder="200"></input>
+                        <input class="label-value value-input" id="value-pmi" placeholder="200">
                       </div>
                     </div>
                     <div class="label-item">
@@ -230,7 +229,7 @@
                       <span class="label-name" id="label-hoa" data-manual="false">HOA</span>
                       <div class="label-input">
                         <p>$</p>
-                        <input class="label-value value-input" id="value-hoa" placeholder="0"></input>
+                        <input class="label-value value-input" id="value-hoa" placeholder="0">
                       </div>
                     </div>
                   </div>
@@ -239,8 +238,8 @@
               </div>
               <div id="amortization-schedule-content" style="display: none;">
                 <h2 class="answer-title">Amortization for Mortgage Loan</h2>
-                <p fetchpriority="high" class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="./disclaimer.html" target="_blank" style="color: initial;">See Disclaimer</a>.)</p>
-                <canvas id="amortizationChart" loading="lazy"></canvas>
+                <p class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="./disclaimer.html" target="_blank" style="color: initial;">See Disclaimer</a>.)</p>
+                <canvas id="amortizationChart"></canvas>
                 <div id="amortizationHoverDate" class="hover-date"></div>
                 <div id="amortizationLabels" class="chart-labels"></div>
                 <h2 class="answer-title">Amortization Schedule Breakdown</h2>

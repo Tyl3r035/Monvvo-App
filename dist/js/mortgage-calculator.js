@@ -29,7 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
         pmiExpense: 200,
         hoaExpense: 0,
     };
-
+    propertyTaxInput.value = defaultValues.propertyTax;
+    pmiExpenseInput.value = defaultValues.pmiExpense;
+    hoaExpenseInput.value = defaultValues.hoaExpense;
     let lastAmortizationData = null;
 
     // Helper: Format currency
@@ -37,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
     });
+    
 
     // Restrict invalid characters in inputs
     const inputsToRestrict = [
@@ -58,6 +61,56 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+
+    adjustPMI(defaultValues.homePrice, defaultValues.downPaymentPercentage);
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("DOMContentLoaded event fired");
+    
+        // Existing initialization code...
+    
+        // Calculate PMI based on default values and update the input
+        const calculatedPMI = adjustPMI(defaultValues.homePrice, defaultValues.downPaymentPercentage);
+        pmiExpenseInput.value = calculatedPMI.toLocaleString(); // Dynamically set PMI
+    });
+    
+
+
+    //Adjust PMI 
+    // function adjustPMI(homePrice, downPaymentPercentage) {
+    //     const pmiThreshold = 20; // PMI applies for down payments < 20%
+    //     if (downPaymentPercentage >= pmiThreshold) {
+    //         return 0; // No PMI if down payment >= 20%
+    //     }
+    
+    //     const loanAmount = homePrice - (downPaymentPercentage / 100) * homePrice;
+    //     const annualPMIRate = 0.005; // Example PMI rate (0.5% annually)
+    //     const monthlyPMI = (loanAmount * annualPMIRate) / 12;
+    
+    //     return Math.ceil(monthlyPMI); // Round up to nearest dollar
+    // }
+    
+
+    function adjustPMI(homePrice, downPaymentPercentage) {
+        const pmiThreshold = 20; // PMI applies for down payments < 20%
+        if (downPaymentPercentage >= pmiThreshold) {
+            pmiExpenseInput.value = "0"; // Set PMI to 0 if no PMI is required
+            return 0; // No PMI if down payment >= 20%
+        }
+    
+        const loanAmount = homePrice - (downPaymentPercentage / 100) * homePrice;
+        const annualPMIRate = 0.005; // Example PMI rate (0.5% annually)
+        const monthlyPMI = (loanAmount * annualPMIRate) / 12;
+    
+        const roundedPMI = Math.ceil(monthlyPMI); // Round up to nearest dollar
+        pmiExpenseInput.value = roundedPMI.toLocaleString(); // Update the input value
+        return roundedPMI;
+    }
+    
+    
+    
+    
 
  // Update dependent inputs and handle PMI logic
 downPaymentAmountInput.addEventListener('input', function () {
@@ -162,6 +215,8 @@ function calculateAndDisplayResults() {
 
     console.log("Results calculated and displayed.");
 }
+
+
 
 
 
@@ -308,14 +363,6 @@ function calculateAndDisplayResults() {
         ctx.arc(x, interestY, dotRadius, 0, Math.PI * 2);
         ctx.fill();
     }
-    
-
-
-
-
-
-
-
 
 
     // Doughnut Chart
@@ -419,53 +466,77 @@ function calculateAndDisplayResults() {
 
 
     // Reset functionality
+    // function resetInputs() {
+    //     // Clear all input fields, leaving placeholders intact
+    //     homePriceInput.value = '';
+    //     downPaymentAmountInput.value = '';
+    //     downPaymentPercentageInput.value = '';
+    //     loanTermInput.value = 30;
+    //     interestRateInput.value = '';
+    //     extraPaymentInput.value = '';
+    
+    //     // Clear Property Tax and HOA values but keep placeholders
+    //     propertyTaxInput.value = defaultValues.propertyTax;
+    //     hoaExpenseInput.value = defaultValues.hoa;
+    
+    //     // Recalculate PMI based on placeholder values or default settings
+    //     const homePricePlaceholder = parseFloat(homePriceInput.placeholder) || defaultValues.homePrice;
+    //     const downPaymentPercentagePlaceholder =
+    //         parseFloat(downPaymentPercentageInput.placeholder) || defaultValues.downPaymentPercentage;
+    
+    //     adjustPMI(homePricePlaceholder, downPaymentPercentagePlaceholder);
+    
+    //     // Remove manual override flags
+    //     pmiExpenseInput.removeAttribute('data-manual');
+    //     propertyTaxInput.removeAttribute('data-manual');
+    //     hoaExpenseInput.removeAttribute('data-manual');
+    
+    //     // Recalculate results with the cleared fields
+    //     calculateAndDisplayResults();
+    
+    //     console.log("Inputs cleared to placeholders, and calculations refreshed.");
+    // }
+    
     function resetInputs() {
-        // Reset all input fields to blank or default
-        homePriceInput.value = '';
-        downPaymentAmountInput.value = '';
-        downPaymentPercentageInput.value = '';
-        loanTermInput.value = defaultValues.loanTerm;
-        interestRateInput.value = '';
-        extraPaymentInput.value = '';
+        // Clear and reset all inputs to their default values
+        const homePrice = defaultValues.homePrice;
+        const downPaymentPercentage = defaultValues.downPaymentPercentage;
     
-        // Reset Property Tax, PMI, and HOA to placeholder values
-        propertyTaxInput.value = propertyTaxInput.placeholder || '';
-        pmiExpenseInput.value = pmiExpenseInput.placeholder || '';
-        hoaExpenseInput.value = hoaExpenseInput.placeholder || '';
+        // Reset fields to default values
+        homePriceInput.value = Math.ceil(homePrice).toLocaleString();
+        downPaymentPercentageInput.value = Math.ceil(downPaymentPercentage).toString();
+        const downPaymentAmount = Math.ceil((downPaymentPercentage / 100) * homePrice);
+        downPaymentAmountInput.value = downPaymentAmount.toLocaleString();
     
-        // Ensure PMI manual override flag is removed
-        pmiExpenseInput.removeAttribute('data-manual');
+        loanTermInput.value = defaultValues.loanTerm.toString();
+        interestRateInput.value = defaultValues.interestRate.toFixed(2);
+        extraPaymentInput.value = defaultValues.extraPayment.toString();
+        propertyTaxInput.value = Math.ceil(defaultValues.propertyTax).toString();
+        hoaExpenseInput.value = Math.ceil(defaultValues.hoaExpense).toString();
     
-        // Recalculate results using the default or blank inputs
+        // Calculate PMI dynamically based on home price and down payment percentage
+        const calculatedPMI = adjustPMI(homePrice, downPaymentPercentage);
+        pmiExpenseInput.value = Math.ceil(calculatedPMI).toString();
+    
+        // Trigger recalculation for principal and interest
         calculateAndDisplayResults();
     
-        console.log("Inputs reset to placeholder values, and calculations refreshed.");
+        console.log("Inputs reset to default values and recalculated.");
     }
+    
+    
+    
+    
+    
     
 
     
 
     // Event listeners
-        // updateBtn.addEventListener('click', function() {
-            // // Track the Google Ads conversion event
-            // gtag('event', 'conversion', {
-            //     'send_to': 'AW-11495710624/WkaLCNPA6_kZEKC_yukq'
-            // });
-
-        //     // Call the existing calculation function
-        //     calculateAndDisplayResults();
-        // });
-
-
         updateBtn.addEventListener('click', function () {
             // Track the Google Ads conversion event
             gtag('event', 'conversion', {
                 'send_to': 'AW-11495710624/WkaLCNPA6_kZEKC_yukq'
-            });
-            
-            // Send event to Google Analytics 4
-            gtag('event', 'Update_Btn_Click', {
-                'button_type': 'update' // Optional parameter
             });
         
             // Call the existing calculation function
