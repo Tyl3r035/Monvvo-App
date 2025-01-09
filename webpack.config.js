@@ -50,13 +50,13 @@ const pages = [
         filename: 'mortgage/articles/home-affordability.html',
         template: path.resolve(__dirname, 'public/mortgage/articles/home-affordability.html'),
         chunks: ['main', 'article', 'footer', 'utils'], // Exclude unnecessary chunks
-        canonical: 'https://www.monvvo.com/mortgage/articles/home-affordability.',
+        canonical: 'https://www.monvvo.com/mortgage/articles/home-affordability',
     },
     {
         filename: 'mortgage/articles/mortgage-down-payment-guide.html',
         template: path.resolve(__dirname, 'public/mortgage/articles/mortgage-down-payment-guide.html'),
         chunks: ['main', 'article', 'footer', 'utils'], // Exclude unnecessary chunks
-        canonical: 'https://www.monvvo.com/mortgage/articles/mortgage-down-payment-guide.',
+        canonical: 'https://www.monvvo.com/mortgage/articles/mortgage-down-payment-guide',
     },
     // Auto Section Pages
     {
