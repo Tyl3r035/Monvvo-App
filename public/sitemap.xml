@@ -20,7 +20,7 @@
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://www.monvvo.com/investment/</loc>
+        <loc>https://www.monvvo.com/investing/</loc>
         <priority>0.9</priority>
     </url>
     <url>
@@ -44,7 +44,7 @@
 
     <!-- Articles -->
     <url>
-        <loc>https://www.monvvo.com/mortgage/articles/private-mortgage-insurance-pmi</loc>
+        <loc>https://www.monvvo.com/mortgage/articles/what-is-private-mortgage-insurance-pmi</loc>
         <priority>0.8</priority>
     </url>
     <url>
@@ -52,7 +52,7 @@
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.monvvo.com/mortgage/articles/down-payment-guide</loc>
+        <loc>https://www.monvvo.com/mortgage/articles/mortgage-down-payment-guide</loc>
         <priority>0.8</priority>
     </url>
     <url>
