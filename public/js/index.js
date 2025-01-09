@@ -1,6 +1,4 @@
-import '../css/reset.css';
-import '../css/styles.css';
-// import './utils.js';
+import './header.js';
 
 // Your additional JavaScript logic here
 
@@ -39,3 +37,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+
+// Save scroll position before the page unloads
+window.addEventListener("beforeunload", () => {
+    sessionStorage.setItem("scrollPosition", window.scrollY);
+});
+
+// Restore scroll position on page load without smooth scrolling
+window.addEventListener("DOMContentLoaded", () => {
+    const scrollPosition = sessionStorage.getItem("scrollPosition");
+    if (scrollPosition) {
+        // Temporarily disable smooth scrolling
+        document.documentElement.style.scrollBehavior = "auto";
+        window.scrollTo(0, parseInt(scrollPosition, 10));
+        
+        // Re-enable smooth scrolling after restoring position
+        document.documentElement.style.scrollBehavior = "smooth";
+    }
+});

@@ -1,0 +1,118 @@
+
+#footer{
+  position: relative;
+  background-color: #1C2939;
+  width: 100%;
+  margin: 0;
+  padding: 20px 20px 0 20px;
+}
+
+.footer-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.footer-left{
+  flex-grow: 1;
+}
+.footer-right{
+  flex-shrink: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.footer-col{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  margin: 0 10px;
+}
+.footer-title{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 22px;
+  color: #fff;
+}
+.footer-link{
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #f0f0f0;
+  margin-bottom: 8px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.footer-link:hover{
+  transition: .4s ease-in-out;
+  opacity: 0.9;
+}
+
+.footer-break{
+  width: 100%;
+  height: 0.5px;
+  background-color: #6C6C70;
+} 
+.footer-bottom{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 200px;
+}
+.bottom-links{
+  padding: 0 10px;
+}
+.bottom-links .footer-link{
+  color: #F8F8F8;
+  padding: 0 8px;
+}
+.footer-name{
+  font-size: 18px;
+  margin-top: 15px;
+}
+.bottom-icon {
+  position: absolute; /* Place the icon relative to the footer */
+  bottom: 0; /* Align to the bottom of the footer */
+  left: 0; /* Align to the left edge */
+  right: 0;
+  width: 100%; /* Make the icon span the full width */
+  height: auto; /* Keep the height fixed */
+  object-fit: contain; /* Ensures proper scaling without distortion */
+}
+
+
+@media screen and (min-width: 2000px){
+    .footer-bottom{
+      margin-bottom: 300px;
+    }
+    
+  }
+
+  @media screen and (max-width: 1500px){
+    .footer-bottom{
+      margin-bottom: 150px;
+    }
+  }
+
+  @media screen and (max-width: 1150px) {
+    .footer-bottom{
+        margin-bottom: 100px;
+      }
+  }
+
+  @media screen and (max-width: 600px){
+    .footer-bottom{
+      margin-bottom: 75px;
+    }
+  }
+  
+  @media screen and (max-width: 500px){
+    .footer-bottom{
+      margin-bottom: 50px;
+    }
+  }

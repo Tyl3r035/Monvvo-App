@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Tyler P.">
+    <meta name="description" content="Use our Home Affordability Calculator to find the home price you can afford based on your income, debt, and goals. Make confident financial decisions today with Monvvo.">
+    <title>Home Affordability Calculator | Estimate Your Budget</title>
+    <link rel="canonical" href="<%= htmlWebpackPlugin.options.canonical %>" />
+    <link rel="icon" type="image/svg" href="../img/logos/monvvo-favicon.svg">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC9PLEKB7Q"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11495710624"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      //Google Analytics
+      gtag('config', 'G-LC9PLEKB7Q');
+      //Google Adwords
+      gtag('config', 'AW-11495710624');
+    </script>
+    <!-- Google Event Snippet -->
+    <script>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-11495710624/WkaLCNPA6_kZEKC_yukq',
+            'event_callback': callback
+        });
+        return false;
+      }
+      </script>
+  
+
+    <!-- Google Fonts -->
+    <!-- Preconnect for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preloaded Critical Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <!-- Full Font Stylesheets (Non-Critical) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap">
+
+  <!-- Schema Code -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["WebApplication", "Article"],
+      "name": "Home Affordability Calculator | Monvvo",
+      "headline": "Calculate Your Home Affordability with Ease",
+      "description": "Use the Monvvo Home Affordability Calculator to estimate the home price you can afford based on your income, debt, and financial goals. Make informed decisions today.",
+      "url": "https://www.monvvo.com/mortgage/home-affordability-calculator",
+      "applicationCategory": "FinancialApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript enabled",
+      "isAccessibleForFree": true,
+      "keywords": [
+        "home affordability calculator",
+        "mortgage affordability",
+        "home buying budget",
+        "housing costs estimator",
+        "debt-to-income ratio"
+      ],
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://www.monvvo.com/images/home-affordability-calculator.png",
+        "width": 1200,
+        "height": 630
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Monvvo",
+        "url": "https://www.monvvo.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Monvvo",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.monvvo.com/logo.png",
+          "width": 600,
+          "height": 60
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.monvvo.com/mortgage/home-affordability-calculator"
+      },
+      "datePublished": "2024-01-01",
+      "dateModified": "2024-01-01",
+      "featureList": [
+        "Calculate home affordability",
+        "Estimate maximum loan amount",
+        "Analyze debt-to-income ratio",
+        "Adjust loan term options",
+        "Incorporate credit score impact"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>    
+  </head>
+<body>
+  <header id="header">
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../img/logos/monvvo-transparent.svg" alt="Monvvo Logo" class="monvvo-logo" loading="lazy">
+      </a>
+    </div>
+    <nav id="nav">
+      <a class="nav-link nav-link-active" href="./index.html">Mortgage</a>
+      <a class="nav-link" href="../auto/index.html">Auto</a>
+      <a class="nav-link" href="../loan/index.html">Loans</a>
+      <a class="nav-link" href="../investing/index.html">Investing</a>
+      <a class="nav-link" href="../personal-finance/index.html">Personal Finance</a>
+      <a class="nav-link" href="../retirement/index.html">Retirement</a>
+    </nav>
+    <div class="contact-header">
+      <a class="contact-btn" href="../contact/index.html">Contact Us</a>
+    </div>
+    <img class="mobile-btn" src="../img/icons/mobile-menu.svg" alt="Mobile Menu Button">
+  </header>
+  <div id="menu-overlay"></div>
+  <main id="main" class="calculator-main">
+    <div class="mobile-menu">
+      <img class="mobile-close" src="../img/icons/close-black.svg" alt="Close Button">
+      <nav class="mobile-nav">
+          <a class="nav-link" href="./index.html">Mortgage</a>
+          <a class="nav-link" href="../auto/index.html">Auto</a>
+          <a class="nav-link" href="../loan/index.html">Loans</a>
+          <a class="nav-link" href="../investing/index.html">Investing</a>
+          <a class="nav-link" href="../personal-finance/index.html">Personal Finance</a>
+          <a class="nav-link" href="../retirement/index.html">Retirement</a>
+          <a class="nav-link mobile-contact" href="../contact/index.html">Contact Us</a>
+      </nav>
+  </div>
+    <section class="calculation-section">
+      <h1 id="title" class="calculator-title">Home Affordability Calculator</h1>
+      <div class="calculator-wrap">
+        <div class="calculator-inputs">
+          <div class="main-inputs affordability-inputs">
+            <div class="input-box annual-income-box">
+              <label for="annual-income">Annual Income</label>
+              <div class="input-fluid">
+                <div class="input-content">
+                  <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
+                  <div class="input-separator"></div>
+                  <input type="number" class="number-input" id="annual-income" name="affordability_input__annual_income" placeholder="70000">
+                </div>
+              </div>
+            </div>
+            <div class="input-box monthly-debt-box">
+              <label for="monthly-debt">Monthly Debt</label>
+              <div class="input-fluid">
+                <div class="input-content">
+                  <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
+                  <div class="input-separator"></div>
+                  <input type="number" class="number-input" id="monthly-debt" name="affordability_input__monthly_debt" placeholder="1200">
+                </div>
+              </div>
+            </div>
+            <div class="input-box affordability-down-box">
+              <label for="affordability-down">Down Payment</label>
+              <div class="input-fluid">
+                <div class="input-content">
+                  <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
+                  <div class="input-separator"></div>
+                  <input type="number" class="number-input" id="affordability-down" name="affordability_input__down_payment" placeholder="10000">
+                </div>
+              </div>
+            </div>
+            <div class="input-box affordability-term-box">
+              <div class="input-top">
+                <label for="affordability-term">Loan Term</label>
+                <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Select the length of time (in years) over which you plan to repay the mortgage loan." loading="lazy">
+              </div>
+              <div class="input-bottom">
+                <div class="input-inner">
+                  <select id="affordability-term" name="affordability_input__loan_term" aria-label="term-dropdown">
+                    <option value="30" class="calculation-option">30</option>
+                    <option value="20" class="calculation-option">20</option>
+                    <option value="15" class="calculation-option">15</option>
+                    <option value="10" class="calculation-option">10</option>
+                  </select>
+                  <img  src="../img/icons/down-arrow.svg" alt="down-arrrow" class="input-dropdown" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="input-box affordability-credit-box">
+              <div class="input-top">
+                <label for="affordability-credit">Credit Score</label>
+                <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Select the length of time (in years) over which you plan to repay the mortgage loan." loading="lazy">
+              </div>
+              <div class="input-bottom">
+                <div class="input-inner">
+                  <select id="affordability-credit" name="affordability_input__credit_score" aria-label="credit-score-dropdown">
+                      <option value="720">720 and Above</option>
+                      <option value="670-719">670–719</option>
+                      <option value="571-669">571–669</option>
+                      <option value="570">570 or Below</option>
+                  </select>
+                  <img  src="../img/icons/down-arrow.svg" alt="down-arrrow" class="input-dropdown" loading="lazy">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calculations-container">
+          <div class="results-container">
+            <div class="results-top">
+              <div class="results-tab tab-active" id="tab-recommended">
+                <p class="tab-text">Recommended <span class="hide-tabtext">Budget</p>
+              </div>
+              <div class="results-tab" id="tab-max-budget">
+                <p class="tab-text">Maximum <span class="hide-tabtext">Budget</span></p>
+              </div>
+            </div>
+        
+            <div class="results-content">
+              <!-- Recommended Budget -->
+              <div id="recommended-budget">
+                <h2 class="answer-title">Estimated Breakdown:</h2>
+                <p class="answer-disclaimer">
+                  (Actual amounts may vary, this is only an estimate.
+                  <a href="../disclaimer/index.html" target="_blank" style="color: initial;">See Disclaimer</a>.)
+                </p>
+                <div class="loan-total-container">
+                  <p class="loan-total-label">Recommended Loan Total</p>
+                  <div class="loan-total-value" id="loan-total-value-recommended">$0</div>
+                </div>
+        
+                <!-- Recommended Budget Chart Labels -->
+                <div id="recommended-chartLabels" class="chart-labels">
+                  <div class="label-item">
+                    <span class="color-circle" style="background-color: #175134;"></span>
+                    <span class="label-name">Principal & Interest</span>
+                    <span class="label-value" id="recommended-value-principal-interest">$0</span>
+                  </div>
+                  <div class="label-item">
+                    <span class="color-circle" style="background-color: #3EB721;"></span>
+                    <span class="label-name">Property Tax</span>
+                    <div class="label-input">
+                      <p>$</p>
+                      <input class="label-value value-input" id="recommended-value-property-tax" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="label-item">
+                    <span class="color-circle" style="background-color: #91BBA6;"></span>
+                    <span class="label-name">PMI</span>
+                    <div class="label-input">
+                      <p>$</p>
+                      <input class="label-value value-input" id="recommended-value-pmi" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="label-item">
+                    <span class="color-circle" style="background-color: #B3D4C2;"></span>
+                    <span class="label-name">HOA</span>
+                    <div class="label-input">
+                      <p>$</p>
+                      <input class="label-value value-input" id="recommended-value-hoa" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="label-item monthly-total-label-item">
+                    <span class="label-name label-monthly-total">Monthly Payment</span>
+                    <span class="label-value value-monthly-total" id="recommended-value-monthly-total" contenteditable="false">$0</span>
+                  </div>
+                </div>
+              </div>
+        
+              <!-- Maximum Budget -->
+              <div id="max-budget" style="display: none;">
+                <h2 class="answer-title">Estimated Breakdown:</h2>
+                <p class="answer-disclaimer">
+                  (Actual amounts may vary, this is only an estimate.
+                  <a href="../disclaimer/index.html" target="_blank" style="color: initial;">See Disclaimer</a>.)
+                </p>
+                <div class="loan-total-container">
+                  <p class="loan-total-label"> Maximum Loan Total</p>
+                  <div class="loan-total-value" id="loan-total-value-max">$0</div>
+                </div>
+        
+                <!-- Maximum Budget Chart Labels -->
+                <div id="max-chartLabels" class="chart-labels">
+                  <div class="label-item">
+                    <span class="color-circle" style="background-color: #175134;"></span>
+                    <span class="label-name">Principal & Interest</span>
+                    <span class="label-value" id="max-value-principal-interest">$0</span>
+                  </div>
+                  <div class="label-item">
+                    <span class="color-circle" style="background-color: #3EB721;"></span>
+                    <span class="label-name">Property Tax</span>
+                    <div class="label-input">
+                      <p>$</p>
+                      <input class="label-value value-input" id="max-value-property-tax" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="label-item">
+                    <span class="color-circle" style="background-color: #91BBA6;"></span>
+                    <span class="label-name">PMI</span>
+                    <div class="label-input">
+                      <p>$</p>
+                      <input class="label-value value-input" id="max-value-pmi" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="label-item">
+                    <span class="color-circle" style="background-color: #B3D4C2;"></span>
+                    <span class="label-name">HOA</span>
+                    <div class="label-input">
+                      <p>$</p>
+                      <input class="label-value value-input" id="max-value-hoa" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="label-item monthly-total-label-item">
+                    <span class="label-name label-monthly-total">Monthly Payment</span>
+                    <span class="label-value value-monthly-total" id="max-value-monthly-total" contenteditable="false">$0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-container">
+            <div class="btn-left">
+              <button id="update-btn" class="btn-submit calculation-btn" name="mortgage_input__mortgage_submit">Update</button>
+              <button id="reset-btn" class="btn-reset calculation-btn" name="mortgage_input__mortgage_reset">Reset</button>
+            </div>
+            <div class="btn-right">
+              <!-- 
+              <div class="btn-icon-fluid">
+                <img class="btn-icon" src="../img/icons/printer-icon.svg" alt="Print Icon">
+                <p class="printer-text">Export Results</p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        
+
+
+
+
+
+
+
+
+ 
+        </div>
+      </div>
+    </section>
+    <section class="how-section">
+      <div class="how-inner">
+        <h3 class="how-title">How to use Monvvo home affordability calculator</h3>
+        <ol class="how-list">
+          <li class="how-text">Enter your annual income to help determine your housing budget based on your financial capacity.</li>
+          <li class="how-text">Add your monthly debt payments, including car loans, credit card bills, and other obligations.</li>
+          <li class="how-text">Input your planned down payment amount, which will reduce the loan amount needed.</li>
+          <li class="how-text">Choose your desired loan term (10, 15, 20, or 30 years) to see affordability options over time.</li>
+          <li class="how-text">Select your credit score range, as it influences the estimated interest rate for your loan.</li>
+          <li class="how-text">Click Update to see your results, including maximum home price, loan amount, and monthly cost estimates.</li>
+        </ol>
+      </div>
+    </section>
+    <section class="terms-section">
+      <h3 class="terms-title">Home Affordability Terms</h3>
+      <div class="terms-content">
+        <div class="terms-item">
+          <div class="item-inner">
+            <h4 class="item-title">Annual Income</h4>
+            <p class="item-text">Your total income earned in a year before taxes and deductions. This figure is used to estimate how much of your monthly budget can go toward housing costs. Lenders typically recommend spending no more than 28% of your gross monthly income on housing payments.</p>
+          </div>
+          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
+        </div>
+        <div class="terms-item">
+          <div class="item-inner">
+            <h4 class="item-title">Monthly Debt</h4>
+            <p class="item-text">This includes recurring financial obligations such as car loans, student loans, credit card payments, and other fixed debts. Monthly debt plays a significant role in determining your debt-to-income (DTI) ratio, which lenders use to evaluate your ability to manage additional mortgage payments.</p>
+          </div>
+          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
+        </div>
+        <div class="terms-item">
+          <div class="item-inner">
+            <h4 class="item-title">Down Payment</h4>
+            <p class="item-text">The upfront amount you contribute toward purchasing your home, usually expressed as a percentage of the home price. A higher down payment reduces the loan amount you need and may eliminate the need for private mortgage insurance (PMI). Common down payments range from 3% to 20% of the home price.</p>
+          </div>
+          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
+        </div>
+        <div class="terms-item">
+          <div class="item-inner">
+            <h4 class="item-title">Loan Term</h4>
+            <p class="item-text">The time period over which you agree to repay the mortgage, typically ranging from 10 to 30 years. A shorter loan term usually comes with higher monthly payments but lower total interest costs, while a longer term offers lower monthly payments with higher overall interest.</p>
+          </div>
+          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
+        </div>
+        <div class="terms-item">
+          <div class="item-inner">
+            <h4 class="item-title">Closing Costs</h4>
+            <p class="item-text">Fees and expenses incurred during the home-buying process, typically 2-5% of the purchase price.</p>
+          </div>
+          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
+        </div>
+    </section>
+  </main>
+  <footer id="footer">
+    <div class="footer-top">
+        <div class="footer-left"></div>
+        <div class="footer-right">
+            <!-- <div class="footer-col">
+            <h5 class="footer-title">Calculators</h5>
+            <a class="footer-link" href="#">Banking</a>
+            <a class="footer-link" href="#">Mortgage</a>
+            <a class="footer-link" href="#">Loan</a>
+            <a class="footer-link" href="#">Investing</a>
+            <a class="footer-link" href="#">Personal Finance</a>
+            <a class="footer-link" href="#">Taxes</a>
+            </div>
+            <div class="footer-col">
+            <h5 class="footer-title">Resources</h5>
+            <a class="footer-link" href="#">Articles</a>
+            <a class="footer-link" href="#">Videos</a>
+            <a class="footer-link" href="#">Podcasts</a>
+            </div> -->
+            <div class="footer-col">
+            <h5 class="footer-title">Quick Links</h5>
+                <a class="footer-link" href="../contact/index.html">Contact Us</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-break"></div>
+    <div class="footer-bottom">
+        <div class="bottom-links">
+            <a class="footer-link" href="../disclaimer/index.html" target="_blank">Disclaimer</a>
+            <a class="footer-link" href="../privacy-policy/index.html" target="_blank">Privacy Policy</a>
+        </div>
+    <p class="footer-name">Monvvo, 2024</p>
+    </div>
+    <img src="../img/icons/footer-icon.svg" class="bottom-icon" alt="footer-icon">
+</footer>
+</body>
+</html>

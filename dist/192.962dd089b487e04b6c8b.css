@@ -1,0 +1,305 @@
+*{
+    box-sizing: border-box;
+  }
+  
+  body,html{
+    display: flex;
+    flex-direction: column;
+    background-color: #F6F4F2;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+  
+  /* Additional styles for color circles */
+  .color-circle {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  
+  /* Header CSS */
+  #header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    padding: 14px 80px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    border-bottom: .5px solid #8D8D91;
+    height: 50px;
+    background-color: #F6F4F2;
+    z-index: 999;
+  }
+  .logo{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5.984px;
+  }
+  .logo .monvvo-logo{
+    width: 127.2px;
+    height: 19.2px;
+  }
+  #nav{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-left: 30px;
+  }
+  #nav .nav-link{
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #6C6C70;
+    text-decoration: none;
+  }
+  #nav .nav-link-active{
+    font-weight: 500;
+    color: #175134;
+  }
+  .contact-header{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+  }
+  .contact-btn{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #175134;
+    color: #fff;
+    border-radius: 3px;
+    padding: 8px 12px;
+    text-decoration: none;
+  }
+  .contact-btn:hover{
+    transition: all .3s ease-in-out;
+    background-color: #20894D;
+  }
+  
+  .mobile-btn{
+    display: none;
+    width: 30px;
+    height: 30px;
+    margin: 30px;
+    cursor: pointer;
+  }
+  .mobile-btn.disabled{
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Start off-screen */
+    width: 80%; /* Adjust width as needed */
+    height: 100%;
+    background-color: #F6F4F2;
+    border-right: 0.5px solid #ddd;
+    z-index: 99999999;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    transition: left 0.3s ease-in-out; /* Smooth slide-in effect */
+  }
+  .mobile-menu.active {
+    left: 0; /* Slide in */
+  }
+  
+  .mobile-close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  .mobile-nav{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 50px;
+  }
+  .mobile-nav .nav-link{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    color: #232525;
+    padding: 5px;
+    margin: 5px 10px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .mobile-nav .mobile-contact{
+    color: #20894D;
+  }
+  #menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 998; /* Place it below the mobile menu but above the content */
+    display: none; /* Hide it by default */
+  }
+  
+  /* Main CSS */
+  
+  #title{
+    font-family: "Times New Roman", serif;
+    font-size: 40px;
+    font-style: normal;
+    line-height: normal;
+    align-self: stretch;
+  }
+  
+  .main-title{
+    font-weight: 600;
+    color: #f8f8f8;
+  }
+  
+/* Disclaimer CSS*/
+.disclaimer-main{
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+  
+.legal-top{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    background-color: #1C2939;
+    min-height: 300px;
+    padding: 40px;
+  }
+  .disclaimer-intro{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 30px 0 20px 0;
+    padding: 0 5%;
+    color: #171717;
+  }
+  .disclaimer-fluid{
+    margin: 40px 20px;
+    padding: 0 5%;
+  }
+  .disclaimer-box{
+    margin: 20px 0 40px 0;
+    padding: 0 5%;
+  }
+  .disclaimer-title{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 10px;
+  }
+  .disclaimer-text{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    color: #171717;
+  }
+  .disclaimer-text a{
+    color: #20894D
+  }
+  
+  /* Privacy Policy CSS */
+  .privacy-main{
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+  .privacy-section{
+    margin: 20px auto;
+    padding: 0 5%;
+  }
+  .privacy-section a{
+    color: #20894D;
+  }
+  .privacy-title{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 10px;
+  }
+  .privacy-text{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    color: #171717;
+  }
+  .privacy-list{
+    margin: 10px auto 25px auto;
+    padding-left: 25px;
+  }
+  .privacy-list li{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    color: #171717;
+  }
+  
+  
+
+
+
+
+  @media screen and (max-width: 1300px) {
+    #header{
+      padding: 14px 25px;
+    }
+  }
+  @media screen and (max-width: 950px){
+    #nav{
+      gap: 15px;
+      margin-left: 20px;
+    }
+    #nav .nav-link{
+      font-size: 14px;
+    }
+    .contact-btn{
+      font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 768px){
+    #nav{
+      display: none;
+    }
+    .contact-header{
+      display: none;
+    }  
+    .mobile-btn{
+      display: flex;
+    }
+  }
+  @media screen and (max-width: 430px){
+    .legal-top{
+      min-height: 200px;
+    }
+    #title{
+      font-size: 24px;
+    }
+  }
+
+/*# sourceMappingURL=192.962dd089b487e04b6c8b.css.map*/

@@ -1,0 +1,545 @@
+*{
+    box-sizing: border-box;
+  }
+  
+  
+  body,html{
+    display: flex;
+    flex-direction: column;
+    background-color: #F6F4F2;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+
+  /* Header CSS */
+#header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    padding: 14px 80px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    border-bottom: .5px solid #8D8D91;
+    height: 50px;
+    background-color: #F6F4F2;
+    z-index: 999;
+  }
+  .logo{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5.984px;
+  }
+  .logo .monvvo-logo{
+    width: 127.2px;
+    height: 19.2px;
+  }
+  #nav{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-left: 30px;
+  }
+  #nav .nav-link{
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #6C6C70;
+    text-decoration: none;
+  }
+  #nav .nav-link-active{
+    font-weight: 500;
+    color: #175134;
+  }
+  .contact-header{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+  }
+  .contact-btn{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #175134;
+    color: #fff;
+    border-radius: 3px;
+    padding: 8px 12px;
+    text-decoration: none;
+  }
+  .contact-btn:hover{
+    transition: all .3s ease-in-out;
+    background-color: #20894D;
+  }
+  
+  .mobile-btn{
+    display: none;
+    width: 30px;
+    height: 30px;
+    margin: 30px;
+    cursor: pointer;
+  }
+  .mobile-btn.disabled{
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Start off-screen */
+    width: 80%; /* Adjust width as needed */
+    height: 100%;
+    background-color: #F6F4F2;
+    border-right: 0.5px solid #ddd;
+    z-index: 99999999;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    transition: left 0.3s ease-in-out; /* Smooth slide-in effect */
+  }
+  .mobile-menu.active {
+    left: 0; /* Slide in */
+  }
+  
+  .mobile-close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  .mobile-nav{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 50px;
+  }
+  .mobile-nav .nav-link{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    color: #232525;
+    padding: 5px;
+    margin: 5px 10px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .mobile-nav .mobile-contact{
+    color: #20894D;
+  }
+  #menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 998; /* Place it below the mobile menu but above the content */
+    display: none; /* Hide it by default */
+  }
+  
+
+/* Main CSS */
+
+.home-main{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  .top-section{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    background-color: #1C2939;
+    min-height: 450px;
+    padding: 40px;
+  }
+
+
+#title{
+    font-family: "Times New Roman", serif;
+    font-size: 40px;
+    font-style: normal;
+    line-height: normal;
+    align-self: stretch;
+  }
+  
+  
+  .main-title{
+    font-weight: 600;
+    color: #f8f8f8;
+  }
+
+  .subtitle{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #f8f8f8;
+    margin-top: 10px;
+  }
+
+  
+.page-title{
+    font-family: 'Times New Roman', serif;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+  .page-title-light{
+    color: #232525;
+  }
+  .page-title-dark{
+    color: #f8f8f8;
+  }
+  
+  .title-option{
+    color: #175134;
+    text-decoration: underline;
+    cursor: italic;
+  }
+
+  #title-select{
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    background-color: transparent;
+    color: #175134;
+    border: none;
+    outline: none;
+    text-decoration: underline;
+    cursor: pointer;
+    -webkit-appearance: none; /* For Chrome, Safari, and Edge */
+    -moz-appearance: none;    /* For Firefox */
+    appearance: none;  
+  }
+  #title-select:hover{
+    color: #20894D;
+  }
+  #title-select option{
+    font-size: 16px;
+    color: #000;
+    padding: 0 10px;
+  }
+  
+
+/* .title-option:hover{
+    color: #20894d;
+  } */
+  .calculators-section, .articles-section{
+    width: 90%;
+    margin: 90px auto 50px auto;
+  }
+  .articles-section .page-title{
+    margin: 0;
+  }
+  /*
+  .calculators-container{
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    justify-items: center;
+    gap: 25px 15px;
+    max-width: 900px;
+    margin: 0 auto;
+  } */
+   .calculators-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+   }
+  .calculator-item{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 250px;
+    background-color: #fff;
+    color: #232525;
+    border-radius: 5px;
+    padding: 50px 10px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .calculator-item:hover{
+    transition: all .3s ease-in-out;
+    opacity: .7;
+  }
+  .calculator-item img{
+    width: 80px;
+    height: 80px;
+    margin-bottom: 35px;
+  }
+  .calculator-item .item-title{
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Times New Roman', serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+    width: 100%;
+    color: #000;
+    text-align: center;
+    align-self: flex-end;
+    text-decoration: none;
+  }
+  .articles-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    list-style-type: none;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .articles-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 25px;
+  }
+   .articles-img{
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px !important;
+    height: 150px  !important;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-right: 25px;
+   }
+  .articles-img img{
+    width: 100%; /* Prevent shrinking */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: fill;
+  }
+  .articles-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .articles-title{
+    font-family: 'Times New Roman', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #232525;
+    margin: 0 0 10px 0;
+  }
+  .articles-description{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #000;
+    margin: 0;
+  }
+  .articles-date{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #232525;
+    margin: 10px 0 0 0;
+  }
+  .faq-section{
+    background-color: #1C2939;
+    padding: 25px 50px;
+  }
+  .faq-item{
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+  }
+  .faq-title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #fff;
+    margin: 0 0 15px 0;
+    cursor: pointer;
+  }
+  .faq-text{
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #f8f8f8;
+    margin: 0 0 25px 0;
+    max-width: 800px;
+  }
+  .faq-text a{
+    color: inherit;
+  }
+  
+  @media screen and (max-width: 1300px) {
+    #header{
+      padding: 14px 25px;
+    }
+  }
+  @media screen and (max-width: 950px){
+    #nav{
+      gap: 15px;
+      margin-left: 20px;
+    }
+    #nav .nav-link{
+      font-size: 14px;
+    }
+    .contact-btn{
+      font-size: 14px;
+    }
+    .calculator-item{
+      width: 170px;
+      height: 230px;
+    }
+    .calculator-item img{
+      width: 60px;
+      height: 60px;
+    }
+    .calculator-item .item-title{
+      font-size: 14px;
+    }
+    .articles-list{
+      width: 90%;
+    }
+    .articles-content{
+      margin-top: 15px;
+    }
+  }
+  
+  @media screen and (max-width: 800px){
+    .calculator-item{
+      width: 150px;
+      height: 200px;
+    }
+    .articles-list{
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 768px){
+    #nav{
+      display: none;
+    }
+    .contact-header{
+      display: none;
+    }  
+    .mobile-btn{
+      display: flex;
+    }
+    .calculators-container{
+      grid-template-columns: repeat(2, auto);
+    }
+    .calculator-item{
+      width: 250px;
+      height: 270px;
+    }
+    .calculator-item img{
+      width: 80px;
+      height: 80px;
+    }
+    .calculator-item .item-title{
+      font-size: 18px;
+    }
+  }
+  @media screen and (max-width: 650px){
+    .articles-item{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .articles-img{
+      width: 300px !important;
+      height: 250px !important;
+      margin-right: 0;
+    }
+    .articles-title{
+      max-width: 500px;
+      text-align: center;
+    }
+    .articles-description{
+      max-width: 500px;
+      text-align: center;
+    }
+  }
+  @media screen and (max-width: 600px){
+    .calculator-item{
+      width: 180px;
+      height: 230px;
+    }
+    .calculator-item img{
+      width: 70px;
+      height: 70px;
+    }
+    .calculator-item .item-title{
+      font-size: 16px;
+    }
+    .faq-section{
+      width: 100%;
+      padding: 15px;
+    }
+    .faq-item{
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 500px){
+    .faq-title{
+      font-size: 18px;
+    }
+    .faq-text{
+      font-size: 12px;
+    }
+  }
+  @media screen and (max-width: 450px){
+    .calculator-item{
+      width: 150px;
+      height: 200px;
+    }
+    .calculator-item img{
+      width: 60px;
+      height: 60px;
+    }
+    .calculator-item .item-title{
+      font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 350px){
+    .calculator-item{
+      width: 140px;
+      height: 190px;
+    }
+    .calculator-item img{
+      width: 50px;
+      height: 50;
+    }
+  }
+
+/*# sourceMappingURL=536.ca8734dddab78ba76d6b.css.map*/

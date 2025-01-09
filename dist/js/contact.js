@@ -1,3 +1,4 @@
+import '../css/contact.css';
 // Formspree Redirect
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('contact-form').addEventListener('submit', async function(event) {
@@ -27,23 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // // FAQ toggle functionality
-    // const faqQuestions = document.querySelectorAll('.faq-question');
-
-    // faqQuestions.forEach(question => {
-    //     question.addEventListener('click', () => {
-    //         const answer = question.nextElementSibling;
-    //         const isVisible = answer.style.display === 'block';
-
-    //         // Close all open answers
-    //         document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
-
-    //         // Toggle the clicked question
-    //         answer.style.display = isVisible ? 'none' : 'block';
-    //     });
-    // });
-
-    // FAQ toggle functionality
+// FAQ JS
 const faqQuestions = document.querySelectorAll('.faq-question');
 
 faqQuestions.forEach(question => {

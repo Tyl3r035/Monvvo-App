@@ -1,3 +1,5 @@
+import '../css/mortgage-calculator.css';
+import '../css/footer.css';
 import { generateMortgagePdf } from "./pdf/mortgage-pdf.js";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -78,20 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     //Adjust PMI 
-    // function adjustPMI(homePrice, downPaymentPercentage) {
-    //     const pmiThreshold = 20; // PMI applies for down payments < 20%
-    //     if (downPaymentPercentage >= pmiThreshold) {
-    //         return 0; // No PMI if down payment >= 20%
-    //     }
-    
-    //     const loanAmount = homePrice - (downPaymentPercentage / 100) * homePrice;
-    //     const annualPMIRate = 0.005; // Example PMI rate (0.5% annually)
-    //     const monthlyPMI = (loanAmount * annualPMIRate) / 12;
-    
-    //     return Math.ceil(monthlyPMI); // Round up to nearest dollar
-    // }
-    
-
     function adjustPMI(homePrice, downPaymentPercentage) {
         const pmiThreshold = 20; // PMI applies for down payments < 20%
         if (downPaymentPercentage >= pmiThreshold) {
@@ -466,37 +454,6 @@ function calculateAndDisplayResults() {
 
 
     // Reset functionality
-    // function resetInputs() {
-    //     // Clear all input fields, leaving placeholders intact
-    //     homePriceInput.value = '';
-    //     downPaymentAmountInput.value = '';
-    //     downPaymentPercentageInput.value = '';
-    //     loanTermInput.value = 30;
-    //     interestRateInput.value = '';
-    //     extraPaymentInput.value = '';
-    
-    //     // Clear Property Tax and HOA values but keep placeholders
-    //     propertyTaxInput.value = defaultValues.propertyTax;
-    //     hoaExpenseInput.value = defaultValues.hoa;
-    
-    //     // Recalculate PMI based on placeholder values or default settings
-    //     const homePricePlaceholder = parseFloat(homePriceInput.placeholder) || defaultValues.homePrice;
-    //     const downPaymentPercentagePlaceholder =
-    //         parseFloat(downPaymentPercentageInput.placeholder) || defaultValues.downPaymentPercentage;
-    
-    //     adjustPMI(homePricePlaceholder, downPaymentPercentagePlaceholder);
-    
-    //     // Remove manual override flags
-    //     pmiExpenseInput.removeAttribute('data-manual');
-    //     propertyTaxInput.removeAttribute('data-manual');
-    //     hoaExpenseInput.removeAttribute('data-manual');
-    
-    //     // Recalculate results with the cleared fields
-    //     calculateAndDisplayResults();
-    
-    //     console.log("Inputs cleared to placeholders, and calculations refreshed.");
-    // }
-    
     function resetInputs() {
         // Clear and reset all inputs to their default values
         const homePrice = defaultValues.homePrice;
@@ -1138,6 +1095,44 @@ if (downPaymentCloseButton) {
 }
 
 
+
+
+
+// Tab toggle functionality for "Payment Breakdown" and "Amortization Schedule"
+const tabPaymentBreakdown = document.getElementById('tab-payment-breakdown');
+const tabAmortizationSchedule = document.getElementById('tab-amortization-schedule');
+const paymentBreakdownContent = document.getElementById('payment-breakdown-content');
+const amortizationScheduleContent = document.getElementById('amortization-schedule-content');
+
+if (tabPaymentBreakdown && tabAmortizationSchedule && paymentBreakdownContent && amortizationScheduleContent) {
+    function switchTab(selectedTab) {
+        if (selectedTab === 'payment') {
+            paymentBreakdownContent.style.display = 'block';
+            amortizationScheduleContent.style.display = 'none';
+            tabPaymentBreakdown.classList.add('tab-active');
+            tabAmortizationSchedule.classList.remove('tab-active');
+        } else if (selectedTab === 'amortization') {
+            paymentBreakdownContent.style.display = 'none';
+            amortizationScheduleContent.style.display = 'block';
+            tabPaymentBreakdown.classList.remove('tab-active');
+            tabAmortizationSchedule.classList.add('tab-active');
+        }
+    }
+
+    // Event listeners for tab clicks
+    tabPaymentBreakdown.addEventListener('click', function () {
+        switchTab('payment');
+    });
+
+    tabAmortizationSchedule.addEventListener('click', function () {
+        switchTab('amortization');
+    });
+
+    // Set initial view to "Payment Breakdown"
+    switchTab('payment');
+} else {
+    console.log("Tab elements for Payment Breakdown and Amortization Schedule not found");
+}
 
 
 
