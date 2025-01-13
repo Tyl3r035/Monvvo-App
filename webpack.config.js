@@ -62,7 +62,7 @@ const pages = [
     {
         filename: 'auto/index.html',
         template: path.resolve(__dirname, 'public/auto/index.html'),
-        chunks: ['index-pages', 'footer', 'utils'], // Exclude unnecessary chunks
+        chunks: ['main', 'index-pages', 'footer', 'utils'], // Exclude unnecessary chunks
         canonical: 'https://www.monvvo.com/auto/',
     },
     {

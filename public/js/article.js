@@ -1,11 +1,27 @@
 import '../css/article.css';
 
+// Prevent the browser from restoring scroll position
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+    // Temporarily disable smooth scrolling
+    document.documentElement.style.scrollBehavior = "auto";
+
+    // Scroll to the top immediately
+    window.scrollTo(0, 0);
+
+    // Re-enable smooth scrolling after a full load
+    window.addEventListener("load", () => {
+        document.documentElement.style.scrollBehavior = "smooth";
+    });
+
     const tocOpenButton = document.querySelector(".toc-open");
     const tocCloseButton = document.querySelector(".toc-close");
     const mobileTOC = document.querySelector(".mobile-toc");
-    const mobileMenuButton = document.querySelector(".mobile-btn"); // Mobile menu button
-    const tocItems = document.querySelectorAll(".toc-item a"); // TOC links
+    const mobileMenuButton = document.querySelector(".mobile-btn");
+    const tocItems = document.querySelectorAll(".toc-item a");
     const sections = Array.from(tocItems).map(link => {
         const targetId = link.getAttribute("href").slice(1);
         return document.getElementById(targetId);
@@ -15,21 +31,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Open the mobile TOC
     tocOpenButton.addEventListener("click", () => {
-        mobileTOC.classList.add("active"); // Slide in the TOC
-        mobileMenuButton.classList.add("disabled"); // Disable the mobile menu button
+        mobileTOC.classList.add("active");
+        mobileMenuButton.classList.add("disabled");
     });
 
     // Close the mobile TOC
     tocCloseButton.addEventListener("click", () => {
-        mobileTOC.classList.remove("active"); // Slide out the TOC
-        mobileMenuButton.classList.remove("disabled"); // Re-enable the mobile menu button
+        mobileTOC.classList.remove("active");
+        mobileMenuButton.classList.remove("disabled");
     });
 
     // Prevent interaction with the disabled mobile menu button
     mobileMenuButton.addEventListener("click", (event) => {
         if (mobileMenuButton.classList.contains("disabled")) {
-            event.preventDefault(); // Block any actions
-            event.stopPropagation(); // Prevent bubbling
+            event.preventDefault();
+            event.stopPropagation();
         }
     });
 
@@ -53,18 +69,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // TOC Scroll Highlighting
     const observerOptions = {
-        root: null, // Use the viewport as the root
-        rootMargin: `-${offset}px 0px -50% 0px`, // Adjust to align with the inner link scroll position
-        threshold: 0 // Trigger as soon as the section is visible
+        root: null,
+        rootMargin: `-${offset}px 0px -50% 0px`,
+        threshold: 0
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const index = sections.indexOf(entry.target);
             if (entry.isIntersecting) {
-                // Remove the active class from all TOC items
                 tocItems.forEach(item => item.parentElement.classList.remove("toc-item-active"));
-                // Add the active class to the current TOC item
                 if (index !== -1) {
                     tocItems[index].parentElement.classList.add("toc-item-active");
                 }
@@ -76,4 +90,9 @@ document.addEventListener("DOMContentLoaded", function () {
     sections.forEach(section => {
         if (section) observer.observe(section);
     });
+});
+
+// Ensure the page loads at the top during a full reload
+window.addEventListener("load", () => {
+    window.scrollTo(0, 0);
 });

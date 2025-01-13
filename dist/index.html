@@ -38,7 +38,7 @@
     <!-- Full Font Stylesheets (Non-Critical) -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Material+Symbols+Outlined:wght@400;500;600;700&display=swap">
 
-<script defer src="/main.5fc5904fd5d445554a26.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><script defer src="/index-pages.7cc6607df1b02952971b.js"></script><script defer src="/footer.49621c654f1952140398.js"></script><link href="/536.ca8734dddab78ba76d6b.css" rel="stylesheet"><link href="/382.ca9acb20b9cfb31ad785.css" rel="stylesheet"></head>
+<script defer src="/main.be5066a48839610bcd60.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><script defer src="/index-pages.be3bbe46af1facc667e7.js"></script><script defer src="/footer.49621c654f1952140398.js"></script><link href="/536.4a80901ac00da7b9cb3e.css" rel="stylesheet"><link href="/382.ca9acb20b9cfb31ad785.css" rel="stylesheet"></head>
 <body>
     <header id="header">
       <div class="logo">
@@ -385,52 +385,52 @@
         <section class="faq-section" id="homepage-faq">
             <h2 class="page-title page-title-dark">Monvvo FAQs</h2>
             <div class="faq-item">
-                <h3 class="faq-title">What is Monvvo?</h3>
-                <P class="faq-text">
+                <h3 class="faq-title">What is Monvvo? <img class="faq-arrow" src="../img/icons/down-arrow-white.svg" alt="down arrow"></h3>
+                <div class="faq-text">
                     Monvvo is a financial resource platform that provides accurate tools, calculators, and expert guidance to help you make confident financial decisions.
-                </P>
+                </div>
             </div>
             <div class="faq-item">
-                <h3 class="faq-title">Is Monvvo free to use?</h3>
-                <P class="faq-text">
+                <h3 class="faq-title">Is Monvvo free to use? <img class="faq-arrow" src="../img/icons/down-arrow-white.svg" alt="down arrow"></h3>
+                <div class="faq-text">
                     Yes, all of the tools and resources on Monvvo are completely free to use.
-                </P>
+                </div>
             </div>
             <div class="faq-item">
-                <h3 class="faq-title">What kind of tools does Monvvo offer?</h3>
-                <P class="faq-text">
+                <h3 class="faq-title">What kind of tools does Monvvo offer? <img class="faq-arrow" src="../img/icons/down-arrow-white.svg" alt="down arrow"></h3>
+                <div class="faq-text">
                     Monvvo provides a variety of financial calculators, including tools for budgeting, saving, investing, and loan planning.
-                </P>
+                </div>
             </div>
             <div class="faq-item">
-                <h3 class="faq-title">How accurate are Monvvo's calculators?</h3>
-                <P class="faq-text">
+                <h3 class="faq-title">How accurate are Monvvo's calculators? <img class="faq-arrow" src="../img/icons/down-arrow-white.svg" alt="down arrow"></h3>
+                <div class="faq-text">
                     Monvvo's calculators are designed to provide reliable and accurate estimates using industry-standard formulas. Keep in mind, actual outcomes may depend on your personal financial situation.
-                </P>
+                </div>
             </div>
             <div class="faq-item">
-                <h3 class="faq-title">Do I need to create an account to use Monvvo?</h3>
-                <P class="faq-text">
+                <h3 class="faq-title">Do I need to create an account to use Monvvo? <img class="faq-arrow" src="../img/icons/down-arrow-white.svg" alt="down arrow"></h3>
+                <div class="faq-text">
                     No, you can access all of Monvvo's tools and resources without creating an account.
-                </P>
+                </div>
             </div>
             <div class="faq-item">
-                <h3 class="faq-title">Can I save my calculations on Monvvo?</h3>
-                <P class="faq-text">
+                <h3 class="faq-title">Can I save my calculations on Monvvo? <img class="faq-arrow" src="../img/icons/down-arrow-white.svg" alt="down arrow"></h3>
+                <div class="faq-text">
                     Currently, Monvvo doesn't offer a saving feature, but you can easily download or take a screenshot of your calculations for future reference.
-                </P>
+                </div>
             </div>
             <div class="faq-item">
-                <h3 class="faq-title">Does Monvvo offer personalized financial advice?</h3>
-                <P class="faq-text">
+                <h3 class="faq-title">Does Monvvo offer personalized financial advice? <img class="faq-arrow" src="../img/icons/down-arrow-white.svg" alt="down arrow"></h3>
+                <div class="faq-text">
                     Monvvo provides general tools and resources for guidance. For personalized advice, we recommend consulting a financial professional.
-                </P>
+                </div>
             </div>
             <div class="faq-item">
-                <h3 class="faq-title">How can I contact Monvvo for questions or feedback?</h3>
-                <P class="faq-text">
+                <h3 class="faq-title">How can I contact Monvvo for questions or feedback? <img class="faq-arrow" src="../img/icons/down-arrow-white.svg" alt="down arrow"></h3>
+                <div class="faq-text">
                     You can reach us via our <a href="./contact/index.html" target="_blank">Contact Us page</a>. We're always happy to hear from you and assist with your questions.
-                </P>
+                </div>
             </div>
         </section>
     </main>
@@ -469,4 +469,24 @@
       </div>
       <img src="./img/icons/footer-icon.svg" class="bottom-icon" alt="footer-icon">
   </footer>
+  <script>
+        const selectElement = document.getElementById('title-select');
+    const articleLists = document.querySelectorAll('.articles-list');
+  
+    selectElement.addEventListener('change', (event) => {
+      const selectedValue = event.target.value;
+  
+      // Hide all lists
+      articleLists.forEach((list) => {
+        list.style.display = 'none';
+      });
+  
+      // Show the corresponding list
+      const activeList = document.getElementById(selectedValue); // No need for `${selectedValue}-list`
+      if (activeList) {
+        activeList.style.display = 'block';
+      }
+    });
+  </script>
 </body>
+</html>

@@ -56,25 +56,33 @@ document.addEventListener('DOMContentLoaded', function () {
     };
   }());
 
-  // FAQ JS
-  var faqQuestions = document.querySelectorAll('.faq-question');
-  faqQuestions.forEach(function (question) {
-    question.addEventListener('click', function () {
-      var answer = question.nextElementSibling;
-      var isVisible = answer.style.display === 'block';
-
-      // Close all open answers and reset rotation
-      document.querySelectorAll('.faq-answer').forEach(function (ans) {
-        return ans.style.display = 'none';
+  // FAQ Toggle Functionality
+  var faqTitles = document.querySelectorAll('.faq-title');
+  faqTitles.forEach(function (title) {
+    title.addEventListener('click', function () {
+      // Close all other FAQ items and reset arrows
+      var allFaqTexts = document.querySelectorAll('.faq-text');
+      var allFaqArrows = document.querySelectorAll('.faq-arrow');
+      allFaqTexts.forEach(function (text) {
+        if (text !== title.nextElementSibling) {
+          text.style.display = 'none';
+        }
       });
-      document.querySelectorAll('.faq-question').forEach(function (q) {
-        return q.classList.remove('active');
+      allFaqArrows.forEach(function (arrow) {
+        if (arrow !== title.querySelector('.faq-arrow')) {
+          arrow.classList.remove('active');
+        }
       });
 
-      // Toggle the clicked question and rotation
-      if (!isVisible) {
-        answer.style.display = 'block';
-        question.classList.add('active');
+      // Toggle the clicked FAQ item
+      var faqText = title.nextElementSibling;
+      var faqArrow = title.querySelector('.faq-arrow');
+      if (faqText.style.display === 'none' || !faqText.style.display) {
+        faqText.style.display = 'block'; // Show the description
+        faqArrow.classList.add('active'); // Rotate arrow
+      } else {
+        faqText.style.display = 'none'; // Hide the description
+        faqArrow.classList.remove('active'); // Reset arrow
       }
     });
   });
@@ -258,4 +266,4 @@ document.addEventListener('DOMContentLoaded', function () {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=contact.fc02325ad6125f06d11f.js.map
+//# sourceMappingURL=contact.5395347d7d709abf215b.js.map

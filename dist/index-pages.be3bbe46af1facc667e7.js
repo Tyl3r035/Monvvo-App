@@ -2,85 +2,87 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 7929:
+/***/ 7542:
 /***/ (() => {
 
 
-document.addEventListener("DOMContentLoaded", function () {
-  var tocOpenButton = document.querySelector(".toc-open");
-  var tocCloseButton = document.querySelector(".toc-close");
-  var mobileTOC = document.querySelector(".mobile-toc");
-  var mobileMenuButton = document.querySelector(".mobile-btn"); // Mobile menu button
-  var tocItems = document.querySelectorAll(".toc-item a"); // TOC links
-  var sections = Array.from(tocItems).map(function (link) {
-    var targetId = link.getAttribute("href").slice(1);
-    return document.getElementById(targetId);
-  });
-  var offset = 80; // Adjust to match the height of your fixed header
+document.addEventListener('DOMContentLoaded', function () {
+  // const selectElement = document.getElementById('title-select');
+  // const articleLists = document.querySelectorAll('.articles-list');
 
-  // Open the mobile TOC
-  tocOpenButton.addEventListener("click", function () {
-    mobileTOC.classList.add("active"); // Slide in the TOC
-    mobileMenuButton.classList.add("disabled"); // Disable the mobile menu button
-  });
+  // selectElement.addEventListener('change', (event) => {
+  //   const selectedValue = event.target.value;
 
-  // Close the mobile TOC
-  tocCloseButton.addEventListener("click", function () {
-    mobileTOC.classList.remove("active"); // Slide out the TOC
-    mobileMenuButton.classList.remove("disabled"); // Re-enable the mobile menu button
-  });
+  //   // Hide all lists
+  //   articleLists.forEach((list) => {
+  //     list.style.display = 'none';
+  //   });
 
-  // Prevent interaction with the disabled mobile menu button
-  mobileMenuButton.addEventListener("click", function (event) {
-    if (mobileMenuButton.classList.contains("disabled")) {
-      event.preventDefault(); // Block any actions
-      event.stopPropagation(); // Prevent bubbling
-    }
-  });
+  //   // Show the corresponding list
+  //   const activeList = document.getElementById(selectedValue); // No need for `${selectedValue}-list`
+  //   if (activeList) {
+  //     activeList.style.display = 'block';
+  //   }
+  // });
 
-  // Smooth scrolling for TOC links
-  tocItems.forEach(function (link) {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      var targetId = this.getAttribute("href").slice(1);
-      var targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        var targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
-        window.scrollTo({
-          top: targetPosition,
-          behavior: "smooth"
-        });
-      }
-    });
-  });
-
-  // TOC Scroll Highlighting
-  var observerOptions = {
-    root: null,
-    // Use the viewport as the root
-    rootMargin: "-".concat(offset, "px 0px -50% 0px"),
-    // Adjust to align with the inner link scroll position
-    threshold: 0 // Trigger as soon as the section is visible
-  };
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      var index = sections.indexOf(entry.target);
-      if (entry.isIntersecting) {
-        // Remove the active class from all TOC items
-        tocItems.forEach(function (item) {
-          return item.parentElement.classList.remove("toc-item-active");
-        });
-        // Add the active class to the current TOC item
-        if (index !== -1) {
-          tocItems[index].parentElement.classList.add("toc-item-active");
+  // Terms Toggle Functionality
+  var termTitles = document.querySelectorAll('.page-term-title');
+  termTitles.forEach(function (title) {
+    title.addEventListener('click', function () {
+      // Close all other term definitions and reset arrows
+      var allDefinitions = document.querySelectorAll('.page-term-definition');
+      var allArrows = document.querySelectorAll('.terms-arrow');
+      allDefinitions.forEach(function (definition) {
+        if (definition !== title.nextElementSibling) {
+          definition.style.display = 'none';
         }
+      });
+      allArrows.forEach(function (arrow) {
+        arrow.classList.remove('active');
+      });
+
+      // Toggle the clicked term's definition
+      var termDefinition = title.nextElementSibling;
+      var arrow = title.querySelector('.terms-arrow');
+      if (termDefinition.style.display === 'flex') {
+        termDefinition.style.display = 'none';
+        arrow.classList.remove('active');
+      } else {
+        termDefinition.style.display = 'flex';
+        arrow.classList.add('active');
       }
     });
-  }, observerOptions);
+  });
 
-  // Observe each section
-  sections.forEach(function (section) {
-    if (section) observer.observe(section);
+  // FAQ Toggle Functionality
+  var faqTitles = document.querySelectorAll('.faq-title');
+  faqTitles.forEach(function (title) {
+    title.addEventListener('click', function () {
+      // Close all other FAQ items and reset arrows
+      var allFaqTexts = document.querySelectorAll('.faq-text');
+      var allFaqArrows = document.querySelectorAll('.faq-arrow');
+      allFaqTexts.forEach(function (text) {
+        if (text !== title.nextElementSibling) {
+          text.style.display = 'none';
+        }
+      });
+      allFaqArrows.forEach(function (arrow) {
+        if (arrow !== title.querySelector('.faq-arrow')) {
+          arrow.classList.remove('active');
+        }
+      });
+
+      // Toggle the clicked FAQ item
+      var faqText = title.nextElementSibling;
+      var faqArrow = title.querySelector('.faq-arrow');
+      if (faqText.style.display === 'none' || !faqText.style.display) {
+        faqText.style.display = 'block'; // Show the description
+        faqArrow.classList.add('active'); // Rotate arrow
+      } else {
+        faqText.style.display = 'none'; // Hide the description
+        faqArrow.classList.remove('active'); // Reset arrow
+      }
+    });
   });
 });
 
@@ -161,8 +163,8 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			275: 0,
-/******/ 			97: 0
+/******/ 			50: 0,
+/******/ 			536: 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -212,9 +214,9 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [97], () => (__webpack_require__(7929)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [536], () => (__webpack_require__(7542)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=article.7783880cf71234e0d0e2.js.map
+//# sourceMappingURL=index-pages.be3bbe46af1facc667e7.js.map

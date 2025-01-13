@@ -2,27 +2,102 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 7542:
+/***/ 7929:
 /***/ (() => {
 
 
-document.addEventListener('DOMContentLoaded', function () {
-  var selectElement = document.getElementById('title-select');
-  var articleLists = document.querySelectorAll('.articles-list');
-  selectElement.addEventListener('change', function (event) {
-    var selectedValue = event.target.value;
 
-    // Hide all lists
-    articleLists.forEach(function (list) {
-      list.style.display = 'none';
-    });
+// Prevent the browser from restoring scroll position
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+document.addEventListener("DOMContentLoaded", function () {
+  // Temporarily disable smooth scrolling
+  document.documentElement.style.scrollBehavior = "auto";
 
-    // Show the corresponding list
-    var activeList = document.getElementById(selectedValue); // No need for `${selectedValue}-list`
-    if (activeList) {
-      activeList.style.display = 'block';
+  // Scroll to the top immediately
+  window.scrollTo(0, 0);
+
+  // Re-enable smooth scrolling after a full load
+  window.addEventListener("load", function () {
+    document.documentElement.style.scrollBehavior = "smooth";
+  });
+  var tocOpenButton = document.querySelector(".toc-open");
+  var tocCloseButton = document.querySelector(".toc-close");
+  var mobileTOC = document.querySelector(".mobile-toc");
+  var mobileMenuButton = document.querySelector(".mobile-btn");
+  var tocItems = document.querySelectorAll(".toc-item a");
+  var sections = Array.from(tocItems).map(function (link) {
+    var targetId = link.getAttribute("href").slice(1);
+    return document.getElementById(targetId);
+  });
+  var offset = 80; // Adjust to match the height of your fixed header
+
+  // Open the mobile TOC
+  tocOpenButton.addEventListener("click", function () {
+    mobileTOC.classList.add("active");
+    mobileMenuButton.classList.add("disabled");
+  });
+
+  // Close the mobile TOC
+  tocCloseButton.addEventListener("click", function () {
+    mobileTOC.classList.remove("active");
+    mobileMenuButton.classList.remove("disabled");
+  });
+
+  // Prevent interaction with the disabled mobile menu button
+  mobileMenuButton.addEventListener("click", function (event) {
+    if (mobileMenuButton.classList.contains("disabled")) {
+      event.preventDefault();
+      event.stopPropagation();
     }
   });
+
+  // Smooth scrolling for TOC links
+  tocItems.forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      var targetId = this.getAttribute("href").slice(1);
+      var targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        var targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth"
+        });
+      }
+    });
+  });
+
+  // TOC Scroll Highlighting
+  var observerOptions = {
+    root: null,
+    rootMargin: "-".concat(offset, "px 0px -50% 0px"),
+    threshold: 0
+  };
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var index = sections.indexOf(entry.target);
+      if (entry.isIntersecting) {
+        tocItems.forEach(function (item) {
+          return item.parentElement.classList.remove("toc-item-active");
+        });
+        if (index !== -1) {
+          tocItems[index].parentElement.classList.add("toc-item-active");
+        }
+      }
+    });
+  }, observerOptions);
+
+  // Observe each section
+  sections.forEach(function (section) {
+    if (section) observer.observe(section);
+  });
+});
+
+// Ensure the page loads at the top during a full reload
+window.addEventListener("load", function () {
+  window.scrollTo(0, 0);
 });
 
 /***/ })
@@ -102,8 +177,8 @@ document.addEventListener('DOMContentLoaded', function () {
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			50: 0,
-/******/ 			536: 0
+/******/ 			275: 0,
+/******/ 			97: 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -153,9 +228,9 @@ document.addEventListener('DOMContentLoaded', function () {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [536], () => (__webpack_require__(7542)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [97], () => (__webpack_require__(7929)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=index-pages.7cc6607df1b02952971b.js.map
+//# sourceMappingURL=article.8412acbe88ac2338a070.js.map
