@@ -240,7 +240,7 @@
   .contact-list a{
     font-weight: 400;
     cursor: pointer;
-    color: #20894D;
+    color: #175134;
   }
   .contact-form{
     display: flex;
@@ -270,6 +270,7 @@
       font-weight: 400;
       line-height: normal;
       color: #6C6C70;
+      padding-bottom: 5px;
   }
   .contact-form input{
     font-family: 'Roboto', sans-serif;
@@ -302,10 +303,9 @@
   .contact-form .contact-submit{
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-    width: 50%;
-    min-width: 300px;
+    width: 100%;
     padding: 15px 25px;
-    background-color: #20894D;
+    background-color: #175134;
     color: #fff;
     border: none;
     border-radius: 3px;

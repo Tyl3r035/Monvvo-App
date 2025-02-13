@@ -10,6 +10,7 @@ const pages = [
     { template: './public/privacy-policy/index.html', filename: 'privacy-policy.html' },
     { template: './public/contact/index.html', filename: 'contact.html' },
     { template: './public/widgets/mortgage-widget.html', filename: 'mortgage-widget.html' },
+    { template: './public/widgets/home-affodability-widget.html', filename: 'home-affordability-widget.html' },    
     { template: './public/mortgage/index.html', filename: 'mortgage/index.html' },
     { template: './public/auto/index.html', filename: 'auto/index.html' },
     { template: './public/mortgage/mortgage-calculator.html', filename: 'mortgage/mortgage-calculator.html' },

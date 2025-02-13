@@ -33,18 +33,19 @@ const pages = [
         template: path.resolve(__dirname, 'public/mortgage/home-affordability-calculator.html'),
         chunks: ['main', 'home-affordability-calculator', 'generalCalcs', 'footer','utils'], // Exclude unnecessary chunks
         canonical: 'https://www.monvvo.com/mortgage/home-affordability-calculator',
-    },  {
-        filename: 'mortgage/down-payment-calculator.html',
-        template: path.resolve(__dirname, 'public/mortgage/down-payment-calculator.html'),
-        chunks: ['main', 'down-payment-calculator', 'generalCalcs', 'footer', 'utils'], // Exclude unnecessary chunks
-        canonical: 'https://www.monvvo.com/mortgage/down-payment-calculator',
-    }, 
+    },
+    //   {
+    //     filename: 'mortgage/down-payment-calculator.html',
+    //     template: path.resolve(__dirname, 'public/mortgage/down-payment-calculator.html'),
+    //     chunks: ['main', 'down-payment-calculator', 'generalCalcs', 'footer', 'utils'], // Exclude unnecessary chunks
+    //     canonical: 'https://www.monvvo.com/mortgage/down-payment-calculator',
+    // }, 
     // Mortgage Section Articles
     {
-        filename: 'mortgage/articles/what-is-private-mortgage-insurance-pmi.html',
-        template: path.resolve(__dirname, 'public/mortgage/articles/what-is-private-mortgage-insurance-pmi.html'),
+        filename: 'mortgage/articles/pmi-definition.html',
+        template: path.resolve(__dirname, 'public/mortgage/articles/pmi-definition.html'),
         chunks: ['main', 'article', 'footer', 'utils'], // Exclude unnecessary chunks
-        canonical: 'https://www.monvvo.com/mortgage/articles/what-is-private-mortgage-insurance-pmi',
+        canonical: 'https://www.monvvo.com/mortgage/articles/pmi-definition',
     },
     {
         filename: 'mortgage/articles/home-affordability.html',
@@ -65,12 +66,12 @@ const pages = [
         chunks: ['main', 'index-pages', 'footer', 'utils'], // Exclude unnecessary chunks
         canonical: 'https://www.monvvo.com/auto/',
     },
-    {
-        filename: 'auto/auto-loan-calculator.html',
-        template: path.resolve(__dirname, 'public/auto/auto-loan-calculator.html'),
-        chunks: ['auto-loan-calculator', 'footer', 'utils'], // Exclude unnecessary chunks
-        canonical: 'https://www.monvvo.com/auto/auto-loan-calculator',
-    },
+    // {
+    //     filename: 'auto/auto-loan-calculator.html',
+    //     template: path.resolve(__dirname, 'public/auto/auto-loan-calculator.html'),
+    //     chunks: ['auto-loan-calculator', 'footer', 'utils'], // Exclude unnecessary chunks
+    //     canonical: 'https://www.monvvo.com/auto/auto-loan-calculator',
+    // },
         // Auto Section Articles
     {
         filename: 'auto/articles/auto-loan-basics.html',
@@ -131,10 +132,10 @@ const pages = [
         canonical: 'https://www.monvvo.com/investing/articles/investing-101',
     },
     {
-        filename: 'investing/articles/how-to-start-investing-with-little-money.html',
-        template: path.resolve(__dirname, 'public/investing/articles/how-to-start-investing-with-little-money.html'),
+        filename: 'investing/articles/investing-with-little-money.html',
+        template: path.resolve(__dirname, 'public/investing/articles/investing-with-little-money.html'),
         chunks: ['main', 'article', 'footer', 'utils'], // Exclude unnecessary chunks
-        canonical: 'https://www.monvvo.com/investing/articles/how-to-start-investing-with-little-money',
+        canonical: 'https://www.monvvo.com/investing/articles/investing-with-little-money',
     },
     {
         filename: 'investing/articles/what-is-a-brokerage-account.html',
@@ -212,6 +213,12 @@ const pages = [
         template: path.resolve(__dirname, 'public/widgets/mortgage-widget.html'),
         chunks: ['main', 'footer', 'utils'], // Exclude calculator-specific scripts
         canonical: 'https://www.monvvo.com/widgets/mortgage-widget',
+    },
+    {
+        filename: 'home-affordability-widget.html',
+        template: path.resolve(__dirname, 'public/widgets/home-affordability-widget.html'),
+        chunks: ['main', 'footer', 'utils'], // Exclude calculator-specific scripts
+        canonical: 'https://www.monvvo.com/widgets/home-affordability-widget',
     },
     {
         filename: '404.html',
@@ -373,7 +380,7 @@ module.exports = {
         liveReload: true,
         historyApiFallback: {
             rewrites: [
-                { from: /^\/widgets\/mortgage-widget$/, to: '/widgets/mortgage-widget.html' },
+                // { from: /^\/widgets\/mortgage-widget$/, to: '/widgets/mortgage-widget.html' },
                 { from: /./, to: '/404.html' },
             ],
         },

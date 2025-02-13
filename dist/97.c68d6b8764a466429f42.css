@@ -173,6 +173,7 @@
   .main-title{
     font-weight: 600;
     color: #f8f8f8;
+    max-width: 700px;
   }
 
   /* Article CSS */
@@ -181,7 +182,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-color: #1C2939;
+    background-color: #175134;
     padding: 60px 40px 40px 40px;
     margin-top: 50px;
   }
@@ -247,7 +248,7 @@
     flex-grow: 1;
   }
   .article-key{
-    background-color: #175134;
+    background-color: #20894D;
   }
   .article-key-inner{
     display: flex;
@@ -468,4 +469,4 @@
     }
   }
 
-/*# sourceMappingURL=97.1d77b66b305be5f30f37.css.map*/
+/*# sourceMappingURL=97.c68d6b8764a466429f42.css.map*/

@@ -192,7 +192,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + "." + {"5":"783e76ea13c00437d521","259":"7be279d049f745f2fd25","337":"444689834b600bd368a3","393":"69f95fbbbd345ec36a5a","397":"d67032c4bd1ad636d6b6","481":"2537d9650ee66ec63acb","545":"42f3ec637af0852e5d3e","581":"587161547ba9373c24c9","608":"c86a29cf44138b6f51b0","730":"10b1f964bfbcc15a9aeb","749":"bb5c0f697c2e985e9490","805":"113374e6a7cb45c04ad9","830":"25092cecf7e3f2672899","843":"ee906024d82bed614358","867":"4413282f4ba2ff892749","950":"dd368aaf1b4d851df52e","974":"25dbcf67430104be2b34","991":"6c46db5e81a3f635e763"}[chunkId] + ".js";
+/******/ 			return "" + chunkId + "." + {"5":"783e76ea13c00437d521","259":"7be279d049f745f2fd25","337":"444689834b600bd368a3","393":"f75eff441c5c62b2103f","397":"d67032c4bd1ad636d6b6","481":"2537d9650ee66ec63acb","545":"42f3ec637af0852e5d3e","581":"587161547ba9373c24c9","608":"c86a29cf44138b6f51b0","730":"10b1f964bfbcc15a9aeb","749":"bb5c0f697c2e985e9490","805":"113374e6a7cb45c04ad9","830":"25092cecf7e3f2672899","843":"ee906024d82bed614358","867":"4413282f4ba2ff892749","950":"dd368aaf1b4d851df52e","974":"25dbcf67430104be2b34","991":"6c46db5e81a3f635e763"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -371,10 +371,21 @@ var __webpack_exports__ = {};
 /* harmony import */ var _header_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_header_js__WEBPACK_IMPORTED_MODULE_0__);
 
 
-// Your additional JavaScript logic here
+// Ensure that smooth scrolling is disabled by setting scroll behavior to auto
+document.documentElement.style.scrollBehavior = "auto";
+
+// Immediately force the page to start at the top
+window.scrollTo(0, 0);
+
+// Disable browser scroll restoration so no previous scroll is applied
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
 
 // Lazy Loading Logic
 document.addEventListener('DOMContentLoaded', function () {
+  // Make sure the page is at the top when the DOM is ready
+  window.scrollTo(0, 0);
   var lazyImages = document.querySelectorAll('img[data-src]');
   if ('IntersectionObserver' in window) {
     var lazyImageObserver = new IntersectionObserver(function (entries, observer) {
@@ -405,26 +416,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
-
-// Save scroll position before the page unloads
-window.addEventListener("beforeunload", function () {
-  sessionStorage.setItem("scrollPosition", window.scrollY);
-});
-
-// Restore scroll position on page load without smooth scrolling
-window.addEventListener("DOMContentLoaded", function () {
-  var scrollPosition = sessionStorage.getItem("scrollPosition");
-  if (scrollPosition) {
-    // Temporarily disable smooth scrolling
-    document.documentElement.style.scrollBehavior = "auto";
-    window.scrollTo(0, parseInt(scrollPosition, 10));
-
-    // Re-enable smooth scrolling after restoring position
-    document.documentElement.style.scrollBehavior = "smooth";
-  }
-});
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=main.be5066a48839610bcd60.js.map
+//# sourceMappingURL=main.8ccd897474ef2f7a7384.js.map

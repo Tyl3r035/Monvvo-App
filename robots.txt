@@ -1,7 +1,12 @@
+Updated robots.txt 
+
+# Robots.txt for Monvvo.com
+
 User-agent: *
 Disallow: /node_modules/
 Disallow: /dist/
 Disallow: /public/
+Disallow: /knowledge-center/
 Disallow: /_headers
 Disallow: /_redirects
 Disallow: /deno.lock
@@ -18,9 +23,9 @@ Allow: /dist/index.html
 Allow: /Knowledge-Center/
 Allow: /404.html
 
-# Allow crawling of only the canonical https://www.monvvo.com/
+# Allow full crawling of the website
 User-agent: *
 Allow: /
 
-# Sitemap
+# Sitemap location
 Sitemap: https://www.monvvo.com/sitemap.xml

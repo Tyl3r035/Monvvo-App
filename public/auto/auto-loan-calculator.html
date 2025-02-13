@@ -120,8 +120,8 @@
       </a>
     </div>
     <nav id="nav">
-      <a class="nav-link nav-link-active" href="./index.html">Mortgage</a>
-      <a class="nav-link" href="../auto/index.html">Auto</a>
+      <a class="nav-link" href="./index.html">Mortgage</a>
+      <a class="nav-link nav-link-active" href="../auto/index.html">Auto</a>
       <a class="nav-link" href="../loan/index.html">Loans</a>
       <a class="nav-link" href="../investing/index.html">Investing</a>
       <a class="nav-link" href="../personal-finance/index.html">Personal Finance</a>
@@ -137,7 +137,7 @@
     <div class="mobile-menu">
       <img class="mobile-close" src="../img/icons/close-black.svg" alt="Close Button">
       <nav class="mobile-nav">
-          <a class="nav-link" href="./index.html">Mortgage</a>
+          <a class="nav-link" href="../mortgage/index.html">Mortgage</a>
           <a class="nav-link" href="../auto/index.html">Auto</a>
           <a class="nav-link" href="../loan/index.html">Loans</a>
           <a class="nav-link" href="../investing/index.html">Investing</a>
@@ -152,12 +152,12 @@
         <div class="calculator-inputs">
           <div class="main-inputs auto-loan-inputs">
             <div class="input-box auto-loan-price-box">
-              <label for="home-price">Loan Price</label>
+              <label for="loan-price">Loan Price</label>
               <div class="input-fluid">
                 <div class="input-content">
                   <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
                   <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="loan-price" name="auto_input__loan_price" placeholder="20000">
+                  <input type="number" class="number-input" id="loan-price" name="auto_input__loan_price" placeholder="25000">
                 </div>
               </div>
             </div>
@@ -170,7 +170,7 @@
                 <div class="input-content">
                   <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
                   <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="current-savings" name="dp_input__current_savings" placeholder="10000">
+                  <input type="number" class="number-input" id="down-payment" name="dp_input__current_savings" placeholder="3000">
                 </div>
               </div>
             </div>
@@ -193,12 +193,12 @@
             </div>
             <div class="input-box auto-loan-interest-box">
               <div class="input-top">
-                <label for="auto-interest">Interest Rate</label>
+                <label for="interest-rate">Interest Rate</label>
                 <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Select the length of time (in years) over which you plan to repay the mortgage loan." loading="lazy">
               </div>
                 <div class="input-bottom">
                     <div class="input-bottom-inner">
-                        <input type="number" step="0.01" id="auto-interest" name="auto_input__interest_rate" placeholder="5.5">
+                        <input type="number" step="0.01" id="interest-rate" name="auto_input__interest_rate" placeholder="5.5">
                         <div class="input-bottom-right">
                             <div class="input-separator"></div>
                             <img src="../img/icons/percentage.svg" alt="%" class="input-icon percent-icon" loading="lazy">
@@ -215,7 +215,7 @@
                 <div class="input-content">
                   <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
                   <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="extra-payment" name="auto_input__extra_payment" placeholder="400">
+                  <input type="number" class="number-input" id="extra-payment" name="auto_input__extra_payment" placeholder="0">
                 </div>
               </div>
             </div>
@@ -225,45 +225,84 @@
         <div class="calculations-container">
           <div class="results-container">
             <div class="results-top">
-              <div class="results-tab tab-active" id="tab-recommended">
-                <p class="tab-text">Down Payments</p>
+              <div class="results-tab tab-active" id="tab-payment-breakdown">
+                <p class="tab-text">Payment Breakdown</p>
               </div>
-              <div class="results-tab" id="tab-max-budget">
-                <p class="tab-text">Savings Timeline</p>
+              <div class="results-tab" id="tab-amortization-schedule">
+                <p class="tab-text">Amortization Schedule</p>
               </div>
             </div>
-        
             <div class="results-content">
-              <!-- Down Payment Options -->
-              <div id="down-payment-options">
-                <h2 class="answer-title">Estimated Breakdown:</h2>
-                <p class="answer-disclaimer">
-                  (Actual amounts may vary, this is only an estimate.
-                  <a href="../disclaimer/index.html" target="_blank" style="color: initial;">See Disclaimer</a>.)
-                </p>
-                <div class="down-payment-select-fluid">
-                  <select id="down-payment-chart-select">
-                    <option id="option-conventional" value="conventional">Conventional 3%-20%</option>
-                    <option id="option-fha" value="fha">FHA 3.5%-10%</option>
-                  </select>
-                  <img class="down-payment-arrow" src="../img/icons/down-arrow.svg" alt="down-arrow">
+              <div id="payment-breakdown-content">
+                <h2 class="answer-title">Estimated Payment:</h2>
+                <p class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="../disclaimer/index.html" target="_blank" style="color: initial;">See Disclaimer</a>.)</p>
+                <div class="results-data">
+                  <canvas id="autoChart" class="doughnut-chart"></canvas>
+                  <div id="chartLabels" class="chart-labels">
+                    <div class="label-item">
+                      <span class="color-circle" style="background-color: #175134;"></span>
+                      <span class="label-name" id="label-principal-interest">Principal & Interest</span>
+                      <span class="label-value" id="value-principal-interest">$3,173</span>
+                    </div>
+                    <div class="label-item">
+                      <span class="color-circle" style="background-color: #3EB721;"></span>
+                      <span class="label-name" id="label-trade-in" data-manual="false">Trade-In Value</span>
+                      <div class="label-input">
+                        <p>$</p>
+                        <input class="label-value value-input" id="value-trade-in" placeholder="2000">
+                      </div>
+                    </div>
+                    <div class="label-item">
+                      <span class="color-circle" style="background-color: #91BBA6;"></span>
+                      <span class="label-name" id="label-sales-tax" data-manual="false">Sales Tax</span>
+                      <div class="label-input">
+                        <input class="label-value value-input" id="value-sales-tax" placeholder="200">
+                        <p>%</p>
+                      </div>
+                    </div>
+                    <div class="label-item">
+                      <span class="color-circle" style="background-color: #B3D4C2;"></span>
+                      <span class="label-name" id="label-fees" data-manual="false">Fees</span>
+                      <div class="label-input">
+                        <p>$</p>
+                        <input class="label-value value-input" id="value-fees" placeholder="500">
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div id="chart-container"></div>
               </div>
-        
-              <!-- Savings Timeline -->
-              <div id="savings-timeline" style="display: none;">
-                <h2 class="answer-title">Savings Timeline:</h2>
-                <p class="answer-disclaimer">
-                  (Actual amounts may vary, this is only an estimate.
-                  <a href="../disclaimer/index.html" target="_blank" style="color: initial;">See Disclaimer</a>.)
-                </p>
-                <div class="down-payment-answer">
-                  <span id="down-payment-months">46 Months</span> is the time it will take saving <span id="down-payment-savings">$400</span> a month
+              <div id="amortization-schedule-content" style="display: none;">
+                <h2 class="answer-title">Amortization for Auto Loan</h2>
+                <p class="answer-disclaimer">(Actual mortgage amount may vary, this is only an estimate. <a href="../disclaimer/index.html" target="_blank" style="color: initial;">See Disclaimer</a>.)</p>
+                <canvas id="amortizationChart"></canvas>
+                <div id="amortizationHoverDate" class="hover-date"></div>
+                <div id="amortizationLabels" class="chart-labels"></div>
+                <h2 class="answer-title">Amortization Schedule Breakdown</h2>
+                <div class="expand-box">
+                  <p class="expand-text">Expand</p>
+                  <img class="expand-icon" src="../img/icons/down-arrow.svg" alt="expand icon">
                 </div>
-                <!-- Maximum Budget Chart Labels -->
-                <div class="chart-labels"></div>
+                <div id="amortization-schedule">
+                  <table class="amortization-table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Principal</th>
+                        <th>Interest</th>
+                        <th>Balance</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <div class="scrollable-tbody">
+                    <table class="amortization-table">
+                      <tbody id="amortization-table-body">
+                        <!-- Rows dynamically added here -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
+              
             </div>
           </div>
           <div class="btn-container">
@@ -344,7 +383,7 @@
         <div class="footer-left"></div>
         <div class="footer-right">
             <!-- <div class="footer-col">
-            <h5 class="footer-title">Calculators</h5>
+            <h4 class="footer-title">Calculators</h4>
             <a class="footer-link" href="#">Banking</a>
             <a class="footer-link" href="#">Mortgage</a>
             <a class="footer-link" href="#">Loan</a>
@@ -353,13 +392,13 @@
             <a class="footer-link" href="#">Taxes</a>
             </div>
             <div class="footer-col">
-            <h5 class="footer-title">Resources</h5>
+            <h4 class="footer-title">Resources</h4>
             <a class="footer-link" href="#">Articles</a>
             <a class="footer-link" href="#">Videos</a>
             <a class="footer-link" href="#">Podcasts</a>
             </div> -->
             <div class="footer-col">
-            <h5 class="footer-title">Quick Links</h5>
+            <h4 class="footer-title">Quick Links</h4>
                 <a class="footer-link" href="../contact/index.html">Contact Us</a>
             </div>
         </div>
@@ -370,7 +409,7 @@
             <a class="footer-link" href="../disclaimer/index.html" target="_blank">Disclaimer</a>
             <a class="footer-link" href="../privacy-policy/index.html" target="_blank">Privacy Policy</a>
         </div>
-    <p class="footer-name">Monvvo, 2024</p>
+    <p class="footer-name">Monvvo, 2025</p>
     </div>
     <img src="../img/icons/footer-icon.svg" class="bottom-icon" alt="footer-icon">
 </footer>

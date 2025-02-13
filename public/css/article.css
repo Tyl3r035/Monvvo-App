@@ -173,6 +173,7 @@
   .main-title{
     font-weight: 600;
     color: #f8f8f8;
+    max-width: 700px;
   }
 
   /* Article CSS */
@@ -181,7 +182,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-color: #1C2939;
+    background-color: #175134;
     padding: 60px 40px 40px 40px;
     margin-top: 50px;
   }
@@ -247,7 +248,7 @@
     flex-grow: 1;
   }
   .article-key{
-    background-color: #175134;
+    background-color: #20894D;
   }
   .article-key-inner{
     display: flex;

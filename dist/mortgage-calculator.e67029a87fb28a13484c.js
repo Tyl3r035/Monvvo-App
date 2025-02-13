@@ -738,42 +738,85 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initialize expand/collapse logic
     initializeExpandCollapseLogic();
   }
+
+  // function initializeExpandCollapseLogic() {
+  //     const expandBox = document.querySelector(".expand-box");
+  //     const amortizationScheduleContainer = document.getElementById("amortization-schedule");
+  //     const expandText = document.querySelector(".expand-text");
+  //     const tableBody = document.getElementById("amortization-table-body");
+  //     const rows = Array.from(tableBody.rows);
+
+  //     if (!expandBox || !amortizationScheduleContainer || !expandText) {
+  //         console.error("Expand/Collapse elements not found.");
+  //         return;
+  //     }
+
+  //     console.log("Expand/Collapse Logic Initialized");
+
+  //     expandBox.addEventListener("click", function () {
+  //         const isExpanded = expandText.textContent === "Expand";
+
+  //         if (isExpanded) {
+  //             // Expand: Show the first 10 rows and make the container scrollable for the rest
+  //             amortizationScheduleContainer.style.maxHeight = "300px"; // Set height for the scrollable area
+  //             amortizationScheduleContainer.style.overflowY = "auto"; // Enable scrolling
+  //             rows.forEach((row, index) => {
+  //                 row.style.display = "table-row"; // Ensure all rows are visible in the scrollable container
+  //             });
+  //             expandText.textContent = "Collapse";
+  //         } else {
+  //             // Collapse: Show only the first 3 rows, hide the rest
+  //             amortizationScheduleContainer.style.maxHeight = "300px"; // Limit height
+  //             amortizationScheduleContainer.style.overflowY = "hidden"; // Hide scroll
+  //             rows.forEach((row, index) => {
+  //                 row.style.display = index < 3 ? "table-row" : "none"; // Show only the first 3 rows
+  //             });
+  //             expandText.textContent = "Expand";
+  //         }
+  //     });
+
+  //     // Initial state: Show only the first 3 rows
+  //     rows.forEach((row, index) => {
+  //         row.style.display = index < 3 ? "table-row" : "none";
+  //     });
+  // }
+
   function initializeExpandCollapseLogic() {
     var expandBox = document.querySelector(".expand-box");
-    var amortizationScheduleContainer = document.getElementById("amortization-schedule");
+    var scrollableContainer = document.querySelector(".scrollable-tbody");
     var expandText = document.querySelector(".expand-text");
     var tableBody = document.getElementById("amortization-table-body");
     var rows = Array.from(tableBody.rows);
-    if (!expandBox || !amortizationScheduleContainer || !expandText) {
+    if (!expandBox || !scrollableContainer || !expandText) {
       console.error("Expand/Collapse elements not found.");
       return;
     }
     console.log("Expand/Collapse Logic Initialized");
     expandBox.addEventListener("click", function () {
-      var isExpanded = expandText.textContent === "Expand";
-      if (isExpanded) {
-        // Expand: Show the first 10 rows and make the container scrollable for the rest
-        amortizationScheduleContainer.style.maxHeight = "300px"; // Set height for the scrollable area
-        amortizationScheduleContainer.style.overflowY = "auto"; // Enable scrolling
-        rows.forEach(function (row, index) {
-          row.style.display = "table-row"; // Ensure all rows are visible in the scrollable container
+      var isCollapsed = expandText.textContent === "Expand";
+      if (isCollapsed) {
+        // Expand: show all rows and add the "expanded" class so that
+        // the container's CSS (max-height: 300px) displays roughly 10 rows and becomes scrollable
+        rows.forEach(function (row) {
+          row.style.display = "table-row";
         });
+        scrollableContainer.classList.add("expanded");
         expandText.textContent = "Collapse";
       } else {
-        // Collapse: Show only the first 3 rows, hide the rest
-        amortizationScheduleContainer.style.maxHeight = "300px"; // Limit height
-        amortizationScheduleContainer.style.overflowY = "hidden"; // Hide scroll
+        // Collapse: show only the first 3 rows and remove the "expanded" class to hide overflow
+        scrollableContainer.classList.remove("expanded");
         rows.forEach(function (row, index) {
-          row.style.display = index < 3 ? "table-row" : "none"; // Show only the first 3 rows
+          row.style.display = index < 3 ? "table-row" : "none";
         });
         expandText.textContent = "Expand";
       }
     });
 
-    // Initial state: Show only the first 3 rows
+    // Initial state: collapsed—show only the first 3 rows
     rows.forEach(function (row, index) {
       row.style.display = index < 3 ? "table-row" : "none";
     });
+    scrollableContainer.classList.remove("expanded");
   }
   function updateHoverValues(balance, interest, principal) {
     var balanceLabel = document.getElementById('label-balance');
@@ -1335,4 +1378,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=mortgage-calculator.0ed5108293c79da390ed.js.map
+//# sourceMappingURL=mortgage-calculator.e67029a87fb28a13484c.js.map

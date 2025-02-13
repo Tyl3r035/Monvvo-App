@@ -44,7 +44,7 @@
 
     <!-- Articles -->
     <url>
-        <loc>https://www.monvvo.com/mortgage/articles/what-is-private-mortgage-insurance-pmi</loc>
+        <loc>https://www.monvvo.com/mortgage/articles/pmi-definition</loc>
         <priority>0.8</priority>
     </url>
     <url>
@@ -80,7 +80,7 @@
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.monvvo.com/investing/articles/how-to-start-investing-with-little-money</loc>
+        <loc>https://www.monvvo.com/investing/articles/investing-with-little-money</loc>
         <priority>0.8</priority>
     </url>
     <url>
@@ -118,11 +118,25 @@
 
     <!-- Utility Pages -->
     <url>
+        <loc>https://www.monvvo.com/contact/</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://www.monvvo.com/privacy-policy/</loc>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.monvvo.com/disclaimer/</loc>
         <priority>0.7</priority>
+    </url>
+
+        <!-- Widget Pages -->
+    <url>
+        <loc>https://www.monvvo.com/widgets/mortgage-widget</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.monvvo.com/widgets/home-affordability-widget</loc>
+        <priority>0.5</priority>
     </url>
 </urlset>

@@ -203,83 +203,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-
-  // function calculateAndDisplayResults() {
-  //     console.log("Calculating home affordability...");
-
-  //     const annualIncome = parseFloat(annualIncomeInput.value) || 70000;
-  //     const monthlyDebt = parseFloat(monthlyDebtInput.value) || 1200;
-  //     const downPayment = parseFloat(downPaymentInput.value) || 10000;
-  //     const loanTerm = parseInt(loanTermDropdown.value) || 30;
-  //     const creditScore = parseInt(creditScoreDropdown.value) || 720;
-
-  //     const baseInterestRate = creditScore >= 720 ? 0.05 : creditScore >= 670 ? 0.06 : 0.075;
-  //     const monthlyInterestRate = baseInterestRate / 12;
-  //     const numberOfPayments = loanTerm * 12;
-
-  //     const frontEndRatio = 0.28; // Conservative ratio
-  //     const backEndRatio = 0.36; // Aggressive ratio
-
-  //     // Calculations
-  //     const recommendedMonthlyPayment = (annualIncome / 12) * frontEndRatio;
-  //     const maxMonthlyPayment = (annualIncome / 12) * backEndRatio - monthlyDebt;
-
-  //     const recommendedLoan = 
-  //         (recommendedMonthlyPayment * (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments))) /
-  //         monthlyInterestRate;
-  //     const maxLoan = 
-  //         (maxMonthlyPayment * (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments))) /
-  //         monthlyInterestRate;
-
-  //     // Monthly Mortgage Payment Calculation
-  //     function calculateMonthlyPayment(loanAmount) {
-  //         return loanAmount * (monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments)));
-  //     }
-
-  //     const recommendedMonthlyMortgage = calculateMonthlyPayment(recommendedLoan);
-  //     const maxMonthlyMortgage = calculateMonthlyPayment(maxLoan);
-
-  //     // Update Recommended Budget (Lower Loan Amount)
-  //     const recommendedContent = document.getElementById("recommended-budget");
-  //     if (recommendedContent) {
-  //         const loanValueRecommended = recommendedContent.querySelector("#loan-total-value-recommended");
-  //         if (loanValueRecommended) {
-  //             loanValueRecommended.textContent = `$${Math.ceil(Math.min(recommendedLoan, maxLoan)).toLocaleString()}`;
-  //         }
-
-  //         const principalInterestLabel = recommendedContent.querySelector("#recommended-value-principal-interest");
-  //         if (principalInterestLabel) {
-  //             principalInterestLabel.textContent = `$${Math.ceil(Math.min(recommendedLoan, maxLoan)).toLocaleString()}`;
-  //         }
-
-  //         const monthlyPaymentLabel = recommendedContent.querySelector("#recommended-value-monthly-total");
-  //         if (monthlyPaymentLabel) {
-  //             monthlyPaymentLabel.textContent = `$${Math.ceil(Math.min(recommendedMonthlyMortgage, maxMonthlyMortgage)).toLocaleString()}`;
-  //         }
-  //     }
-
-  //     // Update Max Budget (Higher Loan Amount)
-  //     const maxContent = document.getElementById("max-budget");
-  //     if (maxContent) {
-  //         const loanValueMax = maxContent.querySelector("#loan-total-value-max");
-  //         if (loanValueMax) {
-  //             loanValueMax.textContent = `$${Math.ceil(Math.max(recommendedLoan, maxLoan)).toLocaleString()}`;
-  //         }
-
-  //         const principalInterestLabel = maxContent.querySelector("#max-value-principal-interest");
-  //         if (principalInterestLabel) {
-  //             principalInterestLabel.textContent = `$${Math.ceil(Math.max(recommendedLoan, maxLoan)).toLocaleString()}`;
-  //         }
-
-  //         const monthlyPaymentLabel = maxContent.querySelector("#max-value-monthly-total");
-  //         if (monthlyPaymentLabel) {
-  //             monthlyPaymentLabel.textContent = `$${Math.ceil(Math.max(recommendedMonthlyMortgage, maxMonthlyMortgage)).toLocaleString()}`;
-  //         }
-  //     }        
-
-  //     console.log("Results updated.");
-  // }
-
   function calculateAndDisplayResults() {
     console.log("Calculating home affordability...");
     var annualIncome = parseFloat(annualIncomeInput.value) || 70000;
@@ -293,10 +216,17 @@ document.addEventListener("DOMContentLoaded", function () {
     var frontEndRatio = 0.28; // Conservative ratio
     var backEndRatio = 0.36; // Aggressive ratio
 
-    // Additional Costs Inputs
-    var propertyTax = parseFloat(document.getElementById("recommended-value-property-tax").value) || 0;
-    var pmi = parseFloat(document.getElementById("recommended-value-pmi").value) || 0;
-    var hoa = parseFloat(document.getElementById("recommended-value-hoa").value) || 0;
+    // Determine which tab is active and use the corresponding additional cost inputs
+    var propertyTax, pmi, hoa;
+    if (document.getElementById("max-budget").style.display !== "none") {
+      propertyTax = parseFloat(document.getElementById("max-value-property-tax").value) || 0;
+      pmi = parseFloat(document.getElementById("max-value-pmi").value) || 0;
+      hoa = parseFloat(document.getElementById("max-value-hoa").value) || 0;
+    } else {
+      propertyTax = parseFloat(document.getElementById("recommended-value-property-tax").value) || 0;
+      pmi = parseFloat(document.getElementById("recommended-value-pmi").value) || 0;
+      hoa = parseFloat(document.getElementById("recommended-value-hoa").value) || 0;
+    }
 
     // Calculations
     var recommendedMonthlyPayment = annualIncome / 12 * frontEndRatio;
@@ -328,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // Update Max Budget (Higher Loan Amount)
+    // Update Maximum Budget (Higher Loan Amount)
     var maxContent = document.getElementById("max-budget");
     if (maxContent) {
       var loanValueMax = maxContent.querySelector("#loan-total-value-max");
@@ -689,4 +619,4 @@ document.addEventListener("DOMContentLoaded", function () {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=home-affordability-calculator.88c4c02bd91276c529a0.js.map
+//# sourceMappingURL=home-affordability-calculator.462ee534b5b93e4b6cd1.js.map

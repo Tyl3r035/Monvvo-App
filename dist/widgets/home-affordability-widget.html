@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="<%= htmlWebpackPlugin.options.canonical %>" />
+  <title>Mortgage Affordability Calculator Widget</title>
+  <style>
+    iframe{
+        border: none;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    #affordability-widget {
+        border: 1px solid #ccc;
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 400px;
+        margin: 0 auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    h2{
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+    input {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    select {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    input::-webkit-inner-spin-button, input::-webkit-outer-spin-button {
+        display: none;
+        appearance: none;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #175134;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background: #20894D;
+    }
+    .results {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .results h2 {
+      font-size: 1.5em;
+      margin: 5px 0;
+    }
+    .results span{
+        font-size: 18px !important;
+        font-style: bold;
+        color: #175134;
+    }
+    footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 12px;
+    }
+    footer a {
+        text-decoration: none;
+        color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <div id="affordability-widget">
+    <h1>Mortgage Affordability Calculator</h1>
+    <form id="affordability-form">
+      <div class="form-group">
+        <label for="annual-income">Annual Income ($)</label>
+        <input type="number" id="annual-income" placeholder="70000" required>
+      </div>
+      <div class="form-group">
+        <label for="monthly-debt">Monthly Debt Payments ($)</label>
+        <input type="number" id="monthly-debt" placeholder="1200" required>
+      </div>
+      <div class="form-group">
+        <label for="down-payment">Down Payment ($)</label>
+        <input type="number" id="down-payment" placeholder="10000" required>
+      </div>
+      <div class="form-group">
+        <label for="loan-term">Loan Term (Years)</label>
+        <input type="number" id="loan-term" placeholder="30" required>
+      </div>
+      <div class="form-group">
+        <label for="affordability-credit">Credit Score Range</label>
+        <select id="affordability-credit" name="affordability_input__credit_score" aria-label="credit-score-dropdown">
+          <option value="720">720 and Above</option>
+          <option value="670-719">670–719</option>
+          <option value="571-669">571–669</option>
+          <option value="570">570 or Below</option>
+        </select>
+      </div>
+      <button type="submit">Calculate</button>
+    </form>
+
+    <div class="results" id="results" style="display:none;">
+      <h2>Maximum Loan Amount: <span id="max-loan-amount"><br>$0</span></h2>
+      <h2>Monthly Mortgage Payment: <span id="monthly-payment"><br>$0</span></h2>
+    </div>
+    <footer>
+        <p>Powered by <a href="https://www.monvvo.com" target="_blank" rel="noopener">Monvvo</a></p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('affordability-form');
+      const annualIncomeInput = document.getElementById('annual-income');
+      const monthlyDebtInput = document.getElementById('monthly-debt');
+      const downPaymentInput = document.getElementById('down-payment');
+      const loanTermInput = document.getElementById('loan-term');
+      const creditScoreDropdown = document.getElementById('affordability-credit');
+      
+      const resultsDiv = document.getElementById('results');
+      const maxLoanAmountOutput = document.getElementById('max-loan-amount');
+      const monthlyPaymentOutput = document.getElementById('monthly-payment');
+      
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        // Get input values
+        const annualIncome = parseFloat(annualIncomeInput.value) || 70000;
+        const monthlyDebt = parseFloat(monthlyDebtInput.value) || 1200;
+        const downPayment = parseFloat(downPaymentInput.value) || 10000;
+        const loanTerm = parseInt(loanTermInput.value) || 30;
+        
+        // Parse the credit score value (if a range, take the average)
+        let creditScoreValue = creditScoreDropdown.value;
+        let creditScore;
+        if (creditScoreValue.includes('-')) {
+          const parts = creditScoreValue.split('-');
+          creditScore = (parseInt(parts[0]) + parseInt(parts[1])) / 2;
+        } else {
+          creditScore = parseInt(creditScoreValue);
+        }
+        
+        // Determine base interest rate based on credit score
+        const baseInterestRate = creditScore >= 720 ? 0.05 : creditScore >= 670 ? 0.06 : 0.075;
+        const monthlyInterestRate = baseInterestRate / 12;
+        const numberOfPayments = loanTerm * 12;
+        
+        // Ratios for monthly housing affordability
+        const frontEndRatio = 0.28; // percentage of monthly income toward housing
+        const backEndRatio = 0.36;  // percentage including debts
+        
+        const recommendedMonthlyPayment = (annualIncome / 12) * frontEndRatio;
+        const maxMonthlyPayment = (annualIncome / 12) * backEndRatio - monthlyDebt;
+        
+        // Calculate possible loan amounts based on these monthly payment limits
+        const recommendedLoan =
+          (recommendedMonthlyPayment * (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments))) /
+          monthlyInterestRate;
+        const maxLoan =
+          (maxMonthlyPayment * (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments))) /
+          monthlyInterestRate;
+        
+        // For a conservative approach, use the lower of the two
+        const finalLoanAmount = Math.min(recommendedLoan, maxLoan);
+        
+        // Calculate the monthly mortgage payment for the loan amount
+        const monthlyMortgagePayment = finalLoanAmount * (monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments)));
+        
+        maxLoanAmountOutput.textContent = `$${Math.ceil(finalLoanAmount).toLocaleString()}`;
+        monthlyPaymentOutput.textContent = `$${Math.ceil(monthlyMortgagePayment).toLocaleString()}`;
+        resultsDiv.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>

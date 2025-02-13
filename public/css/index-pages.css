@@ -321,7 +321,7 @@
   }
   .options-title{
     font-family: 'Roboto', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     margin-bottom: 0;
   }
@@ -493,7 +493,7 @@
     font-size: 15px;
     font-weight: 400;
     line-height: 1.3;
-    color: #f8f8f8;
+    color: #eee;
     margin: 0 0 25px 5px;
     padding-right: 35px;
     max-width: 800px;
@@ -612,10 +612,11 @@
     .calculator-item .item-title{
       font-size: 16px;
     }
-    .faq-section{
+    .faq-section, .terms-section{
+      width: 100%;
       padding: 15px;
     }
-    .faq-title{
+    .faq-title, .page-term-title{
       font-size: 18px;
     }
   }
@@ -625,6 +626,10 @@
     }
     .faq-text{
       font-size: 12px;
+    }
+    .faq-arrow, .terms-arrow{
+      width: 15px;
+      height: 15px;
     }
   }
   @media screen and (max-width: 450px){
