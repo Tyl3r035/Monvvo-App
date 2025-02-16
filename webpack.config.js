@@ -42,10 +42,10 @@ const pages = [
     // }, 
     // Mortgage Section Articles
     {
-        filename: 'mortgage/articles/pmi-definition.html',
-        template: path.resolve(__dirname, 'public/mortgage/articles/pmi-definition.html'),
+        filename: 'mortgage/articles/mortgage-pmi-definition.html',
+        template: path.resolve(__dirname, 'public/mortgage/articles/mortgage-pmi-definition.html'),
         chunks: ['main', 'article', 'footer', 'utils'], // Exclude unnecessary chunks
-        canonical: 'https://www.monvvo.com/mortgage/articles/pmi-definition',
+        canonical: 'https://www.monvvo.com/mortgage/articles/mortgage-pmi-definition',
     },
     {
         filename: 'mortgage/articles/home-affordability.html',

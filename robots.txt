@@ -1,5 +1,3 @@
-Updated robots.txt 
-
 # Robots.txt for Monvvo.com
 
 User-agent: *

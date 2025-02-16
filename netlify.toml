@@ -54,6 +54,15 @@
   status = 301
   force = true
 
+# Redirect for pmi article
+[[redirects]]
+  from = "https://www.monvvo.com/mortgage/articles/what-is-private-mortgage-insurance-pmi*"
+  to = "https://www.monvvo.com/mortgage/articles/mortgage-pmi-definition"
+  status = 301
+  force = true
+
+
+
 # Redirect for clean URL to .html
 [[redirects]]
   from = "/widgets/mortgage-widget"
