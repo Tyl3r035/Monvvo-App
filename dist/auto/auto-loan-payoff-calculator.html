@@ -6,7 +6,7 @@
     <meta name="author" content="Tyler P.">
     <meta name="description" content="Calculate your down payment with ease. Get estimates for FHA, Conventional, and USDA loans, plus a savings timeline to plan your path to homeownership.">
     <title>Auto Loan Calculator | Monvvo</title>
-    <link rel="canonical" href="<%= htmlWebpackPlugin.options.canonical %>" />
+    <link rel="canonical" href="https://www.monvvo.com/auto/auto-loan-payoff-calculator" />
     <link rel="icon" type="image/svg" href="../img/logos/monvvo-favicon.svg">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC9PLEKB7Q"></script>
@@ -111,7 +111,7 @@
     }
   </script>
       
-  </head>
+  <script defer src="/main.8ccd897474ef2f7a7384.js"></script><script defer src="/generalCalcs.8359bae798a37154ce47.js"></script><script defer src="/auto-payoff-calculator.e21714b03c4351ba1723.js"></script><script defer src="/utils.7a16f341e621154de0db.js"></script><script defer src="/footer.49621c654f1952140398.js"></script><link href="/43.15b93f305ea68ca6da51.css" rel="stylesheet"><link href="/382.ca9acb20b9cfb31ad785.css" rel="stylesheet"></head>
 <body>
   <header id="header">
     <div class="logo">
@@ -147,54 +147,39 @@
       </nav>
   </div>
     <section class="calculation-section">
-      <h1 id="title" class="calculator-title">Auto Loan Calculator</h1>
+      <h1 id="title" class="calculator-title">Auto Loan Payoff Calculator</h1>
       <div class="calculator-wrap">
         <div class="calculator-inputs">
-          <div class="main-inputs auto-loan-inputs">
-            <div class="input-box auto-loan-price-box">
-              <label for="loan-price">Loan Price</label>
-              <div class="input-fluid">
-                <div class="input-content">
-                  <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
-                  <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="loan-price" name="auto_input__loan_price" placeholder="25000">
+            <div class="main-inputs auto-payoff-inputs">
+              <div class="input-box auto-payoff-balance-box">
+                <label for="loan-balance">Current Loan Balance</label>
+                <div class="input-fluid">
+                  <div class="input-content">
+                    <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
+                    <div class="input-separator"></div>
+                    <input type="number" class="number-input" id="loan-balance" name="auto_input__loan_balance" placeholder="17000">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="input-box auto-loan-dp-box">
-              <div class="input-top">
-                <label for="current-savings">Down Payment</label>
-                <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the amount you plan to pay upfront for the vehicle. A higher down payment reduces the loan amount and can lower your monthly payment." loading="lazy">
-              </div>
-              <div class="input-fluid">
-                <div class="input-content">
-                  <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
-                  <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="down-payment" name="dp_input__current_savings" placeholder="3000">
+              <div class="input-box auto-payoff-term-box">
+                <div class="input-top">
+                  <label for="term-remaining">Remaining Term</label>
+                  <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the number of months left on your loan. This helps determine your payoff timeline." loading="lazy">
                 </div>
+                  <div class="input-bottom">
+                      <div class="input-bottom-inner">
+                          <input type="number" id="term-remaining" name="auto_input__remaining_term" placeholder="46">
+                          <div class="input-bottom-right">
+                              <div class="input-separator"></div>
+                                <span class="input-icon-text">Months</span>
+                            </div>
+                      </div>
+                  </div>
               </div>
-            </div>
-            <div class="input-box auto-loan-term-box">
-              <div class="input-top">
-                <label for="loan-term">Loan Term</label>
-                <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Select the length of time (in months or years) over which you plan to repay the auto loan. Longer terms may lower monthly payments but increase total interest paid." loading="lazy">
-              </div>
-              <div class="input-bottom">
-                <div class="input-inner">
-                  <select id="loan-term" name="auto_input__loan_term" aria-label="term-dropdown">
-                    <option value="60" class="calculation-option">60</option>
-                    <option value="72" class="calculation-option">72</option>
-                    <option value="48" class="calculation-option">48</option>
-                    <option value="36" class="calculation-option">36</option>
-                  </select>
-                  <img  src="../img/icons/down-arrow.svg" alt="down-arrrow" class="input-dropdown" loading="lazy">
-                </div>
-              </div>
-            </div>
-            <div class="input-box auto-loan-interest-box">
+            <div class="input-box auto-payoff-interest-box">
               <div class="input-top">
                 <label for="interest-rate">Interest Rate</label>
-                <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter the annual interest rate on the auto loan as a percentage. This affects your total cost of borrowing and monthly payment amount." loading="lazy">
+                <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter your loan’s annual interest rate (APR) as a percentage. A lower rate reduces total interest costs." loading="lazy">
               </div>
                 <div class="input-bottom">
                     <div class="input-bottom-inner">
@@ -206,16 +191,55 @@
                     </div>
                 </div>
             </div>
-            <div class="input-box auto-loan-extra-box">
+            <div class="input-box auto-payoff-payment-box">
+                <div class="input-top">
+                    <label for="monthly-payment">Monthly Payment</label>
+                    <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter your required monthly payment. This includes both principal and interest." loading="lazy">
+                </div>
+              <div class="input-fluid">
+                <div class="input-content">
+                  <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
+                  <div class="input-separator"></div>
+                  <input type="number" class="number-input" id="monthly-payment" name="auto_input__monthly_payment" placeholder="496.23">
+                </div>
+              </div>
+            </div>
+            <div class="input-box auto-payoff-extra-box">
               <div class="input-top">
                 <label for="extra-payment">Extra Payment</label>
-                <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter any extra amount you plan to pay each month toward the loan. Additional payments can help reduce the loan term and save on interest." loading="lazy">
+                <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter any additional amount you plan to pay each month. Extra payments can reduce your loan term and save on interest." loading="lazy">
               </div>
               <div class="input-fluid">
                 <div class="input-content">
                   <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
                   <div class="input-separator"></div>
-                  <input type="number" class="number-input" id="extra-payment" name="auto_input__extra_payment" placeholder="0">
+                  <input type="number" class="number-input" id="extra-payment" name="auto_input__extra_payment" placeholder="150">
+                </div>
+              </div>
+            </div>
+            <div class="input-box auto-payoff-lump-box">
+              <div class="input-top">
+                <label for="lump-sum">One-Time Lump Sum Payment</label>
+                <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter a single extra payment toward your loan. A lump sum can significantly lower your balance and shorten your loan term." loading="lazy">
+              </div>
+              <div class="input-fluid">
+                <div class="input-content">
+                  <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy">
+                  <div class="input-separator"></div>
+                  <input type="number" class="number-input" id="lump-sum" name="auto_input__lump_sum" placeholder="0">
+                </div>
+              </div>
+            </div>
+            <div class="input-box auto-payoff-lump-date">
+              <div class="input-top">
+                <label for="lump-sum">Lump Sum Payment Date</label>
+                <img src="../img/icons/info-icon.svg" alt="info-icon" class="info-icon" data-tooltip="Enter a single extra payment toward your loan. A lump sum can significantly lower your balance and shorten your loan term." loading="lazy">
+              </div>
+              <div class="input-fluid">
+                <div class="input-content">
+                  <!-- <img src="../img/icons/dollar.svg" alt="$" class="input-icon dollar-icon" loading="lazy"> -->
+                  <!-- <div class="input-separator"></div> -->
+                  <input type="date" class="number-input" id="lump-date" name="auto_input__lump_date">
                 </div>
               </div>
             </div>
@@ -239,35 +263,16 @@
                   <canvas id="autoChart" class="doughnut-chart"></canvas>
                   <div id="chartLabels" class="chart-labels">
                     <div class="label-item">
-                      <span class="color-circle" style="background-color: #175134;"></span>
-                      <span class="label-name" id="label-principal-interest">Principal & Interest</span>
-                      <span class="label-value" id="value-principal-interest">$3,173</span>
+                        <span class="color-circle" style="background-color: #175134;"></span>
+                        <span class="label-name" id="label-principal-interest">Principal & Interest</span>
+                        <span class="label-value" id="value-principal-interest">$0.00</span>
                     </div>
                     <div class="label-item">
-                      <span class="color-circle" style="background-color: #3EB721;"></span>
-                      <span class="label-name" id="label-trade-in" data-manual="false">Trade-In Value</span>
-                      <div class="label-input">
-                        <p>$</p>
-                        <input class="label-value value-input" id="value-trade-in" placeholder="2000">
-                      </div>
+                        <span class="color-circle" style="background-color: #3EB721;"></span>
+                        <span class="label-name" id="label-extra-payment">Extra Payment</span>
+                        <span class="label-value" id="value-extra-payment">$0.00</span>
                     </div>
-                    <div class="label-item">
-                      <span class="color-circle" style="background-color: #91BBA6;"></span>
-                      <span class="label-name" id="label-sales-tax" data-manual="false">Sales Tax</span>
-                      <div class="label-input">
-                        <input class="label-value value-input" id="value-sales-tax" placeholder="200">
-                        <p class="percentage-label">%</p>
-                      </div>
-                    </div>
-                    <div class="label-item">
-                      <span class="color-circle" style="background-color: #B3D4C2;"></span>
-                      <span class="label-name" id="label-fees" data-manual="false">Fees</span>
-                      <div class="label-input">
-                        <p>$</p>
-                        <input class="label-value value-input" id="value-fees" placeholder="500">
-                      </div>
-                    </div>
-                  </div>
+                </div>
                 </div>
               </div>
               <div id="amortization-schedule-content" style="display: none;">
@@ -323,81 +328,66 @@
     </section>
     <section class="how-section">
       <div class="how-inner">
-        <h3 class="how-title">How to use Monvvo auto loan calculator</h3>
+        <h3 class="how-title">How to use Monvvo auto loan payoff calculator</h3>
         <ol class="how-list">
-          <li class="how-text">Enter the total loan amount for the car you are considering.</li>
-          <li class="how-text">Provide the down payment amount, if any, to reduce the principal loan amount.</li>
-          <li class="how-text">Select the loan term from the dropdown (e.g., 36, 48, 60 months) to see repayment options.</li>
-          <li class="how-text">Input the interest rate offered by your lender based on your credit score.</li>
-          <li class="how-text">Add any planned extra monthly payments to see the impact on your loan term and total interest paid.</li>
-          <li class="how-text">Click "Update" to calculate your monthly payments, total interest, and loan payoff timeline.</li>
-          <li class="how-text">Modify any inputs to explore different loan scenarios and find the best fit for your budget.</li>
+          <li class="how-text">Enter your current loan balance—the remaining amount you owe on your auto loan.</li>
+          <li class="how-text">Input the remaining term in months—the number of payments left on your loan.</li>
+          <li class="how-text">Provide your interest rate (APR%) to calculate total interest costs and repayment time.</li>
+          <li class="how-text">Enter your monthly payment amount to reflect your standard loan repayment schedule.</li>
+          <li class="how-text">Add an extra monthly payment to see how additional payments impact your payoff date and interest savings.</li>
+          <li class="how-text">Include a one-time lump sum payment if you plan to make a large extra payment to reduce your loan balance.</li>
+          <li class="how-text">Click Update to calculate your new payoff timeline, total interest savings, and updated loan schedule.</li>
+          <li class="how-text">Adjust inputs to explore different payoff strategies and find the best way to save on interest.</li>
         </ol>
       </div>
-    </section>
-    <section class="terms-section">
-      <h3 class="terms-title">Auto Loan Terms</h3>
-      <div class="terms-content">
-        <div class="terms-item">
-          <div class="item-inner">
-            <h4 class="item-title">Loan Amount</h4>
-            <p class="item-text">The total amount financed for the car purchase, minus the down payment and trade-in value.</p>
+    </section><section class="terms-section">
+        <h3 class="terms-title">Auto Loan Payoff Terms</h3>
+        <div class="terms-content">
+          <div class="terms-item">
+            <div class="item-inner">
+              <h4 class="item-title">Current Loan Balance</h4>
+              <p class="item-text">The remaining amount owed on your auto loan. This is the total debt before any extra payments are applied.</p>
+            </div>
+            <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
           </div>
-          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
+          <div class="terms-item">
+            <div class="item-inner">
+              <h4 class="item-title">Remaining Term</h4>
+              <p class="item-text">The number of months left on your loan until it’s fully paid off.</p>
+            </div>
+            <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
+          </div>
+          <div class="terms-item">
+            <div class="item-inner">
+              <h4 class="item-title">Interest Rate</h4>
+              <p class="item-text">The annual percentage rate (APR) charged on your loan. A lower rate reduces interest costs over time.</p>
+            </div>
+            <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
+          </div>
+          <div class="terms-item">
+            <div class="item-inner">
+              <h4 class="item-title">Monthly Payment</h4>
+              <p class="item-text">The required amount you pay each month, covering both principal and interest.</p>
+            </div>
+            <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
+          </div>
+          <div class="terms-item">
+            <div class="item-inner">
+              <h4 class="item-title">Extra Monthly Payment</h4>
+              <p class="item-text">An optional additional amount paid each month to reduce your balance faster and save on interest.</p>
+            </div>
+            <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
+          </div>
+          <div class="terms-item">
+            <div class="item-inner">
+              <h4 class="item-title">One-Time Lump Sum Payment</h4>
+              <p class="item-text">A single large extra payment applied to the loan, which can shorten the repayment term and lower total interest paid.</p>
+            </div>
+            <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
+          </div>
         </div>
-        <div class="terms-item">
-          <div class="item-inner">
-            <h4 class="item-title">Down Payment</h4>
-            <p class="item-text">The upfront amount paid to reduce the loan principal. A larger down payment reduces monthly payments and interest.</p>
-          </div>
-          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
-        </div>
-        <div class="terms-item">
-          <div class="item-inner">
-            <h4 class="item-title">Interest Rate</h4>
-            <p class="item-text">The percentage charged by the lender for the loan. Determined by credit score, loan term, and other factors.</p>
-          </div>
-          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
-        </div>
-        <div class="terms-item">
-          <div class="item-inner">
-            <h4 class="item-title">Loan Term</h4>
-            <p class="item-text">The duration of the loan repayment period, typically ranging from 36 to 84 months.</p>
-          </div>
-          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
-        </div>
-        <div class="terms-item">
-          <div class="item-inner">
-            <h4 class="item-title">Extra Payment</h4>
-            <p class="item-text">Optional additional payments made toward the principal to reduce the loan term and total interest paid.</p>
-          </div>
-          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
-        </div>
-        <div class="terms-item">
-          <div class="item-inner">
-            <h4 class="item-title">Trade-In Value</h4>
-            <p class="item-text">The estimated worth of your current vehicle, which can be applied toward the purchase price to lower the loan amount.</p>
-          </div>
-          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
-        </div>
-        
-        <div class="terms-item">
-          <div class="item-inner">
-            <h4 class="item-title">Sales Tax</h4>
-            <p class="item-text">A percentage-based tax applied to the vehicle purchase price, varying by state and sometimes by county or city.</p>
-          </div>
-          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
-        </div>
-        
-        <div class="terms-item">
-          <div class="item-inner">
-            <h4 class="item-title">Fees</h4>
-            <p class="item-text">Additional costs such as registration, title, and dealer fees that may be required when purchasing a vehicle.</p>
-          </div>
-          <img src="../img/icons/item-corner.svg" class="item-corner" alt="Item Corner">
-        </div>        
-      </div>
-    </section>
+      </section>
+      
     
   </main>
   <footer id="footer">

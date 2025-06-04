@@ -35,26 +35,35 @@ document.addEventListener("click", function () {
   activeTooltip = null;
 });
 function showTooltip(icon, tooltip) {
+  tooltip.style.display = "block"; // Ensure tooltip is visible before calculating size
   var iconRect = icon.getBoundingClientRect();
   var tooltipWidth = tooltip.offsetWidth; // Dynamically calculate width
   var tooltipHeight = tooltip.offsetHeight; // Dynamically calculate height
+  var screenWidth = window.innerWidth;
+  if (screenWidth <= 390) {
+    // Change only when screen is 390px or less
+    tooltip.style.width = "".concat(screenWidth * 0.9, "px"); // Set width to 90% of screen
+    tooltip.style.left = "".concat((screenWidth - tooltip.offsetWidth) / 2 + window.scrollX, "px"); // Center it
+  } else {
+    // Keep original styling for larger screens
+    tooltip.style.width = "auto";
+    tooltip.style.left = "".concat(window.scrollX + iconRect.left - tooltipWidth - 5, "px"); // Default position
+  }
 
-  // Align the tooltip's right edge with the left edge of the icon
-  var tooltipX = window.scrollX + iconRect.left - tooltipWidth - 5;
-  // Position tooltip directly above the icon with a 5px gap
-  var tooltipY = window.scrollY + iconRect.top - tooltipHeight - 5;
-  tooltip.style.left = "".concat(tooltipX, "px");
-  tooltip.style.top = "".concat(tooltipY, "px");
+  // Maintain original vertical position
+  tooltip.style.top = "".concat(window.scrollY + iconRect.top - tooltipHeight - 5, "px");
   tooltip.classList.add("visible");
 }
 function hideTooltip(tooltip) {
   tooltip.classList.remove("visible");
+  tooltip.style.display = "none"; // Ensure tooltip is completely hidden
 }
 function hideAllTooltips() {
   document.querySelectorAll(".info-tooltips.visible").forEach(function (tooltip) {
     tooltip.classList.remove("visible");
+    tooltip.style.display = "none";
   });
 }
 /******/ })()
 ;
-//# sourceMappingURL=generalCalcs.8a5ba22016b6c040d0db.js.map
+//# sourceMappingURL=generalCalcs.8359bae798a37154ce47.js.map

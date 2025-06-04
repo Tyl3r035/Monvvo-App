@@ -66,12 +66,18 @@ const pages = [
         chunks: ['main', 'index-pages', 'footer', 'utils'], // Exclude unnecessary chunks
         canonical: 'https://www.monvvo.com/auto/',
     },
-    // {
-    //     filename: 'auto/auto-loan-calculator.html',
-    //     template: path.resolve(__dirname, 'public/auto/auto-loan-calculator.html'),
-    //     chunks: ['auto-loan-calculator', 'footer', 'utils'], // Exclude unnecessary chunks
-    //     canonical: 'https://www.monvvo.com/auto/auto-loan-calculator',
-    // },
+    {
+        filename: 'auto/auto-loan-calculator.html',
+        template: path.resolve(__dirname, 'public/auto/auto-loan-calculator.html'),
+        chunks: ['main', 'auto-loan-calculator', 'generalCalcs', 'footer', 'utils'], // Exclude unnecessary chunks
+        canonical: 'https://www.monvvo.com/auto/auto-loan-calculator',
+    },
+    {
+        filename: 'auto/auto-loan-payoff-calculator.html',
+        template: path.resolve(__dirname, 'public/auto/auto-loan-payoff-calculator.html'),
+        chunks: ['main', 'auto-payoff-calculator', 'generalCalcs', 'footer', 'utils'], // Exclude unnecessary chunks
+        canonical: 'https://www.monvvo.com/auto/auto-loan-payoff-calculator',
+    },
         // Auto Section Articles
     {
         filename: 'auto/articles/auto-loan-basics.html',
@@ -248,6 +254,8 @@ module.exports = {
         'down-payment-calculator': './public/js/down-payment-calculator.js',
         // Auto Loan JS & CSS
         'auto-loan-calculator': './public/js/auto-loan-calculator.js',
+        // Auto Loan Payoff JS & CSS
+        'auto-payoff-calculator': './public/js/auto-payoff-calculator.js',
         // Contact JS & CSS
         contact: './public/js/contact.js',
         // Utils JS & CSS

@@ -682,53 +682,6 @@ function calculateAndDisplayResults() {
 
     
     
-
-
-    
-
-    // function initializeExpandCollapseLogic() {
-    //     const expandBox = document.querySelector(".expand-box");
-    //     const amortizationScheduleContainer = document.getElementById("amortization-schedule");
-    //     const expandText = document.querySelector(".expand-text");
-    //     const tableBody = document.getElementById("amortization-table-body");
-    //     const rows = Array.from(tableBody.rows);
-    
-    //     if (!expandBox || !amortizationScheduleContainer || !expandText) {
-    //         console.error("Expand/Collapse elements not found.");
-    //         return;
-    //     }
-    
-    //     console.log("Expand/Collapse Logic Initialized");
-    
-    //     expandBox.addEventListener("click", function () {
-    //         const isExpanded = expandText.textContent === "Expand";
-    
-    //         if (isExpanded) {
-    //             // Expand: Show the first 10 rows and make the container scrollable for the rest
-    //             amortizationScheduleContainer.style.maxHeight = "300px"; // Set height for the scrollable area
-    //             amortizationScheduleContainer.style.overflowY = "auto"; // Enable scrolling
-    //             rows.forEach((row, index) => {
-    //                 row.style.display = "table-row"; // Ensure all rows are visible in the scrollable container
-    //             });
-    //             expandText.textContent = "Collapse";
-    //         } else {
-    //             // Collapse: Show only the first 3 rows, hide the rest
-    //             amortizationScheduleContainer.style.maxHeight = "300px"; // Limit height
-    //             amortizationScheduleContainer.style.overflowY = "hidden"; // Hide scroll
-    //             rows.forEach((row, index) => {
-    //                 row.style.display = index < 3 ? "table-row" : "none"; // Show only the first 3 rows
-    //             });
-    //             expandText.textContent = "Expand";
-    //         }
-    //     });
-    
-    //     // Initial state: Show only the first 3 rows
-    //     rows.forEach((row, index) => {
-    //         row.style.display = index < 3 ? "table-row" : "none";
-    //     });
-    // }
-    
-    
     function initializeExpandCollapseLogic() {
         const expandBox = document.querySelector(".expand-box");
         const scrollableContainer = document.querySelector(".scrollable-tbody");
@@ -771,9 +724,6 @@ function calculateAndDisplayResults() {
         scrollableContainer.classList.remove("expanded");
       }
       
-
-    
-    
 
   
   

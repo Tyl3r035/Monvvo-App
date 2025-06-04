@@ -1,6 +1,3 @@
-
-
-
 // Tooltip Info Icon JS
 const infoIcons = document.querySelectorAll(".info-icon");
 
@@ -38,34 +35,36 @@ document.addEventListener("click", () => {
     activeTooltip = null;
 });
 
-
-
 function showTooltip(icon, tooltip) {
+    tooltip.style.display = "block"; // Ensure tooltip is visible before calculating size
     const iconRect = icon.getBoundingClientRect();
     const tooltipWidth = tooltip.offsetWidth; // Dynamically calculate width
     const tooltipHeight = tooltip.offsetHeight; // Dynamically calculate height
+    const screenWidth = window.innerWidth;
 
-    // Align the tooltip's right edge with the left edge of the icon
-    const tooltipX = window.scrollX + iconRect.left - tooltipWidth - 5;
-    // Position tooltip directly above the icon with a 5px gap
-    const tooltipY = window.scrollY + iconRect.top - tooltipHeight - 5;
+    if (screenWidth <= 390) {
+        // Change only when screen is 390px or less
+        tooltip.style.width = `${screenWidth * 0.9}px`; // Set width to 90% of screen
+        tooltip.style.left = `${(screenWidth - tooltip.offsetWidth) / 2 + window.scrollX}px`; // Center it
+    } else {
+        // Keep original styling for larger screens
+        tooltip.style.width = "auto"; 
+        tooltip.style.left = `${window.scrollX + iconRect.left - tooltipWidth - 5}px`; // Default position
+    }
 
-    tooltip.style.left = `${tooltipX}px`;
-    tooltip.style.top = `${tooltipY}px`;
-
+    // Maintain original vertical position
+    tooltip.style.top = `${window.scrollY + iconRect.top - tooltipHeight - 5}px`;
     tooltip.classList.add("visible");
 }
 
-
-
-
-
 function hideTooltip(tooltip) {
     tooltip.classList.remove("visible");
+    tooltip.style.display = "none"; // Ensure tooltip is completely hidden
 }
 
 function hideAllTooltips() {
     document.querySelectorAll(".info-tooltips.visible").forEach((tooltip) => {
         tooltip.classList.remove("visible");
+        tooltip.style.display = "none";
     });
 }

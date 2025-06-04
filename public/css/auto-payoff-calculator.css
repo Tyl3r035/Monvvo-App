@@ -197,7 +197,7 @@
     max-width: 400px;
   }
   
-  .auto-loan-inputs{
+  .auto-payoff-inputs{
     display: grid !important;
     grid-template-columns: 1fr 1fr !important; /* Example */
     gap: 20px; /* Add uniform spacing */
@@ -205,22 +205,26 @@
   
   
   /* Mortgage Input Section */
-  .auto-loan-inputs{
+  .auto-payoff-inputs{
     display: grid;
     grid-template-areas: 
-    "auto-price auto-price"
-    "auto-down auto-down"
-    "auto-term auto-term"
+    "auto-balance auto-balance"
+    "remaining-term remaining-term"
+    "auto-payment auto-payment"
     "auto-interest auto-interest"
-    "auto-extra auto-extra";
+    "auto-extra auto-extra"
+    "lump-sum lump-sum"
+    "lump-date lump-date";
     width: 100%;
     padding: 0 15px;
   }
-  .auto-loan-inputs .auto-loan-price-box{grid-area: auto-price;}
-  .auto-loan-inputs .auto-loan-dp-box{grid-area: auto-down;}
-  .auto-loan-inputs .auto-loan-term-box{grid-area: auto-term;}
-  .auto-loan-inputs .auto-loan-interest-box{grid-area: auto-interest;}
-  .auto-loan-inputs .auto-loan-extra-box{grid-area: auto-extra;}
+  .auto-payoff-inputs .auto-payoff-balance-box{grid-area: auto-balance;}
+  .auto-payoff-inputs .auto-payoff-term-box{grid-area: remaining-term;}
+  .auto-payoff-inputs .auto-payoff-interest-box{grid-area: auto-interest;}
+  .auto-payoff-inputs .auto-payoff-payment-box{grid-area: auto-payment;}
+  .auto-payoff-inputs .auto-payoff-extra-box{grid-area: auto-extra;}
+  .auto-payoff-inputs .auto-payoff-lump-box{grid-area: lump-sum;}
+  .auto-payoff-inputs .auto-payoff-lump-date{grid-area: lump-date;}
   
   .input-box{
     display: flex;
@@ -262,6 +266,13 @@
     width: 1px;
     height: 24px;
     background: #6C6C70;
+  }
+  .input-icon-text{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    color: #5F5F63;
   }
   .input-box input, .input-box select{
     font-family: "Roboto", sans-serif;
@@ -1150,7 +1161,7 @@
       margin: 0 auto;
       padding-bottom: 70px;
     }
-    .auto-loan-inputs{
+    .auto-payoff-inputs{
       max-width: 100%;
     }
     .input-box{
@@ -1229,11 +1240,15 @@
       .calculator-inputs{
         width: 100%;
       }
-      .auto-loan-inputs{
-        grid-template-areas:
-        "auto-down auto-down"
-        "auto-price auto-interest"
-        "auto-term auto-extra" !important;
+      .auto-payoff-inputs{
+        grid-template-areas: 
+        "auto-balance auto-balance"
+        "remaining-term remaining-term"
+        "auto-payment auto-payment"
+        "auto-interest auto-interest"
+        "auto-extra auto-extra"
+        "lump-sum lump-sum"
+        "lump-date lump-date";
         gap: 0 30px;
       }
       .input-inner select{
@@ -1245,6 +1260,9 @@
         width: 100%;
       }
       .input-box label, .input-top label{
+        font-size: 14px;
+      }
+      .input-icon-text{
         font-size: 14px;
       }
       .calculator-wrap{
@@ -1452,11 +1470,14 @@
     .results-tab{
       padding: 8px 0;
     }
-    .auto-loan-inputs{
-      grid-template-areas:
-      "auto-price auto-interest"
-      "auto-term auto-extra"
-      "auto-down auto-down" !important;
+    .auto-payoff-inputs{
+        grid-template-areas:
+        "auto-balance auto-balance"
+        "remaining-term remaining-term"
+        "auto-payment auto-interest"
+        "auto-extra auto-extra" 
+        "lump-sum lump-sum"
+        "lump-date lump-date" !important;
     }
     .label-name, .label-value{
       font-size: 12px;
@@ -1512,7 +1533,7 @@
     }
   }
   @media screen and (max-width: 320px){
-    .auto-loan-inputs{
+    .auto-payoff-inputs{
       gap: 0 15px;
     }
     .calculation-btn{

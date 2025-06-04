@@ -704,6 +704,16 @@
     font-weight: 400; /* Default weight */
     height: 50px;
 }
+
+  /* Percentage Label */
+  #value-sales-tax{
+    padding-left: 0 !important;
+    width: 48px !important;
+  }
+  .percentage-label{
+    padding-right: 0 !important;
+    padding-left: 5px;
+  }
   
   /* Ensure consistency in label names */
   #chartLabels .label-name,
@@ -832,6 +842,8 @@
   }
 
   /* Amortization Table CSS */
+
+  /* Amortization Table CSS */
   #amortization-schedule {
     width: 100%; /* Full width */
     overflow-y: unset;
@@ -870,6 +882,7 @@
     padding: 8px 12px;
     text-align: center;
   }
+  
   
   
   
