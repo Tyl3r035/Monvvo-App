@@ -12,24 +12,24 @@
   [headers.values]
     Content-Type = "text/css"
 
-# Global CSP for all pages (except the widget)
+# Global CSP for all pages (including widget support + Google services)
 [[headers]]
   for = "/*"
   [headers.values]
     Cache-Control = "public, max-age=300, must-revalidate"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; object-src 'none'; img-src * data:; connect-src 'self' https://www.google-analytics.com https://formspree.io; frame-ancestors 'none'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdn.jsdelivr.net https://app.supermoney.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; object-src 'none'; img-src * data:; connect-src 'self' https://www.google-analytics.com https://formspree.io https://www.google.com; frame-src 'self' https://www.googletagmanager.com https://td.doubleclick.net https://app.supermoney.com; frame-ancestors 'self'"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "no-referrer-when-downgrade"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
-# Specific CSP for the widget page
+# Optional: Specific CSP override for widget page (if needed)
 [[headers]]
   for = "/widgets/mortgage-widget"
   [headers.values]
     Cache-Control = "public, max-age=300, must-revalidate"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; img-src * data:; connect-src 'self' https://formspree.io; frame-ancestors *"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.supermoney.com; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; img-src * data:; connect-src 'self' https://formspree.io; frame-ancestors *"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "ALLOW"
     X-XSS-Protection = "1; mode=block"
@@ -54,14 +54,12 @@
   status = 301
   force = true
 
-# Redirect for pmi article
+# Redirect for PMI article
 [[redirects]]
   from = "https://www.monvvo.com/mortgage/articles/what-is-private-mortgage-insurance-pmi*"
   to = "https://www.monvvo.com/mortgage/articles/mortgage-pmi-definition"
   status = 301
   force = true
-
-
 
 # Redirect for clean URL to .html
 [[redirects]]
