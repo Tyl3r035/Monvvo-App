@@ -16,7 +16,7 @@
   for = "/*"
   [headers.values]
     Cache-Control = "public, max-age=300, must-revalidate"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdn.jsdelivr.net https://app.supermoney.com https://home.supermoney.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; object-src 'none'; img-src * data:; connect-src 'self' https://www.google-analytics.com https://formspree.io https://www.google.com; frame-src 'self' https://www.googletagmanager.com https://td.doubleclick.net https://app.supermoney.com https://track.supermoney.com; frame-ancestors 'self'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdn.jsdelivr.net https://app.supermoney.com https://home.supermoney.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; object-src 'none'; img-src * data:; connect-src 'self' https://www.google-analytics.com https://formspree.io https://www.google.com; frame-src 'self' https://www.googletagmanager.com https://td.doubleclick.net https://app.supermoney.com https://track.supermoney.com https://home.supermoney.com; frame-ancestors 'self'"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
