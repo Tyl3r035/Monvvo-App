@@ -24,7 +24,7 @@
       img-src * data:;
       connect-src 'self' https://www.google-analytics.com https://formspree.io https://www.google.com https://home.supermoney.com;
       frame-src 'self' https://www.googletagmanager.com https://td.doubleclick.net https://app.supermoney.com https://track.supermoney.com https://home.supermoney.com;
-      frame-ancestors *;
+      frame-ancestors 'self' https://*.google.com;
     """
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "ALLOW"
@@ -36,13 +36,14 @@
   for = "/widgets/mortgage-widget"
   [headers.values]
     Cache-Control = "public, max-age=300, must-revalidate"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.supermoney.com https://home.supermoney.com; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; img-src * data:; connect-src 'self' https://formspree.io; frame-ancestors *"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.supermoney.com https://home.supermoney.com; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; img-src * data:; connect-src 'self' https://formspree.io; frame-ancestors 'self' https://*.google.com;"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "ALLOW"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "no-referrer-when-downgrade"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
+# Redirect HTTP and non-www to HTTPS www
 [[redirects]]
   from = "http://monvvo.com/*"
   to = "https://www.monvvo.com/:splat"
@@ -61,30 +62,21 @@
   status = 301
   force = true
 
+# Article redirect (specific)
 [[redirects]]
   from = "https://www.monvvo.com/mortgage/articles/what-is-private-mortgage-insurance-pmi*"
   to = "https://www.monvvo.com/mortgage/articles/mortgage-pmi-definition"
   status = 301
   force = true
 
+# Widget alias
 [[redirects]]
   from = "/widgets/mortgage-widget"
   to = "/widgets/mortgage-widget.html"
   status = 200
 
-[[redirects]]
-  from = "/:path"
-  to = "/:path/default.html"
-  status = 200
-  force = true
-
+# Final fallback 404 rule
 [[redirects]]
   from = "/*"
   to = "/404.html"
   status = 404
-
-[[redirects]]
-  from = "/img/*"
-  to = "/410.html"
-  status = 410
-  force = true

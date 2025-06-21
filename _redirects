@@ -1,7 +1,0 @@
-# Redirect all HTTP traffic to HTTPS and www
-http://monvvo.com/* https://www.monvvo.com/:splat 301
-http://www.monvvo.com/* https://www.monvvo.com/:splat 301
-https://monvvo.com/* https://www.monvvo.com/:splat 301
-
-# Handle 404 errors
-/* /404.html 404
