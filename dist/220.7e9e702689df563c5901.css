@@ -834,6 +834,17 @@
     color: #000;
   
   }
+
+
+  .sm_widget {
+  overflow: hidden;
+  scrollbar-width: none; /* Firefox */
+}
+
+.sm_widget::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
   
   
   
@@ -1514,4 +1525,4 @@
     }
   }
 
-/*# sourceMappingURL=220.addcec010d6c98b2f570.css.map*/
+/*# sourceMappingURL=220.7e9e702689df563c5901.css.map*/
